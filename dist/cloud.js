@@ -159,6 +159,21 @@
     return products.map((row) => productFromRow(row, byProduct.get(row.id) || []));
   }
 
+  async function loadAppSettings() {
+    required();
+    const { data, error } = await client.from('app_settings').select('setting_value').eq('setting_key', 'catalog_ui').maybeSingle();
+    fail(error);
+    return data?.setting_value || null;
+  }
+
+  async function saveAppSettings(settings) {
+    required();
+    const { error } = await client.from('app_settings').upsert({
+      setting_key: 'catalog_ui', setting_value: settings || {}, updated_by: user.id, updated_at: new Date().toISOString(),
+    }, { onConflict: 'setting_key' });
+    fail(error);
+  }
+
   async function saveCatalog(db) {
     required();
     const uploadedImages = new Map();
@@ -218,6 +233,7 @@
       fail(error);
     }
     catalogSnapshot = { productIds: currentProductIds, cardIds: currentCardIds };
+    if (db.settings) await saveAppSettings(db.settings);
   }
 
   function subscribeCatalog(onChange) {
@@ -412,7 +428,7 @@
   window.CardCloud = Object.freeze({
     configured, get user() { return user; }, get admin() { return admin; }, client,
     init, signIn, signUp, signOut,
-    loadCatalog, saveCatalog, subscribeCatalog, loadBanlist, saveBanlist, loadFavourites, setFavourite, loadCollection, loadGachaState,
+    loadCatalog, saveCatalog, loadAppSettings, saveAppSettings, subscribeCatalog, loadBanlist, saveBanlist, loadFavourites, setFavourite, loadCollection, loadGachaState,
     setPityReset, resetPity, recordPack, shareRarePull,
     loadDecks, saveDeck, deleteDeck, loadSharedDecks, copySharedDeck,
     loadRareFeed, loadRecipes, saveRecipe, craft, loadCraftHistory, uploadDataUri,
