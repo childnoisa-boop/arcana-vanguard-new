@@ -176,6 +176,9 @@
 
   async function saveCatalog(db) {
     required();
+    // Save shared UI settings first so Nations / types / zones survive even if
+    // a catalog write is rejected by an older Supabase policy.
+    if (db.settings) await saveAppSettings(db.settings);
     const uploadedImages = new Map();
     const publicImage = async (value, name) => {
       if (!String(value || '').startsWith('data:image/')) return value || null;
@@ -206,8 +209,8 @@
         links.push({ product_id: product.id, card_id: card.id, product_card_no: String(card.no || '') || null });
       }
     }
-    for (const batch of chunks(products)) { const { error } = await client.from('catalog_products').upsert(batch); fail(error); }
-    for (const batch of chunks([...allCards.values()])) { const { error } = await client.from('catalog_cards').upsert(batch); fail(error); }
+    for (const batch of chunks(products)) { const { error } = await client.from('catalog_products').upsert(batch, { onConflict: 'id' }); fail(error); }
+    for (const batch of chunks([...allCards.values()])) { const { error } = await client.from('catalog_cards').upsert(batch, { onConflict: 'id' }); fail(error); }
 
     const currentProductIds = products.map((x) => x.id);
     for (const productId of currentProductIds) {
@@ -233,7 +236,6 @@
       fail(error);
     }
     catalogSnapshot = { productIds: currentProductIds, cardIds: currentCardIds };
-    if (db.settings) await saveAppSettings(db.settings);
   }
 
   function subscribeCatalog(onChange) {

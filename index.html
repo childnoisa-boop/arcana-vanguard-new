@@ -442,16 +442,36 @@ section:not(#p5):not(#p1){animation:arcaneIn .18s ease-out}@keyframes arcaneIn{f
 body.sparkles-off .pkglow{display:none!important}body.sparkles-off .pkCard.rrr-gold.open,body.sparkles-off .pkCard.guar.open{filter:drop-shadow(0 6px 5px #0008)!important}body.sparkles-off .pkCard.rrr-gold.open .pkff,body.sparkles-off .pkCard.guar.open .pkff{box-shadow:inset 0 0 0 2px #f4c96b!important}
 body.sparkles-off #p5 .pkCard.rrr-gold.open .pkff,body.sparkles-off #p5 .pkCard.rrr-gold.open .pkRRRglint,body.sparkles-off #p5 .pkCard.rrr-gold.open .pkRRRglint:after{animation:none!important}
 body.sparkles-off #p5 .pkCard.open .pkff .art.f1::before,body.sparkles-off #p5 .pkCard.open .pkff .art.f2::before,body.sparkles-off #p5 .pkCard.open .pkff .art.f3::before,body.sparkles-off #p5 .pkCard.open .pkff .art.f4::before{filter:none!important}
-/* The sample board is separate from active shared rules and never affects deck checks. */
-#p4 .banGalleryCards{display:block}
-#p4 .banSampleCategory{border-style:dashed;border-color:#b8874c}#p4 .banSampleCategory>summary{background:linear-gradient(110deg,#352547,#17172d 72%);border-left:0}#p4 .banSampleCategory .banSampleNote{padding:12px 14px;margin:12px 0 16px;border:1px dashed #9a7045;border-radius:9px;background:#221d37;color:#e3d3aa;font-size:13px}#p4 .banSampleNote a{color:#f5d892;font-weight:700;text-decoration:underline}
-#p4 .banSampleCategory .banRuleRow{display:block}#p4 .banSampleCategory .banRuleLabel{width:auto;max-width:none;padding:8px 2px;color:#f5d892}#p4 .banSampleGroups{display:grid;gap:10px}.banSampleCard{cursor:default!important;pointer-events:none;flex:0 0 168px!important}.banSampleCard:hover{transform:none!important;box-shadow:0 7px 20px #0003!important;border-color:#493b67!important}.banSampleFace{aspect-ratio:59/86;display:flex;flex-direction:column;justify-content:space-between;gap:10px;padding:12px 9px;border:1px solid #a17c4f;border-radius:6px;background:radial-gradient(circle at 50% 20%,#e7b95f38,transparent 58%),linear-gradient(145deg,#302546,#101426);box-shadow:inset 0 0 22px #e7b95f18,0 0 12px #e7b95f18;text-align:center}.banSampleFace>span{font:600 9px/1.3 Cinzel,serif;letter-spacing:.1em;color:#f4d98d}.banSampleFace>b{font:700 13px/1.2 Barlow,sans-serif;color:#f7f0df;overflow-wrap:anywhere}.banSampleCard>small{display:block;margin-top:7px;color:#aaa4c0;font-size:11px;text-align:center}
+	#p4 .banGalleryCards{display:block}
 @media(prefers-reduced-motion:reduce){.pkgloss{animation:none!important}#p5 .pkwrap.torn .pkglow,#p5 .pkCard.rrr-gold.open .pkff,#p5 .pkCard.rrr-gold.open .pkRRRglint,#p5 .pkCard.rrr-gold.open .pkRRRglint:after{animation:none!important}}
+
+
+/* ---------- Premium visual card finish: restrained 3D + directional foil ---------- */
+.motionBtn{display:none}
+.art{--tilt-x:0deg;--tilt-y:0deg;--depth-x:0px;--depth-y:0px;--shine-x:50%;--shine-y:50%;transform:perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));transform-style:preserve-3d;transition:transform .18s ease,box-shadow .24s ease;will-change:transform}
+.art>img,.art>.ph,.art>.lf>img,.art>.lf>.ph{transform:translate3d(var(--depth-x),var(--depth-y),0) scale(1.018);transition:transform .18s ease;will-change:transform}
+.art>.fx{transform:translate3d(var(--depth-x),var(--depth-y),0);transition:transform .18s ease;mix-blend-mode:screen}
+.art.f0::after,.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after{display:block!important;inset:0!important;pointer-events:none!important;mix-blend-mode:screen!important;opacity:.34!important;animation:premiumFoilSweep 6.2s ease-in-out infinite!important;background:linear-gradient(115deg,transparent 28%,rgba(255,255,255,.08) 40%,rgba(255,255,255,.82) 50%,rgba(255,235,170,.24) 56%,transparent 70%) 0 0/260% 100% no-repeat!important}
+.art.f0::before{box-shadow:inset 0 0 0 1px #dbe7fa,inset 0 0 12px rgba(194,214,244,.55)!important}
+.art.f1::before{box-shadow:inset 0 0 0 1.5px #ffe18a,inset 0 0 14px rgba(255,198,67,.7)!important}
+.art.f3::before{box-shadow:inset 0 0 0 1.5px #ff9fd9,inset 0 0 16px rgba(255,110,192,.62)!important}
+.art.f4::before{box-shadow:inset 0 0 0 1.5px #ffe69a,inset 0 0 0 3px rgba(255,104,98,.62),inset 0 0 18px rgba(255,90,80,.7)!important}
+.art.f2::before{padding:2px!important;background:linear-gradient(125deg,#ff5ca8,#ffd36a,#8af3d0,#70c9ff,#be8cff,#ff5ca8) 0 0/280% 280%!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;animation:premiumRainbow 7s linear infinite!important;box-shadow:none!important}
+.art.f2::after{background:radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.6) 0,rgba(255,255,255,.16) 10%,transparent 27%),linear-gradient(115deg,transparent 27%,rgba(255,255,255,.08) 38%,rgba(255,255,255,.86) 49%,rgba(255,255,255,.18) 54%,transparent 66%) 0 0/260% 100% no-repeat,linear-gradient(125deg,rgba(255,72,174,.36),rgba(255,213,92,.3),rgba(89,237,202,.28),rgba(92,183,255,.32),rgba(190,112,255,.36),rgba(255,72,174,.36)) 0 0/320% 320%!important;opacity:.46!important;animation:premiumHolo 5.8s ease-in-out infinite!important}
+.art.f2>.fx{opacity:.64!important}
+@keyframes premiumFoilSweep{0%{background-position:145% 0;opacity:.08}32%{opacity:.3}55%{background-position:10% 0;opacity:.4}82%{opacity:.14}100%{background-position:-70% 0;opacity:.08}}
+@keyframes premiumRainbow{to{background-position:280% 280%}}
+@keyframes premiumHolo{0%{background-position:var(--shine-x) var(--shine-y),145% 0,0 0;filter:hue-rotate(-8deg)}50%{background-position:var(--shine-x) var(--shine-y),10% 0,45% 45%;filter:hue-rotate(8deg)}100%{background-position:var(--shine-x) var(--shine-y),-70% 0,100% 100%;filter:hue-rotate(-8deg)}}
+body.sparkles-off .art{transform:none!important}
+body.sparkles-off .art>img,body.sparkles-off .art>.ph,body.sparkles-off .art>.lf>img,body.sparkles-off .art>.lf>.ph,body.sparkles-off .art>.fx{transform:none!important}
+body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-off .art.f2::after,body.sparkles-off .art.f3::after,body.sparkles-off .art.f4::after{display:none!important}
+@media(max-width:650px){.motionBtn{display:inline-block}}
+@media(prefers-reduced-motion:reduce){.art,.art>img,.art>.ph,.art>.lf>img,.art>.lf>.ph,.art>.fx{transition:none!important;transform:none!important}.art.f0::after,.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after,.art.f2::before{animation:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><h1><span class="sigil" aria-hidden="true">✦</span> Arcana Vanguard <small>หอสมุดการ์ดเวทมนตร์</small></h1><div class="topActions"><span id="st" style="color:var(--mute);font-size:13px" aria-live="polite"></span><button class="btn sm" id="authBtn">Sign in</button><button class="btn sm" id="sparkleToggle" type="button" aria-pressed="false">✦ ปิดเอฟเฟกต์</button><button class="btn sm" id="editBtn" aria-pressed="false">✎ Edit</button></div></div>
+  <div class="top"><h1><span class="sigil" aria-hidden="true">✦</span> Arcana Vanguard <small>หอสมุดการ์ดเวทมนตร์</small></h1><div class="topActions"><span id="st" style="color:var(--mute);font-size:13px" aria-live="polite"></span><button class="btn sm" id="authBtn">Sign in</button><button class="btn sm" id="sparkleToggle" type="button" aria-pressed="false">✦ ปิดเอฟเฟกต์</button><button class="btn sm motionBtn" id="motionBtn" type="button" aria-pressed="false">⌁ เปิด Motion</button><button class="btn sm" id="editBtn" aria-pressed="false">✎ Edit</button></div></div>
   <div id="cloudNotice" class="cloudNotice" hidden></div>
   <div id="realtimeNotice" class="cloudNotice" hidden><span id="realtimeText">มีข้อมูลใหม่จากผู้ใช้อื่น</span> <button class="btn sm" id="realtimeRefresh">↻ รีเฟรชข้อมูล</button></div>
   <section id="cloudGate" class="cloudGate" hidden><h2>เข้าสู่ระบบเพื่อใช้แอป</h2><p>ข้อมูลโปรดักและ Card List เป็นข้อมูลร่วม ส่วนเด็ค คลังสะสม Pity และประวัติการสุ่มเป็นข้อมูลส่วนตัวของบัญชี</p><button class="btn primary" id="gateSignIn">เข้าสู่ระบบ / สมัครบัญชี</button></section>
@@ -690,18 +710,21 @@ async function load(){
       authUi(session.user);applyAdminUI();$("cloudGate").hidden=true;$("home").hidden=false;$("cloudNotice").hidden=true;
       const topbar=document.querySelector(".edbar");if(topbar)topbar.hidden=false;
       PRODUCTS=await Cloud.loadCatalog();
-      try{
-        const settings=await Cloud.loadAppSettings();
-        if(Array.isArray(settings?.nations)&&settings.nations.length)NATIONS=settings.nations;
-        if(Array.isArray(settings?.zones)&&settings.zones.length)ZONES=settings.zones;
-        if(Array.isArray(settings?.ctypes)&&settings.ctypes.length)CTYPES=settings.ctypes;
-      }catch(settingsError){console.warn("Shared app settings unavailable; using defaults",settingsError.message)}
+      let settings=null;
+      try{settings=await Cloud.loadAppSettings()}
+      catch(settingsError){console.warn("Shared app settings unavailable; using defaults",settingsError.message)}
+      // Do not replace stored Nations / types / zones with defaults after loading.
+      // This was the reason those three lists disappeared after a refresh.
+      NATIONS=Array.isArray(settings?.nations)?settings.nations.map(n=>({...n})):DEFN.map(x=>({...x}));
+      ZONES=Array.isArray(settings?.zones)&&settings.zones.length?settings.zones.map(z=>({...z})):DEFZ.map(x=>({...x}));
+      CTYPES=Array.isArray(settings?.ctypes)?[...settings.ctypes]:DEFT.slice();
       FAVS=new Set(await Cloud.loadFavourites());BANLIST=await Cloud.loadBanlist();COLLECTION=await Cloud.loadCollection();
       const gs=await Cloud.loadGachaState();PITY=Math.max(0,Math.min(PITYMAX,Number(gs.pity_count)||0));PACKS_OPENED=Number(gs.packs_opened)||0;PITYRST=gs.pity_reset_on_high!==false;
       REMOTE_DECKS=await Cloud.loadDecks();
-      const knownN=new Set(DEFN.map(x=>x.name));PRODUCTS.flatMap(p=>p.cards||[]).flatMap(c=>[c.nation,c.nation2]).filter(Boolean).forEach(n=>{if(!knownN.has(n)){knownN.add(n);DEFN.push({name:n,color:col(n)})}});
-      const types=[...new Set([...DEFT,...PRODUCTS.flatMap(p=>p.cards||[]).map(c=>c.unit).filter(Boolean)])];CTYPES=types;
-      NATIONS=DEFN.map(x=>({...x}));ZONES=DEFZ.map(x=>({...x}));loaded=true;$("st").textContent="";startRealtime();return;
+      // Keep legacy card values searchable without mutating the user's shared lists.
+      const types=[...new Set([...CTYPES,...PRODUCTS.flatMap(p=>p.cards||[]).map(c=>c.unit).filter(Boolean)])];CTYPES=types;
+      ZONES.forEach(z=>{if(z.id==="ride"&&z.perGrade===undefined){z.size=null;z.copies=null;z.perGrade=1}});
+      loaded=true;$("st").textContent="";startRealtime();return;
     }catch(e){$("st").textContent="Cloud error";$("cloudGate").hidden=false;$("home").hidden=true;$("authError").textContent=e.message;return}
   }
   $("cloudNotice").hidden=false;$("cloudNotice").textContent="โหมดตัวอย่าง: ยังไม่ได้ตั้งค่า Supabase จึงบันทึกเฉพาะในเบราว์เซอร์นี้และแชร์กับผู้ใช้อื่นไม่ได้";
@@ -766,6 +789,45 @@ const art=(c,nat)=>{
   else inner=`<div class="ph" style="background:${bg(c)}">${h(c.name)}</div>`;
   if(slot)inner=`<div class="lf">${inner}</div>`;
   return `<div class="art${slot?" slot":""}${foil(c)}" style="aspect-ratio:${ar}">${inner}${foil(c)?'<i class="fx"></i>':""}</div>`};
+
+/* Premium finish interaction: subtle mouse parallax and optional phone tilt. */
+const reduceMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+let activeArt=null,gyroBound=false;
+function setArtTilt(node,x=0,y=0){
+  if(!node||reduceMotion)return;
+  const ix=Math.max(-1,Math.min(1,Number(x)||0)),iy=Math.max(-1,Math.min(1,Number(y)||0));
+  const rare=node.classList.contains("f2")||node.classList.contains("f3")||node.classList.contains("f4"),scale=rare?1.15:.82;
+  node.style.setProperty("--tilt-x",`${(-iy*2.6*scale).toFixed(2)}deg`);
+  node.style.setProperty("--tilt-y",`${(ix*3.4*scale).toFixed(2)}deg`);
+  node.style.setProperty("--depth-x",`${(ix*4.5*scale).toFixed(2)}px`);
+  node.style.setProperty("--depth-y",`${(iy*3.5*scale).toFixed(2)}px`);
+  node.style.setProperty("--shine-x",`${(50+ix*34).toFixed(1)}%`);
+  node.style.setProperty("--shine-y",`${(50+iy*30).toFixed(1)}%`);
+}
+function resetArtTilt(node){setArtTilt(node,0,0)}
+function artFromEvent(e){return e.target?.closest?.(".art")||null}
+document.addEventListener("pointermove",e=>{const node=artFromEvent(e);if(!node)return;activeArt=node;const r=node.getBoundingClientRect();setArtTilt(node,(e.clientX-(r.left+r.width/2))/(r.width/2),(e.clientY-(r.top+r.height/2))/(r.height/2))});
+document.addEventListener("pointerout",e=>{const node=artFromEvent(e);if(node&&(!e.relatedTarget||!node.contains(e.relatedTarget)))resetArtTilt(node)});
+document.addEventListener("pointerdown",e=>{const node=artFromEvent(e);if(node)activeArt=node});
+function applyGyro(e){
+  if(reduceMotion)return;
+  const x=Math.max(-1,Math.min(1,(Number(e.gamma)||0)/32)),y=Math.max(-1,Math.min(1,((Number(e.beta)||45)-45)/32));
+  const targets=activeArt?[activeArt]:[...document.querySelectorAll(".gstage .art,.art.f2")];targets.forEach(node=>setArtTilt(node,x,y));
+}
+async function enableMotion(){
+  if(reduceMotion)return notice("ask","ปิด Motion ตามการตั้งค่าเครื่อง","เปิด Reduce Motion อยู่ จึงไม่ใช้เอฟเฟกต์เอียงการ์ด",{auto:2600});
+  try{
+    if(typeof DeviceOrientationEvent==="undefined")throw new Error("อุปกรณ์นี้ไม่รองรับเซนเซอร์เอียง");
+    if(typeof DeviceOrientationEvent.requestPermission==="function"){
+      const permission=await DeviceOrientationEvent.requestPermission();
+      if(permission!=="granted")throw new Error("ไม่ได้อนุญาตการเข้าถึงเซนเซอร์");
+    }
+    if(!gyroBound){window.addEventListener("deviceorientation",applyGyro,{passive:true});gyroBound=true}
+    $("motionBtn").setAttribute("aria-pressed","true");$("motionBtn").textContent="⌁ Motion เปิดแล้ว";
+  }catch(e){notice("ask","เปิด Motion ไม่ได้",String(e?.message||e),{auto:3000})}
+}
+$("motionBtn").onclick=enableMotion;
+if(typeof DeviceOrientationEvent!=="undefined"&&typeof DeviceOrientationEvent.requestPermission!=="function")enableMotion();
 function favKey(){return "cardlist-favourites-"+(Cloud?.user?.id||"guest")}
 function isFav(id){return FAVS.has(String(id))}
 function favStar(c){return `<span class="favStar${isFav(c.id)?" on":""}" data-fav="${h(c.id)}" role="button" tabindex="0" aria-label="${isFav(c.id)?"ลบ Favourite":"เพิ่ม Favourite"}">${isFav(c.id)?"★":"☆"}</span>`}
@@ -1134,29 +1196,9 @@ function renderBanGallery(){
  const togetherRows=rowsBy(BANLIST.filter(r=>r.type==="together"),r=>String(r.group||"กลุ่ม 1").trim(),r=>String(r.group||"กลุ่ม 1").trim());
  const sections=[cat("ban","ห้ามใส่",banRows),cat("zone","ห้ามใส่ในกองการ์ด",zoneRows),cat("limit","จำกัดจำนวนการ์ด",limitRows)];
  sections.push(`<details class="banTypeGroup banCategory"><summary>ห้ามใส่ด้วยกัน<span class="banOpenHint">กดเพื่อเปิดดูกลุ่ม</span></summary><div class="banCategoryBody">${togetherRows.length?togetherRows.map(row=>`<div class="banTogetherGroup"><div class="banTogetherTitle">${h(row.label)}</div>${cardRow(row.cards)}</div>`).join(""):cardRow([])}</div></details>`);
- const sampleData=[
-  {label:"Choice restriction · เลือกได้ไม่เกิน 1 ชื่อในแต่ละกลุ่ม",groups:[["Rewrite the Star, Vyrgilla","Dragritter, Nirmihn"],["Sugary and Scary Land, Heartluru","Spiritual King of Ignition, Valnout"],["Harvest Elf","Rotting Usurp Dragon"]]},
-  {label:"Restricted to 1 · จำกัดไม่เกิน 1 ใบ",cards:["Magic of Colored Flame, Rerelihm"]},
-  {label:"Restricted to 2 · จำกัดไม่เกิน 2 ใบ",cards:["Vyrgilla, “Rewrite Form: Alfknights”","Summon Crow Mage, Corvoll"]},
-  {label:"Restricted · ห้ามใส่ (0 ใบ)",cards:["Defensing Roar","Aurora Battle Princess, Derii Violet","Bustling Bleachers","Knight of Excision, Diorruing","Magic of Cycling Wind, Parryris","Hymn Brimming With Mercy","Strange Food Preparation","Flowering Sweet Shop"]}
- ];
- const sampleMeta="japan jp standard 2026 april april 1 banlist fighter rules";
- const sampleMatch=(name,label)=>!q||(`${name} ${label} ${sampleMeta}`).toLowerCase().includes(q);
- const sampleTile=name=>`<div class="banGalleryCard banSampleCard"><div class="banSampleFace"><span>JP STANDARD · SAMPLE</span><b>${h(name)}</b></div><small>ตัวอย่างอ้างอิง · ไม่ใช่กฎจริง</small></div>`;
- const sampleRows=sampleData.map(item=>{
-  const labelHit=sampleMatch("",item.label);
-  if(item.groups){
-   const groups=item.groups.map((names,i)=>({names,i})).filter(x=>labelHit||!q||x.names.some(n=>sampleMatch(n,item.label)));
-   if(!groups.length)return "";
-   return `<div class="banRuleRow"><div class="banRuleLabel">${h(item.label)}</div><div class="banSampleGroups">${groups.map(x=>`<div class="banTogetherGroup"><div class="banTogetherTitle">กลุ่ม ${x.i+1} · เลือกได้ไม่เกิน 1 ชื่อ</div><div class="banRuleCards">${x.names.map(sampleTile).join("")}</div></div>`).join("")}</div></div>`;
-  }
-  const cards=item.cards.filter(n=>labelHit||!q||sampleMatch(n,item.label));
-  return cards.length?`<div class="banRuleRow"><div class="banRuleLabel">${h(item.label)}</div><div class="banRuleCards">${cards.map(sampleTile).join("")}</div></div>`:"";
- }).filter(Boolean).join("");
- const sampleHtml=sampleRows?`<details class="banTypeGroup banCategory banSampleCategory"><summary>ตัวอย่าง Banlist ญี่ปุ่น · Standard · 1 เม.ย. 2026 <span class="banOpenHint">อ้างอิงเท่านั้น</span></summary><div class="banCategoryBody"><p class="banSampleNote">อ้างอิงจากโพสต์ Reddit สำหรับญี่ปุ่น (มีผล 1 เม.ย. 2026) — ตัวอย่างนี้ไม่เพิ่มลง Banlist จริงและไม่เปลี่ยนผลตรวจเด็ค; ประกาศภาษาอังกฤษของ Bushiroad ระบุวันเริ่มใช้ 1 พ.ค. 2026 สำหรับภูมิภาค EN. <a href="https://www.reddit.com/r/cardfightvanguard/comments/1s397l5/jp_banlist_effective_april_1st/" target="_blank" rel="noopener noreferrer">โพสต์ Reddit</a> · <a href="https://en.cf-vanguard.com/information/regarding-the-april-2026-deck-construction-rules-update/" target="_blank" rel="noopener noreferrer">ประกาศ Bushiroad EN</a></p>${sampleRows}</div></details>`:"";
  const shown=new Set([...banRows,...zoneRows,...limitRows,...togetherRows].flatMap(row=>row.cards.map(c=>String(c.id))));
- $("banGalleryCount").textContent=shown.size+" / "+all.length+" ใบ · 4 หมวดจริง (ไม่รวมตัวอย่าง)";
- box.innerHTML=sections.join("")+sampleHtml;
+	$("banGalleryCount").textContent=shown.size+" / "+all.length+" ใบ";
+	box.innerHTML=sections.join("");
 }
 $("banGalleryManage").onclick=banForm;
 $("banGallerySearch").oninput=renderBanGallery;

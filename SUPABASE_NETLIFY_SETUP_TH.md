@@ -163,3 +163,15 @@
 - [Supabase Auth Redirect URLs](https://supabase.com/docs/guides/auth/redirect-urls)
 - [Supabase Database / SQL Editor](https://supabase.com/docs/guides/database/overview)
 - [Netlify environment variables](https://docs.netlify.com/build/configure-builds/environment-variables/)
+
+
+## แก้ error `new row violates row-level security policy for table "catalog_cards"`
+
+ในชุดแก้ไขนี้มี migration เพิ่มเติมชื่อ `supabase/migrations/20261003020000_catalog_rls_hardening.sql` สำหรับโปรเจกต์ Supabase เดิมที่ยังมี policy เก่า/แบบ admin-only ค้างอยู่
+
+1. สำรองหรือทดสอบฐานข้อมูลก่อน
+2. เปิด Supabase Dashboard → **SQL Editor** แล้วรันเนื้อหาไฟล์ migration นี้ **หนึ่งครั้ง** หรือใช้ `supabase db push` ตาม workflow ของโปรเจกต์
+3. ตรวจว่า user ล็อกอินอยู่ แล้ว Deploy Netlify ใหม่
+4. เปิดเว็บใหม่แล้วทดสอบแก้การ์ด, เปิดซอง และบันทึก **Nations / Card types / Deck zones**
+
+migration นี้อนุญาตการจัดการ Catalog และ Banlist ตามขอบเขตเดิมของแอปสำหรับผู้ใช้ที่มี session (`authenticated`) เท่านั้น ไม่ได้เปิดสิทธิ์ให้ผู้ใช้ที่ยังไม่ล็อกอิน และไม่ต้องใส่ `service_role` key ในเว็บ

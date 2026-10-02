@@ -7,7 +7,7 @@ const dist = path.join(root, 'dist');
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
-for (const name of ['index.html', 'cloud.js', '_redirects', '_headers']) {
+for (const name of ['index.html', 'cloud.js', '_redirects', '_headers', 'manus-routes.json']) {
   try {
     await cp(path.join(root, name), path.join(dist, name));
   } catch (error) {
