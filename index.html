@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arcana Vanguard · หอสมุดการ์ดเวทมนตร์</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14213d;--paper:#f4f6fb;--line:#d5dbe8;--red:#c8102e;--mute:#5b6478;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--ink:#eef1f8;--paper:#0f1626;--line:#2a3550;--mute:#9aa5bd;--card:#18223a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.5 Barlow,Arial,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 16px 48px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+h1{font:700 44px/1 "Barlow Condensed",Arial,sans-serif;margin:0;border-left:6px solid var(--red);padding-left:12px}
+[hidden]{display:none!important}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.ed,.edbar{display:none!important}
+body.edit .ed{display:inline-block!important}
+body.edit .edbar{display:flex!important}
+.edbar{gap:8px;flex-wrap:wrap;background:var(--card);border:1px dashed var(--red);border-radius:6px;padding:10px;margin-bottom:16px}
+.tabs{display:flex;gap:4px;border-bottom:2px solid var(--line);margin-bottom:20px}
+.tab{background:none;border:0;color:var(--mute);font:600 16px Barlow,sans-serif;padding:10px 18px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+.tabs{overflow-x:auto;scrollbar-width:none}.tab{white-space:nowrap;flex:none}.tab[aria-selected=true]{color:var(--ink);border-bottom-color:var(--red)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+label{display:block;font-weight:600;font-size:13px;margin-bottom:4px;color:var(--mute)}
+select,input,textarea{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:4px;background:var(--card);color:var(--ink);font:inherit}
+.link{background:none;border:0;padding:0;font:600 14px Barlow,sans-serif;cursor:pointer;text-decoration:underline}
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{padding:10px 22px;border-radius:4px;border:1px solid var(--ink);background:var(--card);font:600 15px Barlow,sans-serif;cursor:pointer}
+.btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.btn.sm{padding:6px 14px;font-size:14px}
+.count{margin:22px 0 10px;color:var(--mute);font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;grid-auto-flow:dense}
+@media(max-width:560px){.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}}
+.c{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;padding:0;cursor:pointer}
+.c:hover{border-color:var(--red)}
+.art{position:relative;overflow:hidden;aspect-ratio:59/86;background:var(--line)}
+.art img{width:100%;height:100%;object-fit:cover;display:block}
+.art.slot{background:transparent}
+.c.land,.sc.land{grid-column:span 2}
+.lf{border-radius:8px;position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);aspect-ratio:86/59;overflow:hidden}
+.lf>img:not([style]),.lf>.ph{position:absolute;inset:0;width:100%;height:100%}
+.ph{height:100%;display:flex;align-items:flex-end;padding:8px;color:#fff;font:700 14px "Barlow Condensed",sans-serif}
+.c .t{padding:6px 8px;font-size:12px;line-height:1.3}.c .t b{display:block}.c .t span{color:var(--mute)}
+.rows{display:flex;flex-direction:column;gap:6px}
+.row{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:6px 12px 6px 6px;cursor:pointer}
+.row .art{width:44px;border-radius:3px;overflow:hidden}
+.row small{color:var(--mute);display:block}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.pill{padding:6px 16px;border-radius:99px;border:1px solid var(--line);background:var(--card);font:600 14px Barlow,sans-serif;cursor:pointer}
+.pill[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+details{border:1px solid var(--line);background:var(--card);border-radius:6px;margin-bottom:10px}
+summary{padding:12px 16px;font:700 20px "Barlow Condensed",sans-serif;cursor:pointer}
+.plist{list-style:none;margin:0;padding:0 16px 12px}
+.plist li{border-top:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.prod{display:flex;align-items:center;gap:12px;flex:1;background:none;border:0;padding:8px 0;cursor:pointer;text-align:left}
+.prod .art{width:40px;flex:none;border-radius:3px;overflow:hidden}
+.prod span{flex:1;font-weight:500}.prod em{font-style:normal;color:var(--mute);font-size:13px}
+.prod:hover span{color:var(--red)}
+.pvhead{display:flex;flex-wrap:wrap;gap:12px;align-items:end;justify-content:space-between;margin:14px 0}
+.pvhead h2{font:700 30px/1.1 "Barlow Condensed",sans-serif;margin:0}
+.tools{display:flex;gap:10px;align-items:end;margin-bottom:16px;flex-wrap:wrap}
+.tools select{width:auto}
+dialog{border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);padding:0;max-width:min(680px,94vw);width:100%;max-height:92vh}
+dialog::backdrop{background:rgba(10,15,30,.65)}
+.pad{padding:20px}
+.lb{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:20px;padding:20px}
+.lb h3,.pad h3{font:700 26px/1.1 "Barlow Condensed",sans-serif;margin:0 0 10px}
+.lb dl{margin:0 0 14px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px}.lb dt{color:var(--mute)}.lb dd{margin:0}
+.x{position:absolute;right:10px;top:8px;background:none;border:0;font-size:22px;cursor:pointer}
+.fld{margin-bottom:10px}
+.imgrow{display:flex;gap:12px;align-items:flex-start}.imgrow .art{width:80px;flex:none;border-radius:4px;overflow:hidden}.imgrow>div:last-child{flex:1;display:grid;gap:6px}
+textarea{height:200px;font:12px/1.4 monospace}
+@media(max-width:520px){.lb{grid-template-columns:1fr}h1{font-size:34px}}
+.yr{font:700 22px "Barlow Condensed",sans-serif;margin:18px 0 8px}
+.ptiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.cov{position:relative;aspect-ratio:3/2;background:var(--line);overflow:hidden}
+.cov img{width:100%;height:100%;object-fit:cover;display:block}
+.cov .ph{align-items:center;justify-content:center;text-align:center;padding:14px;font-size:20px}
+.tb{display:inline-block;margin:10px 0 0 10px;padding:3px 14px;color:#fff;font:700 15px/1.3 "Barlow Condensed",Arial,sans-serif}
+.ptile{display:flex;flex-direction:column;gap:6px}
+.dgrid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+.dpick{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;max-height:70vh;overflow:auto;padding:2px}
+.dpick .t{padding:4px 6px;font-size:12px}
+.dside{position:sticky;top:8px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:12px}
+.drow{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid var(--line)}
+.drow .art{width:36px;border-radius:3px;overflow:hidden}.drow .ph{font-size:0}
+.drow small{display:block;color:var(--mute)}
+.qty{display:flex;gap:6px;align-items:center}
+.qty button{width:32px;height:32px;border-radius:4px;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:17px}
+.sp{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-bottom:10px}
+.sc{position:relative;border-radius:8px;overflow:hidden}
+.bdg{position:absolute;right:6px;top:6px;background:var(--red);color:#fff;font:700 13px Barlow,sans-serif;border-radius:99px;padding:1px 9px}
+.nrow{display:flex;gap:8px;margin-bottom:8px}.nrow input[type=color]{width:52px;padding:2px;flex:none}
+@media(max-width:760px){.dgrid{grid-template-columns:1fr}.dside{position:static;order:-1}}
+.dto{font-size:13px;color:var(--mute);margin:0 0 8px}
+.chk{font-size:13px;color:var(--mute);margin:12px 0 0}.chk .bad{color:var(--red);font-weight:700}.chk .ok{color:#2e9e5b;font-weight:700}
+.sub2{font-weight:600;color:var(--mute);margin:8px 0 4px;font-size:13px}
+.zrow{display:grid;grid-template-columns:1fr 62px 62px 62px auto;gap:6px;margin-bottom:8px;align-items:center}
+.zh{font-size:12px;color:var(--mute);font-weight:600;margin-bottom:4px}
+.stage{position:relative;overflow:hidden;background:var(--line);border:2px solid var(--red);border-radius:6px;touch-action:none;cursor:grab;margin:10px auto}
+.stage.b{width:min(360px,100%)}.stage.p{width:min(220px,70%)}.stage.l{width:min(320px,100%)}
+.chk ul{margin:6px 0 0;padding-left:18px}
+.art.back{background:repeating-linear-gradient(45deg,#0d2a6b 0 6px,#143a8f 6px 12px);border:2px solid #7aa2ff;display:grid;place-items:center}.art.back:after{content:"V";color:#9cc0ff;font:700 26px "Barlow Condensed",sans-serif}
+.btn[aria-pressed=true]{background:#2e9e5b;border-color:#2e9e5b;color:#fff}
+#nt{max-width:min(400px,90vw);text-align:center;border:3px solid var(--line)}
+#nt.bad{border-color:var(--red)}#nt.ok{border-color:#2e9e5b}
+#nt .ic{font-size:72px;line-height:1;margin:4px 0 10px;animation:ntpop .4s ease-out}
+#nt h3{font:700 28px/1.1 "Barlow Condensed",sans-serif;margin:0 0 8px}
+#nt p{margin:0 0 8px;color:var(--mute)}
+#nt .chk{text-align:left;margin:8px 0 0}
+#nt .actions{justify-content:center;margin-top:16px}
+@keyframes ntpop{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.18)}100%{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){#nt .ic{animation:none}}
+
+
+
+
+.art.back{background:#000 url(data:image/jpeg;base64,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) center/cover no-repeat;border:1px solid #9bb;display:block}.art.back:after{content:none}
+.art.back.bride{filter:hue-rotate(160deg)}.art.back.bg{filter:hue-rotate(80deg)}.art.back.bout{opacity:.45}
+
+
+
+
+
+
+
+
+
+@media (hover:hover){}
+.dz{outline:3px dashed #5ec27a!important;outline-offset:-3px}.dragging{opacity:.35}body.dgg,body.dgg *{cursor:grabbing!important}
+.dkp{position:fixed;right:10px;top:84px;width:min(230px,46vw);max-height:78vh;overflow:auto;z-index:50;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:10px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.dkh{display:flex;justify-content:space-between;align-items:baseline;gap:6px;font:700 17px "Barlow Condensed",sans-serif}.dkh span{font-size:14px;color:var(--mute)}
+.dkr{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.dkl{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:4px;max-height:38vh;overflow:auto;margin:6px 0}.dkc{cursor:pointer}.dkc.sel{outline:2px solid #ffd54a}.dkc .art{border-radius:3px}
+
+/* damage: full-size sideways cards, one column, staggered overlap (no shrinking) */
+/* selection panel: fixed on the left side */
+#selBar{position:fixed;left:8px;top:50%;transform:translateY(-50%);width:min(220px,44vw);max-height:78vh;overflow:auto;z-index:40;box-sizing:border-box;background:var(--card);box-shadow:0 8px 24px rgba(0,0,0,.45)}
+#selBar[hidden]{display:none}
+/* order: full slot height, side by side, shrink only when too many to fit */
+
+
+
+
+/* crest: sideways cards, whole slot, no overlap */
+
+
+
+
+
+
+
+
+/* foil: RRR gold, SVR+ rainbow */
+.art.f1::before,.art.f2::before,.art.f1::after,.art.f2::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;box-sizing:border-box}
+.art.f1::before{box-shadow:inset 0 0 0 2px #ffd54a,inset 0 0 12px 2px rgba(255,200,60,.8)}
+.art.f1::after{background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%) 0 0/300% 100% no-repeat;animation:fsh 5s ease-in-out infinite}
+.art.f2::before{padding:3px;background:linear-gradient(125deg,#ff0080,#ff8c00,#ffe600,#00e08a,#00b3ff,#8a2be2,#ff0080) 0 0/300% 300%;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:fbd 4s linear infinite}
+.art.f2::after{mix-blend-mode:overlay;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.85) 50%,transparent 62%) 0 0/300% 100% no-repeat,linear-gradient(125deg,rgba(255,0,128,.5),rgba(255,140,0,.45),rgba(255,230,0,.45),rgba(0,224,138,.45),rgba(0,179,255,.5),rgba(138,43,226,.5),rgba(255,0,128,.5)) 0 0/300% 300%,radial-gradient(circle,#fff 0 1px,transparent 2px) 0 0/22px 22px,radial-gradient(circle,#fff 0 1px,transparent 2px) 11px 7px/31px 31px;animation:fh 5s linear infinite}
+@keyframes fsh{0%{background-position:150% 0}40%,100%{background-position:-50% 0}}
+@keyframes fbd{to{background-position:300% 300%}}
+@keyframes fh{0%{background-position:150% 0,0 0,0 0,11px 7px}40%{background-position:-50% 0,40% 40%,6px 9px,3px 14px}100%{background-position:-50% 0,100% 100%,0 0,11px 7px}}
+@media(prefers-reduced-motion:reduce){.art.f1::after,.art.f2::before,.art.f2::after{animation:none}}
+
+/* sparkle stars by rarity tier */
+:root{--star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath d='M15 13Q15 20 22 20Q15 20 15 27Q15 20 8 20Q15 20 15 13ZM60 8Q60 12 64 12Q60 12 60 16Q60 12 56 12Q60 12 60 8ZM75 41Q75 50 84 50Q75 50 75 59Q75 50 66 50Q75 50 75 41ZM30 60Q30 65 35 65Q30 65 30 70Q30 65 25 65Q30 65 30 60ZM48 37Q48 40 51 40Q48 40 48 43Q48 40 45 40Q48 40 48 37ZM10 79Q10 82 13 82Q10 82 10 85Q10 82 7 82Q10 82 10 79Z' fill='%23000'/%3E%3Ccircle cx='42' cy='80' r='1.3'/%3E%3Ccircle cx='82' cy='22' r='1.3'/%3E%3Ccircle cx='55' cy='62' r='1'/%3E%3C/svg%3E")}
+.art.f0::before,.art.f3::before,.art.f4::before,.art.f0::after,.art.f3::after,.art.f4::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;box-sizing:border-box}
+.art.f0::before{box-shadow:inset 0 0 0 2px #cfd8e8,inset 0 0 10px 1px rgba(190,210,255,.7)}
+.art.f3::before{box-shadow:inset 0 0 0 2px #ff7ac8,inset 0 0 14px 2px rgba(255,100,190,.85)}
+.art.f4::before{box-shadow:inset 0 0 0 2px #ff4d4d,inset 0 0 0 4px rgba(255,211,107,.9),inset 0 0 16px 3px rgba(255,70,70,.8)}
+.art.f0::after,.art.f3::after,.art.f4::after{background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.5) 50%,transparent 60%) 0 0/300% 100% no-repeat;animation:fsh 5s ease-in-out infinite}
+.art.f3::after{animation-duration:4s}.art.f4::after{animation-duration:3.2s;background-image:linear-gradient(115deg,transparent 38%,rgba(255,230,160,.75) 50%,transparent 62%)}
+.fx{position:absolute;inset:0;z-index:3;pointer-events:none;display:block;--ss:64px;--fc:#fff;--fc2:#fff;--tw:2.6s;--dr:12s}
+.fx::before,.fx::after{content:"";position:absolute;inset:0;background:var(--fc);-webkit-mask:var(--star) 0 0/var(--ss) var(--ss) repeat;mask:var(--star) 0 0/var(--ss) var(--ss) repeat;opacity:0;animation:twk var(--tw) ease-in-out infinite,dr1 var(--dr) linear infinite;filter:drop-shadow(0 0 2px var(--fc))}
+.fx::after{background:var(--fc2);-webkit-mask-size:calc(var(--ss)*1.45);mask-size:calc(var(--ss)*1.45);-webkit-mask-position:29px 17px;mask-position:29px 17px;animation:twk calc(var(--tw)*1.2) ease-in-out 1.3s infinite,dr2 calc(var(--dr)*1.3) linear infinite}
+.f0>.fx{--fc:#e6efff;--fc2:#a9c4ff;--ss:80px;--dr:6s}
+.f1>.fx{--fc:#ffe27a;--fc2:#ffb300;--ss:58px;--dr:3.6s;--tw:2s}
+.f2>.fx{--fc:#ff8ae0;--fc2:#6fe8ff;--ss:56px;--dr:4s;animation:fhue 5s linear infinite}
+.f3>.fx{--fc:#ffb3e1;--fc2:#fff;--ss:50px;--dr:3.4s;--tw:1.8s}
+.f4>.fx{--fc:#ff6b6b;--fc2:#ffd877;--ss:44px;--dr:3s;--tw:1.5s}
+@keyframes twk{0%,100%{opacity:0}20%{opacity:1}55%{opacity:.85}78%{opacity:0}}
+@keyframes dr1{to{-webkit-mask-position:var(--ss) calc(var(--ss)*-1);mask-position:var(--ss) calc(var(--ss)*-1)}}
+@keyframes dr2{to{-webkit-mask-position:calc(29px - var(--ss)*1.45) calc(17px + var(--ss)*1.45);mask-position:calc(29px - var(--ss)*1.45) calc(17px + var(--ss)*1.45)}}
+@keyframes fhue{to{filter:hue-rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.fx::before,.fx::after,.f2>.fx{animation:none}.fx::before{opacity:.8}.fx::after{opacity:0}}
+/* pack opener */
+.pkc{animation:pkin .45s both;animation-delay:var(--d)}@keyframes pkin{from{opacity:0;transform:translateY(14px) scale(.92)}}
+@media(prefers-reduced-motion:reduce){.pkc{animation:none}}
+.pkr{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;padding:10px 0}
+/* ---------- Pack Opener / Gacha ---------- */
+.pkpanel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.pkbar{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;margin-top:14px}
+.pity{flex:1;min-width:230px}
+.pityTop{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pityTop b{font:700 20px/1 "Barlow Condensed",sans-serif}
+.pityTop span{font:600 13px Barlow,sans-serif;color:var(--mute)}
+.pityBar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:6px 0}
+.pityBar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#3aa0ff,#c8102e);transition:width .3s ease}
+.pity.full .pityBar i{background:linear-gradient(90deg,#ffd54a,#ff4d4d);box-shadow:0 0 12px #ffd54a}
+.pkacts{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#gacha{border:0;background:transparent;padding:0;margin:0;width:100%;height:100%;max-width:100%;max-height:100%;overflow:hidden}
+#gacha::backdrop{background:radial-gradient(ellipse at 50% 38%,rgba(24,44,92,.95),rgba(3,6,16,.985))}
+.gwrap{position:relative;width:100%;height:100%;display:flex;flex-direction:column;gap:10px;padding:12px;box-sizing:border-box;color:#eef1f8;overflow:auto}
+.gx{position:absolute;right:10px;top:8px;z-index:6;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font-size:24px;line-height:1;cursor:pointer}
+.ghead{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;padding-top:4px}
+.ghead>b{font:700 26px/1.05 "Barlow Condensed",sans-serif}
+.ghead>span{color:#9fb0d0;font-size:13px}
+.gpity{display:flex;align-items:center;gap:8px;font:600 13px Barlow,sans-serif;color:#9fb0d0}
+.gpity b{color:#fff}
+.gpbar{display:block;width:150px;height:8px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.gpbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3aa0ff,#ffd54a);transition:width .3s}
+.gbody{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;width:100%}
+.gstage{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.gfoot{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;min-height:46px}
+.gfootmsg{color:#9fb0d0;font-size:13px;text-align:center}
+#gacha .btn{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.1);color:#fff}
+#gacha .btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.pkwrap{--ty:22%;position:relative;width:min(340px,76vw,calc((100vh - 310px)*.75));aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:#101c33;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;box-shadow:0 20px 50px rgba(0,0,0,.65),inset 0 0 0 2px rgba(255,255,255,.16)}
+.pkwrap:active{cursor:grabbing}
+.pkimg{position:absolute;inset:0;overflow:hidden;background:#16233c}
+.pkimg.pkfull{inset:auto;left:0;top:0;width:100%;height:auto;aspect-ratio:3/4}
+.pkimg .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;font:700 22px/1.2 "Barlow Condensed",sans-serif;color:#fff}
+.pkclip{position:absolute;left:0;right:0;top:0;height:var(--ty);overflow:hidden;pointer-events:none;transform-origin:10% 100%;transition:transform .1s linear,opacity .2s linear;filter:drop-shadow(0 6px 10px rgba(0,0,0,.55))}
+.pkwrap.torn .pkclip{transform:translate(-34%,-52%) rotate(-26deg)!important;opacity:0!important;transition:transform .72s cubic-bezier(.32,1.35,.5,1),opacity .72s}
+.pktear{position:absolute;left:0;right:0;top:calc(var(--ty) - 2px);height:5px;background:repeating-linear-gradient(90deg,#ffd54a 0 9px,rgba(0,0,0,0) 9px 16px);opacity:.9;pointer-events:none}
+.pkgloss{position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.3) 50%,transparent 66%) 0 0/300% 100% no-repeat;animation:pkgl 4.5s ease-in-out infinite}
+@keyframes pkgl{0%{background-position:150% 0}45%,100%{background-position:-60% 0}}
+.pkglow{position:absolute;inset:-30%;pointer-events:none;opacity:0;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,214,90,.55) 38%,transparent 68%)}
+.pkwrap.torn .pkglow{animation:pkflash .85s ease-out}
+@keyframes pkflash{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+.pktrack{position:relative;width:min(340px,84vw);height:46px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);overflow:hidden;touch-action:none;user-select:none}
+.pkfill{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,rgba(200,16,46,.9),rgba(255,213,74,.95))}
+.pktrack .lbl{position:absolute;inset:0;display:grid;place-items:center;font:600 13px Barlow,sans-serif;color:rgba(255,255,255,.85);pointer-events:none}
+.pkhandle{position:absolute;top:3px;left:calc(var(--p,0) * (100% - 40px));width:40px;height:40px;border-radius:50%;background:#fff;color:#14213d;display:grid;place-items:center;font:700 18px Barlow,sans-serif;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+.pkhint{margin:0;color:#9fb0d0;font-size:13px;text-align:center;min-height:20px}
+.cg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;width:min(980px,96vw);margin:0 auto}
+@media(max-width:820px){.cg{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:min(560px,96vw)}}
+@media(max-width:430px){.cg{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}}
+.pkCard{position:relative;aspect-ratio:59/86;perspective:1000px;background:none;border:0;padding:0;cursor:pointer;animation:pkpop .5s cubic-bezier(.2,1.2,.4,1) both;animation-delay:var(--d,0ms)}
+@keyframes pkpop{from{opacity:0;transform:translateY(34px) scale(.72)}}
+.pkin{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.25,.9,.3,1)}
+.pkCard.open .pkin{transform:rotateY(180deg)}
+.pkfb,.pkff{position:absolute;inset:0;border-radius:8px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.pkff{transform:rotateY(180deg)}
+.pkCard .art{width:100%;height:100%;border-radius:8px}
+.pkr2{position:absolute;left:50%;bottom:5px;transform:translateX(-50%);z-index:4;background:rgba(0,0,0,.78);color:#fff;font:700 11px/1 "Barlow Condensed",sans-serif;padding:3px 8px;border-radius:99px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .3s .35s}
+.pkCard.open .pkr2{opacity:1}
+.pkCard.guar .pkff{box-shadow:inset 0 0 0 3px #ffd54a,0 0 20px rgba(255,213,74,.9)}
+.gsum{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:10px;width:min(740px,96vw);max-height:56vh;overflow:auto;padding:4px;margin:0 auto}
+.pks{position:relative;cursor:pointer}
+.pks .art{border-radius:8px}
+.pks .pkr2{opacity:1;transition:none}
+@media(prefers-reduced-motion:reduce){.pkCard{animation:none}.pkgloss{animation:none}}
+.pkbgg{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(16px) brightness(.58) saturate(1.15);transform:scale(1.25)}
+.pkfg{position:absolute;left:0;top:50%;width:100%;height:auto;transform:translateY(-50%);box-shadow:0 10px 26px rgba(0,0,0,.5)}
+.pkimg .ph.pkdefault{flex-direction:column;gap:10px;padding:22px;background-image:radial-gradient(circle at 50% 16%,rgba(255,255,255,.28),transparent 58%),repeating-linear-gradient(135deg,rgba(255,255,255,.075) 0 11px,rgba(0,0,0,.045) 11px 22px);background-blend-mode:overlay,normal;box-shadow:inset 0 0 60px rgba(0,0,0,.45)}
+.pkdefault .pktag{font:700 12px/1 Barlow,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.65);border-radius:99px;padding:5px 12px}
+.pkdefault b{font:700 27px/1.12 "Barlow Condensed",sans-serif;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.55)}
+.pkdefault .pktype{font:600 13px/1 Barlow,sans-serif;color:rgba(255,255,255,.82)}
+.pkCard .ph,.pks .ph{align-items:center;justify-content:center;text-align:center;padding:8px;font-size:13px;line-height:1.15}
+.pks .pkr2{opacity:1;transition:none;top:5px;bottom:auto;background:rgba(0,0,0,.82)}
+.pks:hover{transform:translateY(-3px);transition:transform .15s}
+
+.packSizeEditor{border:1px solid var(--line);border-radius:8px;padding:12px;background:rgba(127,145,180,.06)}
+.packCustom{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.packCustom[hidden]{display:none}
+.packPreviewBox{display:flex;gap:12px;align-items:center;margin-top:8px;color:var(--mute);font-size:13px}
+.packPreview{position:relative;display:grid;place-items:center;width:92px;height:148px;overflow:hidden;border-radius:8px;background:linear-gradient(135deg,#182641,#344665);border:1px solid var(--line);box-shadow:0 5px 15px rgba(0,0,0,.16)}
+.packPreview::before,.packPreview::after{content:"";position:absolute;left:0;right:0;height:8px;z-index:2;background:repeating-linear-gradient(90deg,rgba(255,255,255,.85) 0 2px,rgba(255,255,255,.15) 2px 4px,rgba(0,0,0,.18) 4px 6px);opacity:.8}
+.packPreview::before{top:0}.packPreview::after{bottom:0}.packPreview img{max-width:none;max-height:none;object-fit:contain;position:relative;z-index:1}
+.packPreview.empty::after{content:attr(data-empty);height:auto;left:6px;right:6px;bottom:40%;background:none;text-align:center;font-size:10px;opacity:.9}
+.pkSoundToggle{display:flex;align-items:center;gap:7px;align-self:end;padding:9px 12px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--ink);white-space:nowrap;font-size:13px}.pkSoundToggle input{width:auto;margin:0}
+.pkwrap{width:min(300px,70vw,calc((100vh - 300px)*.606));aspect-ratio:1/1.65;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#14213a,#354864 38%,#151f35);box-shadow:0 24px 56px rgba(0,0,0,.66),inset 0 0 0 3px rgba(255,255,255,.12)}
+.pkimg{inset:5% 3%;border-radius:7px;background:linear-gradient(135deg,#1a2743,#354964 50%,#182239)}
+.pkimg.pkfull{left:3%;top:5%;width:94%;height:90%;aspect-ratio:auto}
+.pkwrap::before,.pkwrap::after{content:"";position:absolute;left:0;right:0;height:5.5%;z-index:4;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(214,224,234,.25) 30%,rgba(15,26,44,.32) 70%,rgba(255,255,255,.48)),repeating-linear-gradient(90deg,rgba(255,255,255,.35) 0 2px,transparent 2px 5px);border-block:1px solid rgba(255,255,255,.55);box-shadow:0 2px 8px rgba(0,0,0,.23)}
+.pkwrap::before{top:0}.pkwrap::after{bottom:0}
+.pkfg{left:50%;top:50%;height:auto;max-width:none;transform:translate(-50%,-50%);border-radius:3px;box-shadow:0 8px 24px rgba(0,0,0,.36)}
+.pkCard.rrr-gold.open .pkff{box-shadow:inset 0 0 0 3px #ffd54a,0 0 15px 4px rgba(255,194,35,.78),0 0 32px rgba(255,226,122,.62);animation:rrrGoldPulse 1.8s ease-in-out infinite alternate}
+.pkRRRglint{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;border-radius:8px;background:linear-gradient(112deg,transparent 24%,rgba(255,255,210,.06) 37%,rgba(255,230,140,.60) 49%,rgba(255,255,255,.72) 51%,rgba(255,198,45,.42) 57%,transparent 72%),radial-gradient(circle at 18% 22%,rgba(255,241,156,.95) 0 1px,transparent 3px),radial-gradient(circle at 74% 68%,rgba(255,255,230,.9) 0 1px,transparent 3px),radial-gradient(circle at 55% 28%,rgba(255,203,56,.9) 0 1px,transparent 3px);background-size:240% 100%,100% 100%,100% 100%,100% 100%;mix-blend-mode:screen}
+.pkCard.rrr-gold.open .pkRRRglint{animation:rrrGleam 1.65s ease-in-out infinite}
+@keyframes rrrGleam{0%{opacity:.12;background-position:150% 0,0 0,0 0,0 0}45%{opacity:.58}100%{opacity:.16;background-position:-60% 0,0 0,0 0,0 0}}
+@keyframes rrrGoldPulse{from{filter:drop-shadow(0 0 4px rgba(255,192,38,.45))}to{filter:drop-shadow(0 0 12px rgba(255,225,106,.95))}}
+@media(max-width:560px){.packCustom{grid-template-columns:1fr}.pkSoundToggle{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){.pkCard.rrr-gold.open .pkff,.pkCard.rrr-gold.open .pkRRRglint{animation:none}.pkCard.rrr-gold.open .pkRRRglint{opacity:.35}}
+
+.packPosition{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.packPosition label{font-size:12px}.packPosition input{display:block;width:100%;margin-top:5px}.packPosition .dto{grid-column:1/-1}.packPreview{touch-action:none;cursor:move}.packPreview img{user-select:none;-webkit-user-drag:none}
+.collectionPanel{margin-top:20px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--card)}.collectionHead{display:flex;align-items:start;justify-content:space-between;gap:12px}.collectionHead h3{margin:0;font:700 24px/1.1 "Barlow Condensed",sans-serif}.collectionHead .dto{margin-top:5px}.collectionTools{display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin:10px 0}.collectionTools input{min-width:min(320px,100%)}.collectionTools label{min-width:180px}.collectionTools select{margin-top:3px}.collectionCards{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:10px}.collectionCard{position:relative;display:flex;flex-direction:column;gap:3px;padding:7px;border:1px solid var(--line);border-radius:8px;background:var(--paper);min-width:0}.collectionCard .art{width:100%;aspect-ratio:59/86;border-radius:5px;overflow:hidden}.collectionCard b{font-size:12px;line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.collectionCard small{color:var(--mute);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.colRarity,.colQty{position:absolute;top:10px;z-index:3;padding:3px 7px;border-radius:99px;color:white;background:rgba(0,0,0,.78);font:700 11px/1 "Barlow Condensed",sans-serif}.colRarity{left:10px}.colQty{right:10px;background:var(--red)}
+.banNewRule{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:8px;align-items:end}.banNewRule label{font-size:12px}.banNewRule label[hidden],.banRow label[hidden]{display:none}.banResults{display:flex;flex-direction:column;gap:4px;max-height:200px;overflow:auto;margin:8px 0;padding:4px;border:1px solid var(--line);border-radius:6px}.banResult{display:grid;grid-template-columns:1fr auto 28px;gap:8px;align-items:center;text-align:left;padding:7px 9px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}.banResult:hover{background:rgba(120,140,180,.12)}.banResult small{color:var(--mute)}.banResult b{font-size:18px;color:var(--red)}.banRow{display:grid;grid-template-columns:minmax(120px,1fr) minmax(150px,1fr) auto auto auto auto;gap:7px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}.banRow label{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--mute)}.banRow input{min-width:60px;padding:6px}.banRow select{font-size:12px;padding:6px}.banThumb{position:relative;width:36px;aspect-ratio:59/86;overflow:hidden;border-radius:3px}.banThumb .art{width:100%;height:100%;border-radius:3px}.banOverlay{position:absolute;inset:0;z-index:10;display:grid;place-items:center;padding:3px;box-sizing:border-box;overflow:hidden;border-radius:inherit;background:rgba(150,10,28,.86);color:#fff;text-align:center;font-size:10px;font-weight:800;line-height:1.15;text-shadow:0 1px 2px #000;pointer-events:none}
+@media(max-width:650px){.banNewRule{grid-template-columns:1fr 1fr}.banRow{grid-template-columns:1fr 1fr}.banRow>b{grid-column:1/-1}.collectionCards{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}.collectionHead{flex-direction:column}.packPosition{grid-template-columns:1fr}}
+.collectionCard{font:inherit;color:var(--ink);text-align:left;cursor:pointer;width:100%;transition:transform .14s,border-color .14s}.collectionCard:hover{border-color:var(--red);transform:translateY(-2px)}
+.banBackFace{position:relative;width:100%;height:100%;overflow:hidden;border-radius:inherit;background:#06122b}.banBackFace>.art.back{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;border-radius:inherit}.banBackText{position:absolute;left:3px;right:3px;top:50%;transform:translateY(-50%);padding:4px 3px;border:1px solid rgba(255,255,255,.75);border-radius:5px;background:rgba(111,12,30,.91);color:#fff;text-align:center;font-size:clamp(7px,1.7vw,11px);font-weight:800;line-height:1.12;text-shadow:0 1px 2px #000;overflow-wrap:anywhere;max-height:80%;overflow:hidden}
+.banGalleryHead{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--card)}.banGalleryHead h2{margin:0 0 4px;font:700 30px/1.1 "Barlow Condensed",sans-serif}.banGalleryTools{display:flex;gap:10px;margin:14px 0}.banGalleryTools input{max-width:440px}.banGalleryCards{display:grid;grid-template-columns:repeat(auto-fill,minmax(142px,1fr));gap:12px}.banGalleryCard{position:relative;display:flex;flex-direction:column;gap:4px;min-width:0;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;text-align:left;cursor:pointer;overflow:hidden}.banGalleryCard:hover{border-color:var(--red);transform:translateY(-2px)}.banGalleryCard>.art{width:100%;aspect-ratio:59/86;border-radius:5px}.banGalleryCard>b{font-size:13px;line-height:1.2}.banGalleryCard>small{color:var(--mute);font-size:11px}.banNumber{position:absolute;z-index:3;top:13px;left:13px;min-width:25px;height:25px;padding:0 5px;display:grid;place-items:center;border-radius:50%;background:var(--red);color:#fff;font:700 14px "Barlow Condensed",sans-serif;box-shadow:0 1px 5px #0008}.banRules{display:flex;flex-direction:column;gap:3px}.banRules i{font-style:normal;font-size:10px;line-height:1.15;color:#9e1326;background:rgba(200,16,46,.08);border:1px solid rgba(200,16,46,.18);border-radius:4px;padding:3px 5px}
+@media(max-width:600px){.banGalleryHead{align-items:flex-start;flex-direction:column}.banGalleryCards{grid-template-columns:repeat(auto-fill,minmax(112px,1fr))}}
+.topActions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.cloudNotice{margin:10px 0;padding:9px 12px;border-radius:8px;background:#ffedc2;color:#503b0a;border:1px solid #e7c46d;font-size:13px}.cloudGate{max-width:660px;margin:40px auto;padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-align:center}.cloudGate h2{margin:0 0 8px}.cloudGate p{color:var(--mute)}.shareCheck{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card)}.shareCheck input{width:auto;margin:0}.packStats{display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--mute);font-size:12px}.packStats b{color:var(--ink)}.featureList{display:grid;gap:10px;margin:16px 0}.featureCard{padding:14px;border:1px solid var(--line);border-radius:9px;background:var(--card)}.featureCard h3,.featureCard h4{margin:0 0 6px}.featureMeta{font-size:12px;color:var(--mute)}.featureActions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.recipeIngredients{display:grid;gap:8px}.recipeIngredient{display:grid;grid-template-columns:1fr 100px auto;gap:8px;align-items:end}.feedItem{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center}.feedItem .art{width:56px;aspect-ratio:59/86;border-radius:4px}.feedBadge{font-size:11px;font-weight:700;color:#785500;background:#fff1bd;border-radius:99px;padding:4px 8px}@media(max-width:650px){.topActions{justify-content:flex-end}.recipeIngredient{grid-template-columns:1fr 75px auto}.tabs{overflow-x:auto;flex-wrap:nowrap}.tab{white-space:nowrap}}
+
+/* User-controlled sparkle effects */
+body.sparkles-off .fx,
+body.sparkles-off .pkgloss,
+body.sparkles-off .pkRRRglint {
+  display: none !important;
+}
+
+/* Lightweight rare-card effects: no moving masks or hue filters on normal cards. */
+.art.f0>.fx::before,.art.f0>.fx::after,.art.f1>.fx::before,.art.f1>.fx::after,.art.f2>.fx::before,.art.f2>.fx::after,.art.f3>.fx::before,.art.f3>.fx::after,.art.f4>.fx::before,.art.f4>.fx::after{animation-name:twk;animation-duration:5.5s;animation-timing-function:ease-in-out;animation-iteration-count:infinite;filter:none}.art.f2>.fx{animation:none}.art.f3>.fx::after,.art.f4>.fx::after{display:none}
+/* Effects off keeps only a static rarity border. */
+body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-off .art.f2::after,body.sparkles-off .art.f3::after,body.sparkles-off .art.f4::after,body.sparkles-off .art>.fx,body.sparkles-off .pkgloss,body.sparkles-off .pkRRRglint{display:none!important}body.sparkles-off .art.f0::before{box-shadow:inset 0 0 0 2px #cfd8e8!important}body.sparkles-off .art.f1::before{box-shadow:inset 0 0 0 2px #ffd54a!important}body.sparkles-off .art.f2::before{background:transparent!important;border:2px solid #d65cff;padding:0!important;-webkit-mask:none!important;mask:none!important}body.sparkles-off .art.f3::before{box-shadow:inset 0 0 0 2px #ff9bd8!important}body.sparkles-off .art.f4::before{box-shadow:inset 0 0 0 2px #ff4d4d,inset 0 0 0 4px rgba(255,211,107,.9)!important}.banTypeGroup{margin:18px 0 24px}.banTypeGroup h3{margin:0 0 9px;padding:8px 12px;border-left:5px solid var(--red);background:var(--card);font:700 22px/1.1 "Barlow Condensed",sans-serif}.banTypeGroup .banGalleryCards{margin-top:0}
+.favStar{position:absolute;right:6px;top:6px;z-index:6;border:1px solid rgba(0,0,0,.18);border-radius:99px;background:rgba(255,255,255,.92);color:#9aa1b2;font:700 18px/1 Arial;padding:3px 6px;cursor:pointer;box-shadow:0 1px 4px #0003}.favStar.on{color:#e6a400;background:#fff7c7}.c,.row{position:relative}.row .favStar{position:static;justify-self:end}.lbFav{margin:0 0 10px;color:#9aa1b2;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 12px;cursor:pointer;font:600 14px Barlow,sans-serif}.lbFav.on{color:#a66b00;background:#fff7c7;border-color:#e6a400}
+/* ---------- Arcana Vanguard fantasy theme ---------- */
+:root{--ink:#f4ead0;--paper:#0b1020;--line:#4b3b68;--red:#c78b3c;--mute:#b5abc7;--card:#15152c;--gold:#f4c96b;--violet:#8b6bd1;--ember:#df7351}
+body{font-family:Barlow,Arial,sans-serif;background:radial-gradient(ellipse at 50% -15%,#2d214d 0%,#10162b 42%,#070a14 100%);background-attachment:fixed;color:var(--ink)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:radial-gradient(circle at 12% 18%,#f4c96b 0 1px,transparent 2px),radial-gradient(circle at 82% 28%,#8b6bd1 0 1px,transparent 2px),radial-gradient(circle at 56% 78%,#f4c96b 0 1px,transparent 2px);background-size:170px 190px,230px 260px,310px 280px;z-index:-1}
+.wrap{max-width:1180px;padding-top:28px}
+.top{padding:12px 16px 16px;border:1px solid #6a4b71;border-radius:16px;background:linear-gradient(135deg,rgba(29,24,59,.92),rgba(13,17,36,.92));box-shadow:0 15px 44px #0008,inset 0 0 32px #8b6bd114;position:relative;overflow:hidden}
+.top:after{content:"✧ ᛟ ᚱ ᛟ ✧";position:absolute;right:18px;bottom:6px;color:#f4c96b55;font:22px Cinzel,serif;letter-spacing:8px}
+h1{border-left:0;padding-left:0;color:var(--gold);font:700 clamp(28px,5vw,48px)/1 Cinzel,serif;letter-spacing:.03em;text-shadow:0 0 14px #f4c96b55}h1 small{display:block;margin-top:7px;color:#cfc2df;font:500 13px Barlow,sans-serif;letter-spacing:.08em}.sigil{display:inline-block;color:#f4c96b;filter:drop-shadow(0 0 8px #f4c96b);margin-right:6px}
+.tabs{border-bottom:1px solid #5d4772;gap:2px;margin:20px 0}.tab{color:#a99dbd;border-radius:9px 9px 0 0;padding:11px 17px}.tab:hover{color:var(--gold);background:#8b6bd112}.tab[aria-selected=true]{color:var(--gold);border-bottom-color:var(--gold);background:linear-gradient(#f4c96b18,transparent)}
+.btn{border-color:#765887;border-radius:9px;background:linear-gradient(145deg,#211b3b,#14152b);box-shadow:0 3px 10px #0004}.btn:hover{border-color:var(--gold);transform:translateY(-1px)}.btn.primary{background:linear-gradient(135deg,#8e4d45,#c78b3c);border-color:#e1ae5d;box-shadow:0 0 18px #c78b3c44}.btn[aria-pressed=true]{background:#4d8b69;border-color:#9bd49b}
+select,input,textarea{background:#101426;border-color:#594873;color:var(--ink);border-radius:8px}label{color:#c6bad4}.c,.row,details,.dside,.collectionPanel,.featureCard,.banGalleryHead,.banGalleryCard,.edbar{background:linear-gradient(145deg,#17162f,#101426);border-color:#4e3c68}.c:hover,.row:hover,.banGalleryCard:hover{border-color:var(--gold);box-shadow:0 0 18px #f4c96b22}.c .t span,.row small,.dto,.count{color:#b5abc7}
+.art{background:#201b39}.art.back{border-color:#d7a44f}.art.back:after{content:none}
+dialog{background:linear-gradient(145deg,#181630,#0d1122);border-color:#7d5c8d;box-shadow:0 0 50px #000b,0 0 24px #8b6bd133}dialog::backdrop{background:radial-gradient(circle,#3d275588,#050713dd)}
+#cloudGate{text-align:center;border-color:#6f5580;background:#15152c}.cloudNotice{background:#292043;color:#f4d99b;border-color:#9a7045}
+/* fantasy Pack Opener */
+#p5{position:relative}.pkpanel{border:1px solid #6f5580!important;background:radial-gradient(circle at 50% 0,#38265355,transparent 60%),linear-gradient(145deg,#171630,#0d1122)!important;box-shadow:0 12px 34px #0007,inset 0 0 30px #8b6bd115}.pkpanel:before{content:"✧  ARCANA SEAL  ✧";display:block;text-align:center;color:#f4c96b99;font:600 11px Cinzel,serif;letter-spacing:.22em;margin:-2px 0 8px}.pkwrap{border-color:#e0ad5a!important;border-radius:16px!important;background:radial-gradient(circle,#47305f,#10162b 68%)!important;box-shadow:0 0 0 2px #33204d,0 0 0 5px #c78b3c55,0 24px 60px #000b,inset 0 0 40px #f4c96b22!important}.pkwrap:before,.pkwrap:after{background:linear-gradient(90deg,transparent,#f4c96b,#fff1b2,#f4c96b,transparent)!important;border-color:#f4c96b!important}.pkglow{background:radial-gradient(circle,#fff4bd,#c78b3c88 28%,#8b6bd155 48%,transparent 70%)!important}.pktrack{border-color:#b98750!important;background:#0d1020!important;box-shadow:inset 0 0 12px #000}.pkfill{background:linear-gradient(90deg,#5f3a9c,#c78b3c,#f4d77e)!important}.pkhandle{background:#f4c96b!important;color:#20152e!important;box-shadow:0 0 18px #f4c96b99!important}.pkhint{color:#e1c98d!important}.gwrap{background:radial-gradient(circle at 50% 0,#332052,#0b0e1c 62%)!important;border:1px solid #80609a!important}.ghead{border-bottom-color:#5b4776!important}.ghead b{font-family:Cinzel,serif!important;color:#f4c96b!important}.pkCard{filter:drop-shadow(0 9px 8px #0008)}.pkfb{border:1px solid #c78b3c!important;box-shadow:inset 0 0 0 3px #25183c,0 0 0 1px #f4c96b55}.pkCard.open .pkff{box-shadow:0 0 0 2px #c78b3c,0 0 20px #8b6bd155}.pkCard.guar .pkff{box-shadow:inset 0 0 0 3px #f4c96b,0 0 24px #f4c96b99!important}.pkr2{background:#241934!important;color:#f4d99b!important;border:1px solid #956d43}.gfootmsg{color:#cfc2df!important}
+@media(max-width:560px){.top{padding:12px}.top:after{display:none}h1{font-size:27px}.tab{padding:10px 13px;font-size:14px}.pkpanel{padding:12px!important}.pkwrap{width:min(270px,76vw)}.pkCard{filter:none}}
+@media(prefers-reduced-motion:reduce){body:before{display:none}.btn:hover,.collectionCard:hover{transform:none}.pkwrap,.pkCard{animation:none!important}}
+
+/* ---------- Arcana Vanguard cohesive UI refinement ---------- */
+:root{--gold:#e7b95f;--gold-soft:#f5d892;--ink:#f7f0df;--paper:#080b18;--line:#493b67;--card:#12152a;--card-2:#191936;--mute:#aaa4c0;--red:#bd6f55;--violet:#7c63bd}
+body{background-color:#080b18;background-image:radial-gradient(ellipse at 50% -20%,#44305f 0%,#16152f 30%,#080b18 72%),linear-gradient(115deg,#090c19,#17132b 48%,#080b18);color:var(--ink)}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.08;background:linear-gradient(115deg,transparent 0 47%,#e7b95f 47.15% 47.3%,transparent 47.45% 100%),linear-gradient(65deg,transparent 0 70%,#8068c8 70.15% 70.3%,transparent 70.45% 100%);mix-blend-mode:screen}
+.wrap{max-width:1220px;padding:20px 18px 56px}.top{min-height:104px;margin-bottom:14px;padding:17px 20px;border-radius:18px;border:1px solid #806342;background:linear-gradient(125deg,#211b3d 0%,#14152d 55%,#0d1224 100%);box-shadow:0 15px 45px #0009,inset 0 1px #f5d89233}.top:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,transparent,#e7b95f,#fff0b2,#e7b95f,transparent);opacity:.9}.top:after{content:"✧  ARCANA  ✧";right:20px;bottom:10px;color:#f5d89266;font:600 11px Cinzel,serif;letter-spacing:.28em}
+h1{font-size:clamp(27px,4.8vw,46px);letter-spacing:.045em}.sigil{font-size:.78em}h1 small{font-size:12px;color:#d4c7df;letter-spacing:.13em}.topActions{position:relative;z-index:1}.topActions .btn{background:#111329cc}
+.tabs{padding:5px 6px 0;margin:16px 0 22px;border:1px solid #45365e;border-radius:13px 13px 0 0;background:linear-gradient(180deg,#17152fdd,#0c1020aa);box-shadow:0 7px 20px #0005}.tab{font-size:15px;padding:11px 15px;color:#aaa4c0}.tab[aria-selected=true]{color:var(--gold-soft);border-bottom-color:var(--gold);text-shadow:0 0 10px #e7b95f66}
+section:not(#p5):not(#p1){animation:arcaneIn .18s ease-out}@keyframes arcaneIn{from{opacity:.5;transform:translateY(3px)}to{opacity:1;transform:none}}
+.grid{gap:12px}.grid>div,.tools>div{min-width:0}select,input,textarea{background:#0d1122;border:1px solid #55456e;box-shadow:inset 0 1px #ffffff09}select:focus,input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 2px #e7b95f22}
+.btn{min-height:38px;border-radius:10px;border-color:#66517f;background:linear-gradient(145deg,#211c3b,#111428);color:#f3ead4;transition:transform .15s,border-color .15s,box-shadow .15s}.btn:hover{box-shadow:0 0 18px #e7b95f26}.btn.primary{background:linear-gradient(135deg,#8b4f4b,#c58a42 75%,#e4b968);color:#fff8e8}.pill{border-color:#5a496f;background:#12152a;color:#cfc4dc}.pill[aria-pressed=true]{background:linear-gradient(135deg,#7557a9,#b67b4b);border-color:#ddb465;color:#fff8e8}
+.c,.row,.prod,.dside,.collectionPanel,.featureCard,.banGalleryHead,.banGalleryCard,details,.edbar{border-color:#493b67;background:linear-gradient(145deg,#191832,#101326);box-shadow:0 7px 20px #0003}.c,.row,.banGalleryCard,.collectionCard{transition:transform .16s,border-color .16s,box-shadow .16s}.c:hover,.row:hover,.banGalleryCard:hover,.collectionCard:hover{border-color:#d6a95e;box-shadow:0 10px 24px #0007,0 0 18px #e7b95f1c}
+.c .t{padding:8px 9px}.c .t b,.prod span,.banGalleryCard>b{color:#f2e7cf}.count{color:#c2b7ce}.yr,.pvhead h2,.banGalleryHead h2,.collectionHead h3{font-family:Cinzel,serif;color:var(--gold-soft);letter-spacing:.025em}.yr{font-size:20px}.pvhead{border-bottom:1px solid #493b67;padding-bottom:12px}.pvhead h2{font-size:25px}
+.cloudNotice{background:linear-gradient(135deg,#2b2045,#1a1833);border-color:#9a7045;color:#f5d892;box-shadow:0 5px 18px #0004}.edbar{border-style:solid;padding:12px}.edbar:before{content:"✦";color:var(--gold);align-self:center;font-size:18px}
+.dialog,.lb{background:transparent}.lb{padding:24px}.lb h3,.pad h3{font-family:Cinzel,serif;color:var(--gold-soft)}
+/* Keep the envelope interaction, but make the opener feel like a ritual altar. */
+.pkpanel{position:relative;overflow:hidden;border-radius:16px!important;padding:18px!important}.pkpanel:after{content:"";position:absolute;inset:8px;border:1px solid #e7b95f1f;border-radius:12px;pointer-events:none}.pkpanel>*{position:relative;z-index:1}.pkpanel:before{margin-bottom:14px;color:#e7b95fbb}.pkpanel .grid{position:relative}.pkwrap{margin:12px auto 18px;transform:translateZ(0)}.pkwrap:hover{box-shadow:0 0 0 2px #33204d,0 0 0 5px #c78b3c88,0 0 34px #e7b95f44,0 24px 60px #000b,inset 0 0 40px #f4c96b22!important}.pktrack{height:48px}.pktrack .lbl{font-family:Cinzel,serif;letter-spacing:.04em}.gwrap{border-radius:18px!important;overflow:hidden}.ghead{padding:15px 18px!important}.ghead b{letter-spacing:.035em}.gbody{background:radial-gradient(circle at 50% 20%,#2a1e4555,transparent 55%)}.gfoot{border-top-color:#513f6a!important}.pkCard{transition:filter .2s,transform .2s}.pkCard:hover{transform:translateY(-5px) rotate(-1deg);filter:drop-shadow(0 12px 12px #0009)}.pkCard.open:hover{transform:translateY(-4px)}
+@media(max-width:650px){.wrap{padding:12px 10px 38px}.top{padding:14px 13px;min-height:0}.top:after{display:none}.tabs{margin-top:12px;padding-left:2px;padding-right:2px}.tab{padding:10px 12px;font-size:14px}.topActions{gap:6px}.topActions .btn{padding:7px 10px;font-size:12px}.edbar:before{display:none}.pkpanel{padding:13px!important}.pkpanel:after{inset:6px}.gwrap{width:100vw;max-width:100vw}.ghead{padding:12px!important}}
+@media(prefers-reduced-motion:reduce){section:not(#p5):not(#p1),.pkCard:hover,.pkwrap:hover{animation:none;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><h1><span class="sigil" aria-hidden="true">✦</span> Arcana Vanguard <small>หอสมุดการ์ดเวทมนตร์</small></h1><div class="topActions"><span id="st" style="color:var(--mute);font-size:13px" aria-live="polite"></span><button class="btn sm" id="authBtn">Sign in</button><button class="btn sm" id="sparkleToggle" type="button" aria-pressed="false">✦ ปิดเอฟเฟกต์</button><button class="btn sm" id="editBtn" aria-pressed="false">✎ Edit</button></div></div>
+  <div id="cloudNotice" class="cloudNotice" hidden></div>
+  <div id="realtimeNotice" class="cloudNotice" hidden><span id="realtimeText">มีข้อมูลใหม่จากผู้ใช้อื่น</span> <button class="btn sm" id="realtimeRefresh">↻ รีเฟรชข้อมูล</button></div>
+  <section id="cloudGate" class="cloudGate" hidden><h2>เข้าสู่ระบบเพื่อใช้แอป</h2><p>ข้อมูลโปรดักและ Card List เป็นข้อมูลร่วม ส่วนเด็ค คลังสะสม Pity และประวัติการสุ่มเป็นข้อมูลส่วนตัวของบัญชี</p><button class="btn primary" id="gateSignIn">เข้าสู่ระบบ / สมัครบัญชี</button></section>
+
+  <div class="edbar">
+    <button class="btn sm primary" id="newProd">+ New product</button>
+    <button class="btn sm" id="natBtn">Nations</button>
+    <button class="btn sm" id="ctBtn">Card types</button>
+    <button class="btn sm" id="zoneBtn">Deck zones</button>
+    <button class="btn sm" id="backup">Backup / Restore</button>
+    <span style="color:var(--mute);font-size:13px;align-self:center">Edit mode on.</span>
+  </div>
+
+  <div id="home">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="t2" aria-selected="true" aria-controls="p2">Products</button>
+      <button class="tab" role="tab" id="t1" aria-selected="false" aria-controls="p1">Card Search</button>
+      <button class="tab" role="tab" id="t3" aria-selected="false" aria-controls="p3">Deck Builder</button>
+      <button class="tab" role="tab" id="t5" aria-selected="false" aria-controls="p5">Gacha</button>
+      <button class="tab admin-only" role="tab" id="t4" aria-selected="false" aria-controls="p4">Banlist</button>
+      <button class="tab" role="tab" id="t6" aria-selected="false" aria-controls="p6">Craft PR</button>
+      <button class="tab" role="tab" id="t7" aria-selected="false" aria-controls="p7">Community</button>
+    </div>
+    <section id="p1" role="tabpanel" aria-labelledby="t1" hidden>
+      <div class="grid">
+        <div><label for="nation">Nation</label><select id="nation"></select></div>
+        <div><label for="kw">Keyword</label><input id="kw" type="search" placeholder="Card name"></div>
+        <div><label for="ssort">Sort</label><select id="ssort"><option value="">Default</option><option value="grade-desc">Grade (Descending)</option><option value="grade-asc">Grade (Ascending)</option><option value="power-desc">Power (Descending)</option><option value="power-asc">Power (Ascending)</option></select></div><label class="shareCheck"><input type="checkbox" id="favOnly"> ★ เฉพาะ Favourite</label>
+      </div>
+      <p><button class="link" id="advBtn" aria-expanded="false">▼ Advance Search</button></p>
+      <div id="adv" class="grid" hidden>
+        <div><label for="unit">Card type</label><select id="unit"></select></div>
+        <div><label for="grade">Grade</label><select id="grade"></select></div>
+        <div><label for="power">Power</label><select id="power"></select></div>
+        <div><label for="rarity">Rarity</label><select id="rarity"></select></div>
+        <div><label for="trigger">Trigger</label><select id="trigger"></select></div>
+      </div>
+      <div class="actions"><button class="btn primary" id="go">Search</button><button class="btn" id="clear">Clear All</button></div>
+      <p class="count" id="count" aria-live="polite"></p>
+      <div class="cards" id="found"></div>
+    </section>
+    <section id="p2" role="tabpanel" aria-labelledby="t2">
+      <div class="pills" id="pills"></div>
+      <div id="years"></div>
+    </section>
+    <section id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+      <div class="grid">
+        <div><label for="dname">Deck name</label><input id="dname" placeholder="My deck"></div>
+        <div><label for="dsel">My decks</label><select id="dsel"></select></div>
+        <div><label for="dDesc">Deck description (optional)</label><input id="dDesc" maxlength="2000" placeholder="Strategy, matchup notes, or short description"></div>
+        <label class="shareCheck"><input id="dPublish" type="checkbox"> Share this deck with signed-in users</label>
+      </div>
+      <div class="actions" style="margin:12px 0 18px">
+        <button class="btn sm" id="dnew">New deck</button><button class="btn sm" id="dsave">Save</button><button class="btn sm" id="ddel">Delete</button>
+        <button class="btn sm primary" id="dshow">Spread view</button><button class="btn sm primary" id="dshare">Share</button><button class="btn sm primary" id="dexp">Export</button><button class="btn sm" id="dfin">✓ Finish check</button><button class="btn sm" id="dload">Load from code</button><button class="btn sm admin-only" id="banBtn">Banlist</button>
+      </div>
+      <div class="dgrid">
+        <div>
+          <div class="grid" style="margin-bottom:10px"><div><label for="dnat">Nation</label><select id="dnat"></select></div><div><label for="dkw">Keyword</label><input id="dkw" type="search" placeholder="Card name"></div></div>
+          <p class="dto" id="dto"></p>
+          <div class="dpick" id="dpick"></div>
+        </div>
+        <div class="dside"><h3 class="yr" style="margin:0 0 8px">Deck <span id="dcount"></span></h3><div class="pills" id="ztabs" style="margin-bottom:8px"></div><p class="dto" id="zrule"></p><div id="dlist"></div><div class="chk" id="dcheck"></div></div>
+      </div>
+    </section>
+    <section id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+      <div class="banGalleryHead"><div><h2>Banlist</h2><p class="dto">รายการการ์ดที่มีกฎห้ามใส่ จำกัดจำนวน หรือห้ามใช้ร่วมกัน · แตะการ์ดเพื่อดูรายละเอียด</p><span id="banGalleryCount" class="count" style="margin:0"></span></div><button class="btn primary admin-only" id="banGalleryManage">จัดการกฎ Banlist</button></div>
+      <div class="banGalleryTools"><input type="search" id="banGallerySearch" placeholder="ค้นหาชื่อการ์ด / หมายเลข / กฎ" aria-label="ค้นหาในการ์ด Banlist"></div>
+      <div id="banGalleryCards" class="banGalleryCards"></div>
+    </section>
+    <section id="p5" role="tabpanel" aria-labelledby="t5" hidden>
+      <div class="pkpanel">
+        <div class="grid">
+          <div><label for="pkP">สินค้า / ซอง</label><select id="pkP"></select></div>
+          <div><label for="pkQty">จำนวนซองที่เปิด สูงสุด 5 ซอง (1 ซอง = 7 ใบ)</label><input id="pkQty" type="number" min="1" max="5" value="1"></div>
+          <label class="pkSoundToggle"><input type="checkbox" id="pkSound" checked> เปิดเสียงแกะซองและพลิกการ์ด</label>
+        </div>
+        <div class="pkbar">
+          <div class="pity" id="pkPity">
+            <div class="pityTop"><b>Pity</b><span id="pkPityTxt">0/200</span></div>
+            <div class="pityBar"><i id="pkPityBar"></i></div>
+            <small class="dto" style="margin:0">พอ Pity เต็ม 200 ใบถัดไปจะการันตีการ์ดระดับสูงกว่า RRR (SVR / SP / SEC …) แล้วรีเซ็ตกลับเป็น 0</small>
+          </div>
+          <div class="pkacts">
+            <label class="chk" style="margin:0;display:flex;gap:6px;align-items:center"><input type="checkbox" id="pkRst" checked style="width:auto"> รีเซ็ต Pity เมื่อสุ่มได้การ์ดสูงกว่า RRR</label>
+            <button class="btn primary" id="pkGo">เปิดซอง</button>
+            <button class="btn sm" id="pkReset">รีเซ็ต Pity</button>
+          </div>
+        </div>
+        <p class="dto" id="pkTierNote" style="margin:12px 0 0"></p>
+      </div>
+      <details id="gachaRatesAdmin" class="admin-only" style="margin-top:14px"><summary style="padding:8px 12px;cursor:pointer;font-weight:600">อัตราดรอป (weight) · Admin</summary><div class="pkr" id="pkR" style="padding:10px 12px"></div><p class="dto" style="margin:0 0 6px">เปอร์เซ็นต์คำนวณจาก Weight ของแต่ละเรต (ก่อนผลจาก Pity) · ปรับ Weight ได้ · โอกาส 0.2% ที่ทั้ง 7 ใบเป็น RRR ขึ้นไป (ต้องมีการ์ด RRR+ ไม่ซ้ำกันอย่างน้อย 7 แบบ)</p></details>
+      <p class="count" id="pkMsg" aria-live="polite"></p>
+      <div class="packStats"><b id="pkLifetime">เปิดแล้ว 0 ซอง</b><span>เรตข้างต้นเป็น Weight ของการสุ่มในสินค้านี้ ไม่ใช่เปอร์เซ็นต์ตรง ๆ; ระบบจะแสดงสัดส่วนคำนวณให้เมื่อมีข้อมูลครบ</span></div>
+      <section class="collectionPanel"><div class="collectionHead"><div><h3>คลังการ์ดจากการสุ่ม</h3><p class="dto">สะสมแยกจาก Deck Builder · ไม่เพิ่มการ์ดเข้าเด็คอัตโนมัติ</p></div><span id="collectionSummary" class="count"></span></div><div class="collectionTools"><input type="search" id="collectionSearch" placeholder="ค้นหาชื่อการ์ด / หมายเลข / เรต"><label>เรียง<select id="collectionSort"><option value="rarity-desc">เรตสูง → ต่ำ</option><option value="rarity-asc">เรตต่ำ → สูง</option><option value="count-desc">จำนวนมาก → น้อย</option><option value="name">ชื่อ A–Z</option></select></label></div><div id="collectionCards" class="collectionCards"></div></section>
+    </section>
+    <section id="p6" role="tabpanel" aria-labelledby="t6" hidden>
+      <div class="banGalleryHead"><div><h2>คราฟการ์ดพิเศษ / PR</h2><p class="dto">สูตรคราฟต์มองเห็นร่วมกัน แต่ใช้วัตถุดิบจากคลังส่วนตัวของผู้คราฟต์เท่านั้น</p></div><button class="btn primary" id="craftNew">＋ สร้างสูตร</button></div>
+      <div id="craftRecipes" class="featureList"></div>
+      <h3 class="yr">ประวัติการคราฟต์ของฉัน</h3><div id="craftHistory" class="featureList"></div>
+    </section>
+    <section id="p7" role="tabpanel" aria-labelledby="t7" hidden>
+      <div class="banGalleryHead"><div><h2>Community Feed</h2><p class="dto">แสดงเด็คที่เจ้าของเลือกแชร์ และผล RRR+ ที่เจ้าของกดแชร์เองเท่านั้น · ไม่แสดงอีเมลหรือคลังส่วนตัว</p></div><button class="btn" id="feedRefresh">รีเฟรช</button></div>
+      <div id="communityFeed" class="featureList"></div>
+    </section>
+
+  </div>
+
+  <div id="pv" hidden>
+    <button class="link" id="back">← Back to Products</button>
+    <div class="pvhead"><h2 id="pvTitle"></h2><span id="pvCount" class="count" style="margin:0"></span></div>
+    <div class="edbar">
+      <button class="btn sm primary" id="addCard">+ Add card</button>
+      <label class="btn sm" style="margin:0;color:var(--ink)">Add many photos<input type="file" id="bulk" accept="image/*" multiple hidden></label>
+      <button class="btn sm" id="editProd">Edit product</button>
+    </div>
+    <div class="pills" id="pvNat"></div>
+    <div class="tools">
+      <div><label for="sort">Sort</label>
+        <select id="sort"><option value="no">Card Number</option><option value="grade-desc">Grade (Descending)</option><option value="grade-asc">Grade (Ascending)</option><option value="power-desc">Power (Descending)</option><option value="power-asc">Power (Ascending)</option></select></div>
+      <div class="pills" style="margin:0"><button class="pill" id="vImg" aria-pressed="true">Gallery View</button><button class="pill" id="vTxt" aria-pressed="false">List Detail View</button></div>
+    </div>
+    <div id="pvCards"></div>
+  </div>
+</div>
+
+<dialog id="authDialog"><button class="x" id="authClose" aria-label="Close">×</button><div class="pad"><h2 id="authTitle">เข้าสู่ระบบ</h2><form id="authForm"><div class="fld"><label for="authName">ชื่อที่แสดงใน Feed (สมัครใหม่)</label><input id="authName" maxlength="40" autocomplete="nickname" placeholder="Player"></div><div class="fld"><label for="authEmail">อีเมล</label><input id="authEmail" type="email" autocomplete="email" required></div><div class="fld"><label for="authPassword">รหัสผ่าน</label><input id="authPassword" type="password" autocomplete="current-password" minlength="8" required></div><div class="actions"><button class="btn primary" id="authSubmit" type="submit">เข้าสู่ระบบ</button><button class="btn" id="authMode" type="button">สมัครบัญชีใหม่</button></div><p class="dto" id="authHint">ข้อมูลส่วนตัวจะถูกจำกัดด้วยนโยบาย RLS ใน Supabase</p><p class="bad" id="authError" role="alert"></p></form></div></dialog>
+<dialog id="lb"><button class="x" id="lbx" aria-label="Close">×</button><div class="lb" id="lbBody"></div></dialog>
+<dialog id="ed"><div class="pad" id="edBody"></div></dialog>
+<dialog id="sp" style="max-width:min(1100px,96vw)"><button class="x" id="spx" aria-label="Close">×</button><div class="pad" id="spBody"></div></dialog>
+<dialog id="nt" role="alertdialog"><div class="pad" id="ntBody"></div></dialog>
+<dialog id="gacha">
+  <div class="gwrap">
+    <button class="gx" id="gClose" aria-label="ปิด">×</button>
+    <div class="ghead"><b id="gTitle">เปิดซอง</b><span id="gSub"></span>
+      <div class="gpity"><span>Pity <b id="gPity">0/200</b></span><span class="gpbar"><i id="gPityBar"></i></span></div>
+    </div>
+    <div class="gbody">
+      <div class="gstage" id="gStagePack">
+        <div class="pkwrap" id="pkWrap">
+          <div class="pkimg" id="pkImg"></div>
+          <div class="pkclip" id="pkClip"><div class="pkimg pkfull" id="pkImg2"></div></div>
+          <div class="pktear" id="pkTear"></div>
+          <div class="pkgloss"></div>
+          <div class="pkglow"></div>
+        </div>
+        <div class="pktrack" id="pkTrack"><div class="pkfill" id="pkFill"></div><span class="lbl">ลากเพื่อปลดผนึก ⇢</span><div class="pkhandle" id="pkHandle">⇢</div></div>
+        <p class="pkhint" id="pkHint">ลากผนึกเวทไปทางขวาเพื่อเปิดซอง</p>
+      </div>
+      <div class="gstage" id="gStageCards" hidden><div class="cg" id="gCards"></div></div>
+    </div>
+    <div class="gfoot" id="gFoot"></div>
+  </div>
+</dialog>
+<datalist id="nations"></datalist>
+<datalist id="types"><option>Booster Pack</option><option>Constructed Deck</option><option>Others</option><option>PR Card</option></datalist>
+<datalist id="rarities"><option>C</option><option>N</option><option>U</option><option>R</option><option>RR</option><option>RRR</option><option>SR</option><option>PR</option><option>SVR</option><option>GR</option><option>FR</option><option>FFR</option><option>OR</option><option>OVR</option><option>ORR</option><option>DSR</option><option>ZR</option><option>X</option><option>SP</option><option>SSP</option><option>SEC</option><option>SSR</option><option>SCR</option></datalist>
+<datalist id="triggers"><option>Critical</option><option>Heal</option><option>Front</option><option>Draw</option><option>Over</option></datalist>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="./config.js"></script>
+<script src="./cloud.js"></script>
+<script>
+/* ข้อมูลตัวอย่างตอนเปิดครั้งแรก (หลังจากนั้นแก้ในหน้าเว็บได้เลย กดปุ่ม ✎ Edit)
+   Starter data, used only the first time. After that, edit on the page. */
+/* วาง URL เว็บแอป Apps Script (ลงท้ายด้วย /exec) ระหว่างเครื่องหมายคำพูดด้านล่าง
+   Paste your Apps Script web app URL (ends with /exec) between the quotes. */
+const API="";
+const K=["no","name","nation","unit","grade","power","rarity","trigger","img"];
+const SEED=[
+ {year:2025,type:"Constructed Deck",name:"[SAMPLE-01] Sample Deck One",cover:"",cards:[
+  ["001","Sample Dragon A","Dragon Empire","Normal Unit",3,11000,"RRR","",""],
+  ["002","Sample Dragon B","Dragon Empire","Trigger Unit",0,5000,"C","Critical",""],
+  ["003","Sample Keter A","Keter Sanctuary","Normal Unit",2,9000,"R","",""]]},
+ {year:2025,type:"Booster Pack",name:"[SAMPLE-02] Sample Booster Two",cover:"",cards:[
+  ["001","Sample Lyrical A","Lyrical Monasterio","Normal Unit",3,10000,"RR","",""],
+  ["002","Sample Lyrical B","Lyrical Monasterio","Trigger Unit",0,5000,"C","Draw",""]]}
+];
+const KEY="cardlist-v1",TYPES=["All","Booster Pack","Constructed Deck","Others","PR Card"];
+const $=id=>document.getElementById(id);
+const uid=()=>crypto.randomUUID?crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==="x"?r:(r&3|8)).toString(16)});
+const h=s=>String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const col=n=>{const v=NATIONS.find(x=>x.name===n);if(v)return v.color;let x=0;for(const ch of String(n))x=(x*31+ch.charCodeAt(0))%360;return n?`hsl(${x} 55% 38%)`:"#556"};
+
+const DEFN=[["Dragon Empire","#c0392b"],["Dark States","#6c3483"],["Brandt Gate","#3d4a5c"],["Keter Sanctuary","#b7950b"],["Stoicheia","#1f77b4"],["Lyrical Monasterio","#d0508a"]].map(([name,color])=>({name,color}));
+const DEFZ=[{id:"main",name:"Main deck",size:50,copies:4},{id:"ride",name:"Ride deck",size:null,copies:null,perGrade:1},{id:"g",name:"G zone",size:16,copies:4},{id:"token",name:"Token",size:null,copies:null}];
+const DEFT=["Normal Unit","Trigger Unit","Normal Order","Set Order","Blitz Order","Token"];
+const Cloud=window.CardCloud;
+let PRODUCTS=[],NATIONS=[],ZONES=[],CTYPES=DEFT.slice(),PW="",loaded=false,REMOTE_DECKS={},stopRealtime=null,refreshBusy=false;
+const DB=()=>({products:PRODUCTS,nations:NATIONS,zones:ZONES,ctypes:CTYPES});
+const BANKEY="cardlist-banlist-v1",COLKEY="cardlist-pull-collection-v1";
+let BANLIST=[],COLLECTION={};
+try{BANLIST=JSON.parse(localStorage.getItem(BANKEY)||"[]");if(!Array.isArray(BANLIST))BANLIST=[]}catch(e){BANLIST=[]}
+try{COLLECTION=JSON.parse(localStorage.getItem(COLKEY)||"{}");if(!COLLECTION||typeof COLLECTION!=="object")COLLECTION={}}catch(e){COLLECTION={}}
+const seed=()=>SEED.map(p=>({...p,id:uid(),cards:p.cards.map(r=>({id:uid(),...Object.fromEntries(K.map((k,i)=>[k,r[i]??""]))}))}));
+async function post(b){const r=await fetch(API,{method:"POST",body:JSON.stringify({pw:PW,...b})});const j=await r.json();if(!j.ok)throw new Error(j.error||"error");return j}
+function authUi(user){
+  const btn=$("authBtn");
+  if(user){btn.textContent=(user.user_metadata?.display_name||"Account")+" · Sign out";btn.title="Sign out"}
+  else{btn.textContent="Sign in";btn.title="Sign in or create account"}
+}
+function isAdmin(){return !Cloud?.configured || Cloud.admin===true}
+function applyAdminUI(){
+  const allowed=isAdmin();
+  document.querySelectorAll(".admin-only").forEach(el=>{el.hidden=!allowed});
+  if(!allowed && $("p4") && !$("p4").hidden){document.querySelector('[aria-controls="p2"]')?.click()}
+}
+function requireAdmin(){
+  if(isAdmin())return true;
+  notice("bad","เฉพาะแอดมินเท่านั้น","Banlist และการตั้งค่าเรทออกการ์ดให้แก้ไขได้เฉพาะบัญชีแอดมิน",{auto:3200});
+  return false;
+}
+function showRealtimeNotice(message="มีข้อมูลใหม่จากผู้ใช้อื่น"){
+  const box=$("realtimeNotice");if(!box)return;
+  $("realtimeText").textContent=message;box.hidden=false;
+}
+function startRealtime(){
+  if(stopRealtime)stopRealtime();
+  if(!Cloud?.configured||!Cloud.user||!Cloud.subscribeCatalog)return;
+  stopRealtime=Cloud.subscribeCatalog(()=>showRealtimeNotice("มีข้อมูลการ์ดหรือสินค้าใหม่ กรุณากดรีเฟรชข้อมูล"));
+}
+async function refreshFromRealtime(){
+  if(refreshBusy)return;refreshBusy=true;$("realtimeRefresh").disabled=true;
+  try{await load();if($('home').hidden===false){index();search();products();renderPick();renderDeck();renderCollection();renderBanGallery();if(!$("pv").hidden&&cur){cur=PRODUCTS.find(x=>x.id===cur.id)||cur;renderPV()}}$("realtimeNotice").hidden=true;notice("ok","รีเฟรชข้อมูลแล้ว","โหลดข้อมูลล่าสุดเรียบร้อย",{auto:1800})}
+  catch(e){notice("bad","รีเฟรชไม่สำเร็จ",String(e?.message||e),{auto:4500})}
+  finally{refreshBusy=false;$("realtimeRefresh").disabled=false}
+}
+async function load(){
+  $("st").textContent="Loading…";let d=null;
+  if(Cloud?.configured){
+    try{
+      const session=await Cloud.init();
+      if(!session.user){
+        $("home").hidden=true;$("pv").hidden=true;$("cloudGate").hidden=false;$("cloudNotice").hidden=true;
+        const topbar=document.querySelector(".edbar");if(topbar)topbar.hidden=true;authUi(null);loaded=false;$("st").textContent="";return;
+      }
+      authUi(session.user);applyAdminUI();$("cloudGate").hidden=true;$("home").hidden=false;$("cloudNotice").hidden=true;
+      const topbar=document.querySelector(".edbar");if(topbar)topbar.hidden=false;
+      PRODUCTS=await Cloud.loadCatalog();FAVS=new Set(await Cloud.loadFavourites());BANLIST=await Cloud.loadBanlist();COLLECTION=await Cloud.loadCollection();
+      const gs=await Cloud.loadGachaState();PITY=Math.max(0,Math.min(PITYMAX,Number(gs.pity_count)||0));PACKS_OPENED=Number(gs.packs_opened)||0;PITYRST=gs.pity_reset_on_high!==false;
+      REMOTE_DECKS=await Cloud.loadDecks();
+      const knownN=new Set(DEFN.map(x=>x.name));PRODUCTS.flatMap(p=>p.cards||[]).flatMap(c=>[c.nation,c.nation2]).filter(Boolean).forEach(n=>{if(!knownN.has(n)){knownN.add(n);DEFN.push({name:n,color:col(n)})}});
+      const types=[...new Set([...DEFT,...PRODUCTS.flatMap(p=>p.cards||[]).map(c=>c.unit).filter(Boolean)])];CTYPES=types;
+      NATIONS=DEFN.map(x=>({...x}));ZONES=DEFZ.map(x=>({...x}));loaded=true;$("st").textContent="";startRealtime();return;
+    }catch(e){$("st").textContent="Cloud error";$("cloudGate").hidden=false;$("home").hidden=true;$("authError").textContent=e.message;return}
+  }
+  $("cloudNotice").hidden=false;$("cloudNotice").textContent="โหมดตัวอย่าง: ยังไม่ได้ตั้งค่า Supabase จึงบันทึกเฉพาะในเบราว์เซอร์นี้และแชร์กับผู้ใช้อื่นไม่ได้";
+  $("cloudGate").hidden=true;$("home").hidden=false;authUi(null);
+  try{if(API){const j=await(await fetch(API)).json();if(!j.ok)throw new Error(j.error);d=j.data}else d=JSON.parse(localStorage.getItem(KEY));loaded=true;$("st").textContent=""}
+  catch(e){$("st").textContent="Could not load data ("+e.message+")"}
+  let zz=null;
+  if(Array.isArray(d)){PRODUCTS=d;NATIONS=DEFN.map(x=>({...x}))}
+  else if(d&&Array.isArray(d.products)){PRODUCTS=d.products;NATIONS=Array.isArray(d.nations)&&d.nations.length?d.nations:DEFN.map(x=>({...x}));zz=d.zones}
+  else{PRODUCTS=seed();NATIONS=DEFN.map(x=>({...x}))}
+  ZONES=Array.isArray(zz)&&zz.length?zz:DEFZ.map(x=>({...x}));CTYPES=d&&!Array.isArray(d)&&Array.isArray(d.ctypes)&&d.ctypes.length?d.ctypes:DEFT.slice();
+  try{BANLIST=JSON.parse(localStorage.getItem(BANKEY)||"[]");if(!Array.isArray(BANLIST))BANLIST=[]}catch(e){BANLIST=[]}
+  try{COLLECTION=JSON.parse(localStorage.getItem(COLKEY)||"{}");if(!COLLECTION||typeof COLLECTION!=="object")COLLECTION={}}catch(e){COLLECTION={}}
+  try{PACKS_OPENED=Number(localStorage.getItem("cardlist-packs-opened")||0)}catch(e){PACKS_OPENED=0}
+  ZONES.forEach(z=>{if(z.id==="ride"&&z.perGrade===undefined){z.size=null;z.copies=null;z.perGrade=1}});
+}
+$("realtimeRefresh").onclick=refreshFromRealtime;
+let q=Promise.resolve();
+function save(){q=q.then(async()=>{
+  $("st").textContent="กำลังบันทึก…";
+  try{
+    if(Cloud?.configured){
+      if(!Cloud.user)throw new Error("กรุณาเข้าสู่ระบบก่อน");
+      await Cloud.saveCatalog(DB());
+    }else if(API){
+      await post({action:"save",data:DB()});
+    }else{
+      localStorage.setItem(KEY,JSON.stringify(DB()));
+    }
+    $("st").textContent=Cloud?.configured?"บันทึกลง Supabase แล้ว ✓":API?"บันทึกลง API แล้ว ✓":"บันทึกในเครื่องแล้ว ✓";
+  }catch(e){
+    const message=String(e?.message||e);
+    $("st").textContent="บันทึกไม่สำเร็จ";
+    console.error("catalog save failed",e);
+    notice("bad","บันทึกไม่สำเร็จ",message+" (ข้อมูลบนหน้าจอยังอยู่ แต่ยังไม่ยืนยันว่าเข้าฐานข้อมูลแล้ว)",{auto:7000});
+  }
+})}
+async function pic(f){
+  const d=await shrink(f,Cloud?.configured?1000:500);if(!Cloud?.configured)return d;
+  if(!Cloud.user)throw new Error("กรุณาเข้าสู่ระบบก่อนอัปโหลดรูป");
+  $("st").textContent="Uploading picture…";try{const url=await Cloud.uploadDataUri(d,f.name);$("st").textContent="";return url}catch(e){$("st").textContent="Upload failed";throw e}}
+
+/* ---------- views ---------- */
+const nats=c=>[c.nation,c.nation2].filter(Boolean);
+const natTxt=c=>nats(c).join(" / ");
+const bg=c=>c.nation2?`linear-gradient(135deg,${col(c.nation)} 50%,${col(c.nation2)} 50%)`:col(c.nation);
+const CW=59,CH=86,FR={p:CW/CH,l:CH/CW,b:1.5};
+function lay(fit,ori){
+  const f=FR[ori],r=fit.r,bw=Math.max(1,r/f)*100,bh=Math.max(1,f/r)*100,w=bw*fit.z,hh=bh*fit.z;
+  const cx=Math.min(1-50/w,Math.max(50/w,fit.cx)),cy=Math.min(1-50/hh,Math.max(50/hh,fit.cy));
+  return{left:50-cx*w,top:50-cy*hh,w,h:hh,cx,cy};
+}
+/* Landscape cards sit sideways inside a normal portrait slot so every grid stays even. nat=true shows the natural landscape shape (card popup). */
+/* rarity tiers: f0 silver (R,RR) · f1 gold (RRR) · f2 rainbow · f3 pink (SP,SSP) · f4 crimson-gold (SEC,SSR,SCR) */
+const FOILT={R:0,RR:0,RRR:1,SVR:2,GR:2,FR:2,FFR:2,OR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SP:3,SSP:3,SEC:4,SSR:4,SCR:4};
+const foil=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILT?" f"+FOILT[r]:""};
+const art=(c,nat)=>{
+  const o=c.orient==="l"?"l":"p",slot=o==="l"&&!nat,ar=o==="l"&&nat?CH+"/"+CW:CW+"/"+CH;let inner;
+  if(c.img&&c.fit&&c.fit.r){const L=lay(c.fit,o);inner=`<img src="${h(c.img)}" alt="${h(c.name)}" loading="lazy" draggable="false" style="position:absolute;max-width:none;left:${L.left}%;top:${L.top}%;width:${L.w}%;height:${L.h}%">`}
+  else if(c.img)inner=`<img src="${h(c.img)}" alt="${h(c.name)}" loading="lazy"${c.orient?"":nat?' data-auto="nat"':' data-auto="1"'}>`;
+  else inner=`<div class="ph" style="background:${bg(c)}">${h(c.name)}</div>`;
+  if(slot)inner=`<div class="lf">${inner}</div>`;
+  return `<div class="art${slot?" slot":""}${foil(c)}" style="aspect-ratio:${ar}">${inner}${foil(c)?'<i class="fx"></i>':""}</div>`};
+function favKey(){return "cardlist-favourites-"+(Cloud?.user?.id||"guest")}
+function isFav(id){return FAVS.has(String(id))}
+function favStar(c){return `<span class="favStar${isFav(c.id)?" on":""}" data-fav="${h(c.id)}" role="button" tabindex="0" aria-label="${isFav(c.id)?"ลบ Favourite":"เพิ่ม Favourite"}">${isFav(c.id)?"★":"☆"}</span>`}
+async function toggleFavourite(id){const key=String(id),next=!FAVS.has(key);if(next)FAVS.add(key);else FAVS.delete(key);try{if(Cloud?.configured)await Cloud.setFavourite(key,next);else localStorage.setItem(favKey(),JSON.stringify([...FAVS]));search();if(cur)renderPV()}catch(e){if(next)FAVS.delete(key);else FAVS.add(key);notice("bad","Favourite บันทึกไม่สำเร็จ",String(e?.message||e),{auto:4500})}}
+const gal=(c,i)=>`<button class="c${c.orient==="l"?" land":""}" data-i="${i}">${favStar(c)}${art(c,1)}<div class="t"><b>${h(c.name)}</b><span>${h(c.no)}${c.grade!==""?" · Grade "+h(c.grade):""}</span></div></button>`;
+const row=(c,i)=>`<button class="row" data-i="${i}">${art(c)}<div><b>${h(c.name)}</b><small>${h(c.no)} · ${h(natTxt(c))}</small></div><small>${h([c.unit,c.grade!==""?"G"+c.grade:"",c.power,c.rarity].filter(x=>x!=="").join(" / "))}</small>${favStar(c)}</button>`;
+const num=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true});
+const nv=v=>{const n=parseFloat(v);return v===""||v==null||isNaN(n)?null:n};
+const sortFn=v=>{const[k,d]=String(v).split("-");return(a,b)=>{
+  if(k==="no")return num(a.no,b.no);
+  const x=nv(a[k]),y=nv(b[k]);
+  if(x===null&&y===null)return num(a.pname||"",b.pname||"")||num(a.no,b.no);
+  if(x===null)return 1;if(y===null)return -1;
+  return (x-y)*(d==="desc"?-1:1)||num(a.pname||"",b.pname||"")||num(a.no,b.no)}};
+const tsort=(a,b)=>{const i=CTYPES.indexOf(a),j=CTYPES.indexOf(b);return (i<0?999:i)-(j<0?999:j)||num(a,b)};
+
+/* Any plain picture that turns out wider than tall is shown landscape automatically */
+document.addEventListener("load",e=>{
+  const im=e.target;if(!(im instanceof HTMLImageElement)||!im.dataset.auto)return;
+  const mode=im.dataset.auto;im.removeAttribute("data-auto");
+  if(im.naturalWidth<=im.naturalHeight*1.05)return;
+  const a=im.parentElement;if(!a||!a.classList.contains("art"))return;
+  if(mode==="nat"){a.style.aspectRatio=CH+"/"+CW;const t=a.closest(".c,.sc");if(t)t.classList.add("land");return}
+  a.classList.add("slot");const w=document.createElement("div");w.className="lf";a.insertBefore(w,im);w.appendChild(im);
+},true);
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>document.querySelectorAll(".tab").forEach(x=>{
+  const on=x===t;x.setAttribute("aria-selected",on);$(x.getAttribute("aria-controls")).hidden=!on}));
+$("editBtn").onclick=async()=>{
+  const on=!document.body.classList.contains("edit");
+  if(on&&(API||Cloud?.configured)){
+    if(!loaded)return alert("Data did not load. Refresh the page and sign in again.");
+    if(API&&!Cloud?.configured&&!PW){const p=prompt("Enter the edit password");if(!p)return;PW=p;try{await post({action:"check"})}catch(e){PW="";return alert("Could not sign in: "+e.message)}}}
+  document.body.classList.toggle("edit",on);$("editBtn").setAttribute("aria-pressed",on);$("editBtn").textContent=on?"✓ Done":"✎ Edit"};
+
+/* Card Search */
+const F=["nation","unit","grade","power","rarity","trigger"];
+let ALL=[],found=[],FAVS=new Set();
+function index(){
+  ALL=PRODUCTS.flatMap(p=>p.cards.map(c=>({...c,pid:p.id,pname:p.name})));
+  F.filter(f=>f!=="nation").forEach(f=>{const cur=$(f).value;
+    const v=[...new Set(ALL.map(c=>c[f]).filter(x=>x!==""))].sort(f==="unit"?tsort:num);
+    $(f).innerHTML='<option value="">All</option>'+v.map(x=>`<option>${h(x)}</option>`).join("");$(f).value=cur});
+  const nn=[...new Set([...NATIONS.map(n=>n.name),...ALL.flatMap(nats)])];
+  const opt='<option value="">All</option>'+nn.map(x=>`<option>${h(x)}</option>`).join("");
+  ["nation","dnat"].forEach(id=>{const v=$(id).value;$(id).innerHTML=opt;$(id).value=v});
+  $("nations").innerHTML=nn.map(n=>`<option>${h(n)}`).join("");
+}
+function search(){
+  const kw=$("kw").value.trim().toLowerCase();
+  found=ALL.filter(c=>F.every(f=>!$(f).value||(f==="nation"?nats(c).includes($(f).value):String(c[f])===$(f).value))&&(!kw||c.name.toLowerCase().includes(kw))&&(!$('favOnly').checked||isFav(c.id)));
+  if($("ssort").value)found.sort(sortFn($("ssort").value));
+  $("count").textContent=found.length+" Results";
+  $("found").innerHTML=found.map(gal).join("");
+}
+$("advBtn").onclick=()=>{const o=$("adv").hidden;$("adv").hidden=!o;$("advBtn").setAttribute("aria-expanded",o);$("advBtn").textContent=(o?"▲":"▼")+" Advance Search"};
+$("go").onclick=search;$("ssort").onchange=search;$("favOnly").onchange=search;$("kw").onkeydown=e=>{if(e.key==="Enter")search()};
+$("clear").onclick=()=>{F.forEach(f=>$(f).value="");$("kw").value="";$("ssort").value="";$("favOnly").checked=false;search()};
+$("found").onclick=e=>{const f=e.target.closest("[data-fav]");if(f){e.preventDefault();e.stopPropagation();toggleFavourite(f.dataset.fav);return}const b=e.target.closest("[data-i]");if(b)openLB(found[b.dataset.i])};
+
+/* Product folders */
+let type="All";
+const coverImg=p=>{
+  if(p.fit&&p.fit.r){const L=lay(p.fit,"b");return `<img src="${h(p.cover)}" alt="" loading="lazy" draggable="false" style="position:absolute;max-width:none;left:${L.left}%;top:${L.top}%;width:${L.w}%;height:${L.h}%">`}
+  return `<img src="${h(p.cover)}" alt="" loading="lazy">`};
+const TCOL={"Booster Pack":"#c8102e","Constructed Deck":"#1f4fa0","PR Card":"#2e7d4f","Others":"#5b6478"};
+const tcol=t=>TCOL[t]||col(t||"Others");
+function products(){
+  $("pills").innerHTML=TYPES.map(t=>`<button class="pill" aria-pressed="${t===type}" data-t="${t}">${t}</button>`).join("");
+  const years=[...new Set(PRODUCTS.map(p=>p.year))].sort((a,b)=>b-a);
+  $("years").innerHTML=years.length?years.map(y=>{
+    const items=PRODUCTS.filter(p=>p.year===y&&(type==="All"||p.type===type));
+    return items.length?`<h3 class="yr">Products released in ${h(y)}</h3><div class="ptiles">${items.map(p=>
+      `<div class="ptile"><button class="c" data-id="${p.id}"><div class="cov">${p.cover?coverImg(p):`<div class="ph" style="background:var(--ink)">${h(p.name)}</div>`}</div><span class="tb" style="background:${tcol(p.type)}">${h(p.type||"Others")}</span><div class="t"><b>${h(p.name)}</b><span>${p.cards.length} cards</span></div></button><button class="btn sm ed" data-e="${p.id}">Edit</button></div>`).join("")}</div>`:""}).join(""):'<p class="count">No products yet. Tap ✎ Edit, then + New product.</p>';
+}
+$("pills").onclick=e=>{const b=e.target.closest("[data-t]");if(b){type=b.dataset.t;products()}};
+$("years").onclick=e=>{
+  const ed=e.target.closest("[data-e]");if(ed)return prodForm(PRODUCTS.find(p=>p.id===ed.dataset.e));
+  const b=e.target.closest("[data-id]");if(b)openProduct(b.dataset.id)};
+
+/* Product page */
+let cur,nat="All",vw="image",shown=[];
+function openProduct(id){cur=PRODUCTS.find(p=>p.id===id);nat="All";$("home").hidden=true;$("pv").hidden=false;renderPV();scrollTo(0,0)}
+$("back").onclick=()=>{$("pv").hidden=true;$("home").hidden=false};
+function renderPV(){
+  const ns=["All",...new Set(cur.cards.flatMap(nats))];
+  if(!ns.includes(nat))nat="All";
+  const [k,d]=$("sort").value.split("-");
+  shown=cur.cards.map(c=>({...c,pid:cur.id,pname:cur.name})).filter(c=>nat==="All"||nats(c).includes(nat))
+    .sort(sortFn($("sort").value));
+  $("pvTitle").textContent=cur.name;$("pvCount").textContent=shown.length+" Results";
+  $("pvNat").innerHTML=ns.map(n=>`<button class="pill" aria-pressed="${n===nat}" data-n="${h(n)}">${h(n)}</button>`).join("");
+  $("vImg").setAttribute("aria-pressed",vw==="image");$("vTxt").setAttribute("aria-pressed",vw==="text");
+  $("pvCards").className=vw==="image"?"cards":"rows";
+  $("pvCards").innerHTML=shown.map(vw==="image"?gal:row).join("");
+}
+$("pvNat").onclick=e=>{const b=e.target.closest("[data-n]");if(b){nat=b.dataset.n;renderPV()}};
+$("sort").onchange=renderPV;
+$("vImg").onclick=()=>{vw="image";renderPV()};$("vTxt").onclick=()=>{vw="text";renderPV()};
+$("pvCards").onclick=e=>{const f=e.target.closest("[data-fav]");if(f){e.preventDefault();e.stopPropagation();toggleFavourite(f.dataset.fav);return}const b=e.target.closest("[data-i]");if(b)openLB(shown[b.dataset.i])};
+
+/* Card popup */
+function openLB(c,options={}){
+  const r=[["Card No.",c.no],["Nation",natTxt(c)],["Card type",c.unit],["Grade",c.grade],["Power",c.power],["Protection / Shield",c.shield],["Rarity",c.rarity],["Trigger",c.trigger],["Product",c.pname],["In collection",c.collectionCount==null?"":c.collectionCount+" copies"]].filter(x=>x[1]!=="");
+  const lastEditor=c.lastEditedByName||c.lastEditedBy;const lastMeta=lastEditor||c.lastEditedAt?`<p class="dto lastMeta">แก้ไขล่าสุดโดย <b>${h(lastEditor||"ผู้ใช้")}</b>${c.lastEditedAt?" · "+h(new Date(c.lastEditedAt).toLocaleString("th-TH")):""}</p>`:"";
+  const action=options.readonly?`<p class="dto">${options.source==="collection"?"การ์ดนี้อยู่ในคลังสะสม · ไม่ได้เพิ่มเข้าเด็ค":"รายละเอียดการ์ดใน Banlist"}</p>`:'<button class="btn primary" id="lbAdd">Add to deck</button> <button class="btn ed" id="lbEdit">Edit this card</button>';
+  $("lbBody").innerHTML=`${art(c,1)}<div><h3>${h(c.name)}</h3><button type="button" class="lbFav${isFav(c.id)?" on":""}" id="lbFav">${isFav(c.id)?"★ อยู่ใน Favourite":"☆ เพิ่ม Favourite"}</button>${lastMeta}<dl>${r.map(x=>`<dt>${x[0]}</dt><dd>${h(x[1])}</dd>`).join("")}</dl>${action}</div>`;
+  $("lbFav").onclick=async()=>{await toggleFavourite(c.id);openLB(c,options)};
+  if(!options.readonly){
+    $("lbEdit").onclick=()=>{$("lb").close();cardForm(c,c.pid)};
+    $("lbAdd").onclick=()=>{deckAdd(c.id,1);$("st").textContent="Added to deck ("+dtotal()+")"};
+  }
+  $("lb").showModal();
+}
+$("lbx").onclick=()=>$("lb").close();
+$("lb").onclick=e=>{if(e.target===$("lb"))$("lb").close()};
+
+/* ---------- editing ---------- */
+function shrink(file,max=500){return new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;
+  im.onload=()=>{const s=Math.min(1,max/im.width),cv=document.createElement("canvas");cv.width=Math.round(im.width*s);cv.height=Math.round(im.height*s);
+  cv.getContext("2d").drawImage(im,0,0,cv.width,cv.height);res(cv.toDataURL("image/jpeg",.78))};im.src=r.result};r.readAsDataURL(file)})}
+
+function refresh(){save();index();search();products();renderPick();renderDeck();pkFill();renderCollection();renderBanGallery();if(!$("pv").hidden)renderPV()}
+
+/* generic form: fields=[key,label,datalist?], imgKey=property holding the picture */
+const meta=src=>new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i.naturalWidth/i.naturalHeight);i.onerror=rej;i.src=src});
+/* generic form: fields=[key,label,datalist?], imgKey=property holding the picture, crop=true adds the frame editor */
+function form(title,fields,o,imgKey,onSave,onDel,crop){
+  let im=o[imgKey]||"",fit=o.fit&&o.fit.r?{...o.fit}:null,ori=crop==="b"?"b":o.orient==="l"?"l":"p",packPreviewSync=()=>{};
+  $("edBody").innerHTML=`<h3>${title}</h3>`+fields.map(([k,l,dl])=>dl==="@types"?`<div class="fld"><label>${l}</label><select data-k="${k}" data-p="${h(o[k]||"")}"><option value="">— none —</option>${[...CTYPES,...(o[k]&&!CTYPES.includes(o[k])?[o[k]]:[])].map(t=>`<option ${t===o[k]?"selected":""}>${h(t)}</option>`).join("")}<option value="__new">＋ Add new type…</option></select></div>`:dl==="@bool"?`<div class="fld"><label>${l}</label><select data-k="${k}"><option value="true" ${o[k]!==false?"selected":""}>Yes — can appear in packs</option><option value="false" ${o[k]===false?"selected":""}>No — catalog only</option></select></div>`:k==="description"?`<div class="fld"><label>${l}</label><textarea data-k="${k}" maxlength="2000" rows="4" placeholder="ใส่รายละเอียดการ์ด">${h(o[k]||"")}</textarea></div>`:`<div class="fld"><label>${l}</label><input data-k="${k}" value="${h(o[k])}" ${dl?`list="${dl}"`:""}></div>`).join("")+
+   `<div class="fld"><label>${crop==="b"?"รูปสินค้า / รูปหน้าซองสุ่ม":"Picture"}</label><div class="imgrow"><div id="fp" ${crop?"hidden":""}></div><div><input type="file" id="ff" accept="image/*"><input id="fu" placeholder="or paste an image link" value="${im.startsWith("data:")?"":h(im)}"></div></div></div>`+
+   (crop?'<div class="fld" id="cropbox"></div>':"")+
+   (crop==="b"?`<div class="fld packSizeEditor"><label for="packMode">ขนาดรูปซองในหน้าสุ่ม</label><select id="packMode"><option value="auto">ปรับขนาดอัตโนมัติ</option><option value="custom">กำหนดขนาดเอง</option></select><div class="dto">ปรับอัตโนมัติให้ภาพเต็มกรอบซอง หรือเลือกกำหนดความกว้างและความสูงเอง</div><div id="packCustom" class="packCustom"><div><label for="packW">ความกว้าง (% ของกรอบซอง)</label><input id="packW" type="number" min="35" max="100" step="1" value="${Math.max(35,Math.min(100,parseInt(o.packW)||82))}"></div><div><label for="packH">ความสูง (% ของกรอบซอง)</label><input id="packH" type="number" min="35" max="100" step="1" value="${Math.max(35,Math.min(100,parseInt(o.packH)||92))}"></div></div><div class="packPosition"><label>แนวนอน <input id="packX" type="range" min="0" max="100" value="${Math.max(0,Math.min(100,parseInt(o.packX??50)))}"></label><label>แนวตั้ง <input id="packY" type="range" min="0" max="100" value="${Math.max(0,Math.min(100,parseInt(o.packY??50)))}"></label><small class="dto">ลากรูปในตัวอย่าง หรือเลื่อนแถบเพื่อจัดตำแหน่ง</small></div><div class="packPreviewBox"><span>ตัวอย่างซอง</span><div class="packPreview empty" id="packPreview" data-empty="อัปโหลดรูปเพื่อดูตัวอย่าง"><img id="packPreviewImg" alt="ตัวอย่างรูปซอง"></div></div></div>`:"")+
+   `<div class="actions"><button class="btn primary" id="sv">Save</button>${onDel?'<button class="btn" id="dl">Delete</button>':""}<button class="btn" id="cn">Cancel</button></div>`;
+  $("edBody").querySelectorAll("select[data-k]").forEach(sel=>sel.onchange=()=>{
+    if(sel.value!=="__new"){sel.dataset.p=sel.value;return}
+    const n=(prompt("New card type name")||"").trim();
+    if(!n){sel.value=sel.dataset.p||"";return}
+    if(!CTYPES.includes(n)){CTYPES.push(n);save()}
+    if(![...sel.options].some(x=>x.value===n))sel.insertBefore(new Option(n,n),sel.querySelector('[value="__new"]'));
+    sel.value=n;sel.dataset.p=n});
+  // Grade defaults are conveniences only: users can edit Power and Shield afterwards.
+  const gradeField=$("edBody").querySelector('[data-k="grade"]');
+  const powerField=$("edBody").querySelector('[data-k="power"]');
+  const shieldField=$("edBody").querySelector('[data-k="shield"]');
+  const gradeDefaults={"0":{power:"5000",shield:"15000"},"1":{power:"8000",shield:"5000"},"2":{power:"10000",shield:"5000"},"3":{power:"13000",shield:""}};
+  if(gradeField&&powerField&&shieldField){
+    let lastGrade=String(gradeField.value||"").trim(),last=gradeDefaults[lastGrade]||{power:"",shield:""};
+    let powerTouched=Boolean(powerField.value&&powerField.value!==last.power),shieldTouched=Boolean(shieldField.value&&shieldField.value!==last.shield);
+    powerField.addEventListener("input",()=>{powerTouched=true});
+    shieldField.addEventListener("input",()=>{shieldTouched=true});
+    gradeField.addEventListener("input",()=>{
+      const nextGrade=String(gradeField.value||"").trim(),next=gradeDefaults[nextGrade]||{power:"",shield:""};
+      if(!powerTouched||String(powerField.value||"").trim()===last.power)powerField.value=next.power;
+      if(!shieldTouched||String(shieldField.value||"").trim()===last.shield)shieldField.value=next.shield;
+      powerTouched=powerTouched&&String(powerField.value||"").trim()!==next.power;
+      shieldTouched=shieldTouched&&String(shieldField.value||"").trim()!==next.shield;
+      lastGrade=nextGrade;last=next;
+    });
+  }
+  const paintPrev=()=>{$("fp").innerHTML=art({img:im,name:o.name||"No picture"})};
+  function stage(){
+    if(!im){$("cropbox").innerHTML='<p class="dto">Add a picture to adjust it inside the card frame.</p>';return}
+    $("cropbox").innerHTML=`<label>${crop==="b"?"Cover frame":"Card frame"}</label><div class="pills" style="margin-bottom:0">${crop==="b"?"":`<button class="pill" data-o="p" aria-pressed="${ori==="p"}">Portrait</button><button class="pill" data-o="l" aria-pressed="${ori==="l"}">Landscape</button>`}<button class="pill" id="rs">Reset</button></div>
+      <div class="stage ${ori}" id="stg" style="aspect-ratio:${ori==="p"?CW+"/"+CH:ori==="b"?"3/2":CH+"/"+CW}"><img id="simg" alt="" draggable="false"></div>
+      <p class="dto" style="text-align:center">Drag the picture to move it. Use the slider or mouse wheel to zoom.</p><input type="range" id="zm" min="1" max="4" step="0.02" aria-label="Zoom">`;
+    const g=$("stg"),img=$("simg");img.src=im;
+    const paint=()=>{
+      if(!fit){img.style.cssText="position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover";$("zm").disabled=true;return}
+      const L=lay(fit,ori);fit.cx=L.cx;fit.cy=L.cy;
+      img.style.cssText=`position:absolute;max-width:none;left:${L.left}%;top:${L.top}%;width:${L.w}%;height:${L.h}%`;$("zm").value=fit.z};
+    paint();
+    let d=null;
+    g.onpointerdown=e=>{if(fit){d={x:e.clientX,y:e.clientY};g.setPointerCapture(e.pointerId)}};
+    g.onpointermove=e=>{if(!d||!fit)return;const R=g.getBoundingClientRect(),L=lay(fit,ori);
+      fit.cx-=(e.clientX-d.x)/(R.width*L.w/100);fit.cy-=(e.clientY-d.y)/(R.height*L.h/100);d={x:e.clientX,y:e.clientY};paint()};
+    g.onpointerup=g.onpointercancel=()=>{d=null};
+    g.addEventListener("wheel",e=>{if(!fit)return;e.preventDefault();fit.z=Math.min(4,Math.max(1,fit.z*Math.exp(-e.deltaY*.0015)));paint()},{passive:false});
+    $("zm").oninput=e=>{if(fit){fit.z=+e.target.value;paint()}};
+    $("cropbox").querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{ori=b.dataset.o;stage()});
+    $("rs").onclick=()=>{if(fit){fit={...fit,z:1,cx:.5,cy:.5}}stage()};
+  }
+  async function setImg(src,auto){
+    im=src;fit=null;
+    if(!crop){paintPrev();return}
+    stage();if(!src){packPreviewSync();return}
+    try{const r=await meta(src);if(im!==src)return;fit={r,z:1,cx:.5,cy:.5};if(auto&&crop!=="b")ori=r>1?"l":"p";stage()}
+    catch(e){if(im===src)$("cropbox").insertAdjacentHTML("afterbegin",'<p class="chk"><span class="bad">This picture could not be loaded.</span></p>')}
+    packPreviewSync()
+  }
+  $("ff").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const u=await pic(f);$("fu").value="";setImg(u,1)}catch(x){alert("Could not add picture: "+x.message)}};
+  $("fu").onchange=e=>setImg(e.target.value.trim(),1);
+  $("cn").onclick=()=>$("ed").close();
+  $("sv").onclick=()=>{const v={};$("edBody").querySelectorAll("[data-k]").forEach(i=>v[i.dataset.k]=i.value.trim());v[imgKey]=im;if(crop){v.fit=fit;v.orient=ori}if(crop==="b"){v.packMode=$("packMode").value;v.packW=Math.max(35,Math.min(100,parseInt($("packW").value)||82));v.packH=Math.max(35,Math.min(100,parseInt($("packH").value)||92));v.packX=Math.max(0,Math.min(100,parseInt($("packX").value)||0));v.packY=Math.max(0,Math.min(100,parseInt($("packY").value)||0))}onSave(v)};
+  if(onDel)$("dl").onclick=()=>{if(confirm("Delete this? This cannot be undone.")){onDel();$("ed").close();refresh()}};
+  if(crop){if(im&&!fit)setImg(im);else stage()}else paintPrev();
+  if(crop==="b"){
+    $("packMode").value=o.packMode==="custom"?"custom":"auto";
+    packPreviewSync=()=>{
+      const custom=$("packMode").value==="custom";$("packCustom").hidden=!custom;
+      const img=$("packPreviewImg");img.style.width=(custom?Math.max(35,Math.min(100,parseInt($("packW").value)||82)):100)+"%";
+      img.style.height=(custom?Math.max(35,Math.min(100,parseInt($("packH").value)||92)):100)+"%";
+      img.style.objectFit="cover";img.style.objectPosition=$("packX").value+"% "+$("packY").value+"%";img.src=im||"";$("packPreview").classList.toggle("empty",!im);
+      if(!im)$("packPreview").setAttribute("data-empty","อัปโหลดรูปเพื่อดูตัวอย่าง");else $("packPreview").removeAttribute("data-empty");
+    };
+    $("packMode").onchange=packPreviewSync;$("packW").oninput=packPreviewSync;$("packH").oninput=packPreviewSync;$("packX").oninput=packPreviewSync;$("packY").oninput=packPreviewSync;
+    const pb=$("packPreview");let pan=null;pb.onpointerdown=e=>{if(!im)return;pan={x:e.clientX,y:e.clientY,px:+$("packX").value,py:+$("packY").value};try{pb.setPointerCapture(e.pointerId)}catch(x){}};
+    pb.onpointermove=e=>{if(!pan)return;const r=pb.getBoundingClientRect();$("packX").value=Math.round(Math.max(0,Math.min(100,pan.px-(e.clientX-pan.x)/r.width*100)));$("packY").value=Math.round(Math.max(0,Math.min(100,pan.py-(e.clientY-pan.y)/r.height*100)));packPreviewSync()};pb.onpointerup=pb.onpointercancel=()=>pan=null;packPreviewSync();
+  }
+  $("ed").showModal();
+}
+const CF=[["name","Name"],["no","Card number"],["description","รายละเอียดการ์ด"],["nation","Nation","nations"],["nation2","Second nation (Duo nation, optional)","nations"],["unit","Card type","@types"],["grade","Grade"],["power","Power"],["shield","ป้องกัน / Shield"],["rarity","Rarity","rarities"],["trigger","Trigger","triggers"],["is_gacha_pool","Gacha pool","@bool"]];
+function cardForm(c,pid){
+  const n=!c,p=PRODUCTS.find(x=>x.id===pid);
+  form(n?"Add card":"Edit card",CF,c||{no:String(p.cards.length+1).padStart(3,"0")},"img",v=>{
+    if(!v.name)return alert("Please enter a name.");
+    v.is_gacha_pool=v.is_gacha_pool!=="false";
+    if(n)p.cards.push({id:uid(),...v});else Object.assign(p.cards.find(x=>x.id===c.id),v);
+    $("ed").close();refresh()},n?null:()=>{p.cards=p.cards.filter(x=>x.id!==c.id)},true);
+}
+function prodForm(p){
+  const n=!p;
+  form(n?"New product":"Edit product",[["name","Product name"],["year","Year released"],["type","Type","types"]],p||{year:new Date().getFullYear(),type:"Booster Pack"},"cover",v=>{
+    if(!v.name)return alert("Please enter a product name.");
+    v.year=parseInt(v.year)||new Date().getFullYear();
+    if(n)PRODUCTS.push({id:uid(),cards:[],...v});else Object.assign(p,v);
+    $("ed").close();refresh()},n?null:()=>{PRODUCTS=PRODUCTS.filter(x=>x!==p);if(cur===p){$("pv").hidden=true;$("home").hidden=false}},"b");
+}
+$("newProd").onclick=()=>prodForm();
+$("addCard").onclick=()=>cardForm(null,cur.id);
+$("editProd").onclick=()=>prodForm(cur);
+$("bulk").onchange=async e=>{
+  for(const f of e.target.files){try{const u=await pic(f);let o;try{if(await meta(u)>1)o="l"}catch(x){}cur.cards.push({id:uid(),orient:o,no:String(cur.cards.length+1).padStart(3,"0"),name:f.name.replace(/\.[^.]+$/,""),nation:"",unit:"",grade:"",power:"",rarity:"",trigger:"",img:u})}catch(x){alert("Upload failed: "+x.message)}}
+  e.target.value="";refresh()};
+
+/* Backup / Restore (copy-paste, works on phone and PC) */
+$("backup").onclick=()=>{
+  $("edBody").innerHTML=`<h3>Backup / Restore</h3><p style="color:var(--mute);margin:0 0 10px">Copy this text and keep it somewhere safe. To move your data to another phone or computer, paste it there and tap Restore.</p>
+   <textarea id="bk" spellcheck="false"></textarea><div class="actions"><button class="btn" id="cp">Copy</button><button class="btn primary" id="rs">Restore from text</button><button class="btn" id="cn">Close</button></div>`;
+  $("bk").value=JSON.stringify(DB());
+  $("cp").onclick=async()=>{$("bk").select();try{await navigator.clipboard.writeText($("bk").value)}catch(e){document.execCommand("copy")}$("cp").textContent="Copied"};
+  $("rs").onclick=()=>{try{let d=JSON.parse($("bk").value),nn=null,zz=null,ct=null;if(d&&!Array.isArray(d)){nn=d.nations;zz=d.zones;ct=d.ctypes;d=d.products}if(!Array.isArray(d)||!d.every(p=>p&&Array.isArray(p.cards)))throw 0;
+    if(!confirm("Replace everything on this page with this data?"))return;
+    PRODUCTS=d;if(Array.isArray(nn)&&nn.length)NATIONS=nn;if(Array.isArray(zz)&&zz.length)ZONES=zz;if(Array.isArray(ct)&&ct.length)CTYPES=ct;$("pv").hidden=true;$("home").hidden=false;$("ed").close();refresh()}catch(e){alert("That text is not valid backup data.")}};
+  $("cn").onclick=()=>$("ed").close();
+  $("ed").showModal();
+};
+
+/* ---------- Nations ---------- */
+function natForm(){
+  const rowH=n=>`<div class="nrow" data-o="${h(n.name)}"><input type="color" value="${n.color}" aria-label="Colour"><input value="${h(n.name)}" placeholder="Nation name"><button class="btn sm" data-x aria-label="Remove">✕</button></div>`;
+  $("edBody").innerHTML=`<h3>Nations</h3><div id="nl">${NATIONS.map(rowH).join("")}</div><div class="actions"><button class="btn sm" id="na">+ Add nation</button><button class="btn primary" id="sv">Save</button><button class="btn" id="cn">Cancel</button></div>`;
+  $("na").onclick=()=>$("nl").insertAdjacentHTML("beforeend",rowH({name:"",color:"#5a6b8c"}));
+  $("nl").onclick=e=>{if(e.target.dataset.x!==undefined)e.target.closest(".nrow").remove()};
+  $("cn").onclick=()=>$("ed").close();
+  $("sv").onclick=()=>{const next=[],ren={};
+    $("nl").querySelectorAll(".nrow").forEach(r=>{const [c,t]=r.querySelectorAll("input"),nm=t.value.trim();if(!nm)return;next.push({name:nm,color:c.value});if(r.dataset.o&&r.dataset.o!==nm)ren[r.dataset.o]=nm});
+    PRODUCTS.forEach(p=>p.cards.forEach(c=>{if(ren[c.nation])c.nation=ren[c.nation];if(ren[c.nation2])c.nation2=ren[c.nation2]}));
+    NATIONS=next;$("ed").close();refresh()};
+  $("ed").showModal();
+}
+$("natBtn").onclick=natForm;
+
+/* ---------- Card types (Normal Order, Set Order, Token ... add your own) ---------- */
+function ctForm(){
+  const rowH=n=>`<div class="nrow" data-o="${h(n)}"><input value="${h(n)}" placeholder="Card type"><button class="btn sm" data-x aria-label="Remove">✕</button></div>`;
+  $("edBody").innerHTML=`<h3>Card types</h3><p style="color:var(--mute);margin:0 0 10px">Used when you add a card and in Card Search. Renaming a type updates every card that uses it.</p><div id="nl">${CTYPES.map(rowH).join("")}</div><div class="actions"><button class="btn sm" id="na">+ Add type</button><button class="btn primary" id="sv">Save</button><button class="btn" id="cn">Cancel</button></div>`;
+  $("na").onclick=()=>$("nl").insertAdjacentHTML("beforeend",rowH(""));
+  $("nl").onclick=e=>{if(e.target.dataset.x!==undefined)e.target.closest(".nrow").remove()};
+  $("cn").onclick=()=>$("ed").close();
+  $("sv").onclick=()=>{const next=[],ren={};
+    $("nl").querySelectorAll(".nrow").forEach(r=>{const nm=r.querySelector("input").value.trim();if(!nm||next.includes(nm))return;next.push(nm);if(r.dataset.o&&r.dataset.o!==nm)ren[r.dataset.o]=nm});
+    PRODUCTS.forEach(p=>p.cards.forEach(c=>{if(ren[c.unit])c.unit=ren[c.unit]}));
+    CTYPES=next;$("ed").close();refresh()};
+  $("ed").showModal();
+}
+$("ctBtn").onclick=ctForm;
+
+/* ---------- Deck zones (editable) ---------- */
+function zoneForm(){
+  const rowH=z=>`<div class="zrow" data-i="${h(z.id)}"><input value="${h(z.name)}" placeholder="Zone name"><input type="number" min="1" value="${z.size||""}" aria-label="Cards in zone"><input type="number" min="1" value="${z.copies||""}" aria-label="Copies per card"><input type="number" min="1" value="${z.perGrade||""}" aria-label="Cards per grade"><button class="btn sm" data-x aria-label="Remove">✕</button></div>`;
+  $("edBody").innerHTML=`<h3>Deck zones</h3><p style="color:var(--mute);margin:0 0 10px">Leave a number empty for no limit. "Per grade" limits how many cards of the same grade the zone can hold (Ride deck: 1).</p><div class="zrow zh"><span>Name</span><span>Cards</span><span>Copies</span><span>Per grade</span><span></span></div><div id="zl">${ZONES.map(rowH).join("")}</div><div class="actions"><button class="btn sm" id="za">+ Add zone</button><button class="btn primary" id="sv">Save</button><button class="btn" id="cn">Cancel</button></div>`;
+  $("za").onclick=()=>$("zl").insertAdjacentHTML("beforeend",rowH({id:"",name:"",size:null,copies:null,perGrade:null}));
+  $("zl").onclick=e=>{if(e.target.dataset.x!==undefined)e.target.closest(".zrow").remove()};
+  $("cn").onclick=()=>$("ed").close();
+  $("sv").onclick=()=>{const next=[];
+    $("zl").querySelectorAll(".zrow").forEach(r=>{const [a,b,c,g]=r.querySelectorAll("input"),nm=a.value.trim();if(!nm)return;
+      next.push({id:r.dataset.i||uid(),name:nm,size:parseInt(b.value)||null,copies:parseInt(c.value)||null,perGrade:parseInt(g.value)||null})});
+    if(!next.length)return alert("Keep at least one zone.");
+    ZONES=next;fixDeck(deck);$("ed").close();refresh()};
+  $("ed").showModal();
+}
+$("zoneBtn").onclick=zoneForm;
+
+/* ---------- Deck builder ---------- */
+const MYKEY="cardlist-mydecks",TRIGTOTAL=16,TRIGMAX={Heal:4,Over:1,Critical:8,Draw:8,Front:8};
+const newDeck=()=>({id:uid(),name:"",description:"",isShared:false,z:{},names:{}});
+let deck=newDeck(),az="main",lastIssues=[];
+const zone=id=>ZONES.find(z=>z.id===id);
+const zcount=id=>Object.values(deck.z[id]||{}).reduce((a,b)=>a+b,0);
+const dtotal=()=>ZONES.reduce((a,z)=>a+zcount(z.id),0);
+const byId=id=>ALL.find(c=>c.id===id);
+const dcard=id=>byId(id)||{id,name:deck.names[id]||"Unknown card",nation:"",grade:"",img:"",trigger:""};
+const gnum=c=>c.grade===""?99:+c.grade;
+const dsorted=zid=>Object.keys(deck.z[zid]||{}).map(dcard).sort((a,b)=>gnum(a)-gnum(b)||a.name.localeCompare(b.name));
+const zrule=z=>(z.size?z.size+" cards":"No card limit")+" · "+(z.copies?"max "+z.copies+" copies per card":"any number of copies")+(z.perGrade?" · max "+z.perGrade+" per grade":"");
+const saveBanlist=()=>{
+  if(!requireAdmin())return;
+  renderBanGallery();
+  if(Cloud?.configured){
+    Cloud.saveBanlist(BANLIST).then(()=>{$("st").textContent="บันทึก Banlist ลง Supabase แล้ว ✓"})
+      .catch(e=>{console.error("banlist save failed",e);notice("bad","บันทึก Banlist ไม่สำเร็จ",String(e?.message||e),{auto:7000})});
+  }else{
+    try{localStorage.setItem(BANKEY,JSON.stringify(BANLIST));$("st").textContent="บันทึก Banlist ในเครื่องแล้ว ✓"}
+    catch(e){notice("bad","บันทึก Banlist ไม่สำเร็จ",String(e?.message||e),{auto:7000})}
+  }
+};
+const banTypes=[["ban","ห้ามใส่"],["zone","ห้ามใส่ในกองการ์ด"],["together","ห้ามใส่ในเด็คเดียวกัน"],["limit","จำกัดจำนวน x ใบ"]];
+const deckCopies=id=>Object.values(deck.z).reduce((n,z)=>n+(+z[id]||0),0);
+function banFindCard(id){return ALL.find(c=>c.id===id)||COLLECTION[id]?.card||null}
+function banGroupCards(group){return new Set(BANLIST.filter(r=>r.type==="together"&&String(r.group||"").trim()===String(group||"").trim()).map(r=>r.cardId).filter(id=>deckCopies(id)>0))}
+function banReasons(id,zid){const total=deckCopies(id);if(!total)return[];const out=[];BANLIST.filter(r=>r.cardId===id).forEach(r=>{if(r.type==="ban")out.push("ห้ามใส่ในเด็ค");else if(r.type==="zone"&&zid===r.zoneId)out.push("ห้ามใส่ใน "+(zone(r.zoneId)?.name||"กองนี้"));else if(r.type==="limit"&&total>(parseInt(r.limit)||0))out.push("จำกัด "+(parseInt(r.limit)||0)+" ใบ (มี "+total+")");else if(r.type==="together"&&banGroupCards(r.group).size>1)out.push("ห้ามใส่เด็คเดียวกัน · "+(r.group||"กลุ่ม"))});return[...new Set(out)]}
+function banCardFace(c,zid,nat){const a=banReasons(c.id,zid);return a.length?`<div class="banBackFace" role="img" aria-label="${h(a.join(" / "))}" title="${h(a.join(" / "))}"><div class="art back"></div><span class="banBackText">${h(a.join(" · "))}</span></div>`:art(c,nat)}
+function banIssues(){const issues=[],ids=new Set(Object.values(deck.z).flatMap(z=>Object.entries(z).filter(([,n])=>n>0).map(([id])=>id)));ids.forEach(id=>ZONES.forEach(z=>{if((deck.z[z.id]||{})[id])banReasons(id,z.id).forEach(r=>issues.push(`${dcard(id).name}: ${r}`))}));[...new Set(BANLIST.filter(r=>r.type==="together").map(r=>String(r.group||"")))].forEach(g=>{const set=banGroupCards(g);if(set.size>1)issues.push(`Banlist group ${g||"(unnamed)"}: ${[...set].map(id=>dcard(id).name).join(" / ")} cannot be used together`)});return[...new Set(issues)]}
+function banForm(){
+ if(!requireAdmin())return;
+ const zoneOpts=ZONES.map(z=>`<option value="${h(z.id)}">${h(z.name)}</option>`).join("");
+ $("edBody").innerHTML=`<h3>Banlist</h3><p class="dto">ค้นหาจากคลังการ์ดแล้วกด + เพื่อเพิ่มกฎ การ์ดที่ผิดกฎยังใส่ในเด็คได้ แต่ด้านหลังการ์ดจะแสดงกฎที่ติด และจะแจ้งเตือนในผลตรวจเด็ค</p><div class="banAdd"><label>ค้นหาชื่อการ์ด / หมายเลข<input id="banSearch" type="search" placeholder="พิมพ์อย่างน้อย 2 ตัวอักษร"></label><div class="banNewRule"><label>กฎ<select id="banNewType">${banTypes.map(([v,l])=>`<option value="${v}">${l}</option>`).join("")}</select></label><label class="banNewZone" hidden>กอง<select id="banNewZone">${zoneOpts}</select></label><label class="banNewLimit" hidden>จำนวนสูงสุด<input id="banNewLimit" type="number" min="0" value="1"></label><label class="banNewGroup" hidden>ชื่อกลุ่ม<input id="banNewGroup" value="กลุ่ม 1"></label></div></div><div id="banResults" class="banResults"></div><h4 class="yr">กฎที่ตั้งไว้</h4><div id="banRows"></div><div class="actions"><button class="btn primary" id="banClose">ปิด</button></div>`;
+ const rows=$("banRows"),results=$("banResults"),search=$("banSearch");
+ const showNew=()=>{const t=$("banNewType").value;$("edBody").querySelector(".banNewZone").hidden=t!=="zone";$("edBody").querySelector(".banNewLimit").hidden=t!=="limit";$("edBody").querySelector(".banNewGroup").hidden=t!=="together"};
+ const renderRows=()=>{rows.innerHTML=BANLIST.map((r,i)=>{const c=banFindCard(r.cardId),name=c?.name||r.name||"การ์ดที่ถูกลบ";return `<div class="banRow" data-i="${i}" data-ruleid="${h(r.id)}" data-card="${h(r.cardId)}" data-name="${h(name)}"><b>${h(name)}</b><select data-f="type">${banTypes.map(([v,l])=>`<option value="${v}" ${r.type===v?"selected":""}>${l}</option>`).join("")}</select><label class="rowZone" ${r.type!=="zone"?"hidden":""}>กอง<select data-f="zone">${zoneOpts}</select></label><label class="rowLimit" ${r.type!=="limit"?"hidden":""}>จำนวน<input data-f="limit" type="number" min="0" value="${Math.max(0,parseInt(r.limit)||0)}"></label><label class="rowGroup" ${r.type!=="together"?"hidden":""}>กลุ่ม<input data-f="group" value="${h(r.group||"")}"></label><button class="btn sm" data-del="${i}">ลบ</button></div>`}).join("")||'<p class="dto">ยังไม่มีกฎใน Banlist</p>';rows.querySelectorAll(".banRow").forEach((row,i)=>{const z=row.querySelector('[data-f="zone"]');if(z)z.value=BANLIST[i].zoneId||ZONES[0]?.id||""})};
+ const sync=()=>{BANLIST=[...rows.querySelectorAll(".banRow")].map(r=>({id:r.dataset.ruleid,cardId:r.dataset.card,name:r.dataset.name,type:r.querySelector('[data-f="type"]').value,zoneId:r.querySelector('[data-f="zone"]')?.value||ZONES[0]?.id||"",limit:Math.max(0,parseInt(r.querySelector('[data-f="limit"]')?.value)||0),group:r.querySelector('[data-f="group"]')?.value.trim()||""}));saveBanlist();renderDeck()};
+ const renderResults=()=>{const q=search.value.trim().toLowerCase();if(q.length<2){results.innerHTML='<p class="dto">พิมพ์อย่างน้อย 2 ตัวอักษรเพื่อค้นหาในการ์ดทั้งหมด</p>';return}const m=new Map(ALL.map(c=>[c.id,c]));Object.values(COLLECTION).forEach(v=>{if(v?.card&&!m.has(v.id||v.card.id))m.set(v.id||v.card.id,v.card)});const hits=[...m.values()].filter(c=>(String(c.name||"")+" "+String(c.no||"")+" "+String(c.rarity||"")).toLowerCase().includes(q)).slice(0,30);results.innerHTML=hits.map(c=>`<button type="button" class="banResult" data-add="${h(c.id)}"><span>${h(c.name)}</span><small>${h(c.no||"")} · ${h(c.rarity||"—")}</small><b>＋</b></button>`).join("")||'<p class="dto">ไม่พบการ์ด</p>'};
+ $("banNewType").onchange=showNew;showNew();renderRows();renderResults();search.oninput=renderResults;
+ results.onclick=e=>{const b=e.target.closest("[data-add]");if(!b)return;const c=banFindCard(b.dataset.add);if(!c)return;BANLIST.push({id:uid(),cardId:c.id,name:c.name,type:$("banNewType").value,zoneId:$("banNewZone").value,limit:Math.max(0,parseInt($("banNewLimit").value)||0),group:$("banNewGroup").value.trim()||"กลุ่ม 1"});saveBanlist();renderRows();renderDeck()};
+ rows.onchange=e=>{const r=e.target.closest(".banRow");if(!r)return;if(e.target.dataset.f==="type"){const t=e.target.value;r.querySelector(".rowZone").hidden=t!=="zone";r.querySelector(".rowLimit").hidden=t!=="limit";r.querySelector(".rowGroup").hidden=t!=="together"}sync()};rows.oninput=e=>{if(e.target.closest(".banRow"))sync()};
+ rows.onclick=e=>{const b=e.target.closest("[data-del]");if(!b)return;BANLIST.splice(+b.dataset.del,1);saveBanlist();renderRows();renderDeck()};
+ $("banClose").onclick=()=>$("ed").close();$("ed").showModal();
+}
+$("banBtn").onclick=banForm;
+
+function banRuleLabel(r){
+ if(r.type==="ban")return "ห้ามใส่ในเด็ค";
+ if(r.type==="zone")return "ห้ามใส่ใน "+(zone(r.zoneId)?.name||"กองการ์ด");
+ if(r.type==="together")return "ห้ามใส่ในเด็คเดียวกัน · "+(r.group||"กลุ่ม");
+ if(r.type==="limit")return "จำกัดไม่เกิน "+(parseInt(r.limit)||0)+" ใบ";
+ return "มีข้อจำกัด";
+}
+function banGalleryEntries(){
+ const m=new Map();
+ BANLIST.forEach(r=>{const c=banFindCard(r.cardId)||{id:r.cardId,name:r.name||"การ์ดที่ถูกลบ",img:""};if(!m.has(r.cardId))m.set(r.cardId,{card:c,rules:[]});m.get(r.cardId).rules.push(banRuleLabel(r))});
+ return [...m.values()].sort((a,b)=>String(a.card.name||"").localeCompare(String(b.card.name||"")));
+}
+function banTypeLabel(type){return ({ban:"ห้ามใส่ในเด็ค",zone:"ห้ามใส่ในกองที่กำหนด",limit:"จำกัดจำนวนการ์ด",together:"ห้ามใช้ร่วมกันในเด็คเดียว"})[type]||"กฎอื่นๆ"}
+function renderBanGallery(){
+ const box=$("banGalleryCards");if(!box)return;
+ const q=$("banGallerySearch").value.trim().toLowerCase(),all=banGalleryEntries();
+ const list=all.filter(v=>(String(v.card.name||"")+" "+String(v.card.no||"")+" "+String(v.card.rarity||"")+" "+v.rules.join(" ")).toLowerCase().includes(q));
+ const types=["ban","zone","limit","together"];
+ const groups=types.map(type=>({type,title:banTypeLabel(type),items:list.filter(v=>BANLIST.some(r=>r.cardId===v.card.id&&r.type===type))})).filter(g=>g.items.length);
+ $("banGalleryCount").textContent=list.length+" / "+all.length+" ใบ · "+groups.length+" ประเภท";
+ const cardHtml=(v,i,type)=>{const rules=BANLIST.filter(r=>r.cardId===v.card.id&&r.type===type).map(banRuleLabel);return `<button type="button" class="banGalleryCard" data-ban-card="${h(v.card.id)}" aria-label="ดูรายละเอียด ${h(v.card.name||"การ์ด")}"><span class="banNumber">${i+1}</span>${art(v.card,1)}<b>${h(v.card.name||"การ์ด")}</b><small>${h(v.card.no||"")}${v.card.rarity?" · "+h(v.card.rarity):""}</small><span class="banRules">${rules.map(r=>`<i>${h(r)}</i>`).join("")}</span></button>`};
+ box.innerHTML=groups.map(g=>`<section class="banTypeGroup"><h3>${g.title}</h3><div class="banGalleryCards">${g.items.map((v,i)=>cardHtml(v,i,g.type)).join("")}</div></section>`).join("")||`<p class="dto">${all.length?"ไม่พบการ์ดที่ค้นหา":"ยังไม่มีการ์ดใน Banlist · กด “จัดการกฎ Banlist” เพื่อเพิ่มการ์ด"}</p>`;
+}
+$("banGalleryManage").onclick=banForm;
+$("banGallerySearch").oninput=renderBanGallery;
+$("banGalleryCards").onclick=e=>{const b=e.target.closest("[data-ban-card]");if(!b)return;const v=banGalleryEntries().find(x=>String(x.card.id)===b.dataset.banCard);if(v)openLB({...v.card,pname:"Banlist"},{readonly:true,source:"banlist"})};
+function fixDeck(d){
+  d.names=d.names||{};d.z=d.z||{};
+  if(d.cards){d.z.main=Object.assign(d.z.main||{},d.cards);delete d.cards}
+  const first=ZONES[0].id;
+  Object.keys(d.z).forEach(k=>{if(zone(k))return;const t=d.z[first]=d.z[first]||{};Object.entries(d.z[k]).forEach(([id,n])=>t[id]=(t[id]||0)+n);delete d.z[k]});
+  return d;
+}
+function deckAdd(id,d,zid=az){
+  const z=zone(zid);if(!z)return;
+  const c=byId(id);if(c)deck.names[id]=c.name;
+  const t=deck.z[zid]=deck.z[zid]||{},n=(t[id]||0)+d;
+  if(n<=0)delete t[id];
+  else{
+    if(d>0){
+      if(z.copies&&n>z.copies)return notice("full","Max "+z.copies+" copies","You cannot add more of this card to "+z.name+".",{auto:2200});
+      if(z.size&&zcount(zid)>=z.size)return notice("full",z.name+" is full","("+z.size+"/"+z.size+") Remove a card first to add a new one.",{auto:2400});
+      if(z.perGrade){const g=String(dcard(id).grade),cnt=Object.keys(t).filter(k=>k!==id&&String(dcard(k).grade)===g).reduce((a,k)=>a+t[k],0)+n;
+        if(cnt>z.perGrade)return notice("full","Grade limit reached",z.name+" allows only "+z.perGrade+" card"+(z.perGrade>1?"s":"")+" of each grade.",{auto:2400})}
+    }
+    t[id]=n;
+  }
+  renderDeck();
+  if(d>0&&z.size&&zcount(zid)===z.size)notice("ok",z.name+" is full!",z.size+"/"+z.size+" cards",{auto:1500});
+}
+function trigCheck(){
+  const cnt={};let tot=0;
+  ["main","ride"].forEach(zid=>Object.entries(deck.z[zid]||{}).forEach(([id,n])=>{
+    const t=String(dcard(id).trigger||"").trim();if(!t)return;
+    const k=Object.keys(TRIGMAX).find(x=>x.toLowerCase()===t.toLowerCase())||t;cnt[k]=(cnt[k]||0)+n;tot+=n}));
+  const issues=[];
+  ZONES.forEach(z=>{if(!z.size)return;const n=zcount(z.id);
+    if(n<z.size)issues.push(`${z.name}: ${z.size-n} more card${z.size-n>1?"s":""} needed (${n}/${z.size})`);
+    else if(n>z.size)issues.push(`${z.name}: ${n-z.size} too many (${n}/${z.size})`)});
+  if(tot<TRIGTOTAL)issues.push(`Triggers: ${TRIGTOTAL-tot} missing (${tot}/${TRIGTOTAL})`);
+  else if(tot>TRIGTOTAL)issues.push(`Triggers: ${tot-TRIGTOTAL} too many (${tot}/${TRIGTOTAL})`);
+  Object.keys(TRIGMAX).forEach(k=>{if((cnt[k]||0)>TRIGMAX[k])issues.push(`${k} triggers: max ${TRIGMAX[k]}, you have ${cnt[k]}`)});
+  issues.push(...banIssues());
+  lastIssues=issues;
+  return `<div><span class="${tot===TRIGTOTAL?"ok":"bad"}">Triggers ${tot}/${TRIGTOTAL}</span> · `+
+    Object.keys(TRIGMAX).map(k=>`<span class="${(cnt[k]||0)>TRIGMAX[k]?"bad":""}">${k} ${cnt[k]||0}/${TRIGMAX[k]}</span>`).join(" · ")+"</div>"+
+    (issues.length?"<ul>"+issues.map(i=>`<li class="bad">${h(i)}</li>`).join("")+"</ul>":'<div class="ok" style="margin-top:6px">Deck is complete ✓</div>');
+}
+function renderPick(){
+  const nat=$("dnat").value,kw=$("dkw").value.trim().toLowerCase();
+  const l=ALL.filter(c=>(!nat||nats(c).includes(nat))&&(!kw||c.name.toLowerCase().includes(kw)));
+  $("dpick").innerHTML=l.map(c=>`<button class="c${c.orient==="l"?" land":""}" data-add="${c.id}">${art(c,1)}<div class="t"><b>${h(c.name)}</b></div></button>`).join("")||'<p class="count">No cards found.</p>';
+}
+function renderDeck(){
+  if(!zone(az))az=ZONES[0].id;
+  const z=zone(az),t=deck.z[az]||{};
+  $("dcount").textContent=dtotal()+" cards";
+  $("ztabs").innerHTML=ZONES.map(x=>{const n=zcount(x.id);return `<button class="pill" data-z="${x.id}" aria-pressed="${x.id===az}">${h(x.name)} ${n}${x.size?"/"+x.size:""}${x.size&&n===x.size?" ✓":""}</button>`}).join("");
+  $("zrule").textContent=zrule(z);$("dto").textContent="Tap a card to add it to: "+z.name;
+  $("dlist").innerHTML=dsorted(az).map(c=>`<div class="drow"><div class="banThumb">${banCardFace(c,az)}</div><div><b>${h(c.name)}</b><small>${h(natTxt(c))}${c.grade!==""?" · Grade "+h(c.grade):""}</small></div><div class="qty"><button data-m="${c.id}" aria-label="Remove one">−</button><b>${t[c.id]}</b><button data-p="${c.id}" aria-label="Add one">+</button></div></div>`).join("")||'<p class="count">Tap cards to add them here.</p>';
+  $("dcheck").innerHTML=trigCheck();
+}
+$("dpick").onclick=e=>{const b=e.target.closest("[data-add]");if(b)deckAdd(b.dataset.add,1)};
+$("dlist").onclick=e=>{const m=e.target.closest("[data-m]"),p=e.target.closest("[data-p]");if(m)deckAdd(m.dataset.m,-1);if(p)deckAdd(p.dataset.p,1)};
+$("ztabs").onclick=e=>{const b=e.target.closest("[data-z]");if(b){az=b.dataset.z;renderDeck()}};
+$("dnat").onchange=renderPick;$("dkw").oninput=renderPick;
+$("dname").oninput=()=>deck.name=$("dname").value;
+
+const myAll=()=>Cloud?.configured&&Cloud.user?REMOTE_DECKS:(()=>{try{return JSON.parse(localStorage.getItem(MYKEY))||{}}catch(e){return{}}})();
+function deckMetaUI(){$("dname").value=deck.name||"";$("dDesc").value=deck.description||"";$("dPublish").checked=!!deck.isShared}
+function myList(sel){$("dsel").innerHTML='<option value="">Choose…</option>'+Object.keys(myAll()).map(k=>`<option>${h(k)}</option>`).join("");$("dsel").value=sel||""}
+$("dname").oninput=()=>deck.name=$("dname").value;
+$("dDesc").oninput=()=>deck.description=$("dDesc").value;
+$("dPublish").onchange=()=>deck.isShared=$("dPublish").checked;
+$("dsave").onclick=async()=>{const n=deck.name.trim();if(!n)return alert("Name your deck first.");deck.name=n;deck.description=$("dDesc").value.trim();deck.isShared=$("dPublish").checked;
+  try{
+    if(Cloud?.configured){
+      await Cloud.saveDeck(deck);
+      $("st").textContent="บันทึกเด็คลง Supabase แล้ว ✓";
+      try{REMOTE_DECKS=await Cloud.loadDecks()}catch(reloadError){console.error("deck saved but reload failed",reloadError);notice("ask","บันทึกเด็คแล้ว ✓","แต่โหลดรายการเด็คกลับมาแสดงใหม่ไม่สำเร็จ: "+String(reloadError?.message||reloadError),{auto:8000})}
+    }else{const m=myAll();m[n]={...deck,name:n};localStorage.setItem(MYKEY,JSON.stringify(m));$("st").textContent="บันทึกเด็คในเครื่องแล้ว ✓"}
+    myList(n);
+  }catch(e){$("st").textContent="บันทึกเด็คไม่สำเร็จ";alert("บันทึกเด็คไม่สำเร็จ: "+String(e?.message||e))}};
+$("dsel").onchange=()=>{const d=myAll()[$("dsel").value];if(d){deck=fixDeck(JSON.parse(JSON.stringify(d)));deckMetaUI();renderDeck()}};
+$("ddel").onclick=async()=>{const n=$("dsel").value;if(!n||!confirm('Delete deck "'+n+'"?'))return;const m=myAll();try{if(Cloud?.configured){await Cloud.deleteDeck(m[n].id);REMOTE_DECKS=await Cloud.loadDecks()}else{delete m[n];localStorage.setItem(MYKEY,JSON.stringify(m))}myList("")}catch(e){alert("Could not delete deck: "+e.message)}};
+$("dnew").onclick=()=>{deck=newDeck();deckMetaUI();$("dsel").value="";renderDeck()};
+
+/* Spread view: every zone laid out, grouped by grade */
+$("dshow").onclick=()=>{
+  if(!dtotal())return alert("Add some cards first.");
+  $("spBody").innerHTML=`<h3>${h(deck.name||"My deck")} · ${dtotal()} cards</h3><div class="chk" style="margin:0 0 6px">${trigCheck()}</div>`+
+   ZONES.filter(z=>zcount(z.id)).map(z=>{
+    const g={};dsorted(z.id).forEach(c=>{const k=c.grade===""?"Other":"Grade "+c.grade;(g[k]=g[k]||[]).push(c)});
+    return `<h4 class="yr">${h(z.name)} (${zcount(z.id)}${z.size?"/"+z.size:""})</h4>`+Object.keys(g).map(k=>`<p class="sub2">${k}</p><div class="sp">${g[k].map(c=>`<div class="sc${c.orient==="l"?" land":""}" title="${h(c.name)}">${banCardFace(c,z.id,1)}<span class="bdg">×${deck.z[z.id][c.id]}</span></div>`).join("")}</div>`).join("")}).join("")+
+   '<div class="actions"><button class="btn primary" id="spShare">Share this deck</button><button class="btn" id="spExp">Export</button></div>';
+  $("spShare").onclick=guard(shareDeck);$("spExp").onclick=()=>{$("sp").close();guard(exportDeck)()};$("sp").showModal();
+};
+$("spx").onclick=()=>$("sp").close();
+
+/* Share: short code from the server, or a long code if no server is set */
+const enc=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o))));
+async function shareDeck(){
+  if(!dtotal())return alert("Add some cards first.");
+  const ents=[];ZONES.forEach(z=>Object.keys(deck.z[z.id]||{}).forEach(id=>ents.push([id,dcard(id).name,deck.z[z.id][id],z.id])));
+  const d={name:deck.name||"My deck",cards:ents};
+  let code;$("st").textContent="Creating code…";
+  try{code=API?(await post({action:"shareDeck",deck:d})).code:"L"+enc(d)}catch(e){$("st").textContent="";return alert("Could not share: "+e.message)}
+  $("st").textContent="";
+  $("edBody").innerHTML='<h3>Share deck</h3><p style="color:var(--mute);margin:0 0 10px">Send this to a friend. They open Deck Builder, tap Load from code, and paste it.</p><textarea id="bk" spellcheck="false" readonly></textarea><div class="actions"><button class="btn primary" id="cp">Copy</button><button class="btn" id="cn">Close</button></div>';
+  $("bk").value=d.name+" ("+dtotal()+" cards)\n\n"+ZONES.filter(z=>zcount(z.id)).map(z=>"["+z.name+" "+zcount(z.id)+"]\n"+ents.filter(e=>e[3]===z.id).map(e=>e[2]+"x "+e[1]).join("\n")).join("\n\n")+"\n\nDeck code: "+code;
+  $("cp").onclick=async()=>{$("bk").select();try{await navigator.clipboard.writeText($("bk").value)}catch(e){document.execCommand("copy")}$("cp").textContent="Copied"};
+  $("cn").onclick=()=>$("ed").close();$("ed").showModal();
+}
+$("dshare").onclick=guard(shareDeck);
+$("dload").onclick=()=>{
+  $("edBody").innerHTML='<h3>Load deck from code</h3><div class="fld"><label>Deck code (or the whole shared message)</label><input id="lc" placeholder="Paste here"></div><div class="actions"><button class="btn primary" id="lg">Load</button><button class="btn" id="cn">Cancel</button></div>';
+  $("cn").onclick=()=>$("ed").close();
+  $("lg").onclick=async()=>{
+    const m=$("lc").value.match(/Deck code:\s*(\S+)/i),code=m?m[1]:$("lc").value.trim();
+    try{
+      let d;
+      if(code[0]==="L"&&code.length>12)d=JSON.parse(decodeURIComponent(escape(atob(code.slice(1)))));
+      else{if(!API)throw new Error("Code not recognised");const j=await(await fetch(API+"?deck="+encodeURIComponent(code))).json();if(!j.ok)throw new Error(j.error);d=j.deck}
+      const nd=newDeck();nd.name=d.name||"";
+      d.cards.forEach(([id,name,n,zid])=>{
+        const z=zone(zid)||ZONES[0],c=byId(id)||ALL.find(x=>x.name===name),k=c?c.id:id,t=nd.z[z.id]=nd.z[z.id]||{};
+        t[k]=Math.min(z.copies||999,(t[k]||0)+n);nd.names[k]=c?c.name:name});
+      deck=nd;$("dname").value=deck.name;$("dsel").value="";renderDeck();$("ed").close();
+    }catch(e){alert("Could not load: "+e.message)}};
+  $("ed").showModal();
+};
+
+/* ---------- Export deck: text / image (PNG) / PDF (print) ---------- */
+const deckEntries=()=>ZONES.filter(z=>zcount(z.id)).map(z=>({z,items:dsorted(z.id).map(c=>({c,n:deck.z[z.id][c.id]}))}));
+function deckText(nums){
+  return (deck.name||"My deck")+" ("+dtotal()+" cards)\n"+deckEntries().map(({z,items})=>
+    "\n["+z.name+" "+zcount(z.id)+(z.size?"/"+z.size:"")+"]\n"+items.map(({c,n})=>n+"x "+c.name+(nums&&c.no?" ("+c.no+")":"")).join("\n")).join("\n");
+}
+const fname=()=>(deck.name||"deck").replace(/[^\w\u0E00-\u0E7F-]+/g,"_").slice(0,40)||"deck";
+function loadImg(src){return new Promise(res=>{const i=new Image();i.crossOrigin="anonymous";i.onload=()=>res(i);i.onerror=()=>res(null);i.src=src})}
+async function loadCard(c){
+  if(!c.img)return null;
+  let i=await loadImg(c.img);if(i)return i;
+  const m=String(c.img).match(/[?&]id=([\w-]+)/);            /* Google Drive thumbnail: retry via a CORS-friendly host */
+  return m?await loadImg("https://lh3.googleusercontent.com/d/"+m[1]+"=w800"):null;
+}
+function wrapText(ctx,t,x,y,mw,lh,max){
+  const w=String(t).split(/\s+/);let l="",n=0;
+  for(const s of w){const k=l?l+" "+s:s;
+    if(ctx.measureText(k).width>mw&&l){ctx.fillText(l,x,y+n*lh);n++;l=s;if(n>=max)return}else l=k}
+  ctx.fillText(l,x,y+n*lh);
+}
+function drawCard(ctx,c,img,x,y,w,hh){
+  const o=c.orient==="l"?"l":"p",fw=w,fh=o==="l"?w*CW/CH:hh,fy=y+(hh-fh)/2;
+  ctx.save();ctx.beginPath();ctx.rect(x,fy,fw,fh);ctx.clip();
+  if(img){
+    if(c.fit&&c.fit.r){const L=lay(c.fit,o);ctx.drawImage(img,x+L.left/100*fw,fy+L.top/100*fh,L.w/100*fw,L.h/100*fh)}
+    else{const s=Math.max(fw/img.width,fh/img.height),iw=img.width*s,ih=img.height*s;ctx.drawImage(img,x+(fw-iw)/2,fy+(fh-ih)/2,iw,ih)}
+  }else{
+    ctx.fillStyle=c.nation?col(c.nation):"#556";ctx.fillRect(x,fy,fw,fh);
+    ctx.fillStyle="#fff";ctx.textBaseline="top";ctx.font='700 16px "Barlow Condensed",Arial,sans-serif';
+    wrapText(ctx,c.name,x+8,fy+8,fw-16,18,6);
+  }
+  ctx.restore();ctx.strokeStyle="rgba(0,0,0,.35)";ctx.lineWidth=1;ctx.strokeRect(x+.5,fy+.5,fw-1,fh-1);
+}
+async function makeImage(){
+  const e=deckEntries(),W=120,H=Math.round(W*CH/CW),G=10,M=30,COLS=10,CWID=M*2+COLS*W+(COLS-1)*G;
+  try{await document.fonts.load('700 40px "Barlow Condensed"')}catch(x){}
+  const imgs=await Promise.all(e.map(({items})=>Promise.all(items.map(({c})=>loadCard(c)))));
+  const plan=e.map(({items},zi)=>{let col=0,row=0;
+    const pos=items.map(({c},i)=>{const im=imgs[zi][i],L=c.orient==="l"||(!c.orient&&!!im&&im.width>im.height*1.05),sp=L?2:1;
+      if(col+sp>COLS){col=0;row++}
+      const r={col,row,L,sp};col+=sp;return r});
+    return{pos,rows:pos.length?pos[pos.length-1].row+1:0}});
+  let ht=M+70;plan.forEach(pl=>{ht+=50+pl.rows*(H+G)+10});ht+=M;
+  const cv=document.createElement("canvas");cv.width=CWID;cv.height=ht;
+  const ctx=cv.getContext("2d");
+  ctx.fillStyle="#f4f6fb";ctx.fillRect(0,0,CWID,ht);
+  ctx.textBaseline="alphabetic";ctx.fillStyle="#c8102e";ctx.fillRect(M,M,6,44);
+  ctx.fillStyle="#14213d";ctx.font='700 44px "Barlow Condensed",Arial,sans-serif';ctx.fillText(deck.name||"My deck",M+18,M+40);
+  ctx.font='600 20px Barlow,Arial,sans-serif';ctx.textAlign="right";ctx.fillText(dtotal()+" cards",CWID-M,M+38);ctx.textAlign="left";
+  let y=M+70;
+  e.forEach(({z,items},zi)=>{
+    ctx.fillStyle="#c8102e";ctx.fillRect(M,y+4,6,28);
+    ctx.fillStyle="#14213d";ctx.font='700 28px "Barlow Condensed",Arial,sans-serif';ctx.textBaseline="alphabetic";
+    ctx.fillText(z.name+" ("+zcount(z.id)+(z.size?"/"+z.size:"")+")",M+16,y+28);
+    y+=50;
+    items.forEach(({c,n},i)=>{
+      const q=plan[zi].pos[i],x=M+q.col*(W+G),yy=y+q.row*(H+G),w=q.sp*W+(q.sp-1)*G;
+      drawCard(ctx,q.L?{...c,orient:"l"}:c,imgs[zi][i],x,yy,w,H);
+      const bx=x+w-18,by=yy+18;
+      ctx.fillStyle="#c8102e";ctx.beginPath();ctx.arc(bx,by,15,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle="#fff";ctx.font='700 16px Barlow,Arial,sans-serif';ctx.textAlign="center";ctx.textBaseline="middle";
+      ctx.fillText("\u00d7"+n,bx,by+1);ctx.textAlign="left";ctx.textBaseline="alphabetic";
+    });
+    y+=plan[zi].rows*(H+G)+10;
+  });
+  return{url:cv.toDataURL("image/png"),missing:imgs.flat().filter(im=>!im).length};
+}
+function printSheet(nums){
+  const e=deckEntries();
+  const body=e.map(({z,items})=>`<h2>${h(z.name)} \u2013 ${zcount(z.id)}${z.size?"/"+z.size:""}</h2><table>${items.map(({c,n})=>
+    `<tr><td>${n}</td><td>${h(c.name)}</td><td>${nums?h(c.no||""):""}</td><td>${h(c.grade!==""&&c.grade!==undefined?"G"+c.grade:"")}</td></tr>`).join("")}</table>`).join("");
+  const doc=`<!doctype html><html><head><meta charset="utf-8"><title>${h(deck.name||"Deck")}</title><style>
+body{font:14px Arial,sans-serif;margin:24px;color:#000}h1{font-size:24px;margin:0 0 4px}.sub{color:#555;margin:0 0 14px}
+.meta{display:flex;gap:28px;margin:12px 0 10px}.meta span{border-bottom:1px solid #000;min-width:200px;display:inline-block;padding:2px 0}
+h2{font-size:15px;background:#eee;padding:4px 8px;margin:16px 0 4px;break-after:avoid}
+table{width:100%;border-collapse:collapse}tr{break-inside:avoid}td{border-bottom:1px solid #ccc;padding:3px 8px}
+td:first-child{width:40px;text-align:right;font-weight:bold}td:nth-child(3){width:90px;color:#444}td:nth-child(4){width:50px;color:#444}
+
+
+
+</style></head><body><h1>${h(deck.name||"My deck")}</h1><p class="sub">${dtotal()} cards</p>
+<div class="meta"><div>Player: <span></span></div><div>ID: <span></span></div></div>${body}</body></html>`;
+  const f=document.createElement("iframe");f.style.cssText="position:fixed;right:0;bottom:0;width:0;height:0;border:0";
+  f.onload=()=>{f.contentWindow.focus();f.contentWindow.print();setTimeout(()=>f.remove(),60000)};
+  f.srcdoc=doc;document.body.appendChild(f);
+}
+function exportDeck(){
+  if(!dtotal())return alert("Add some cards first.");
+  $("edBody").innerHTML=`<h3>Export deck</h3>
+   <label style="display:flex;gap:8px;align-items:center;margin-bottom:10px"><input type="checkbox" id="xn" checked style="width:auto"> Include card numbers</label>
+   <textarea id="bk" spellcheck="false" readonly></textarea>
+   <div class="actions" style="margin-top:12px"><button class="btn sm primary" id="xc">Copy text</button><button class="btn sm" id="xt">Download .txt</button><button class="btn sm" id="xi">Make image (PNG)</button><button class="btn sm" id="xp">Print / Save as PDF</button><button class="btn sm" id="cn">Close</button></div>
+   <div id="xo" style="margin-top:14px"></div>`;
+  const fill=()=>$("bk").value=deckText($("xn").checked);fill();$("xn").onchange=fill;
+  $("xc").onclick=async()=>{$("bk").select();try{await navigator.clipboard.writeText($("bk").value)}catch(x){document.execCommand("copy")}$("xc").textContent="Copied"};
+  $("xt").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([$("bk").value],{type:"text/plain;charset=utf-8"}));a.download=fname()+".txt";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)};
+  $("xp").onclick=()=>printSheet($("xn").checked);
+  $("xi").onclick=async()=>{
+    $("xo").innerHTML='<p class="dto">Making image\u2026</p>';
+    try{
+      const r=await makeImage();
+      $("xo").innerHTML=`<img src="${r.url}" alt="Deck image" style="max-width:100%;border:1px solid var(--line);border-radius:4px">
+        <div class="actions"><a class="btn sm primary" href="${r.url}" download="${h(fname())}.png" style="text-decoration:none">Download PNG</a></div>
+        <p class="dto">On a phone, you can also press and hold the image to save it.${r.missing?" "+r.missing+" card(s) have no usable picture, so their name is shown instead.":""}</p>`;
+    }catch(x){$("xo").innerHTML='<p class="chk"><span class="bad">Could not make the image: '+h(x.message)+'</span></p>'}
+  };
+  $("cn").onclick=()=>$("ed").close();$("ed").showModal();
+}
+
+$("dexp").onclick=guard(exportDeck);
+
+/* ---------- Centered notices ---------- */
+let ntTimer;
+function notice(kind,title,msg,o={}){
+  const ic={ok:"✅",bad:"⚠️",full:"🚫",ask:"❓"}[kind]||"ℹ️",btns=o.btns||(o.auto?[]:[["OK",null,true]]);
+  const nt=$("nt");clearTimeout(ntTimer);nt.className=kind==="ok"||kind==="ask"?"ok":"bad";
+  $("ntBody").innerHTML=`<div class="ic" aria-hidden="true">${ic}</div><h3>${h(title)}</h3>${msg?`<p>${h(msg)}</p>`:""}`+
+    (o.list&&o.list.length?`<div class="chk"><ul>${o.list.map(i=>`<li class="bad">${h(i)}</li>`).join("")}</ul></div>`:"")+
+    (btns.length?`<div class="actions">${btns.map((b,i)=>`<button class="btn ${b[2]?"primary":""}" data-b="${i}">${h(b[0])}</button>`).join("")}</div>`:"");
+  $("ntBody").onclick=e=>{const b=e.target.closest("[data-b]");
+    if(b){nt.close();const f=btns[b.dataset.b][1];if(f)f()}else if(o.auto)nt.close()};
+  nt.onclick=e=>{if(e.target===nt)nt.close()};
+  if(!nt.open)nt.showModal();
+  if(o.auto)ntTimer=setTimeout(()=>{if(nt.open)nt.close()},o.auto);
+  if(kind!=="ok"&&kind!=="ask")try{navigator.vibrate&&navigator.vibrate(120)}catch(x){}
+}
+$("nt").addEventListener("close",()=>clearTimeout(ntTimer));
+
+/* Ask before sharing/exporting an incomplete deck */
+function guard(fn){return function(){
+  if(!dtotal()){return fn()}
+  trigCheck();
+  if(!lastIssues.length)return fn();
+  notice("bad","Deck is not complete",lastIssues.length+" thing"+(lastIssues.length>1?"s":"")+" to fix before you register it:",
+    {list:lastIssues,btns:[["Keep editing",null,true],["Continue anyway",()=>fn()]]});
+}}
+$("dfin").onclick=()=>{
+  if(!dtotal())return notice("bad","Deck is empty","Tap cards on the left to add them first.",{auto:2200});
+  trigCheck();
+  if(lastIssues.length)notice("bad","Deck is not complete",lastIssues.length+" thing"+(lastIssues.length>1?"s":"")+" left to fix:",{list:lastIssues});
+  else notice("ok","Deck is complete! 🎉","Every zone and trigger rule is satisfied.",{auto:2600});
+};
+
+/* ---------- Pack Opener / Gacha ---------- */
+
+function renderPackCount(){$("pkLifetime").textContent="เปิดแล้ว "+(Number(PACKS_OPENED)||0)+" ซอง"}
+function collectionAdd(cards){const prod=PRODUCTS.find(p=>p.id===GA.pid),name=prod?.name||"";
+ if(Cloud?.configured&&Cloud.user){const pending=Cloud.recordPack(GA.pid,cards.map(r=>r?.c).filter(Boolean)).then(async packId=>{
+   cards.forEach((r,i)=>{if(r){r.packOpenId=packId;r.slotNumber=i+1}});
+   try{
+     const state=await Cloud.loadGachaState();
+     PITY=Number(state.pity_count)||0;
+     PACKS_OPENED=Number(state.packs_opened)||0;
+     COLLECTION=await Cloud.loadCollection();
+     pkPityUI();renderPackCount();renderCollection();
+   }catch(reloadError){
+     console.error("gacha write succeeded but reload failed",reloadError);
+     notice("ask","สุ่มบันทึกแล้ว ✓","ผลสุ่มเข้าบัญชีแล้ว แต่โหลดคลังกลับมาแสดงใหม่ไม่สำเร็จ: "+String(reloadError?.message||reloadError),{auto:8000});
+   }
+   return packId;
+ }).catch(e=>{console.error("gacha save failed",e);notice("bad","บันทึกผลซองไม่สำเร็จ",String(e?.message||e),{auto:8000});return null});GA.pendingWrites.push(pending);return pending}
+ cards.forEach(r=>{const c=r?.c;if(!c)return;const id=c.id,v=COLLECTION[id]||{id,card:{...c},count:0,productName:name};v.card={...c};v.count=(+v.count||0)+1;v.productName=name;COLLECTION[id]=v});PACKS_OPENED++;try{localStorage.setItem(COLKEY,JSON.stringify(COLLECTION));localStorage.setItem("cardlist-packs-opened",String(PACKS_OPENED))}catch(e){}renderPackCount();renderCollection();return Promise.resolve(null)}
+function renderCollection(){
+ const box=$("collectionCards");if(!box)return;
+ const q=$("collectionSearch").value.trim().toLowerCase(),sort=$("collectionSort").value;
+ let a=Object.values(COLLECTION).filter(v=>v?.card&&v.count>0&&(!q||(String(v.card.name||"")+" "+String(v.card.no||"")+" "+String(v.card.rarity||"")+" "+String(v.productName||"")).toLowerCase().includes(q)));
+ a.sort((x,y)=>sort==="name"?String(x.card.name).localeCompare(String(y.card.name)):sort==="count-desc"?(y.count-x.count||tierOf(y.card)-tierOf(x.card)):sort==="rarity-asc"?(tierOf(x.card)-tierOf(y.card)||String(x.card.name).localeCompare(String(y.card.name))):(tierOf(y.card)-tierOf(x.card)||String(x.card.name).localeCompare(String(y.card.name))));
+ const all=Object.values(COLLECTION).filter(v=>v?.card&&v.count>0),total=all.reduce((n,v)=>n+(+v.count||0),0);
+ $("collectionSummary").textContent=total+" ใบ · "+all.length+" แบบ";
+ box.innerHTML=a.map(v=>`<button type="button" class="collectionCard" data-collection-card="${h(v.id||v.card.id)}" aria-label="ดูรายละเอียด ${h(v.card.name||"การ์ด")}">${art(v.card,1)}<span class="colRarity">${h(v.card.rarity||"—")}</span><span class="colQty">×${v.count}</span><b>${h(v.card.name||"การ์ด")}</b><small>${h(v.card.no||"")}${v.productName?" · "+h(v.productName):""}</small></button>`).join("")||'<p class="dto">ยังไม่มีการ์ดในคลัง · เปิดซองเพื่อเริ่มสะสม</p>';
+}
+$("collectionSearch").oninput=renderCollection;$("collectionSort").onchange=renderCollection;
+$("collectionCards").onclick=e=>{const b=e.target.closest("[data-collection-card]");if(!b)return;const v=COLLECTION[b.dataset.collectionCard];if(v?.card)openLB({...v.card,pname:v.productName,collectionCount:v.count},{readonly:true,source:"collection"})};
+const PKW={},pkd=r=>{r=String(r).toUpperCase();return({C:60,N:60,U:40,R:25,RR:12,RRR:5,SR:3,PR:8})[r]??(r in FOILT?1.5:5)},pkw=r=>r in PKW?PKW[r]:pkd(r);
+try{Object.assign(PKW,JSON.parse(localStorage.getItem("cardlist-pkw")||"{}"))}catch(e){}
+const pkSaveW=()=>{const p=PRODUCTS.find(x=>x.id===$("pkP").value);if(p){p.gachaWeights={...PKW};save()}else{try{localStorage.setItem("cardlist-pkw",JSON.stringify(PKW))}catch(e){}}};
+const PITYKEY="cardlist-pity",PITYMAX=200,PITYMIN=2,PACKSIZE=7;
+let PITY=0,PITYRST=true,PACKS_OPENED=0;
+try{PITY=Math.max(0,Math.min(PITYMAX,parseInt(localStorage.getItem(PITYKEY))||0))}catch(e){}
+try{PITYRST=localStorage.getItem(PITYKEY+"-reset")!=="0"}catch(e){}
+try{PACKS_OPENED=Number(localStorage.getItem("cardlist-packs-opened")||0)}catch(e){}
+const pitySave=()=>{if(Cloud?.configured)return;try{localStorage.setItem(PITYKEY,String(PITY));localStorage.setItem(PITYKEY+"-reset",PITYRST?"1":"0")}catch(e){}};
+const tierOf=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILT?FOILT[r]:-1};
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+/* สุ่มจากข้อมูลสด ๆ ทุกครั้ง การ์ด/สินค้าที่เพิ่งเพิ่มจึงเข้าสุ่มทันที */
+const pkPool=()=>{const p=PRODUCTS.find(x=>x.id===$("pkP").value);return p&&Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false):[]};
+
+function pkPityUI(){
+  const pc=Math.round(PITY/PITYMAX*100),full=PITY>=PITYMAX;
+  $("pkPityTxt").textContent=PITY+"/"+PITYMAX+(full?" · พร้อมการันตี!":"");
+  $("pkPityBar").style.width=pc+"%";$("pkPity").classList.toggle("full",full);
+  $("gPity").textContent=PITY+"/"+PITYMAX;$("gPityBar").style.width=pc+"%";renderPackCount();
+}
+function pkRates(){
+  const product=PRODUCTS.find(x=>x.id===$("pkP").value);Object.keys(PKW).forEach(k=>delete PKW[k]);Object.assign(PKW,product?.gachaWeights||{});
+  const pool=pkPool(),rs=[...new Set(pool.map(c=>String(c.rarity||"").trim()))],total=rs.reduce((n,r)=>n+Math.max(0,pkw(r)),0);
+  $("pkR").innerHTML=rs.map(r=>`<div><label>${h(r||"(ไม่ระบุ)")} <small>${pool.filter(c=>String(c.rarity||"").trim()===r).length} ใบ · ${total?((Math.max(0,pkw(r))/total)*100).toFixed(2):"0.00"}%</small></label><input type="number" min="0" step="0.5" data-r="${h(r)}" value="${pkw(r)}"></div>`).join("")||'<p class="dto">สินค้านี้ยังไม่มีการ์ดที่เปิดสุ่มได้</p>';
+  const hi=[...new Set(pool.filter(c=>tierOf(c)>=PITYMIN).map(c=>c.rarity||"(ไม่ระบุ)"))];
+  $("pkTierNote").textContent=hi.length?"การ์ดที่ถือว่า “สูงกว่า RRR” ในสินค้านี้: "+hi.join(" / "):"สินค้านี้ยังไม่มีการ์ดระดับสูงกว่า RRR — ถ้า Pity เต็ม จะสุ่มจากระดับสูงสุดที่มีให้แทน";
+}
+function pkFill(){
+  const cur=$("pkP").value;
+  $("pkP").innerHTML=PRODUCTS.map(p=>`<option value="${h(p.id)}">${h(p.name)}${p.cards&&p.cards.length?" ("+p.cards.length+" การ์ด)":" — ยังไม่มีการ์ด"}</option>`).join("")||'<option value="">— ยังไม่มีสินค้า —</option>';
+  if(PRODUCTS.some(p=>p.id===cur))$("pkP").value=cur;
+  pkRates();pkPityUI();
+}
+/* สุ่ม 1 ใบตามน้ำหนัก (W) จากกองที่ให้ */
+function pkPickFrom(src){
+  if(!src.length)return null;
+  const by={};src.forEach(c=>{const r=String(c.rarity||"").trim();(by[r]=by[r]||[]).push(c)});
+  const ks=Object.keys(by);let tot=ks.reduce((a,k)=>a+Math.max(0,pkw(k)),0),k;
+  if(tot<=0)k=rnd(ks);else{let x=Math.random()*tot;k=ks.find(q=>(x-=Math.max(0,pkw(q)))<0)||ks[ks.length-1]}
+  return rnd(by[k]);
+}
+/* สุ่ม 1 ใบ พร้อมคิด Pity: เต็ม 200 → การันตีระดับสูงกว่า RRR */
+function pkOne(pool,used){
+  const free=pool.filter(c=>!used.has(c.id)),src=free.length?free:pool;
+  let c=null;
+  if(PITY>=PITYMAX){
+    const hi=src.filter(x=>tierOf(x)>=PITYMIN);
+    const hiAll=pool.filter(x=>tierOf(x)>=PITYMIN);
+    c=pkPickFrom(hi.length?hi:(hiAll.length?hiAll:src));
+  }else c=pkPickFrom(src);
+  if(!c)return null;
+  const guar=tierOf(c)>=PITYMIN;
+  if(guar&&(PITY>=PITYMAX||PITYRST))PITY=0;else PITY=Math.min(PITYMAX,PITY+1);
+  return{c,guar,full:PITY===0&&guar};
+}
+/* 1 ซอง = 7 ใบ (ไม่ซ้ำกันในซอง ถ้าการ์ดในสินค้ามีพอ) */
+function pkPack(pool){
+  const high=pool.filter(c=>tierOf(c)>=1),allHigh=high.length>=PACKSIZE&&Math.random()<0.002;
+  const src=allHigh?high:pool,used=new Set(),out=[];
+  for(let i=0;i<PACKSIZE;i++){const r=pkOne(src,used);if(!r)break;used.add(r.c.id);out.push(r)}
+  out.allHigh=allHigh&&out.length===PACKSIZE;return out
+}
+
+/* ---------- หน้าจอเปิดซอง ---------- */
+const GA={open:false,pid:"",qty:0,packs:[],pi:0,cards:[],rev:0,all:[],pendingWrites:[]};
+let tearP=0,tg=null,autoT=0,SOUND_ON=true,audioCtx=null;
+try{SOUND_ON=localStorage.getItem("cardlist-gacha-sound")!=="0"}catch(e){}
+function soundInit(){if(!SOUND_ON)return null;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;try{audioCtx=audioCtx||new AC();if(audioCtx.state==="suspended")audioCtx.resume();return audioCtx}catch(e){return null}}
+function tone(ctx,freq,start,dur,gain=.045,type="sine",endFreq=0){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(freq,start);if(endFreq)o.frequency.exponentialRampToValueAtTime(Math.max(20,endFreq),start+dur);g.gain.setValueAtTime(.0001,start);g.gain.exponentialRampToValueAtTime(gain,start+.012);g.gain.exponentialRampToValueAtTime(.0001,start+dur);o.connect(g);g.connect(ctx.destination);o.start(start);o.stop(start+dur+.02)}
+function noisePop(ctx,start,dur,gain=.035,cut=1800){const n=Math.max(1,Math.floor(ctx.sampleRate*dur)),b=ctx.createBuffer(1,n,ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);const src=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();src.buffer=b;f.type="lowpass";f.frequency.value=cut;g.gain.setValueAtTime(gain,start);g.gain.exponentialRampToValueAtTime(.0001,start+dur);src.connect(f);f.connect(g);g.connect(ctx.destination);src.start(start);src.stop(start+dur)}
+function gachaSound(kind,rare=false){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;if(kind==="tear"){noisePop(ctx,t,.24,.07,1500);tone(ctx,430,t,.19,.035,"triangle",170);tone(ctx,110,t+.04,.16,.045,"sine",58)}else if(kind==="flip"){noisePop(ctx,t,.055,.025,2600);tone(ctx,rare?1050:690,t+.015,.11,rare?.065:.035,"triangle",rare?1680:920);if(rare)[1320,1760,2200].forEach((f,i)=>tone(ctx,f,t+.06+i*.075,.42,.035,"sine",f*1.04))}}
+const trackW=()=>$("pkTrack").getBoundingClientRect().width||1;
+
+function tearSet(p){
+  tearP=Math.max(0,Math.min(1,p));
+  $("pkTrack").style.setProperty("--p",String(tearP));
+  $("pkFill").style.width=(tearP*100)+"%";
+  const cl=$("pkClip");
+  cl.style.transform=`translate(${(-tearP*34).toFixed(2)}%,${(-tearP*52).toFixed(2)}%) rotate(${(-tearP*26).toFixed(2)}deg)`;
+  cl.style.opacity=String(1-tearP*.45);
+  $("pkTear").style.opacity=String(.9-tearP*.75);
+  $("pkHint").textContent=tearP>=.85?"ปล่อยเพื่อปลดผนึก!":(tearP>.05?"ร่ายเวทต่ออีกนิด…":"ลากผนึกเวทไปทางขวาเพื่อเปิดซอง");
+}
+function tearDone(){
+  clearInterval(autoT);
+  if($("pkWrap").classList.contains("torn"))return;
+  gachaSound("tear");
+  $("pkWrap").classList.add("torn");
+  $("gFoot").innerHTML="";
+  setTimeout(pkShowCards,780);
+}
+function autoTear(){clearInterval(autoT);let p=tearP;autoT=setInterval(()=>{p=Math.min(1,p+.07);tearSet(p);if(p>=1){clearInterval(autoT);tearDone()}},26)}
+
+function pkOpenStart(){
+  const pool=pkPool();
+  if(!pool.length){$("pkMsg").textContent="";return notice("bad","ยังไม่มีการ์ดให้สุ่ม","สินค้านี้ยังไม่มีการ์ด เพิ่มการ์ดในหน้าสินค้าก่อนนะ",{auto:2800})}
+  GA.pid=$("pkP").value;
+  GA.qty=Math.max(1,Math.min(5,parseInt($("pkQty").value)||1));$("pkQty").value=GA.qty;
+  GA.pool=pool;GA.packs=[];GA.all=[];GA.pendingWrites=[];GA.recordedPI=-1;
+  GA.pi=0;pitySave();pkSaveW();
+  const p=PRODUCTS.find(x=>x.id===GA.pid);
+  $("gTitle").textContent="เปิดซอง · "+(p?p.name:"");
+  $("pkMsg").textContent="เปิด "+GA.qty+" ซอง · "+(GA.qty*PACKSIZE)+" ใบ · Pity "+PITY+"/"+PITYMAX;
+  if(!$("gacha").open)$("gacha").showModal();
+  GA.open=true;
+  pkShowPack();
+}
+function pkShowPack(){
+  const p=PRODUCTS.find(x=>x.id===GA.pid);
+  let inner;
+  const packW=p&&p.packMode==="custom"?Math.max(35,Math.min(100,parseInt(p.packW)||82)):100;
+  const packH=p&&p.packMode==="custom"?Math.max(35,Math.min(100,parseInt(p.packH)||92)):100;
+  const packX=p&&Number.isFinite(+p.packX)?Math.max(0,Math.min(100,+p.packX)):50,packY=p&&Number.isFinite(+p.packY)?Math.max(0,Math.min(100,+p.packY)):50;
+  const packStyle=`style="width:${packW}%;height:${packH}%;object-fit:cover;object-position:${packX}% ${packY}%"`;
+  if(p&&p.cover){
+    inner=`<div class="pkbgg" style="background-image:url(&quot;${h(p.cover)}&quot;)"></div><img class="pkfg" ${packStyle} src="${h(p.cover)}" alt="รูปซอง ${h(p.name)}">`;
+  }else inner=`<div class="ph pkdefault" style="background-color:${p?tcol(p.type):"#243a68"}"><span class="pktag">${h(p&&p.type?p.type:"Booster Pack")}</span><b>${h(p?p.name:"")}</b>${p&&p.year?`<span class="pktype">${h(p.year)}</span>`:""}</div>`;
+  $("pkImg").innerHTML=inner;$("pkImg2").innerHTML=inner;
+  $("pkWrap").classList.remove("torn");
+  const cl=$("pkClip");cl.style.transition="none";cl.style.transform="";cl.style.opacity="";tearP=0;
+  requestAnimationFrame(()=>{cl.style.transition="";tearSet(0)});
+  clearInterval(autoT);
+  $("gStagePack").hidden=false;$("gStageCards").hidden=true;
+  $("gSub").textContent="ซองที่ "+(GA.pi+1)+" / "+GA.qty+" · 1 ซอง = "+PACKSIZE+" ใบ";
+  $("gFoot").innerHTML='<span class="gfootmsg">ลากปุ่ม ⇢ ไปทางขวา หรือปัด/แตะที่ตัวซอง เพื่อแกะซอง</span>'+pkSkipHTML();
+  pkPityUI();
+}
+function pkShowCards(){
+  let pack=GA.packs[GA.pi];
+  if(!pack){pack=pkPack(GA.pool||pkPool());GA.packs[GA.pi]=pack}
+  GA.cards=pack||[];GA.rev=0;pitySave();if(GA.recordedPI!==GA.pi){GA.all.push(...GA.cards);collectionAdd(GA.cards);GA.recordedPI=GA.pi}
+  $("gStagePack").hidden=true;$("gStageCards").hidden=false;
+  const cg=$("gCards");cg.className="cg";
+  $("gSub").textContent="ซองที่ "+(GA.pi+1)+" / "+GA.qty+" · แตะการ์ดเพื่อหงาย"+(pack.allHigh?" · ALL-HIGH PACK 0.2%":"");
+  cg.innerHTML=GA.cards.map((r,i)=>{
+    const c=r.c;
+    const rrr=String(c.rarity||"").trim().toUpperCase()==="RRR";
+    return `<div class="pkCard${rrr?" rrr-gold":""}" data-i="${i}" role="button" tabindex="0" aria-label="การ์ดที่ ${i+1}${rrr?" · RRR สีทอง":""}" style="--d:${i*70}ms">
+      <div class="pkin"><div class="pkfb"><div class="art back"></div></div><div class="pkff">${art(c,1)}${rrr?'<span class="pkRRRglint" aria-hidden="true"></span>':""}</div></div>
+      <span class="pkr2">${h(c.rarity||"—")}</span></div>`}).join("");
+  $("gFoot").innerHTML=`<button class="btn sm" data-g="all">หงายทั้งหมด</button><span class="gfootmsg">หงายแล้ว 0/${GA.cards.length}</span>`+pkSkipHTML();
+  pkPityUI();
+}
+function pkFlip(i){
+  const el=$("gCards").querySelector('.pkCard[data-i="'+i+'"]');
+  if(!el||el.classList.contains("open"))return;
+  el.classList.add("open");
+  const r=GA.cards[i],rare=!!(r&&String(r.c.rarity||"").trim().toUpperCase()==="RRR");
+  gachaSound("flip",rare);
+  if(r&&r.guar)el.classList.add("guar");
+  GA.rev++;
+  if(GA.rev>=GA.cards.length)pkPackDone();
+  else{
+    const m=$("gFoot").querySelector(".gfootmsg");
+    if(m)m.textContent="หงายแล้ว "+GA.rev+"/"+GA.cards.length;
+  }
+}
+function pkRevealAll(){
+  [...$("gCards").querySelectorAll(".pkCard:not(.open)")].forEach((el,k)=>setTimeout(()=>pkFlip(+el.dataset.i),k*90));
+}
+function pkSkipHTML(){return GA.qty>1?'<button class="btn sm" data-g="skip">Skip · ข้ามซองที่เหลือ</button>':""}
+function pkSkipAll(){if(!GA.open||GA.qty<2)return;clearInterval(autoT);if(!$("gStagePack").hidden)pkShowCards();$("gCards").querySelectorAll(".pkCard").forEach(e=>e.classList.add("open"));GA.rev=GA.cards.length;for(let i=GA.pi+1;i<GA.qty;i++){GA.pi=i;const pack=pkPack(GA.pool||pkPool());GA.packs[i]=pack;GA.cards=pack;GA.rev=pack.length;GA.all.push(...pack);collectionAdd(pack);GA.recordedPI=i}GA.pi=GA.qty-1;pitySave();pkFinish()}
+function pkPackDone(){
+  const more=GA.pi<GA.qty-1;
+  const hi=GA.cards.filter(r=>tierOf(r.c)>=PITYMIN);
+  $("gFoot").innerHTML=
+    `<span class="gfootmsg">${hi.length?"✨ ได้การ์ดระดับสูง "+hi.length+" ใบ · ":""}Pity ${PITY}/${PITYMAX}</span>`+
+    (more?`<button class="btn primary" data-g="next">เปิดซองถัดไป (${GA.pi+2}/${GA.qty}) ›</button>${pkSkipHTML()}`:`<button class="btn primary" data-g="done">ดูสรุปทั้งหมด</button>`);
+  pkPityUI();
+}
+async function pkFinish(){
+  await Promise.all(GA.pendingWrites||[]);
+  const cnt={};GA.all.forEach(r=>{const k=r.c.id;(cnt[k]=cnt[k]||{c:r.c,n:0});cnt[k].n++});
+  const list=Object.values(cnt).sort((a,b)=>(tierOf(b.c)-tierOf(a.c))||num(a.c.no,b.c.no)),best=list.length?list[0]:null;
+  $("gStagePack").hidden=true;$("gStageCards").hidden=false;
+  const allHighPacks=GA.packs.filter(p=>p?.allHigh).length;
+  $("gSub").textContent="สรุป: เปิด "+GA.qty+" ซอง · ได้ "+GA.all.length+" ใบ"+(best?" · สูงสุด "+best.c.rarity:"")+(allHighPacks?" · ALL-HIGH 0.2% ×"+allHighPacks:"");
+  const el=$("gCards");el.className="gsum";
+  el.innerHTML=list.map(({c,n})=>{const pull=GA.all.find(r=>r.c.id===c.id&&tierOf(r.c)>=1&&r.packOpenId&&r.slotNumber);return `<div class="pks" data-id="${h(c.id)}">${art(c,1)}<span class="pkr2">${h(c.rarity||"—")}${n>1?" ×"+n:""}</span>${Cloud?.configured&&pull?`<button class="btn sm sharePull" data-share-pull="${h(pull.packOpenId)}" data-slot="${pull.slotNumber}">แชร์ลง Feed</button>`:""}</div>`}).join("");
+  $("gFoot").innerHTML=`<button class="btn primary" data-g="again">เปิดอีกครั้ง</button><button class="btn sm" data-g="close">ปิด</button>`;
+  $("pkMsg").textContent="เปิด "+GA.qty+" ซอง · ได้ "+GA.all.length+" ใบ · Pity "+PITY+"/"+PITYMAX;
+  pitySave();pkPityUI();
+}
+function pkClose(){$("gacha").close()}
+
+/* ---------- เหตุการณ์ ---------- */
+$("t5").addEventListener("click",pkFill);
+$("pkP").onchange=pkRates;
+$("pkR").oninput=e=>{const i=e.target.closest("[data-r]");if(i){if(!requireAdmin()){pkRates();return}PKW[i.dataset.r]=Math.max(0,+i.value||0);pkSaveW()}};
+$("pkQty").onchange=()=>{$("pkQty").value=Math.max(1,Math.min(5,parseInt($("pkQty").value)||1))};
+$("pkRst").checked=PITYRST;
+$("pkRst").onchange=async()=>{PITYRST=$("pkRst").checked;pitySave();if(Cloud?.configured)try{await Cloud.setPityReset(PITYRST)}catch(e){alert("Could not save Pity preference: "+e.message)}};
+$("pkReset").onclick=async()=>{if(!confirm("รีเซ็ต Pity กลับเป็น 0/200 ?"))return;PITY=0;pitySave();if(Cloud?.configured)try{await Cloud.resetPity()}catch(e){alert("Could not reset Pity: "+e.message)}pkPityUI();$("pkMsg").textContent="รีเซ็ต Pity แล้ว (0/"+PITYMAX+")"};
+$("pkSound").checked=SOUND_ON;
+$("pkSound").onchange=()=>{SOUND_ON=$("pkSound").checked;try{localStorage.setItem("cardlist-gacha-sound",SOUND_ON?"1":"0")}catch(e){}if(SOUND_ON)soundInit()};
+$("pkGo").onclick=()=>{if(SOUND_ON)soundInit();pkOpenStart()};
+$("gClose").onclick=pkClose;
+$("gacha").addEventListener("close",()=>{GA.open=false;clearInterval(autoT);pkPityUI()});
+
+/* ลากที่แทร็ก */
+$("pkTrack").addEventListener("pointerdown",e=>{
+  tg={id:e.pointerId,mode:"track"};try{$("pkTrack").setPointerCapture(e.pointerId)}catch(x){}
+  tearSet((e.clientX-$("pkTrack").getBoundingClientRect().left)/trackW())});
+$("pkTrack").addEventListener("pointermove",e=>{if(!tg||tg.id!==e.pointerId||tg.mode!=="track")return;
+  tearSet((e.clientX-$("pkTrack").getBoundingClientRect().left)/trackW())});
+$("pkTrack").addEventListener("pointerup",e=>{if(!tg||tg.mode!=="track")return;tg=null;
+  if(tearP>=.85)tearDone();else tearSet(0)});
+$("pkTrack").addEventListener("pointercancel",()=>{if(tg&&tg.mode==="track"){tg=null;tearSet(0)}});
+/* ปัด/แตะที่ตัวซอง */
+$("pkWrap").addEventListener("pointerdown",e=>{tg={id:e.pointerId,mode:"pack",x:e.clientX,p:tearP};try{$("pkWrap").setPointerCapture(e.pointerId)}catch(x){}});
+$("pkWrap").addEventListener("pointermove",e=>{if(!tg||tg.id!==e.pointerId||tg.mode!=="pack")return;
+  tearSet(tg.p+(e.clientX-tg.x)/(trackW()*.9))});
+$("pkWrap").addEventListener("pointerup",e=>{if(!tg||tg.mode!=="pack")return;const moved=Math.abs(e.clientX-tg.x);tg=null;
+  if(moved<10){autoTear();return}
+  if(tearP>=.85)tearDone();else tearSet(0)});
+$("pkWrap").addEventListener("pointercancel",()=>{if(tg&&tg.mode==="pack"){tg=null;tearSet(0)}});
+
+/* การ์ด / ปุ่มท้ายจอ */
+$("gCards").addEventListener("click",async e=>{
+  const share=e.target.closest("[data-share-pull]");if(share){e.stopPropagation();try{await Cloud.shareRarePull(share.dataset.sharePull,Number(share.dataset.slot));share.textContent="แชร์แล้ว ✓";share.disabled=true;notice("ok","แชร์ลง Feed แล้ว","ระบบแชร์เฉพาะการ์ดใบนี้ ไม่เปิดเผยคลังส่วนตัว",{auto:2600})}catch(x){alert("Could not share pull: "+x.message)}return}
+  const s=e.target.closest(".pks");if(s){const c=ALL.find(x=>x.id===s.dataset.id)||GA.all.map(r=>r.c).find(x=>x.id===s.dataset.id);if(c)openLB(c);return}
+  const el=e.target.closest(".pkCard");if(el)pkFlip(+el.dataset.i)});
+$("gCards").addEventListener("keydown",e=>{
+  if(e.key!=="Enter"&&e.key!==" ")return;
+  const el=e.target.closest(".pkCard");if(el){e.preventDefault();pkFlip(+el.dataset.i)}});
+let swipeStartX=0,swipeStartY=0;
+$("gCards").addEventListener("pointerdown",e=>{swipeStartX=e.clientX;swipeStartY=e.clientY;});
+$("gCards").addEventListener("pointerup",e=>{const dx=e.clientX-swipeStartX,dy=e.clientY-swipeStartY;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)){const next=$("gCards").querySelector(".pkCard:not(.open)");if(next)pkFlip(+next.dataset.i);}});
+$("gFoot").addEventListener("click",e=>{
+  const b=e.target.closest("[data-g]");if(!b)return;const a=b.dataset.g;
+  if(a==="all")pkRevealAll();
+  else if(a==="skip")pkSkipAll();
+  else if(a==="next"){GA.pi++;pkShowPack()}
+  else if(a==="done")pkFinish();
+  else if(a==="again"){pkClose();pkOpenStart()}
+  else if(a==="close")pkClose();
+});
+async function renderCraft(){
+  const box=$("craftRecipes"),hist=$("craftHistory");if(!box||!hist)return;
+  if(!Cloud?.configured||!Cloud.user){box.innerHTML='<p class="dto">เข้าสู่ระบบเพื่อดูสูตรคราฟต์ร่วม</p>';hist.innerHTML="";return}
+  box.innerHTML='<p class="dto">กำลังโหลดสูตร…</p>';hist.innerHTML='<p class="dto">กำลังโหลดประวัติ…</p>';
+  try{
+    const [recipes,history]=await Promise.all([Cloud.loadRecipes(),Cloud.loadCraftHistory()]);
+    box.innerHTML=recipes.map(r=>{const target=ALL.find(c=>c.id===r.target_card_id);const owned=(COLLECTION[r.target_card_id]?.count)||0;const mats=r.ingredients.map(i=>{const c=ALL.find(x=>x.id===i.material_card_id);return `${h(c?.name||"การ์ด")}${c?.rarity?" · "+h(c.rarity):""} ×${i.quantity} (มี ${COLLECTION[i.material_card_id]?.count||0})`}).join(" + ");
+      return `<article class="featureCard"><h3>${h(r.title)}</h3><p>${h(r.description||"")}</p><p><b>ได้รับ:</b> ${h(target?.name||"การ์ดเป้าหมาย")}${target?.rarity?" · "+h(target.rarity):""} ×${r.output_quantity}</p><p><b>ใช้:</b> ${mats||"ยังไม่มีวัตถุดิบ"}</p><p class="featureMeta">${r.created_by===Cloud.user.id?"สูตรของคุณ":"สูตรชุมชน"} · มีผลลัพธ์ในคลัง: ${owned}</p><div class="featureActions"><button class="btn primary" data-craft="${h(r.id)}">คราฟต์</button>${r.created_by===Cloud.user.id?`<button class="btn" data-edit-recipe="${h(r.id)}">แก้สูตร</button><button class="btn" data-disable-recipe="${h(r.id)}">ปิดสูตร</button>`:""}</div></article>`}).join("")||'<p class="dto">ยังไม่มีสูตร · ผู้ใช้ที่ล็อกอินสร้างสูตรคราฟต์ได้</p>';
+    hist.innerHTML=history.map(x=>`<article class="featureCard"><b>${h(x.recipe_title_snapshot)}</b><div>ได้รับ ${h(x.card?.name||"การ์ด")} ${x.card?.rarity?"· "+h(x.card.rarity):""} ×${x.output_quantity}</div><small class="featureMeta">${new Date(x.created_at).toLocaleString()}</small></article>`).join("")||'<p class="dto">ยังไม่มีประวัติการคราฟต์</p>';
+  }catch(e){box.innerHTML=`<p class="bad">โหลดสูตรไม่สำเร็จ: ${h(e.message)}</p>`;hist.innerHTML=""}
+}
+function recipeForm(recipe=null){
+  if(!Cloud?.configured||!Cloud.user)return alert("เข้าสู่ระบบก่อนสร้างหรือแก้สูตร");
+  const opts=ALL.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(c=>`<option value="${h(c.id)}">${h(c.name)}${c.no?" · "+h(c.no):""}${c.rarity?" · "+h(c.rarity):""}</option>`).join("");
+  const existing=recipe?.ingredients||[];const isEdit=!!recipe;
+  $("edBody").innerHTML=`<h3>${isEdit?"แก้สูตรคราฟต์":"สร้างสูตรคราฟต์พิเศษ / PR"}</h3><p class="dto">ผู้ใช้ทุกคนที่ล็อกอินเห็นและใช้สูตรได้ แต่แก้ไขสูตรได้เฉพาะผู้สร้าง · วัตถุดิบจะหักจากคลังส่วนตัวเมื่อคราฟต์สำเร็จ</p><div class="grid"><div><label>ชื่อสูตร<input id="recipeTitle" maxlength="100" value="${h(recipe?.title||"")}" required></label></div><div><label>การ์ดเป้าหมาย<select id="recipeTarget"><option value="">เลือกการ์ด</option>${opts}</select></label></div><div><label>คำอธิบาย<input id="recipeDesc" maxlength="2000" value="${h(recipe?.description||"")}" placeholder="เงื่อนไขหรือรายละเอียดเพิ่มเติม"></label></div><div><label>จำนวนการ์ดที่ได้รับ<input id="recipeOutput" type="number" min="1" value="${Number(recipe?.output_quantity)||1}"></label></div></div><h4 class="yr">วัตถุดิบที่ใช้</h4><div class="recipeIngredients" id="recipeIngredients"></div><div class="actions"><button type="button" class="btn" id="recipeAddIngredient">＋ เพิ่มวัตถุดิบ</button><button type="button" class="btn primary" id="recipeSave">บันทึกสูตร</button><button type="button" class="btn" id="recipeCancel">ยกเลิก</button></div>`;
+  $("recipeTarget").value=recipe?.target_card_id||"";
+  const list=$("recipeIngredients");
+  const addRow=(material="",quantity=1)=>{const row=document.createElement("div");row.className="recipeIngredient";row.innerHTML=`<label>การ์ด<select data-material><option value="">เลือกวัตถุดิบ</option>${opts}</select></label><label>จำนวน<input data-quantity type="number" min="1" value="${Math.max(1,Number(quantity)||1)}"></label><button type="button" class="btn sm" data-remove>ลบ</button>`;row.querySelector("[data-material]").value=material;row.querySelector("[data-remove]").onclick=()=>row.remove();list.appendChild(row)};
+  (existing.length?existing:[{material_card_id:"",quantity:1}]).forEach(i=>addRow(i.material_card_id,i.quantity));
+  $("recipeAddIngredient").onclick=()=>addRow();$("recipeCancel").onclick=()=>$("ed").close();
+  $("recipeSave").onclick=async()=>{const title=$("recipeTitle").value.trim(),target=$("recipeTarget").value;if(!title||!target)return alert("กรอกชื่อสูตรและเลือกการ์ดเป้าหมายก่อน");const merged=new Map();for(const row of list.querySelectorAll(".recipeIngredient")){const id=row.querySelector("[data-material]").value,q=Math.max(1,parseInt(row.querySelector("[data-quantity]").value)||1);if(id)merged.set(id,(merged.get(id)||0)+q)}if(!merged.size)return alert("เพิ่มวัตถุดิบอย่างน้อย 1 รายการ");if(merged.has(target))return alert("การ์ดเป้าหมายใช้เป็นวัตถุดิบของตัวเองไม่ได้");const payload={id:recipe?.id,title,description:$("recipeDesc").value.trim(),target_card_id:target,output_quantity:Math.max(1,parseInt($("recipeOutput").value)||1),is_active:true,ingredients:[...merged].map(([material_card_id,quantity])=>({material_card_id,quantity}))};try{await Cloud.saveRecipe(payload);$("ed").close();await renderCraft();notice("ok","บันทึกสูตรแล้ว","สูตรนี้ใช้ร่วมกันได้ใน Community",{auto:2500})}catch(e){alert("บันทึกสูตรไม่สำเร็จ: "+e.message)}};
+  $("ed").showModal();
+}
+async function renderCommunity(){
+  const box=$("communityFeed");if(!box)return;if(!Cloud?.configured||!Cloud.user){box.innerHTML='<p class="dto">เข้าสู่ระบบเพื่อดู Community Feed</p>';return}
+  box.innerHTML='<p class="dto">กำลังโหลด Feed…</p>';
+  try{const [pulls,decks]=await Promise.all([Cloud.loadRareFeed(),Cloud.loadSharedDecks()]);const items=[...pulls.map(x=>({kind:"pull",date:x.created_at,data:x})),...decks.map(x=>({kind:"deck",date:x.shared_at,data:x}))].sort((a,b)=>new Date(b.date)-new Date(a.date));
+    box.innerHTML=items.map(it=>{const d=it.data;if(it.kind==="pull"){const c=ALL.find(x=>x.id===d.card_id);return `<article class="featureCard feedItem">${c?art(c,1):'<div class="feedBadge">'+h(d.rarity_snapshot)+'</div>'}<div><span class="feedBadge">RARE PULL</span><h3>${h(d.display_name_snapshot)} แชร์ผลสุ่ม ${h(d.rarity_snapshot)}</h3><p>${h(d.card_name_snapshot)}${d.product_name_snapshot?" · "+h(d.product_name_snapshot):""}</p><small class="featureMeta">${new Date(d.created_at).toLocaleString()}</small></div></article>`}
+      return `<article class="featureCard"><span class="feedBadge">SHARED DECK</span><h3>${h(d.name)}</h3><p>${h(d.description||"")}</p><p class="featureMeta">โดย ${h(d.owner_name)} · ${new Date(d.shared_at).toLocaleString()}</p><div class="featureActions"><button class="btn primary" data-copy-deck="${h(d.id)}">คัดลอกเข้าเด็คของฉัน</button></div></article>`}).join("")||'<p class="dto">ยังไม่มีโพสต์ · แชร์เด็คหรือกดแชร์ผลสุ่ม RRR+ หลังเปิดซองเพื่อเริ่ม Feed</p>';
+  }catch(e){box.innerHTML=`<p class="bad">โหลด Feed ไม่สำเร็จ: ${h(e.message)}</p>`}
+}
+$("craftNew").onclick=()=>recipeForm();$("craftRecipes").addEventListener("click",async e=>{const craftBtn=e.target.closest("[data-craft]");if(craftBtn){if(!confirm("คราฟต์ตามสูตรนี้และใช้การ์ดจากคลังส่วนตัวหรือไม่?"))return;try{await Cloud.craft(craftBtn.dataset.craft);COLLECTION=await Cloud.loadCollection();renderCollection();await renderCraft();notice("ok","คราฟต์สำเร็จ","การ์ดผลลัพธ์เพิ่มเข้าในคลังส่วนตัวแล้ว",{auto:3000})}catch(x){alert("คราฟต์ไม่สำเร็จ: "+x.message)}return}const edit=e.target.closest("[data-edit-recipe]");if(edit){const r=(await Cloud.loadRecipes()).find(x=>x.id===edit.dataset.editRecipe);if(r)recipeForm(r);return}const disable=e.target.closest("[data-disable-recipe]");if(disable){const r=(await Cloud.loadRecipes()).find(x=>x.id===disable.dataset.disableRecipe);if(r&&confirm("ปิดสูตรนี้หรือไม่?")){try{await Cloud.saveRecipe({...r,is_active:false});await renderCraft()}catch(x){alert(x.message)}}}});
+$("feedRefresh").onclick=renderCommunity;$("communityFeed").addEventListener("click",async e=>{const b=e.target.closest("[data-copy-deck]");if(!b)return;try{deck=fixDeck(await Cloud.copySharedDeck(b.dataset.copyDeck));deckMetaUI();myList("");document.querySelector('#t3').click();renderDeck();notice("ok","คัดลอกเด็คแล้ว","เด็คถูกบันทึกเป็นเด็คส่วนตัวใหม่",{auto:2600})}catch(x){alert("คัดลอกเด็คไม่สำเร็จ: "+x.message)}});
+$("t6").addEventListener("click",renderCraft);$("t7").addEventListener("click",renderCommunity);
+
+let authMode="in";
+function setAuthMode(mode){authMode=mode;const isIn=authMode==="in";$("authTitle").textContent=isIn?"เข้าสู่ระบบ":"สมัครบัญชี";$("authSubmit").textContent=isIn?"เข้าสู่ระบบ":"สมัครบัญชี";$("authMode").textContent=isIn?"สมัครบัญชีใหม่":"มีบัญชีแล้ว? เข้าสู่ระบบ";$("authName").parentElement.hidden=isIn;$("authPassword").autocomplete=isIn?"current-password":"new-password";$("authError").textContent=""}
+function openAuth(){if(!Cloud?.configured){alert("ตั้งค่า SUPABASE_URL และ SUPABASE_ANON_KEY ใน Netlify ก่อนเปิดใช้บัญชี");return}$("authDialog").showModal()}
+$("authBtn").onclick=async()=>{if(Cloud?.configured&&Cloud.user){try{await Cloud.signOut();location.reload()}catch(e){alert(e.message)}}else openAuth()};
+$("gateSignIn").onclick=openAuth;$("authClose").onclick=()=>$("authDialog").close();
+$("authMode").onclick=()=>setAuthMode(authMode==="in"?"up":"in");
+setAuthMode("in");
+$("authForm").onsubmit=async e=>{e.preventDefault();$("authError").textContent="";const email=$("authEmail").value.trim(),password=$("authPassword").value;try{if(authMode==="in"){await Cloud.signIn(email,password);location.reload()}else{const out=await Cloud.signUp(email,password,$("authName").value.trim());if(out.session)location.reload();else{$("authError").textContent="คำขอสมัครถูกส่งแล้ว หากบัญชีนี้ยังไม่ยืนยันอีเมลให้ตรวจกล่องจดหมาย; ถ้าอีเมลนี้มีบัญชีอยู่แล้ว ให้กด ‘มีบัญชีแล้ว? เข้าสู่ระบบ’ แล้วใช้รหัสผ่านเดิม"}}}catch(x){const msg=String(x?.message||x);if(authMode==="up"&&/(already registered|already exists|email_exists|user already registered)/i.test(msg)){setAuthMode("in");$("authError").textContent="อีเมลนี้มีบัญชีอยู่แล้ว ระบบเปลี่ยนเป็นหน้าเข้าสู่ระบบให้แล้ว ให้ใช้รหัสผ่านเดิม"}else if(/invalid login credentials|invalid credentials/i.test(msg)){$("authError").textContent="อีเมลหรือรหัสผ่านไม่ถูกต้อง"}else if(/email_not_confirmed|email not confirmed/i.test(msg)){$("authError").textContent="บัญชีนี้ยังไม่ได้ยืนยันอีเมล ให้ยืนยันอีเมลก่อนเข้าสู่ระบบ หากยังไม่มีอีเมลให้ตรวจ Supabase Auth > Users และการตั้งค่าอีเมล"}else{$("authError").textContent=msg}}};
+(async()=>{await load();if($("cloudGate").hidden){if(!Cloud?.configured){try{FAVS=new Set(JSON.parse(localStorage.getItem(favKey())||"[]"))}catch(e){FAVS=new Set()}}index();search();products();renderPick();renderDeck();pkFill();renderCollection();renderBanGallery();myList("");deckMetaUI();renderPackCount();if(Cloud?.configured){$("pkRst").checked=PITYRST;}}
+})();
+
+/* ---------- Sparkle effect toggle ---------- */
+(() => {
+  const button = document.getElementById("sparkleToggle");
+  if (!button) return;
+
+  const STORAGE_KEY = "vanguard-card-sparkles";
+  const safeGet = () => { try { return localStorage.getItem(STORAGE_KEY) === "off"; } catch (e) { return false; } };
+  const safeSet = (value) => { try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {} };
+  const isOffInitially = safeGet();
+
+  function updateSparkleUI(isOff) {
+    document.body.classList.toggle("sparkles-off", isOff);
+    button.textContent = isOff ? "✦ เปิดเอฟเฟกต์" : "✦ ปิดเอฟเฟกต์";
+    button.setAttribute("aria-pressed", String(!isOff));
+    button.setAttribute("aria-label", isOff ? "เปิดเอฟเฟกต์ระยิบระยับ" : "ปิดเอฟเฟกต์ระยิบระยับ");
+  }
+
+  updateSparkleUI(isOffInitially);
+
+  button.addEventListener("click", () => {
+    const isOff = !document.body.classList.contains("sparkles-off");
+    safeSet(isOff ? "off" : "on");
+    updateSparkleUI(isOff);
+  });
+})();
+</script>
+</body>
+</html>
