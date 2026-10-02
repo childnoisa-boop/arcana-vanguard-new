@@ -421,6 +421,32 @@ section:not(#p5):not(#p1){animation:arcaneIn .18s ease-out}@keyframes arcaneIn{f
 .pkpanel{position:relative;overflow:hidden;border-radius:16px!important;padding:18px!important}.pkpanel:after{content:"";position:absolute;inset:8px;border:1px solid #e7b95f1f;border-radius:12px;pointer-events:none}.pkpanel>*{position:relative;z-index:1}.pkpanel:before{margin-bottom:14px;color:#e7b95fbb}.pkpanel .grid{position:relative}.pkwrap{margin:12px auto 18px;transform:translateZ(0)}.pkwrap:hover{box-shadow:0 0 0 2px #33204d,0 0 0 5px #c78b3c88,0 0 34px #e7b95f44,0 24px 60px #000b,inset 0 0 40px #f4c96b22!important}.pktrack{height:48px}.pktrack .lbl{font-family:Cinzel,serif;letter-spacing:.04em}.gwrap{border-radius:18px!important;overflow:hidden}.ghead{padding:15px 18px!important}.ghead b{letter-spacing:.035em}.gbody{background:radial-gradient(circle at 50% 20%,#2a1e4555,transparent 55%)}.gfoot{border-top-color:#513f6a!important}.pkCard{transition:filter .2s,transform .2s}.pkCard:hover{transform:translateY(-5px) rotate(-1deg);filter:drop-shadow(0 12px 12px #0009)}.pkCard.open:hover{transform:translateY(-4px)}
 @media(max-width:650px){.wrap{padding:12px 10px 38px}.top{padding:14px 13px;min-height:0}.top:after{display:none}.tabs{margin-top:12px;padding-left:2px;padding-right:2px}.tab{padding:10px 12px;font-size:14px}.topActions{gap:6px}.topActions .btn{padding:7px 10px;font-size:12px}.edbar:before{display:none}.pkpanel{padding:13px!important}.pkpanel:after{inset:6px}.gwrap{width:100vw;max-width:100vw}.ghead{padding:12px!important}}
 @media(prefers-reduced-motion:reduce){section:not(#p5):not(#p1),.pkCard:hover,.pkwrap:hover{animation:none;transform:none;transition:none}}
+/* Stronger pack shine and rare foil; RRR aura appears only after the card flips. */
+.pkgloss{background:linear-gradient(112deg,transparent 28%,rgba(255,255,255,.16) 39%,rgba(255,255,255,.95) 48%,rgba(255,221,120,.88) 52%,rgba(255,255,255,.42) 58%,transparent 71%) 0 0/260% 100% no-repeat!important;opacity:.82;mix-blend-mode:screen;filter:drop-shadow(0 0 9px #f4c96b99);animation:pkgl-bright 2.8s ease-in-out infinite!important}
+@keyframes pkgl-bright{0%{background-position:160% 0;opacity:.32}38%{opacity:1}100%{background-position:-65% 0;opacity:.72}}
+.pkglow{inset:-42%;background:radial-gradient(circle,rgba(255,255,255,1),rgba(255,244,189,.95) 18%,rgba(231,185,95,.72) 38%,rgba(124,99,189,.32) 55%,transparent 73%)!important;filter:blur(3px)}
+.pkwrap.torn .pkglow{animation:pkflash-bright 1.12s cubic-bezier(.16,.8,.24,1)!important}
+@keyframes pkflash-bright{0%{opacity:0;transform:scale(.72)}22%{opacity:1;transform:scale(1.02)}48%{opacity:.82;transform:scale(1.12)}100%{opacity:0;transform:scale(1.22)}}
+.pkCard.rrr-gold.open{filter:drop-shadow(0 0 5px #fff3b0) drop-shadow(0 0 13px #f4c96b) drop-shadow(0 0 25px #e5a72d)!important}
+.pkCard.rrr-gold.open .pkff{box-shadow:inset 0 0 0 2px #fff1a8,0 0 10px #fff3b0,0 0 25px #f4c96b,0 0 46px #d79631bb!important}
+.pkCard.guar.open .pkff{box-shadow:inset 0 0 0 3px #fff1a8,0 0 14px #fff3b0,0 0 32px #f4c96b,0 0 52px #d79631cc!important}
+.pkRRRglint{position:absolute;inset:-2px;z-index:5;display:block;border-radius:inherit;overflow:hidden;pointer-events:none;mix-blend-mode:screen;opacity:.96;background:linear-gradient(112deg,transparent 27%,rgba(255,255,255,.14) 40%,rgba(255,255,239,.98) 48%,rgba(255,207,76,.9) 52%,rgba(255,255,255,.38) 58%,transparent 70%) 0 0/260% 100% no-repeat;animation:rrr-sweep 2.15s ease-in-out infinite}
+.pkRRRglint:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 28% 16%,rgba(255,255,218,.78),transparent 36%),radial-gradient(ellipse at 82% 76%,rgba(255,186,44,.45),transparent 44%);animation:rrr-pulse 1.8s ease-in-out infinite alternate}
+@keyframes rrr-sweep{0%{background-position:155% 0;opacity:.42}45%{opacity:1}100%{background-position:-60% 0;opacity:.8}}
+@keyframes rrr-pulse{from{opacity:.35}to{opacity:.95}}
+#p5 .pkCard.rrr-gold.open .pkff{animation:rrrGoldPulseBoost 1.45s ease-in-out infinite alternate!important}
+#p5 .pkCard.rrr-gold.open .pkRRRglint{animation:rrr-sweep 2.15s ease-in-out infinite!important;opacity:1!important}
+#p5 .pkCard.rrr-gold.open .pkRRRglint:after{animation:rrr-pulse 1.8s ease-in-out infinite alternate!important}
+@keyframes rrrGoldPulseBoost{from{filter:drop-shadow(0 0 7px rgba(255,192,38,.75))}to{filter:drop-shadow(0 0 18px rgba(255,245,176,1)) drop-shadow(0 0 28px rgba(231,185,95,.95))}}
+#p5 .pkCard.open .pkff .art.f1::before,#p5 .pkCard.open .pkff .art.f2::before,#p5 .pkCard.open .pkff .art.f3::before,#p5 .pkCard.open .pkff .art.f4::before{filter:drop-shadow(0 0 4px var(--fc)) drop-shadow(0 0 9px var(--fc))!important}
+body.sparkles-off .pkglow{display:none!important}body.sparkles-off .pkCard.rrr-gold.open,body.sparkles-off .pkCard.guar.open{filter:drop-shadow(0 6px 5px #0008)!important}body.sparkles-off .pkCard.rrr-gold.open .pkff,body.sparkles-off .pkCard.guar.open .pkff{box-shadow:inset 0 0 0 2px #f4c96b!important}
+body.sparkles-off #p5 .pkCard.rrr-gold.open .pkff,body.sparkles-off #p5 .pkCard.rrr-gold.open .pkRRRglint,body.sparkles-off #p5 .pkCard.rrr-gold.open .pkRRRglint:after{animation:none!important}
+body.sparkles-off #p5 .pkCard.open .pkff .art.f1::before,body.sparkles-off #p5 .pkCard.open .pkff .art.f2::before,body.sparkles-off #p5 .pkCard.open .pkff .art.f3::before,body.sparkles-off #p5 .pkCard.open .pkff .art.f4::before{filter:none!important}
+/* The sample board is separate from active shared rules and never affects deck checks. */
+#p4 .banGalleryCards{display:block}
+#p4 .banSampleCategory{border-style:dashed;border-color:#b8874c}#p4 .banSampleCategory>summary{background:linear-gradient(110deg,#352547,#17172d 72%);border-left:0}#p4 .banSampleCategory .banSampleNote{padding:12px 14px;margin:12px 0 16px;border:1px dashed #9a7045;border-radius:9px;background:#221d37;color:#e3d3aa;font-size:13px}#p4 .banSampleNote a{color:#f5d892;font-weight:700;text-decoration:underline}
+#p4 .banSampleCategory .banRuleRow{display:block}#p4 .banSampleCategory .banRuleLabel{width:auto;max-width:none;padding:8px 2px;color:#f5d892}#p4 .banSampleGroups{display:grid;gap:10px}.banSampleCard{cursor:default!important;pointer-events:none;flex:0 0 168px!important}.banSampleCard:hover{transform:none!important;box-shadow:0 7px 20px #0003!important;border-color:#493b67!important}.banSampleFace{aspect-ratio:59/86;display:flex;flex-direction:column;justify-content:space-between;gap:10px;padding:12px 9px;border:1px solid #a17c4f;border-radius:6px;background:radial-gradient(circle at 50% 20%,#e7b95f38,transparent 58%),linear-gradient(145deg,#302546,#101426);box-shadow:inset 0 0 22px #e7b95f18,0 0 12px #e7b95f18;text-align:center}.banSampleFace>span{font:600 9px/1.3 Cinzel,serif;letter-spacing:.1em;color:#f4d98d}.banSampleFace>b{font:700 13px/1.2 Barlow,sans-serif;color:#f7f0df;overflow-wrap:anywhere}.banSampleCard>small{display:block;margin-top:7px;color:#aaa4c0;font-size:11px;text-align:center}
+@media(prefers-reduced-motion:reduce){.pkgloss{animation:none!important}#p5 .pkwrap.torn .pkglow,#p5 .pkCard.rrr-gold.open .pkff,#p5 .pkCard.rrr-gold.open .pkRRRglint,#p5 .pkCard.rrr-gold.open .pkRRRglint:after{animation:none!important}}
 </style>
 </head>
 <body>
@@ -1108,9 +1134,29 @@ function renderBanGallery(){
  const togetherRows=rowsBy(BANLIST.filter(r=>r.type==="together"),r=>String(r.group||"กลุ่ม 1").trim(),r=>String(r.group||"กลุ่ม 1").trim());
  const sections=[cat("ban","ห้ามใส่",banRows),cat("zone","ห้ามใส่ในกองการ์ด",zoneRows),cat("limit","จำกัดจำนวนการ์ด",limitRows)];
  sections.push(`<details class="banTypeGroup banCategory"><summary>ห้ามใส่ด้วยกัน<span class="banOpenHint">กดเพื่อเปิดดูกลุ่ม</span></summary><div class="banCategoryBody">${togetherRows.length?togetherRows.map(row=>`<div class="banTogetherGroup"><div class="banTogetherTitle">${h(row.label)}</div>${cardRow(row.cards)}</div>`).join(""):cardRow([])}</div></details>`);
+ const sampleData=[
+  {label:"Choice restriction · เลือกได้ไม่เกิน 1 ชื่อในแต่ละกลุ่ม",groups:[["Rewrite the Star, Vyrgilla","Dragritter, Nirmihn"],["Sugary and Scary Land, Heartluru","Spiritual King of Ignition, Valnout"],["Harvest Elf","Rotting Usurp Dragon"]]},
+  {label:"Restricted to 1 · จำกัดไม่เกิน 1 ใบ",cards:["Magic of Colored Flame, Rerelihm"]},
+  {label:"Restricted to 2 · จำกัดไม่เกิน 2 ใบ",cards:["Vyrgilla, “Rewrite Form: Alfknights”","Summon Crow Mage, Corvoll"]},
+  {label:"Restricted · ห้ามใส่ (0 ใบ)",cards:["Defensing Roar","Aurora Battle Princess, Derii Violet","Bustling Bleachers","Knight of Excision, Diorruing","Magic of Cycling Wind, Parryris","Hymn Brimming With Mercy","Strange Food Preparation","Flowering Sweet Shop"]}
+ ];
+ const sampleMeta="japan jp standard 2026 april april 1 banlist fighter rules";
+ const sampleMatch=(name,label)=>!q||(`${name} ${label} ${sampleMeta}`).toLowerCase().includes(q);
+ const sampleTile=name=>`<div class="banGalleryCard banSampleCard"><div class="banSampleFace"><span>JP STANDARD · SAMPLE</span><b>${h(name)}</b></div><small>ตัวอย่างอ้างอิง · ไม่ใช่กฎจริง</small></div>`;
+ const sampleRows=sampleData.map(item=>{
+  const labelHit=sampleMatch("",item.label);
+  if(item.groups){
+   const groups=item.groups.map((names,i)=>({names,i})).filter(x=>labelHit||!q||x.names.some(n=>sampleMatch(n,item.label)));
+   if(!groups.length)return "";
+   return `<div class="banRuleRow"><div class="banRuleLabel">${h(item.label)}</div><div class="banSampleGroups">${groups.map(x=>`<div class="banTogetherGroup"><div class="banTogetherTitle">กลุ่ม ${x.i+1} · เลือกได้ไม่เกิน 1 ชื่อ</div><div class="banRuleCards">${x.names.map(sampleTile).join("")}</div></div>`).join("")}</div></div>`;
+  }
+  const cards=item.cards.filter(n=>labelHit||!q||sampleMatch(n,item.label));
+  return cards.length?`<div class="banRuleRow"><div class="banRuleLabel">${h(item.label)}</div><div class="banRuleCards">${cards.map(sampleTile).join("")}</div></div>`:"";
+ }).filter(Boolean).join("");
+ const sampleHtml=sampleRows?`<details class="banTypeGroup banCategory banSampleCategory"><summary>ตัวอย่าง Banlist ญี่ปุ่น · Standard · 1 เม.ย. 2026 <span class="banOpenHint">อ้างอิงเท่านั้น</span></summary><div class="banCategoryBody"><p class="banSampleNote">อ้างอิงจากโพสต์ Reddit สำหรับญี่ปุ่น (มีผล 1 เม.ย. 2026) — ตัวอย่างนี้ไม่เพิ่มลง Banlist จริงและไม่เปลี่ยนผลตรวจเด็ค; ประกาศภาษาอังกฤษของ Bushiroad ระบุวันเริ่มใช้ 1 พ.ค. 2026 สำหรับภูมิภาค EN. <a href="https://www.reddit.com/r/cardfightvanguard/comments/1s397l5/jp_banlist_effective_april_1st/" target="_blank" rel="noopener noreferrer">โพสต์ Reddit</a> · <a href="https://en.cf-vanguard.com/information/regarding-the-april-2026-deck-construction-rules-update/" target="_blank" rel="noopener noreferrer">ประกาศ Bushiroad EN</a></p>${sampleRows}</div></details>`:"";
  const shown=new Set([...banRows,...zoneRows,...limitRows,...togetherRows].flatMap(row=>row.cards.map(c=>String(c.id))));
- $("banGalleryCount").textContent=shown.size+" / "+all.length+" ใบ · 4 หมวด";
- box.innerHTML=sections.join("");
+ $("banGalleryCount").textContent=shown.size+" / "+all.length+" ใบ · 4 หมวดจริง (ไม่รวมตัวอย่าง)";
+ box.innerHTML=sections.join("")+sampleHtml;
 }
 $("banGalleryManage").onclick=banForm;
 $("banGallerySearch").oninput=renderBanGallery;
