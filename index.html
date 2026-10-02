@@ -305,9 +305,15 @@ body.sparkles-off .pkRRRglint {
 
 /* Lightweight rare-card effects: no moving masks or hue filters on normal cards. */
 .art.f0>.fx::before,.art.f0>.fx::after,.art.f1>.fx::before,.art.f1>.fx::after,.art.f2>.fx::before,.art.f2>.fx::after,.art.f3>.fx::before,.art.f3>.fx::after,.art.f4>.fx::before,.art.f4>.fx::after{animation-name:twk;animation-duration:5.5s;animation-timing-function:ease-in-out;animation-iteration-count:infinite;filter:none}.art.f2>.fx{animation:none}.art.f3>.fx::after,.art.f4>.fx::after{display:none}
-/* Same movement as the RRR effect for every rarity, while preserving each tier's own colors.
+/* Soften every colored rarity tier so the artwork stays readable.
+   Each tier keeps its own color; only the overlay intensity is reduced. */
+.art.f1::before,.art.f2::before,.art.f3::before,.art.f4::before{opacity:.55}
+.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after{opacity:.18}
+.art.f1>.fx,.art.f2>.fx,.art.f3>.fx,.art.f4>.fx{opacity:.45}
+
+/* Same movement as the RR effect for every rarity, while preserving each tier's own colors.
    In particular, the rainbow tier does not hue-rotate the card artwork. */
-.art.f0>.fx,.art.f1>.fx,.art.f2>.fx,.art.f3>.fx,.art.f4>.fx{--ss:58px;--dr:3.6s;--tw:2s;animation:none!important}
+.art.f0>.fx,.art.f1>.fx,.art.f2>.fx,.art.f3>.fx,.art.f4>.fx{--ss:80px;--dr:6s;--tw:2.6s;animation:none!important}
 .art.f2>.fx{animation:none!important}
 /* Effects off keeps only a static rarity border. */
 body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-off .art.f2::after,body.sparkles-off .art.f3::after,body.sparkles-off .art.f4::after,body.sparkles-off .art>.fx,body.sparkles-off .pkgloss,body.sparkles-off .pkRRRglint{display:none!important}body.sparkles-off .art.f0::before{box-shadow:inset 0 0 0 2px #cfd8e8!important}body.sparkles-off .art.f1::before{box-shadow:inset 0 0 0 2px #ffd54a!important}body.sparkles-off .art.f2::before{background:transparent!important;border:2px solid #d65cff;padding:0!important;-webkit-mask:none!important;mask:none!important}body.sparkles-off .art.f3::before{box-shadow:inset 0 0 0 2px #ff9bd8!important}body.sparkles-off .art.f4::before{box-shadow:inset 0 0 0 2px #ff4d4d,inset 0 0 0 4px rgba(255,211,107,.9)!important}.banTypeGroup{margin:18px 0 24px}.banTypeGroup h3{margin:0 0 9px;padding:8px 12px;border-left:5px solid var(--red);background:var(--card);font:700 22px/1.1 "Barlow Condensed",sans-serif}.banTypeGroup .banGalleryCards{margin-top:0}
