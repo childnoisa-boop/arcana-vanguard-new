@@ -465,9 +465,25 @@ body.sparkles-off #p5 .pkCard.open .pkff .art.f1::before,body.sparkles-off #p5 .
 body.sparkles-off .art{transform:none!important}
 body.sparkles-off .art>img,body.sparkles-off .art>.ph,body.sparkles-off .art>.lf>img,body.sparkles-off .art>.lf>.ph,body.sparkles-off .art>.fx{transform:none!important}
 body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-off .art.f2::after,body.sparkles-off .art.f3::after,body.sparkles-off .art.f4::after{display:none!important}
-@media(max-width:650px){.motionBtn{display:inline-block}}
-@media(prefers-reduced-motion:reduce){.art,.art>img,.art>.ph,.art>.lf>img,.art>.lf>.ph,.art>.fx{transition:none!important;transform:none!important}.art.f0::after,.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after,.art.f2::before{animation:none!important}}
-</style>
+	@media(max-width:650px){.motionBtn{display:inline-block}}
+	@media(prefers-reduced-motion:reduce){.art,.art>img,.art>.ph,.art>.lf>img,.art>.lf>.ph,.art>.fx{transition:none!important;transform:none!important}.art.f0::after,.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after,.art.f2::before{animation:none!important}}
+
+	/* Short, readable foil wave + clear colored premium frames. */
+	.art.f0,.art.f1,.art.f2,.art.f3,.art.f4{isolation:isolate}
+	.art.f0::before,.art.f1::before,.art.f2::before,.art.f3::before,.art.f4::before{z-index:3;pointer-events:none}
+	.art.f0::after,.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after{z-index:4;animation:foilWaveShort 2.4s cubic-bezier(.45,.05,.55,.95) infinite!important}
+	.art.f0{box-shadow:0 0 0 1px rgba(216,231,255,.94),0 0 10px rgba(135,180,255,.34),0 8px 22px rgba(16,22,44,.35)}
+	.art.f1{box-shadow:0 0 0 1px rgba(255,214,91,.98),0 0 13px rgba(255,178,33,.48),0 8px 22px rgba(35,24,8,.4)}
+	.art.f2{box-shadow:0 0 0 1px rgba(255,145,238,.98),0 0 16px rgba(88,220,255,.58),0 0 28px rgba(210,79,255,.3),0 8px 24px rgba(25,8,45,.45)}
+	.art.f3{box-shadow:0 0 0 1px rgba(255,153,211,.98),0 0 15px rgba(255,77,182,.55),0 8px 22px rgba(42,12,34,.42)}
+	.art.f4{box-shadow:0 0 0 1px rgba(255,223,124,.98),0 0 17px rgba(255,77,76,.56),0 0 28px rgba(255,169,42,.23),0 8px 24px rgba(45,12,9,.46)}
+	.art.f0::after,.art.f1::after,.art.f3::after,.art.f4::after{background:linear-gradient(112deg,transparent 0%,transparent 33%,rgba(255,255,255,.08) 40%,rgba(255,255,255,.9) 49%,rgba(255,238,184,.28) 55%,transparent 64%,transparent 100%) 0 0/235% 100% no-repeat!important;opacity:.5!important}
+	.art.f2::after{background:radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.82) 0 3%,rgba(255,255,255,.16) 13%,transparent 29%),linear-gradient(112deg,transparent 0%,transparent 30%,rgba(255,255,255,.08) 39%,rgba(255,255,255,.96) 49%,rgba(255,255,255,.2) 56%,transparent 66%,transparent 100%) 0 0/235% 100% no-repeat,linear-gradient(125deg,rgba(255,47,173,.34),rgba(255,215,73,.26),rgba(60,239,202,.25),rgba(70,178,255,.3),rgba(193,90,255,.34)) 0 0/280% 280%!important;opacity:.58!important}
+	.art.f2::before{box-shadow:0 0 0 1px rgba(255,185,247,.96),0 0 7px rgba(255,90,221,.88),0 0 14px rgba(69,217,255,.6)!important}
+	.art.f1:hover,.art.f2:hover,.art.f3:hover,.art.f4:hover{z-index:5}
+	@keyframes foilWaveShort{0%{background-position:135% 0;opacity:.1}38%{opacity:.52}58%{background-position:0 0;opacity:.62}100%{background-position:-95% 0;opacity:.08}}
+	@media(prefers-reduced-motion:reduce){.art.f0::after,.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after{animation:none!important}.art.f0,.art.f1,.art.f2,.art.f3,.art.f4{box-shadow:none}}
+	</style>
 </head>
 <body>
 <div class="wrap">
