@@ -358,6 +358,18 @@ body.sparkles-off .pkRRRglint {
 .art.f2>.fx{animation:none!important}
 /* Effects off keeps only a static rarity border. */
 body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-off .art.f2::after,body.sparkles-off .art.f3::after,body.sparkles-off .art.f4::after,body.sparkles-off .art>.fx,body.sparkles-off .pkgloss,body.sparkles-off .pkRRRglint{display:none!important}body.sparkles-off .art.f0::before{box-shadow:inset 0 0 0 2px #cfd8e8!important}body.sparkles-off .art.f1::before{box-shadow:inset 0 0 0 2px #ffd54a!important}body.sparkles-off .art.f2::before{background:transparent!important;border:2px solid #d65cff;padding:0!important;-webkit-mask:none!important;mask:none!important}body.sparkles-off .art.f3::before{box-shadow:inset 0 0 0 2px #ff9bd8!important}body.sparkles-off .art.f4::before{box-shadow:inset 0 0 0 2px #ff4d4d,inset 0 0 0 4px rgba(255,211,107,.9)!important}.banTypeGroup{margin:18px 0 24px}.banTypeGroup h3{margin:0 0 9px;padding:8px 12px;border-left:5px solid var(--red);background:var(--card);font:700 22px/1.1 "Barlow Condensed",sans-serif}.banTypeGroup .banGalleryCards{margin-top:0}.banRuleRow{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-top:1px solid #493b67}.banRuleRow:first-child{border-top:0}.banRuleLabel{flex:0 0 180px;font-weight:700;color:var(--gold-soft);padding:10px 4px}.banRuleCards{display:flex;flex:1;gap:10px;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x proximity}.banRuleCards .banGalleryCard{flex:0 0 142px;scroll-snap-align:start}.banRuleCards .banGalleryCard .banRules{display:none}@media(max-width:650px){.banRuleRow{display:block}.banRuleLabel{padding:4px 2px 8px}.banRuleCards .banGalleryCard{flex-basis:112px}}
+/* Banlist uses the card's natural orientation so landscape artwork is shown in full. */
+.banRuleCards .banGalleryCard>.art{width:100%;border-radius:5px}
+/* Banlist layout: categories stack vertically; cards within each category stay horizontal. */
+.banCategory{display:block}.banCategory>h3{margin-bottom:0}.banCategory>.banRuleRow{display:block;padding:12px 0}.banCategory>.banRuleRow>.banRuleLabel{padding:0 0 8px}.banCategory>.banRuleRow>.banRuleCards{width:100%}.banTogetherGroup{margin:12px 0;padding:10px 12px;border:1px solid #6b568b;border-radius:10px;background:linear-gradient(145deg,#1a1735,#101326);box-shadow:inset 0 0 0 1px #f4c96b18}.banTogetherTitle{margin-bottom:8px;color:var(--gold-soft);font-weight:700}.banTogetherGroup .banRuleCards{width:100%}.banCategoryEmpty{margin:0;padding:12px;color:var(--mute);font-size:13px;border:1px dashed #493b67;border-radius:8px;background:#0d112255}
+/* Subtle alternating dot sparkles plus one soft moving glow wave. */
+:root{--star:radial-gradient(circle,#000 0 1.6px,transparent 2.4px)}
+.art.f0>.fx,.art.f1>.fx,.art.f2>.fx,.art.f3>.fx,.art.f4>.fx{--ss:92px;--dr:8s;--tw:3.6s;opacity:.42!important}
+.art.f0>.fx::before,.art.f1>.fx::before,.art.f2>.fx::before,.art.f3>.fx::before,.art.f4>.fx::before{opacity:0;animation:dotTwinkle var(--tw) ease-in-out infinite,dr1 var(--dr) linear infinite!important;filter:drop-shadow(0 0 2px var(--fc))}
+.art.f0>.fx::after,.art.f1>.fx::after,.art.f2>.fx::after,.art.f3>.fx::after,.art.f4>.fx::after{display:block!important;inset:-20%;background:linear-gradient(112deg,transparent 42%,rgba(255,255,255,.34) 49%,rgba(255,235,170,.18) 52%,transparent 60%) 0 0/240% 100% no-repeat!important;-webkit-mask:none!important;mask:none!important;opacity:.28!important;animation:glowWave 6.5s ease-in-out infinite!important;filter:blur(.2px)!important}
+@keyframes dotTwinkle{0%,100%{opacity:0;transform:scale(.82)}22%{opacity:.5}48%{opacity:.08;transform:scale(1.03)}72%{opacity:.42}85%{opacity:0;transform:scale(.88)}}
+@keyframes glowWave{0%{transform:translateX(-35%) skewX(-8deg);opacity:0}22%{opacity:.3}55%{transform:translateX(30%) skewX(-8deg);opacity:.18}82%{opacity:0}100%{transform:translateX(55%) skewX(-8deg);opacity:0}}
+body.sparkles-off .art.f0>.fx::after,body.sparkles-off .art.f1>.fx::after,body.sparkles-off .art.f2>.fx::after,body.sparkles-off .art.f3>.fx::after,body.sparkles-off .art.f4>.fx::after{display:none!important}
 .favStar{position:absolute;right:6px;top:6px;z-index:6;border:1px solid rgba(0,0,0,.18);border-radius:99px;background:rgba(255,255,255,.92);color:#9aa1b2;font:700 18px/1 Arial;padding:3px 6px;cursor:pointer;box-shadow:0 1px 4px #0003}.favStar.on{color:#e6a400;background:#fff7c7}.c,.row{position:relative}.row .favStar{position:static;justify-self:end}.lbFav{margin:0 0 10px;color:#9aa1b2;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 12px;cursor:pointer;font:600 14px Barlow,sans-serif}.lbFav.on{color:#a66b00;background:#fff7c7;border-color:#e6a400}
 /* ---------- Arcana Vanguard fantasy theme ---------- */
 :root{--ink:#f4ead0;--paper:#0b1020;--line:#4b3b68;--red:#c78b3c;--mute:#b5abc7;--card:#15152c;--gold:#f4c96b;--violet:#8b6bd1;--ember:#df7351}
@@ -1073,16 +1085,19 @@ function renderBanGallery(){
  const q=$("banGallerySearch").value.trim().toLowerCase(),all=banGalleryEntries();
  const matches=c=>!q||(String(c.name||"")+" "+String(c.no||"")+" "+String(c.rarity||"")).toLowerCase().includes(q);
  const cardMap=new Map(all.map(v=>[String(v.card.id),v.card]));
- const cardHtml=(c,i)=>`<button type="button" class="banGalleryCard" data-ban-card="${h(c.id)}" aria-label="ดูรายละเอียด ${h(c.name||"การ์ด")}"><span class="banNumber">${i+1}</span>${art(c,1)}<b>${h(c.name||"การ์ด")}</b><small>${h(c.no||"")}${c.rarity?" · "+h(c.rarity):""}</small></button>`;
+ const cardHtml=(c,i)=>`<button type="button" class="banGalleryCard" data-ban-card="${h(c.id)}" aria-label="ดูรายละเอียด ${h(c.name||"การ์ด")}"><span class="banNumber">${i+1}</span>${art(c,true)}<b>${h(c.name||"การ์ด")}</b><small>${h(c.no||"")}${c.rarity?" · "+h(c.rarity):""}</small></button>`;
  const rowsBy=(rules,keyFn,labelFn)=>{const m=new Map();rules.forEach(r=>{const c=cardMap.get(String(r.cardId));if(!c||!matches(c))return;const key=keyFn(r),row=m.get(key)||{label:labelFn(r),cards:[]};if(!row.cards.some(x=>String(x.id)===String(c.id)))row.cards.push(c);m.set(key,row)});return [...m.values()]};
- const sections=[];
- const basic=rowsBy(BANLIST.filter(r=>r.type!=="together"),r=>r.type+"|"+(r.type==="zone"?r.zoneId:r.type==="limit"?r.limit:"all"),r=>r.type==="ban"?"ห้ามใส่":r.type==="zone"?"ห้ามใส่ใน "+(zone(r.zoneId)?.name||"กองการ์ด"):"จำกัดไม่เกิน "+(parseInt(r.limit)||0)+" ใบ");
- if(basic.length)sections.push(`<section class="banTypeGroup"><h3>กฎการใส่การ์ด</h3>${basic.map(row=>`<div class="banRuleRow"><div class="banRuleLabel">${h(row.label)}</div><div class="banRuleCards">${row.cards.map(cardHtml).join("")}</div></div>`).join("")}</section>`);
- const together=rowsBy(BANLIST.filter(r=>r.type==="together"),r=>String(r.group||"กลุ่ม 1").trim(),r=>String(r.group||"กลุ่ม 1").trim());
- if(together.length)sections.push(`<section class="banTypeGroup"><h3>ห้ามใส่ด้วยกัน</h3>${together.map(row=>`<div class="banRuleRow"><div class="banRuleLabel">${h(row.label)}</div><div class="banRuleCards">${row.cards.map(cardHtml).join("")}</div></div>`).join("")}</section>`);
- const shown=new Set([...basic,...together].flatMap(row=>row.cards.map(c=>String(c.id))));
- $("banGalleryCount").textContent=shown.size+" / "+all.length+" ใบ · "+sections.length+" กลุ่ม";
- box.innerHTML=sections.join("")||`<p class="dto">${all.length?"ไม่พบการ์ดที่ค้นหา":"ยังไม่มีการ์ดใน Banlist · กด “จัดการกฎ Banlist” เพื่อเพิ่มการ์ด"}</p>`;
+ const cardRow=(cards,empty="ไม่มีการ์ดในหมวดนี้")=>cards.length?`<div class="banRuleCards">${cards.map(cardHtml).join("")}</div>`:`<p class="banCategoryEmpty">${empty}</p>`;
+ const cat=(type,title,rows)=>`<section class="banTypeGroup banCategory"><h3>${title}</h3>${rows.length?rows.map(row=>`<div class="banRuleRow"><div class="banRuleLabel">${h(row.label)}</div>${cardRow(row.cards)}</div>`).join(""):cardRow([])}</section>`;
+ const banRows=rowsBy(BANLIST.filter(r=>r.type==="ban"),()=>"ban",()=>"ห้ามใส่");
+ const zoneRows=rowsBy(BANLIST.filter(r=>r.type==="zone"),r=>String(r.zoneId),r=>"ห้ามใส่ใน "+(zone(r.zoneId)?.name||"กองการ์ด"));
+ const limitRows=rowsBy(BANLIST.filter(r=>r.type==="limit"),r=>String(r.limit),r=>"จำกัดไม่เกิน "+(parseInt(r.limit)||0)+" ใบ");
+ const togetherRows=rowsBy(BANLIST.filter(r=>r.type==="together"),r=>String(r.group||"กลุ่ม 1").trim(),r=>String(r.group||"กลุ่ม 1").trim());
+ const sections=[cat("ban","ห้ามใส่",banRows),cat("zone","ห้ามใส่ในกองการ์ด",zoneRows),cat("limit","จำกัดจำนวนการ์ด",limitRows)];
+ sections.push(`<section class="banTypeGroup banCategory"><h3>ห้ามใส่ด้วยกัน</h3>${togetherRows.length?togetherRows.map(row=>`<div class="banTogetherGroup"><div class="banTogetherTitle">${h(row.label)}</div>${cardRow(row.cards)}</div>`).join(""):cardRow([])}</section>`);
+ const shown=new Set([...banRows,...zoneRows,...limitRows,...togetherRows].flatMap(row=>row.cards.map(c=>String(c.id))));
+ $("banGalleryCount").textContent=shown.size+" / "+all.length+" ใบ · 4 หมวด";
+ box.innerHTML=sections.join("");
 }
 $("banGalleryManage").onclick=banForm;
 $("banGallerySearch").oninput=renderBanGallery;
