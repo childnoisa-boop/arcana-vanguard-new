@@ -311,6 +311,15 @@ body.sparkles-off .pkRRRglint {
 .art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after{opacity:.18}
 .art.f1>.fx,.art.f2>.fx,.art.f3>.fx,.art.f4>.fx{opacity:.45}
 
+/* Foil light pass: every rarity gets the same soft moving reflection as RR.
+   The pass is neutral white so it does not recolor the card artwork. */
+.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after{
+  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.5) 50%,transparent 60%) 0 0/300% 100% no-repeat!important;
+  animation:fsh 5s ease-in-out infinite!important;
+  mix-blend-mode:normal!important;
+  opacity:.5!important;
+}
+
 /* Same movement as the RR effect for every rarity, while preserving each tier's own colors.
    In particular, the rainbow tier does not hue-rotate the card artwork. */
 .art.f0>.fx,.art.f1>.fx,.art.f2>.fx,.art.f3>.fx,.art.f4>.fx{--ss:80px;--dr:6s;--tw:2.6s;animation:none!important}
