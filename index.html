@@ -913,7 +913,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 </dialog>
 <datalist id="nations"></datalist>
 <datalist id="clans"></datalist>
-<datalist id="types"><option>Booster Pack</option><option>Constructed Deck</option><option>Others</option><option>PR Card</option></datalist>
+<datalist id="types"><option>Booster Pack</option><option>Constructed Deck</option><option>Trial Deck</option><option>Starter Deck</option><option>Master Deck Set</option><option>Stride Deck Set</option><option>Others</option><option>PR Card</option></datalist>
 <datalist id="rarities"><option>C</option><option>N</option><option>U</option><option>R</option><option>RR</option><option>RRR</option><option>SR</option><option>PR</option><option>SVR</option><option>GR</option><option>FR</option><option>FFR</option><option>OR</option><option>OVR</option><option>ORR</option><option>DSR</option><option>ZR</option><option>X</option><option>SP</option><option>SSP</option><option>SEC</option><option>SSR</option><option>SCR</option></datalist>
 <datalist id="triggers"><option>Critical</option><option>Heal</option><option>Front</option><option>Draw</option><option>Over</option></datalist>
 	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -935,7 +935,7 @@ const SEED=[
   ["001","Sample Lyrical A","Lyrical Monasterio","Normal Unit",3,10000,"RR","",""],
   ["002","Sample Lyrical B","Lyrical Monasterio","Trigger Unit",0,5000,"C","Draw",""]]}
 ];
-const KEY="cardlist-v1",TYPES=["All","Booster Pack","Constructed Deck","Others","PR Card"];
+const KEY="cardlist-v1",TYPES=["All","Booster Pack","Constructed Deck","Trial Deck","Starter Deck","Master Deck Set","Stride Deck Set","Others","PR Card"];
 const $=id=>document.getElementById(id);
 const uid=()=>crypto.randomUUID?crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==="x"?r:(r&3|8)).toString(16)});
 const h=s=>String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
@@ -1194,9 +1194,17 @@ const nv=v=>{const n=parseFloat(v);return v===""||v==null||isNaN(n)?null:n};
 	  if(x===null&&y===null)return num(a.pname||"",b.pname||"")||num(a.no,b.no);
 	  if(x===null)return 1;if(y===null)return -1;
 	  return (x-y)*(d==="desc"?-1:1)||num(a.pname||"",b.pname||"")||num(a.no,b.no)}};
-	const productNationRank=c=>{const names=nats(c);const ranks=names.map(n=>{const i=NATIONS.findIndex(x=>String(x.name)===String(n));return i<0?999:i});return ranks.length?Math.min(...ranks):999};
-	const productRarityBand=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase(),t=FOILT[r]??-1;return r==="RRR"?0:(t>1?2:1)};
-	const productCardSort=(a,b)=>productRarityBand(a)-productRarityBand(b)||productNationRank(a)-productNationRank(b)||String(natTxt(a)).localeCompare(String(natTxt(b)))||String(a.name||"").localeCompare(String(b.name||""),undefined,{numeric:true})||num(a.no,b.no);
+	/* Vanguard card-list order: RRR → RR → R → C → every other rarity.
+	   Within each rarity: Grade first, then the official nation order. */
+	const CARD_RARITY_ORDER={RRR:0,RR:1,R:2,C:3};
+	const CARD_NATION_ORDER=["dragon empire","dark states","brandt gate","keter sanctuary","stoicheia","lyrical monasterio"];
+	const CARD_NATION_ALIASES={"dragon":"dragon empire","dragon empire":"dragon empire","dark state":"dark states","dark states":"dark states","brantgate":"brandt gate","brandtgate":"brandt gate","brandt gate":"brandt gate","keter":"keter sanctuary","keter sanctuary":"keter sanctuary","stocia":"stoicheia","stoicheia":"stoicheia","lilycal":"lyrical monasterio","lyrical":"lyrical monasterio","lyrical monasterio":"lyrical monasterio"};
+	const nationKey=n=>String(n||"").trim().toLowerCase().replace(/\s+/g," ");
+	const productNationRank=c=>{const names=nats(c).map(n=>CARD_NATION_ALIASES[nationKey(n)]||nationKey(n));const ranks=names.map(n=>{const fixed=CARD_NATION_ORDER.indexOf(n);if(fixed>=0)return fixed;const configured=NATIONS.findIndex(x=>nationKey(x.name)===n);return 100+(configured<0?999:configured)});return ranks.length?Math.min(...ranks):999};
+	const productRarityRank=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return CARD_RARITY_ORDER[r]??4};
+	const productOtherRarity=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return CARD_RARITY_ORDER[r]===undefined?r:""};
+	const productGradeRank=c=>{const g=nv(c&&c.grade);return g===null?999:g};
+	const productCardSort=(a,b)=>productRarityRank(a)-productRarityRank(b)||productOtherRarity(a).localeCompare(productOtherRarity(b),undefined,{numeric:true})||productGradeRank(a)-productGradeRank(b)||productNationRank(a)-productNationRank(b)||String(natTxt(a)).localeCompare(String(natTxt(b)))||String(a.name||"").localeCompare(String(b.name||""),undefined,{numeric:true})||num(a.no,b.no);
 	const tsort=(a,b)=>{const i=CTYPES.indexOf(a),j=CTYPES.indexOf(b);return (i<0?999:i)-(j<0?999:j)||num(a,b)};
 
 /* Any plain picture that turns out wider than tall is shown landscape automatically */
@@ -1250,7 +1258,7 @@ let type="All";
 const coverImg=p=>{
   if(p.fit&&p.fit.r){const L=lay(p.fit,"b");return `<img src="${h(p.cover)}" alt="" loading="lazy" draggable="false" style="position:absolute;max-width:none;left:${L.left}%;top:${L.top}%;width:${L.w}%;height:${L.h}%">`}
   return `<img src="${h(p.cover)}" alt="" loading="lazy">`};
-const TCOL={"Booster Pack":"#c8102e","Constructed Deck":"#1f4fa0","PR Card":"#2e7d4f","Others":"#5b6478"};
+const TCOL={"Booster Pack":"#c8102e","Constructed Deck":"#1f4fa0","Trial Deck":"#8b5a2b","Starter Deck":"#2e7d4f","Master Deck Set":"#6b3fa0","Stride Deck Set":"#c47b12","PR Card":"#2e7d4f","Others":"#5b6478"};
 const tcol=t=>TCOL[t]||col(t||"Others");
 function products(){
   $("pills").innerHTML=TYPES.map(t=>`<button class="pill" aria-pressed="${t===type}" data-t="${t}">${t}</button>`).join("");
