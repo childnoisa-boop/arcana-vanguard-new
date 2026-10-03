@@ -1195,7 +1195,7 @@ const nv=v=>{const n=parseFloat(v);return v===""||v==null||isNaN(n)?null:n};
 	  if(x===null)return 1;if(y===null)return -1;
 	  return (x-y)*(d==="desc"?-1:1)||num(a.pname||"",b.pname||"")||num(a.no,b.no)}};
 	/* Vanguard card-list order: RRR → RR → R → C → every other rarity.
-	   Within each rarity: Grade first, then the official nation order. */
+	   Within each rarity: official nation order first, then Grade 3 → 2 → 1 → 0. */
 	const CARD_RARITY_ORDER={RRR:0,RR:1,R:2,C:3};
 	const CARD_NATION_ORDER=["dragon empire","dark states","brandt gate","keter sanctuary","stoicheia","lyrical monasterio"];
 	const CARD_NATION_ALIASES={"dragon":"dragon empire","dragon empire":"dragon empire","dark state":"dark states","dark states":"dark states","brantgate":"brandt gate","brandtgate":"brandt gate","brandt gate":"brandt gate","keter":"keter sanctuary","keter sanctuary":"keter sanctuary","stocia":"stoicheia","stoicheia":"stoicheia","lilycal":"lyrical monasterio","lyrical":"lyrical monasterio","lyrical monasterio":"lyrical monasterio"};
@@ -1204,7 +1204,7 @@ const nv=v=>{const n=parseFloat(v);return v===""||v==null||isNaN(n)?null:n};
 	const productRarityRank=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return CARD_RARITY_ORDER[r]??4};
 	const productOtherRarity=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return CARD_RARITY_ORDER[r]===undefined?r:""};
 	const productGradeRank=c=>{const g=nv(c&&c.grade);return g===null?-1:g};
-	const productCardSort=(a,b)=>productRarityRank(a)-productRarityRank(b)||productOtherRarity(a).localeCompare(productOtherRarity(b),undefined,{numeric:true})||productGradeRank(b)-productGradeRank(a)||productNationRank(a)-productNationRank(b)||String(natTxt(a)).localeCompare(String(natTxt(b)))||String(a.name||"").localeCompare(String(b.name||""),undefined,{numeric:true})||num(a.no,b.no);
+	const productCardSort=(a,b)=>productRarityRank(a)-productRarityRank(b)||productOtherRarity(a).localeCompare(productOtherRarity(b),undefined,{numeric:true})||productNationRank(a)-productNationRank(b)||productGradeRank(b)-productGradeRank(a)||String(natTxt(a)).localeCompare(String(natTxt(b)))||String(a.name||"").localeCompare(String(b.name||""),undefined,{numeric:true})||num(a.no,b.no);
 	const tsort=(a,b)=>{const i=CTYPES.indexOf(a),j=CTYPES.indexOf(b);return (i<0?999:i)-(j<0?999:j)||num(a,b)};
 
 /* Any plain picture that turns out wider than tall is shown landscape automatically */
