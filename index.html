@@ -1203,8 +1203,8 @@ const nv=v=>{const n=parseFloat(v);return v===""||v==null||isNaN(n)?null:n};
 	const productNationRank=c=>{const names=nats(c).map(n=>CARD_NATION_ALIASES[nationKey(n)]||nationKey(n));const ranks=names.map(n=>{const fixed=CARD_NATION_ORDER.indexOf(n);if(fixed>=0)return fixed;const configured=NATIONS.findIndex(x=>nationKey(x.name)===n);return 100+(configured<0?999:configured)});return ranks.length?Math.min(...ranks):999};
 	const productRarityRank=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return CARD_RARITY_ORDER[r]??4};
 	const productOtherRarity=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return CARD_RARITY_ORDER[r]===undefined?r:""};
-	const productGradeRank=c=>{const g=nv(c&&c.grade);return g===null?999:g};
-	const productCardSort=(a,b)=>productRarityRank(a)-productRarityRank(b)||productOtherRarity(a).localeCompare(productOtherRarity(b),undefined,{numeric:true})||productGradeRank(a)-productGradeRank(b)||productNationRank(a)-productNationRank(b)||String(natTxt(a)).localeCompare(String(natTxt(b)))||String(a.name||"").localeCompare(String(b.name||""),undefined,{numeric:true})||num(a.no,b.no);
+	const productGradeRank=c=>{const g=nv(c&&c.grade);return g===null?-1:g};
+	const productCardSort=(a,b)=>productRarityRank(a)-productRarityRank(b)||productOtherRarity(a).localeCompare(productOtherRarity(b),undefined,{numeric:true})||productGradeRank(b)-productGradeRank(a)||productNationRank(a)-productNationRank(b)||String(natTxt(a)).localeCompare(String(natTxt(b)))||String(a.name||"").localeCompare(String(b.name||""),undefined,{numeric:true})||num(a.no,b.no);
 	const tsort=(a,b)=>{const i=CTYPES.indexOf(a),j=CTYPES.indexOf(b);return (i<0?999:i)-(j<0?999:j)||num(a,b)};
 
 /* Any plain picture that turns out wider than tall is shown landscape automatically */
