@@ -1434,7 +1434,7 @@ function form(title,fields,o,imgKey,onSave,onDel,crop){
   }
   $("ed").showModal();
 }
-const ABILITIES=["Persona Ride","Intercept","Boost","Regalis Piece","Ace Unit"];
+const ABILITIES=["Persona Ride","Intercept","Boost","Regalis Piece","Ace Unit","Sentinel"];
 const CF=[["name","Name"],["no","Card number"],["description","รายละเอียดการ์ด"],["race","เผ่า / Race"],["clan","Clan","clans"],["icon","ไอคอน (ไม่บังคับ)"],["ability","Ability (ไม่บังคับ)","@ability"],["nation","Nation","nations"],["nation2","Second nation (Duo nation, optional)","nations"],["unit","Card type","@types"],["grade","Grade"],["power","Power"],["shield","ป้องกัน / Shield"],["rarity","Rarity","rarities"],["trigger","Trigger","triggers"],["is_gacha_pool","Gacha pool","@bool"]];
 function cardForm(c,pid){
   const n=!c,p=PRODUCTS.find(x=>x.id===pid);
