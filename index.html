@@ -1029,6 +1029,12 @@ body:has(#p5 .pkCard.open)::before { display:block!important; }
   .tab{padding-left:11px;padding-right:11px}
   .cards{gap:6px}
 }
+
+.collectionHeadActions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.collectionHeadActions .count{white-space:nowrap}.collectionBody[hidden]{display:none!important}
+/* Collection progress dashboard: owned unique cards versus the loaded catalog. */
+.collectionProgress{margin:14px 0 16px;padding:14px;border:1px solid #66517f;border-radius:12px;background:linear-gradient(145deg,#211b3d,#111426);box-shadow:inset 0 0 24px #8b6bd110}
+.collectionProgressHero{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.collectionProgressEyebrow{display:block;color:#cdb8e8;font:700 11px/1.1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase}.collectionProgress h4{margin:3px 0 4px;color:var(--gold-soft);font:700 24px/1.1 Cinzel,serif}.collectionProgressHero p{margin:0;color:#c8bdd5;font-size:12px}.collectionProgressPct{color:#f4c96b;font:700 34px/1 "Barlow Condensed",sans-serif;white-space:nowrap}.progressTrack{height:10px;margin:14px 0 12px;overflow:hidden;border-radius:99px;background:#0a0d1b;border:1px solid #594873}.progressTrack i,.miniProgress i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#9b6bd6,#f4c96b);box-shadow:0 0 12px #f4c96b66;transition:width .3s ease}.collectionProgressStats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.collectionProgressStat{padding:8px 10px;border:1px solid #493b67;border-radius:8px;background:#0f1223}.collectionProgressStat b{display:block;color:#f2e7cf;font:700 20px/1 "Barlow Condensed",sans-serif}.collectionProgressStat small{color:#b9aec8;font-size:11px}.collectionBreakdown{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}.collectionBreakdown h5{margin:0 0 8px;color:#e4d6f0;font-size:13px}.progressRows{display:grid;gap:7px}.progressRowTop{display:flex;justify-content:space-between;gap:8px;margin-bottom:3px;font-size:11px}.progressRowTop span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#ded1e6}.progressRowTop small{color:#b9aec8;white-space:nowrap}.miniProgress{height:5px;overflow:hidden;border-radius:99px;background:#0a0d1b}.miniProgress i{box-shadow:none;background:linear-gradient(90deg,#7650ad,#d6a95e)}
+@media(max-width:600px){.collectionProgressHero{gap:10px}.collectionProgress h4{font-size:21px}.collectionProgressPct{font-size:30px}.collectionProgressStats{grid-template-columns:repeat(2,minmax(0,1fr))}.collectionBreakdown{grid-template-columns:1fr;gap:12px}}
 </style>
 </head>
 <body>
@@ -1145,7 +1151,16 @@ body:has(#p5 .pkCard.open)::before { display:block!important; }
       <details id="gachaRatesAdmin" class="admin-only" style="margin-top:14px"><summary style="padding:8px 12px;cursor:pointer;font-weight:600">อัตราดรอป (weight) · Admin</summary><div class="pkr" id="pkR" style="padding:10px 12px"></div><p class="dto" style="margin:0 0 6px">เปอร์เซ็นต์คำนวณจาก Weight ของแต่ละเรต (ก่อนผลจาก Pity) · ปรับ Weight ได้ · โอกาส 0.2% ที่ทั้ง 7 ใบเป็น RRR ขึ้นไป (ต้องมีการ์ด RRR+ ไม่ซ้ำกันอย่างน้อย 7 แบบ)</p></details>
       <p class="count" id="pkMsg" aria-live="polite"></p>
       <div class="packStats"><b id="pkLifetime">เปิดแล้ว 0 ซอง</b><span>เรตข้างต้นเป็น Weight ของการสุ่มในสินค้านี้ ไม่ใช่เปอร์เซ็นต์ตรง ๆ; ระบบจะแสดงสัดส่วนคำนวณให้เมื่อมีข้อมูลครบ</span></div>
-      <section class="collectionPanel"><div class="collectionHead"><div><h3>คลังการ์ดจากการสุ่ม</h3><p class="dto">สะสมแยกจาก Deck Builder · ไม่เพิ่มการ์ดเข้าเด็คอัตโนมัติ</p></div><span id="collectionSummary" class="count"></span></div><div class="collectionTools"><input type="search" id="collectionSearch" placeholder="ค้นหาชื่อการ์ด / หมายเลข / เรต"><label>เรียง<select id="collectionSort"><option value="rarity-desc">เรตสูง → ต่ำ</option><option value="rarity-asc">เรตต่ำ → สูง</option><option value="count-desc">จำนวนมาก → น้อย</option><option value="name">ชื่อ A–Z</option></select></label></div><div id="collectionCards" class="collectionCards"></div></section>
+      <section class="collectionPanel"><div class="collectionHead"><div><h3>คลังการ์ดจากการสุ่ม</h3><p class="dto">สะสมแยกจาก Deck Builder · ไม่เพิ่มการ์ดเข้าเด็คอัตโนมัติ</p></div><div class="collectionHeadActions"><span id="collectionSummary" class="count"></span><button type="button" class="btn sm" id="collectionToggle" aria-controls="collectionBody" aria-expanded="true">⌃ ย่อคลัง</button></div></div>
+      <div id="collectionBody" class="collectionBody">
+      <div class="collectionProgress" id="collectionProgress" aria-labelledby="collectionProgressTitle">
+        <div class="collectionProgressHero"><div><span class="collectionProgressEyebrow">Collection Progress</span><h4 id="collectionProgressTitle">ความคืบหน้าการสะสม</h4><p>นับจากการ์ดแบบไม่ซ้ำที่มี เทียบกับการ์ดทั้งหมดในคลัง</p></div><strong class="collectionProgressPct" id="collectionProgressPct">0%</strong></div>
+        <div class="progressTrack" aria-hidden="true"><i id="collectionProgressBar" style="width:0%"></i></div>
+        <div class="collectionProgressStats"><div class="collectionProgressStat"><b id="collectionOwned">0</b><small>แบบที่มีแล้ว</small></div><div class="collectionProgressStat"><b id="collectionMissing">0</b><small>แบบที่ยังขาด</small></div><div class="collectionProgressStat"><b id="collectionTotal">0</b><small>การ์ดทั้งหมด</small></div><div class="collectionProgressStat"><b id="collectionCopies">0</b><small>จำนวนใบทั้งหมด</small></div></div>
+        <div class="collectionBreakdown"><div><h5>ความคืบหน้าแยกตามชุด</h5><div id="collectionSetProgress" class="progressRows"></div></div><div><h5>ความคืบหน้าแยกตาม Rarity</h5><div id="collectionRarityProgress" class="progressRows"></div></div></div>
+      </div>
+      <div class="collectionTools"><input type="search" id="collectionSearch" placeholder="ค้นหาชื่อการ์ด / หมายเลข / เรต"><label>เรียง<select id="collectionSort"><option value="rarity-desc">เรตสูง → ต่ำ</option><option value="rarity-asc">เรตต่ำ → สูง</option><option value="count-desc">จำนวนมาก → น้อย</option><option value="name">ชื่อ A–Z</option></select></label></div><div id="collectionCards" class="collectionCards"></div>
+      </div></section>
     </section>
     <section id="p6" role="tabpanel" aria-labelledby="t6" hidden>
       <div class="banGalleryHead"><div><h2>คราฟการ์ดพิเศษ / PR</h2><p class="dto">สูตรคราฟต์มองเห็นร่วมกัน แต่ใช้วัตถุดิบจากคลังส่วนตัวของผู้คราฟต์เท่านั้น</p></div><button class="btn primary" id="craftNew">＋ สร้างสูตร</button></div>
@@ -1242,7 +1257,7 @@ const DEFCLANS=["Royal Paladin","Shadow Paladin","Gold Paladin","Kagero","Naruka
 const Cloud=window.CardCloud;
 let PRODUCTS=[],NATIONS=[],ZONES=[],CTYPES=DEFT.slice(),PW="",loaded=false,REMOTE_DECKS={},stopRealtime=null,refreshBusy=false;
 const DB=()=>({products:PRODUCTS,nations:NATIONS,zones:ZONES,ctypes:CTYPES,settings:{nations:NATIONS,zones:ZONES,ctypes:CTYPES}});
-const BANKEY="cardlist-banlist-v1",COLKEY="cardlist-pull-collection-v1";
+const BANKEY="cardlist-banlist-v1",COLKEY="cardlist-pull-collection-v1",COLLAPSEKEY="cardlist-collection-collapsed-v1";
 let BANLIST=[],COLLECTION={};
 try{BANLIST=JSON.parse(localStorage.getItem(BANKEY)||"[]");if(!Array.isArray(BANLIST))BANLIST=[]}catch(e){BANLIST=[]}
 try{COLLECTION=JSON.parse(localStorage.getItem(COLKEY)||"{}");if(!COLLECTION||typeof COLLECTION!=="object")COLLECTION={}}catch(e){COLLECTION={}}
@@ -2192,8 +2207,22 @@ function collectionAdd(cards){const prod=PRODUCTS.find(p=>p.id===GA.pid),name=pr
    return packId;
  }).catch(e=>{console.error("gacha save failed",e);notice("bad","บันทึกผลซองไม่สำเร็จ",String(e?.message||e),{auto:8000});return null});GA.pendingWrites.push(pending);return pending}
  cards.forEach(r=>{const c=r?.c;if(!c)return;const id=c.id,v=COLLECTION[id]||{id,card:{...c},count:0,productName:name};v.card={...c};v.count=(+v.count||0)+1;v.productName=name;COLLECTION[id]=v});PACKS_OPENED++;try{localStorage.setItem(COLKEY,JSON.stringify(COLLECTION));localStorage.setItem("cardlist-packs-opened",String(PACKS_OPENED))}catch(e){}renderPackCount();renderCollection();return Promise.resolve(null)}
+function renderCollectionProgress(){
+ const catalog=Array.from(new Map(ALL.filter(c=>c?.id).map(c=>[c.id,c])).values());
+ const fallback=Object.values(COLLECTION).filter(v=>v?.card&&v.card.id).map(v=>v.card);
+ const cards=catalog.length?catalog:fallback;
+ const ownedSet=new Set(cards.filter(c=>(+(COLLECTION[c.id]?.count||0))>0).map(c=>c.id));
+ const owned=ownedSet.size,total=cards.length,missing=Math.max(0,total-owned),copies=Object.values(COLLECTION).reduce((n,v)=>n+(+(v?.count||0)),0),pct=total?Math.round(owned/total*100):0;
+ const row=(label,have,max)=>{const p=max?Math.round(have/max*100):0;return `<div class="progressRow"><div class="progressRowTop"><span title="${h(label)}">${h(label)}</span><small>${have}/${max} · ${p}%</small></div><div class="miniProgress"><i style="width:${p}%"></i></div></div>`};
+ const grouped=(key,empty)=>{const m=new Map();cards.forEach(c=>{const label=String(c[key]||empty);if(!m.has(label))m.set(label,{total:0,owned:0});const g=m.get(label);g.total++;if(ownedSet.has(c.id))g.owned++});return [...m.entries()].sort((a,b)=>(b[1].owned/b[1].total)-(a[1].owned/a[1].total)||b[1].owned-a[1].owned||a[0].localeCompare(b[0]));};
+ $("collectionProgressPct").textContent=pct+"%";$("collectionProgressBar").style.width=pct+"%";$("collectionOwned").textContent=owned;$("collectionMissing").textContent=missing;$("collectionTotal").textContent=total;$("collectionCopies").textContent=copies;
+ const sets=new Map();cards.forEach(c=>{const key=c.pid||c.pname||"unknown",label=c.pname||"ไม่ระบุชุด";if(!sets.has(key))sets.set(key,{label,total:0,owned:0});const g=sets.get(key);g.total++;if(ownedSet.has(c.id))g.owned++});
+ $("collectionSetProgress").innerHTML=[...sets.values()].sort((a,b)=>(b.owned/b.total)-(a.owned/a.total)||a.label.localeCompare(b.label)).map(g=>row(g.label,g.owned,g.total)).join("")||'<p class="dto">ยังไม่มีข้อมูลชุดการ์ด</p>';
+ const rarities=grouped("rarity","ไม่ระบุ");$("collectionRarityProgress").innerHTML=rarities.map(([label,g])=>row(rarityLabel(label)||"ไม่ระบุ",g.owned,g.total)).join("")||'<p class="dto">ยังไม่มีข้อมูล Rarity</p>';
+}
 function renderCollection(){
  const box=$("collectionCards");if(!box)return;
+ renderCollectionProgress();
  const q=$("collectionSearch").value.trim().toLowerCase(),sort=$("collectionSort").value;
  let a=Object.values(COLLECTION).filter(v=>v?.card&&v.count>0&&(!q||(String(v.card.name||"")+" "+String(v.card.no||"")+" "+String(v.card.rarity||"")+" "+String(v.productName||"")).toLowerCase().includes(q)));
  a.sort((x,y)=>sort==="name"?String(x.card.name).localeCompare(String(y.card.name)):sort==="count-desc"?(y.count-x.count||tierOf(y.card)-tierOf(x.card)):sort==="rarity-asc"?(tierOf(x.card)-tierOf(y.card)||String(x.card.name).localeCompare(String(y.card.name))):(tierOf(y.card)-tierOf(x.card)||String(x.card.name).localeCompare(String(y.card.name))));
@@ -2201,6 +2230,10 @@ function renderCollection(){
  $("collectionSummary").textContent=total+" ใบ · "+all.length+" แบบ";
  box.innerHTML=a.map(v=>`<button type="button" class="collectionCard" data-collection-card="${h(v.id||v.card.id)}" aria-label="ดูรายละเอียด ${h(v.card.name||"การ์ด")}">${art(v.card,1)}<span class="colRarity">${h(rarityLabel(v.card.rarity)||"—")}</span><span class="colQty">×${v.count}</span><b>${h(v.card.name||"การ์ด")}</b><small>${h(v.card.no||"")}${v.productName?" · "+h(v.productName):""}</small></button>`).join("")||'<p class="dto">ยังไม่มีการ์ดในคลัง · เปิดซองเพื่อเริ่มสะสม</p>';
 }
+let collectionCollapsed=false;
+try{collectionCollapsed=localStorage.getItem(COLLAPSEKEY)==="1"}catch(e){}
+function setCollectionCollapsed(collapsed){collectionCollapsed=!!collapsed;const body=$("collectionBody"),btn=$("collectionToggle");if(!body||!btn)return;body.hidden=collectionCollapsed;btn.setAttribute("aria-expanded",String(!collectionCollapsed));btn.textContent=collectionCollapsed?"⌄ แสดงคลัง":"⌃ ย่อคลัง";try{localStorage.setItem(COLLAPSEKEY,collectionCollapsed?"1":"0")}catch(e){}}
+$("collectionToggle").onclick=()=>setCollectionCollapsed(!collectionCollapsed);setCollectionCollapsed(collectionCollapsed);
 $("collectionSearch").oninput=renderCollection;$("collectionSort").onchange=renderCollection;
 $("collectionCards").onclick=e=>{const b=e.target.closest("[data-collection-card]");if(!b)return;const v=COLLECTION[b.dataset.collectionCard];if(v?.card)openLB({...v.card,pname:v.productName,collectionCount:v.count},{readonly:true,source:"collection"})};
 const PKW={},pkd=r=>{r=String(r).toUpperCase();return({C:60,N:60,U:40,R:25,RR:12,RRR:5,SR:3,PR:8})[r]??(r in FOILT?1.5:5)},pkw=r=>r in PKW?PKW[r]:pkd(r);
