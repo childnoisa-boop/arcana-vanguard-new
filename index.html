@@ -498,6 +498,32 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 	@keyframes foilBorderSpin{to{--foil-angle:360deg}}
 	@keyframes foilWaveGame{0%{background-position:145% 0;opacity:.05}20%{opacity:.32}48%{background-position:45% 0;opacity:.82}62%{opacity:.42}100%{background-position:-75% 0;opacity:.06}}
 	@media(prefers-reduced-motion:reduce){.art.f0,.art.f1,.art.f2,.art.f3,.art.f4{animation:none!important}.art.f2::before{animation:none!important}}
+
+	/* Silver mirror reflection: a narrow diagonal highlight that reads as real foil. */
+	.art.f0::after,.art.f1::after,.art.f3::after,.art.f4::after{background:linear-gradient(118deg,transparent 0%,transparent 32%,rgba(255,255,255,.04) 39%,rgba(220,232,240,.55) 44%,rgba(255,255,255,.98) 48%,rgba(220,232,240,.62) 52%,rgba(255,255,255,.08) 59%,transparent 67%,transparent 100%) 0 0/255% 100% no-repeat!important;animation:silverDiagonalSweep 1.9s cubic-bezier(.4,0,.2,1) infinite!important;opacity:.78!important}
+	.art.f2::after{background:linear-gradient(118deg,transparent 0%,transparent 30%,rgba(255,255,255,.05) 38%,rgba(215,242,255,.55) 43%,rgba(255,255,255,1) 48%,rgba(255,216,246,.7) 52%,rgba(255,255,255,.1) 60%,transparent 68%,transparent 100%) 0 0/255% 100% no-repeat,linear-gradient(125deg,rgba(255,47,173,.27),rgba(255,215,73,.22),rgba(60,239,202,.2),rgba(70,178,255,.26),rgba(193,90,255,.3)) 0 0/280% 280%!important;animation:silverDiagonalRainbow 2.05s cubic-bezier(.4,0,.2,1) infinite!important;opacity:.86!important}
+	@keyframes silverDiagonalSweep{0%{background-position:150% 0;filter:brightness(.95)}18%{filter:brightness(1.05)}50%{background-position:35% 0;filter:brightness(1.32)}68%{filter:brightness(1.06)}100%{background-position:-80% 0;filter:brightness(.95)}}
+	@keyframes silverDiagonalRainbow{0%{background-position:150% 0,0 0;filter:brightness(.95)}50%{background-position:35% 0,45% 45%;filter:brightness(1.26)}100%{background-position:-80% 0,100% 100%;filter:brightness(.95)}}
+	@media(prefers-reduced-motion:reduce){.art.f0::after,.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after{animation:none!important}}
+
+	/* Final holo treatment: no parked white stripe; only a moving, transparent diagonal wave. */
+	.art.f0,.art.f1,.art.f2,.art.f3,.art.f4{border-width:2px!important;animation:holoFrameGlow 2.6s ease-in-out infinite}
+	.art.f0::after,.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after{background:linear-gradient(135deg,transparent 24%,rgba(255,255,255,0) 38%,rgba(255,255,255,.18) 46%,rgba(255,255,255,.34) 50%,rgba(255,255,255,.12) 54%,rgba(255,255,255,0) 63%,transparent 76%) 0 0/185% 185% no-repeat!important;animation:holoWaveDiagonal 2.35s cubic-bezier(.35,.05,.3,1) infinite!important;opacity:.72!important;filter:saturate(1.15)}
+	.art.f0::after{background:linear-gradient(135deg,transparent 24%,rgba(220,240,255,0) 38%,rgba(210,235,255,.2) 46%,rgba(255,255,255,.46) 50%,rgba(185,220,255,.13) 54%,rgba(255,255,255,0) 63%,transparent 76%) 0 0/185% 185% no-repeat!important}
+	.art.f1::after{background:linear-gradient(135deg,transparent 24%,rgba(255,224,125,0) 38%,rgba(255,225,93,.18) 46%,rgba(255,255,220,.43) 50%,rgba(255,183,41,.14) 54%,rgba(255,255,255,0) 63%,transparent 76%) 0 0/185% 185% no-repeat!important}
+	.art.f2::after{background:linear-gradient(135deg,transparent 21%,rgba(255,255,255,0) 35%,rgba(255,101,218,.17) 43%,rgba(255,255,255,.42) 49%,rgba(95,235,255,.24) 54%,rgba(255,255,255,0) 64%,transparent 79%) 0 0/185% 185% no-repeat,linear-gradient(135deg,rgba(255,68,190,.12),rgba(255,218,82,.1),rgba(74,239,206,.1),rgba(80,185,255,.12),rgba(186,105,255,.13)) 0 0/230% 230% no-repeat!important;opacity:.8!important}
+	.art.f3::after{background:linear-gradient(135deg,transparent 24%,rgba(255,110,202,0) 38%,rgba(255,121,206,.22) 46%,rgba(255,242,255,.46) 50%,rgba(255,67,177,.15) 54%,rgba(255,255,255,0) 63%,transparent 76%) 0 0/185% 185% no-repeat!important}
+	.art.f4::after{background:linear-gradient(135deg,transparent 24%,rgba(255,97,81,0) 38%,rgba(255,117,76,.2) 46%,rgba(255,255,218,.48) 50%,rgba(255,191,52,.16) 54%,rgba(255,255,255,0) 63%,transparent 76%) 0 0/185% 185% no-repeat!important}
+	.art.f0{border-color:#a9d9ff!important;box-shadow:0 0 0 1px #e9f7ff,0 0 8px #65b9ff,0 0 18px #327dff99!important}
+	.art.f1{border-color:#ffe272!important;box-shadow:0 0 0 1px #fff5b5,0 0 9px #ffc928,0 0 20px #ff8d1caa!important}
+	.art.f2{border-color:#ff7ee8!important;box-shadow:0 0 0 1px #fff,0 0 9px #ff3fcf,0 0 18px #33dbff,0 0 29px #a83dffbb!important}
+	.art.f3{border-color:#ff83c9!important;box-shadow:0 0 0 1px #ffe9f7,0 0 9px #ff36b5,0 0 21px #fa3d9faa!important}
+	.art.f4{border-color:#ff8062!important;box-shadow:0 0 0 1px #fff0a2,0 0 9px #ff4e43,0 0 22px #ff9e2daa!important}
+	@keyframes holoWaveDiagonal{0%{background-position:-115% -115%;opacity:.04}18%{opacity:.22}48%{background-position:0 0;opacity:.66}68%{opacity:.24}100%{background-position:115% 115%;opacity:.04}}
+	@keyframes holoFrameGlow{0%,100%{filter:brightness(.98)}50%{filter:brightness(1.08)}}
+	@media(prefers-reduced-motion:reduce){.art.f0,.art.f1,.art.f2,.art.f3,.art.f4{animation:none!important}.art.f0::after,.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after{animation:none!important;opacity:.14!important}}
+	.cardDetail{margin:12px 0;padding:10px 12px;border:1px solid #6d568b;border-left:3px solid var(--gold);border-radius:8px;background:linear-gradient(135deg,rgba(244,201,107,.12),rgba(139,107,209,.08));box-shadow:inset 0 0 14px rgba(244,201,107,.05)}
+	.cardDetail>b{display:block;margin-bottom:4px;color:var(--gold);font:700 15px "Barlow Condensed",sans-serif;letter-spacing:.03em}.cardDetail p{margin:0;color:var(--ink);font-size:13px;line-height:1.5;white-space:pre-wrap}
 	</style>
 </head>
 <body>
@@ -962,9 +988,10 @@ $("pvCards").onclick=e=>{const f=e.target.closest("[data-fav]");if(f){e.preventD
 /* Card popup */
 function openLB(c,options={}){
   const r=[["Card No.",c.no],["Nation",natTxt(c)],["Card type",c.unit],["Grade",c.grade],["Power",c.power],["Protection / Shield",c.shield],["Rarity",c.rarity],["Trigger",c.trigger],["Product",c.pname],["In collection",c.collectionCount==null?"":c.collectionCount+" copies"]].filter(x=>x[1]!=="");
-  const lastEditor=c.lastEditedByName||c.lastEditedBy;const lastMeta=lastEditor||c.lastEditedAt?`<p class="dto lastMeta">แก้ไขล่าสุดโดย <b>${h(lastEditor||"ผู้ใช้")}</b>${c.lastEditedAt?" · "+h(new Date(c.lastEditedAt).toLocaleString("th-TH")):""}</p>`:"";
+  const cardDescription=String(c.description||"").trim();
+  const detailBlock=`<div class="cardDetail"><b>รายละเอียดการ์ด</b><p>${h(cardDescription||"ยังไม่มีรายละเอียดการ์ด")}</p></div>`;
   const action=options.readonly?`<p class="dto">${options.source==="collection"?"การ์ดนี้อยู่ในคลังสะสม · ไม่ได้เพิ่มเข้าเด็ค":"รายละเอียดการ์ดใน Banlist"}</p>`:'<button class="btn primary" id="lbAdd">Add to deck</button> <button class="btn ed" id="lbEdit">Edit this card</button>';
-  $("lbBody").innerHTML=`${art(c,1)}<div><h3>${h(c.name)}</h3><button type="button" class="lbFav${isFav(c.id)?" on":""}" id="lbFav">${isFav(c.id)?"★ อยู่ใน Favourite":"☆ เพิ่ม Favourite"}</button>${lastMeta}<dl>${r.map(x=>`<dt>${x[0]}</dt><dd>${h(x[1])}</dd>`).join("")}</dl>${action}</div>`;
+  $("lbBody").innerHTML=`${art(c,1)}<div><h3>${h(c.name)}</h3><button type="button" class="lbFav${isFav(c.id)?" on":""}" id="lbFav">${isFav(c.id)?"★ อยู่ใน Favourite":"☆ เพิ่ม Favourite"}</button>${detailBlock}<dl>${r.map(x=>`<dt>${x[0]}</dt><dd>${h(x[1])}</dd>`).join("")}</dl>${action}</div>`;
   $("lbFav").onclick=async()=>{await toggleFavourite(c.id);openLB(c,options)};
   if(!options.readonly){
     $("lbEdit").onclick=()=>{$("lb").close();cardForm(c,c.pid)};
@@ -1598,12 +1625,21 @@ function pkPack(pool){
 
 /* ---------- หน้าจอเปิดซอง ---------- */
 const GA={open:false,pid:"",qty:0,packs:[],pi:0,cards:[],rev:0,all:[],pendingWrites:[]};
-let tearP=0,tg=null,autoT=0,SOUND_ON=true,audioCtx=null;
-try{SOUND_ON=localStorage.getItem("cardlist-gacha-sound")!=="0"}catch(e){}
-function soundInit(){if(!SOUND_ON)return null;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;try{audioCtx=audioCtx||new AC();if(audioCtx.state==="suspended")audioCtx.resume();return audioCtx}catch(e){return null}}
-function tone(ctx,freq,start,dur,gain=.045,type="sine",endFreq=0){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(freq,start);if(endFreq)o.frequency.exponentialRampToValueAtTime(Math.max(20,endFreq),start+dur);g.gain.setValueAtTime(.0001,start);g.gain.exponentialRampToValueAtTime(gain,start+.012);g.gain.exponentialRampToValueAtTime(.0001,start+dur);o.connect(g);g.connect(ctx.destination);o.start(start);o.stop(start+dur+.02)}
-function noisePop(ctx,start,dur,gain=.035,cut=1800){const n=Math.max(1,Math.floor(ctx.sampleRate*dur)),b=ctx.createBuffer(1,n,ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);const src=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();src.buffer=b;f.type="lowpass";f.frequency.value=cut;g.gain.setValueAtTime(gain,start);g.gain.exponentialRampToValueAtTime(.0001,start+dur);src.connect(f);f.connect(g);g.connect(ctx.destination);src.start(start);src.stop(start+dur)}
-function gachaSound(kind,rare=false){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;if(kind==="tear"){noisePop(ctx,t,.24,.07,1500);tone(ctx,430,t,.19,.035,"triangle",170);tone(ctx,110,t+.04,.16,.045,"sine",58)}else if(kind==="flip"){noisePop(ctx,t,.055,.025,2600);tone(ctx,rare?1050:690,t+.015,.11,rare?.065:.035,"triangle",rare?1680:920);if(rare)[1320,1760,2200].forEach((f,i)=>tone(ctx,f,t+.06+i*.075,.42,.035,"sine",f*1.04))}}
+	let tearP=0,tg=null,autoT=0,SOUND_ON=true,audioCtx=null;
+	try{SOUND_ON=localStorage.getItem("cardlist-gacha-sound")!=="0"}catch(e){}
+	function soundInit(){if(!SOUND_ON)return null;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;try{audioCtx=audioCtx||new AC();if(audioCtx.state==="suspended")audioCtx.resume();return audioCtx}catch(e){return null}}
+	function tone(ctx,freq,start,dur,gain=.045,type="sine",endFreq=0){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(freq,start);if(endFreq)o.frequency.exponentialRampToValueAtTime(Math.max(20,endFreq),start+dur);g.gain.setValueAtTime(.0001,start);g.gain.exponentialRampToValueAtTime(gain,start+.012);g.gain.exponentialRampToValueAtTime(.0001,start+dur);o.connect(g);g.connect(ctx.destination);o.start(start);o.stop(start+dur+.02)}
+	function noisePop(ctx,start,dur,gain=.035,cut=1800){const n=Math.max(1,Math.floor(ctx.sampleRate*dur)),b=ctx.createBuffer(1,n,ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);const src=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();src.buffer=b;f.type="lowpass";f.frequency.value=cut;g.gain.setValueAtTime(gain,start);g.gain.exponentialRampToValueAtTime(.0001,start+dur);src.connect(f);f.connect(g);g.connect(ctx.destination);src.start(start);src.stop(start+dur)}
+	const RARITY_SOUNDS={
+	  common:{base:520,top:660,type:"sine",gain:.026,notes:[]},
+	  silver:{base:720,top:980,type:"triangle",gain:.038,notes:[1080]},
+	  gold:{base:820,top:1240,type:"triangle",gain:.052,notes:[1320,1660]},
+	  rainbow:{base:980,top:1540,type:"sine",gain:.052,notes:[1240,1560,1960,2440]},
+	  pink:{base:880,top:1380,type:"triangle",gain:.05,notes:[1175,1480,1860]},
+	  crimson:{base:460,top:900,type:"sawtooth",gain:.05,notes:[740,1100,1480]}
+	};
+	function raritySoundKey(rarity){const r=String(rarity||"").trim().toUpperCase();if(["SP","SSP"].includes(r))return "pink";if(["SEC","SSR","SCR"].includes(r))return "crimson";if(["SVR","GR","FR","FFR","OR","OVR","ORR","DSR","ZR","X"].includes(r))return "rainbow";if(r==="RRR")return "gold";if(["R","RR"].includes(r))return "silver";return "common"}
+	function gachaSound(kind,rarity=""){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;if(kind==="tear"){noisePop(ctx,t,.24,.07,1500);tone(ctx,430,t,.19,.035,"triangle",170);tone(ctx,110,t+.04,.16,.045,"sine",58)}else if(kind==="flip"){const p=RARITY_SOUNDS[raritySoundKey(rarity)]||RARITY_SOUNDS.common;noisePop(ctx,t,.055,.018,2600);tone(ctx,p.base,t+.015,.12,p.gain,p.type,p.top);p.notes.forEach((f,i)=>tone(ctx,f,t+.075+i*.065,.28,p.gain*.62,i%2?"sine":"triangle",f*1.015))}}
 const trackW=()=>$("pkTrack").getBoundingClientRect().width||1;
 
 function tearSet(p){
@@ -1680,8 +1716,8 @@ function pkFlip(i){
   const el=$("gCards").querySelector('.pkCard[data-i="'+i+'"]');
   if(!el||el.classList.contains("open"))return;
   el.classList.add("open");
-  const r=GA.cards[i],rare=!!(r&&String(r.c.rarity||"").trim().toUpperCase()==="RRR");
-  gachaSound("flip",rare);
+	  const r=GA.cards[i],rarity=String(r?.c?.rarity||"").trim();
+	  gachaSound("flip",rarity);
   if(r&&r.guar)el.classList.add("guar");
   GA.rev++;
   if(GA.rev>=GA.cards.length)pkPackDone();
