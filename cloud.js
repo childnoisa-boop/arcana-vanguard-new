@@ -174,8 +174,15 @@
     fail(error);
   }
 
-  async function saveCatalog(db) {
+  async function saveCatalog(db, options = {}) {
     required();
+    let catalogCoreSaved = false;
+    const saveFail = (error) => {
+      if (!error) return;
+      const out = new Error(error.message || String(error));
+      if (catalogCoreSaved) out.catalogSaved = true;
+      throw out;
+    };
     // Save shared UI settings first so Nations / types / zones survive even if
     // a catalog write is rejected by an older Supabase policy.
     if (db.settings) await saveAppSettings(db.settings);
@@ -209,31 +216,40 @@
         links.push({ product_id: product.id, card_id: card.id, product_card_no: String(card.no || '') || null });
       }
     }
-    for (const batch of chunks(products)) { const { error } = await client.from('catalog_products').upsert(batch, { onConflict: 'id' }); fail(error); }
-    for (const batch of chunks([...allCards.values()])) { const { error } = await client.from('catalog_cards').upsert(batch, { onConflict: 'id' }); fail(error); }
+    for (const batch of chunks(products)) { const { error } = await client.from('catalog_products').upsert(batch, { onConflict: 'id' }); saveFail(error); }
+    if (!options.skipCards) {
+      for (const batch of chunks([...allCards.values()])) { const { error } = await client.from('catalog_cards').upsert(batch, { onConflict: 'id' }); saveFail(error); }
+    }
+    // The product/card rows are the user-visible catalog data. Later link and
+    // cleanup operations should not turn a committed card edit into a false failure.
+    catalogCoreSaved = true;
 
     const currentProductIds = products.map((x) => x.id);
+    if (options.skipCards) {
+      catalogSnapshot = { productIds: currentProductIds, cardIds: catalogSnapshot.cardIds };
+      return;
+    }
     for (const productId of currentProductIds) {
       const currentCards = links.filter((x) => x.product_id === productId).map((x) => x.card_id);
       const existing = await rows('product_cards', client.from('product_cards').select('card_id').eq('product_id', productId));
       const removedLinks = existing.map((x) => x.card_id).filter((id) => !currentCards.includes(id));
-      if (removedLinks.length) { const { error } = await client.from('product_cards').delete().eq('product_id', productId).in('card_id', removedLinks); fail(error); }
+      if (removedLinks.length) { const { error } = await client.from('product_cards').delete().eq('product_id', productId).in('card_id', removedLinks); saveFail(error); }
     }
     const removedProducts = catalogSnapshot.productIds.filter((id) => !currentProductIds.includes(id));
-    for (const productId of removedProducts) { const { error } = await client.from('product_cards').delete().eq('product_id', productId); fail(error); }
-    for (const batch of chunks(links)) { const { error } = await client.from('product_cards').upsert(batch, { onConflict: 'product_id,card_id' }); fail(error); }
+    for (const productId of removedProducts) { const { error } = await client.from('product_cards').delete().eq('product_id', productId); saveFail(error); }
+    for (const batch of chunks(links)) { const { error } = await client.from('product_cards').upsert(batch, { onConflict: 'product_id,card_id' }); saveFail(error); }
 
 
     if (removedProducts.length) {
       const { error } = await client.from('catalog_products').update({ deleted_at: new Date().toISOString() }).in('id', removedProducts);
-      fail(error);
+      saveFail(error);
     }
     const currentCardIds = [...allCards.keys()];
     const removedCards = catalogSnapshot.cardIds.filter((id) => !currentCardIds.includes(id));
     if (removedCards.length) {
       // Keep rows referenced by decks/recipes/collection; soft deletion is reversible.
       const { error } = await client.from('catalog_cards').update({ deleted_at: new Date().toISOString() }).in('id', removedCards);
-      fail(error);
+      saveFail(error);
     }
     catalogSnapshot = { productIds: currentProductIds, cardIds: currentCardIds };
   }

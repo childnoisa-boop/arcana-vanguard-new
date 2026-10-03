@@ -11,6 +11,7 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.5 Barlow,Arial,sans-serif}
 .wrap{max-width:1000px;margin:0 auto;padding:24px 16px 48px}
+.fanmadeNotice{margin:0 0 12px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--mute);font-size:13px;text-align:center}
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
 h1{font:700 44px/1 "Barlow Condensed",Arial,sans-serif;margin:0;border-left:6px solid var(--red);padding-left:12px}
 [hidden]{display:none!important}
@@ -560,13 +561,13 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 	@keyframes referenceTwinkle{0%,20%{opacity:0;transform:scale(.8)}50%{opacity:.72;transform:scale(1.12)}80%,100%{opacity:0;transform:scale(.8)}}
 	@keyframes frameGlowPulse{0%,100%{filter:brightness(.98) drop-shadow(0 0 1px rgba(var(--foil-color),.35))}45%{filter:brightness(1.06) drop-shadow(0 0 6px rgba(var(--foil-color),.65))}68%{filter:brightness(1) drop-shadow(0 0 2px rgba(var(--foil-color),.42))}}
 	@media(prefers-reduced-motion:reduce){.art:not(.back){animation:none!important}.art:not(.back)>.fx,.art:not(.back)>.fx::before,.art:not(.back)>.fx::after{animation:none!important}.art:not(.back)>.fx{opacity:.18!important}}
-	.rarityShowcaseHead{margin:0 0 18px;padding:20px 22px;border:1px solid #806342;border-radius:16px;background:linear-gradient(135deg,#211b3d,#101326);box-shadow:0 12px 28px #0007,inset 0 0 24px #8b6bd122}.rarityShowcaseHead h2{margin:0 0 6px;color:var(--gold-soft);font:700 clamp(24px,4vw,34px) Cinzel,serif}.rarityShowcase{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:20px}.raritySample{min-width:0;padding:14px;border:1px solid #8a704c;border-radius:11px;background:linear-gradient(145deg,#201a3b,#0d1122);box-shadow:inset 0 0 0 3px #2c2147,inset 0 0 0 4px #806342,0 12px 26px #0008;text-align:center;position:relative}.raritySample:before{content:"";position:absolute;inset:7px;border:1px solid #f5d89233;border-radius:7px;pointer-events:none}.raritySample .art{width:min(100%,158px);margin:0 auto 12px;border-radius:7px;box-shadow:0 7px 16px #0009}.raritySample b{display:block;color:var(--gold-soft);font:700 18px "Barlow Condensed",sans-serif;letter-spacing:.04em}.raritySample small{display:block;margin-top:3px;color:var(--mute);font-size:11px;line-height:1.35}.raritySampleTier{margin:24px 0 8px;color:#d9c8ed;font:700 18px Cinzel,serif;grid-column:1/-1;border-bottom:1px solid #493b67;padding-bottom:7px}.raritySampleTier:first-child{margin-top:0}@media(max-width:650px){.rarityShowcase{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.raritySample{padding:10px}.raritySample .art{width:min(100%,145px)}.raritySample b{font-size:15px}.raritySample small{font-size:10px}}
+	.rarityShowcaseTools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}.rarityShowcaseTools .dto{margin:0}.rarityShowcaseHead{margin:0 0 18px;padding:20px 22px;border:1px solid #806342;border-radius:16px;background:linear-gradient(135deg,#211b3d,#101326);box-shadow:0 12px 28px #0007,inset 0 0 24px #8b6bd122}.rarityShowcaseHead h2{margin:0 0 6px;color:var(--gold-soft);font:700 clamp(24px,4vw,34px) Cinzel,serif}.rarityShowcase{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:20px}.raritySample{min-width:0;padding:14px;border:1px solid #8a704c;border-radius:11px;background:linear-gradient(145deg,#201a3b,#0d1122);box-shadow:inset 0 0 0 3px #2c2147,inset 0 0 0 4px #806342,0 12px 26px #0008;text-align:center;position:relative}.raritySample:before{content:"";position:absolute;inset:7px;border:1px solid #f5d89233;border-radius:7px;pointer-events:none}.raritySample .art{width:min(100%,158px);margin:0 auto 12px;border-radius:7px;box-shadow:0 7px 16px #0009}.raritySample b{display:block;color:var(--gold-soft);font:700 18px "Barlow Condensed",sans-serif;letter-spacing:.04em}.raritySample small{display:block;margin-top:3px;color:var(--mute);font-size:11px;line-height:1.35}.raritySampleTier{margin:24px 0 8px;color:#d9c8ed;font:700 18px Cinzel,serif;grid-column:1/-1;border-bottom:1px solid #493b67;padding-bottom:7px}.raritySampleTier:first-child{margin-top:0}@media(max-width:650px){.rarityShowcase{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.raritySample{padding:10px}.raritySample .art{width:min(100%,145px)}.raritySample b{font-size:15px}.raritySample small{font-size:10px}}
 	/* Use the picture-frame rarity border on every real card, not only the Showcase samples. */
 	.art:not(.back){box-sizing:border-box;border:3px solid rgba(var(--foil-color),.84)!important;border-radius:8px!important;box-shadow:0 0 0 1px rgba(var(--foil-color),.72),inset 0 0 0 1px rgba(255,255,255,.3),inset 0 0 0 4px rgba(var(--foil-color),.24),0 8px 20px rgba(8,12,28,.58)!important}
 	.art:not(.back)::before{inset:2px!important;border:1px solid rgba(255,255,255,.24)!important;box-shadow:inset 0 0 0 1px rgba(var(--foil-color),.58),inset 0 0 9px rgba(var(--foil-color),.46)!important}
 	.art.f2{border-color:transparent!important;box-shadow:0 0 0 1px rgba(255,255,255,.9),0 0 12px rgba(255,60,210,.7),0 0 22px rgba(45,210,255,.55),0 0 32px rgba(170,60,255,.35)!important}
 	/* Rainbow frame must occupy the complete perimeter after the shared real-card frame rules. */
-	.art.f2::before{content:""!important;inset:0!important;border:0!important;padding:3px!important;border-radius:inherit!important;background:conic-gradient(from var(--rainbow-angle),#ff174f 0 14%,#ff9d19 14% 28%,#fff02a 28% 42%,#25e889 42% 56%,#20c8ff 56% 70%,#695cff 70% 84%,#e42cff 84% 93%,#ff174f 93% 100%)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:0 0 7px rgba(255,80,220,.9),0 0 15px rgba(45,220,255,.72),inset 0 0 5px rgba(255,255,255,.72)!important;animation:rainbowFrameSpin 3.6s linear infinite!important}
+	.art.f2::before{content:""!important;inset:0!important;border:0!important;padding:3px!important;border-radius:inherit!important;background:conic-gradient(from var(--rainbow-angle),#ff003c 0 14%,#ff8500 14% 28%,#fff000 28% 42%,#00f878 42% 56%,#00d9ff 56% 70%,#4c50ff 70% 84%,#ed00ff 84% 93%,#ff003c 93% 100%)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:0 0 7px rgba(255,80,220,.9),0 0 15px rgba(45,220,255,.72),inset 0 0 5px rgba(255,255,255,.72)!important;animation:rainbowFrameSpin 3.6s linear infinite!important}
 	/* Every rarity gets its own RGB-like tone, glossy Holo edge, and soft aura. */
 	@property --tone-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
 	.art.f0{--tone-angle:0deg;--tone-a:#62cfff;--tone-b:#dffaff;--tone-c:#268bd5;box-shadow:0 0 0 1px #b9f3ff,0 0 9px #51caffaa,0 0 22px #247fd855!important}
@@ -608,6 +609,12 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 	.art.f5{--foil-color:105,190,255;border-color:#bfe8ff!important;box-shadow:0 0 0 1px rgba(235,251,255,.8),0 0 8px rgba(92,198,255,.42),0 0 17px rgba(42,130,235,.22)!important}
 	.art.f5::before{background:linear-gradient(135deg,#e9fbff,#62cfff 28%,#bfefff 52%,#268bd5 76%,#e9fbff)!important;opacity:.8!important}
 	.art.f5::after{background:linear-gradient(135deg,transparent 27%,rgba(220,246,255,.12) 42%,rgba(255,255,255,.62) 50%,rgba(165,220,255,.14) 58%,transparent 72%)!important;opacity:.46!important;animation:diagonalHoloSweep 5.8s ease-in-out infinite!important}
+	/* SR uses a bright platinum mirror finish, intentionally distinct from RR's blue-silver f5. */
+	.art.f6{--foil-color:226,232,240;border:2px solid #f7fafc!important;box-shadow:0 0 0 1px #ffffff,0 0 8px rgba(255,255,255,.72),0 0 17px rgba(174,187,204,.5)!important}
+	.art.f6::before{display:block!important;content:""!important;inset:0!important;padding:2px!important;border:0!important;background:linear-gradient(112deg,#8d99a8 0%,#ffffff 18%,#c9d1db 34%,#ffffff 50%,#9faab8 68%,#f8fafc 84%,#8793a1 100%)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:inset 0 0 5px rgba(255,255,255,.92),0 0 6px rgba(210,220,232,.68)!important;opacity:.96!important;animation:srPlatinumFrame 4.8s ease-in-out infinite!important}
+	.art.f6::after{background:linear-gradient(132deg,transparent 28%,rgba(255,255,255,.08) 40%,rgba(255,255,255,.92) 49%,rgba(214,224,235,.22) 56%,transparent 70%)!important;opacity:.7!important;animation:srPlatinumSweep 4.2s cubic-bezier(.4,0,.2,1) infinite!important}
+	@keyframes srPlatinumFrame{0%,100%{filter:brightness(.96)}48%{filter:brightness(1.12)}70%{filter:brightness(1)}}
+	@keyframes srPlatinumSweep{0%{background-position:145% 0}50%{background-position:35% 0}100%{background-position:-75% 0}}
 	.art:not(.back)[data-card-id]{cursor:pointer}
 	.art:not(.back)[data-card-id]:focus-visible{outline:2px solid #fff1b2;outline-offset:4px}
 	.art:not(.back).is-card-focused{animation:rarityClickGlow .72s ease-out!important}
@@ -646,28 +653,78 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 	.art .ref-holo,.art .ref-glare,.art .ref-sweep,.art .ref-spark{display:none;position:absolute;pointer-events:none}
 	#lbBody .art .ref-holo,#lbBody .art .ref-glare,#lbBody .art .ref-sweep,#lbBody .art .ref-spark,#p5 .pkCard.open .pkff .art .ref-holo,#p5 .pkCard.open .pkff .art .ref-glare,#p5 .pkCard.open .pkff .art .ref-sweep,#p5 .pkCard.open .pkff .art .ref-spark{display:block}
 	#lbBody .art,#p5 .pkCard.open .pkff .art{transform:perspective(900px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));transition:transform .35s ease-out;overflow:hidden}
-	.art .ref-holo{inset:0;z-index:6;border-radius:inherit;opacity:.42;mix-blend-mode:color-dodge;background:repeating-linear-gradient(115deg,#ff0080 0%,#ff8c00 10%,#ffe600 20%,#00ff95 30%,#00c8ff 40%,#8a2bff 50%,#ff0080 60%);background-size:300% 300%;animation:referenceHolo 8s ease-in-out infinite alternate;filter:saturate(1.2) brightness(.75)}
+	.art .ref-holo{inset:0;z-index:6;border-radius:inherit;opacity:.24;mix-blend-mode:color-dodge;background:repeating-linear-gradient(115deg,#ff0080 0%,#ff8c00 10%,#ffe600 20%,#00ff95 30%,#00c8ff 40%,#8a2bff 50%,#ff0080 60%);background-size:300% 300%;animation:referenceHolo 8s ease-in-out infinite alternate;filter:saturate(1.05) brightness(.7)}
 	.art .ref-glare{inset:0;z-index:7;border-radius:inherit;opacity:0;mix-blend-mode:overlay;background:radial-gradient(circle at var(--shine-x,50%) var(--shine-y,50%),rgba(255,255,255,.55),transparent 45%);transition:opacity .2s}
 	#lbBody .art:hover .ref-glare,#p5 .pkCard.open .pkff .art:hover .ref-glare{opacity:1}
-	.art .ref-sweep{inset:-50%;z-index:8;background:linear-gradient(135deg,transparent 38%,rgba(var(--foil-color),.2) 46%,rgba(255,255,255,.55) 50%,rgba(var(--foil-color),.2) 54%,transparent 62%);transform:translate(-32%,-32%);opacity:0;animation:referenceSweep var(--ref-speed,4s) ease-in-out infinite;animation-delay:var(--ref-delay,0s)}
+	.art .ref-sweep{inset:-50%;z-index:8;background:linear-gradient(135deg,transparent 38%,rgba(var(--foil-color),.12) 46%,rgba(255,255,255,.3) 50%,rgba(var(--foil-color),.12) 54%,transparent 62%);transform:translate(-32%,-32%);opacity:0;animation:referenceSweep var(--ref-speed,4s) ease-in-out infinite;animation-delay:var(--ref-delay,0s)}
 	#lbBody .art .ref-sweep,#p5 .pkCard.open .pkff .art .ref-sweep{--ref-speed:3.2s;--ref-delay:-.8s}
-	.art .ref-spark{z-index:9;width:8%;height:8%;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);filter:drop-shadow(0 0 4px rgba(var(--foil-color),.9));animation:referenceTwinkle 2.4s ease-in-out infinite}
+	.art .ref-spark{z-index:9;width:8%;height:8%;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);filter:drop-shadow(0 0 3px rgba(var(--foil-color),.65));animation:referenceTwinkle 2.4s ease-in-out infinite}
 	.art .ref-spark.s1{left:15%;top:25%;animation-delay:-.7s}.art .ref-spark.s2{left:65%;top:55%;animation-delay:-1.8s}.art .ref-spark.s3{left:82%;top:18%;animation-delay:-1.2s}
 	@keyframes referenceHolo{from{background-position:0% 20%}to{background-position:100% 80%}}
 	@keyframes referenceSweep{0%{transform:translate(-32%,-32%);opacity:0}12%{opacity:1}50%{transform:translate(32%,32%);opacity:1}62%,100%{transform:translate(32%,32%);opacity:0}}
-	.ref-flash{position:fixed;inset:-60%;z-index:80;pointer-events:none;overflow:hidden;background:linear-gradient(135deg,transparent 36%,rgba(var(--reveal-color),.35) 45%,rgba(255,255,255,.82) 50%,rgba(var(--reveal-color),.35) 55%,transparent 64%);animation:referenceFlash 1.05s ease-out forwards}.ref-burst-spark{position:fixed;z-index:81;width:12px;height:12px;pointer-events:none;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);filter:drop-shadow(0 0 6px rgba(var(--reveal-color),.95));animation:referenceBurstSpark 1.8s ease-out forwards}@keyframes referenceFlash{from{transform:translate(-30%,-30%);opacity:1}to{transform:translate(30%,30%);opacity:0}}@keyframes referenceBurstSpark{0%{opacity:0;transform:translate(0,0) scale(.2)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1)}}
+	.ref-flash{position:fixed;inset:-60%;z-index:80;pointer-events:none;overflow:hidden;background:linear-gradient(135deg,transparent 36%,rgba(var(--reveal-color),.2) 45%,rgba(255,255,255,.42) 50%,rgba(var(--reveal-color),.2) 55%,transparent 64%);animation:referenceFlash 1.05s ease-out forwards}.ref-burst-spark{position:fixed;z-index:81;width:12px;height:12px;pointer-events:none;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);filter:drop-shadow(0 0 3px rgba(var(--reveal-color),.6));animation:referenceBurstSpark 1.8s ease-out forwards}@keyframes referenceFlash{from{transform:translate(-30%,-30%);opacity:.7}to{transform:translate(30%,30%);opacity:0}}@keyframes referenceBurstSpark{0%{opacity:0;transform:translate(0,0) scale(.2)}20%{opacity:.65}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1)}}
 	/* Basic rarities C / U / R stay clean: no aura, Holo, curtain, glare or sparks. */
-	.art[data-card-rarity="C"],.art[data-card-rarity="U"],.art[data-card-rarity="R"]{box-shadow:none!important;filter:none!important}
-	.art[data-card-rarity="C"] .ref-holo,.art[data-card-rarity="C"] .ref-glare,.art[data-card-rarity="C"] .ref-sweep,.art[data-card-rarity="C"] .ref-spark,.art[data-card-rarity="U"] .ref-holo,.art[data-card-rarity="U"] .ref-glare,.art[data-card-rarity="U"] .ref-sweep,.art[data-card-rarity="U"] .ref-spark,.art[data-card-rarity="R"] .ref-holo,.art[data-card-rarity="R"] .ref-glare,.art[data-card-rarity="R"] .ref-sweep,.art[data-card-rarity="R"] .ref-spark{display:none!important;animation:none!important}
+	.art[data-card-rarity="C"],.art[data-card-rarity="U"],.art[data-card-rarity="R"],.art[data-card-rarity="T"]{box-shadow:none!important;filter:none!important}
+	.art[data-card-rarity="C"] .ref-holo,.art[data-card-rarity="C"] .ref-glare,.art[data-card-rarity="C"] .ref-sweep,.art[data-card-rarity="C"] .ref-spark,.art[data-card-rarity="U"] .ref-holo,.art[data-card-rarity="U"] .ref-glare,.art[data-card-rarity="U"] .ref-sweep,.art[data-card-rarity="U"] .ref-spark,.art[data-card-rarity="R"] .ref-holo,.art[data-card-rarity="R"] .ref-glare,.art[data-card-rarity="R"] .ref-sweep,.art[data-card-rarity="R"] .ref-spark,.art[data-card-rarity="T"] .ref-holo,.art[data-card-rarity="T"] .ref-glare,.art[data-card-rarity="T"] .ref-sweep,.art[data-card-rarity="T"] .ref-spark{display:none!important;animation:none!important}
+	/* Softer Holo: reduce brightness and rainbow saturation while keeping the moving reflection. */
+	.art .ref-holo{opacity:.13!important;filter:saturate(.42) brightness(.58)!important;background:repeating-linear-gradient(115deg,#dcecff 0%,#b9c8dc 18%,#f6fbff 32%,#8ca7c2 48%,#dcecff 64%,#aebbd0 82%,#dcecff 100%)!important;background-size:300% 300%!important}
+	.art .ref-sweep{background:linear-gradient(135deg,transparent 38%,rgba(var(--foil-color),.07) 46%,rgba(255,255,255,.2) 50%,rgba(var(--foil-color),.07) 54%,transparent 62%)!important}
+	.art .ref-glare{opacity:0!important}
+	#lbBody .art:hover .ref-glare,#p5 .pkCard.open .pkff .art:hover .ref-glare{opacity:.35!important}
 	/* Gacha exception: higher rarities show the full reference effect when revealed. */
 	#p5 .pkCard.open .pkff .art.f1 .ref-holo,#p5 .pkCard.open .pkff .art.f1 .ref-glare,#p5 .pkCard.open .pkff .art.f1 .ref-sweep,#p5 .pkCard.open .pkff .art.f1 .ref-spark,#p5 .pkCard.open .pkff .art.f2 .ref-holo,#p5 .pkCard.open .pkff .art.f2 .ref-glare,#p5 .pkCard.open .pkff .art.f2 .ref-sweep,#p5 .pkCard.open .pkff .art.f2 .ref-spark,#p5 .pkCard.open .pkff .art.f3 .ref-holo,#p5 .pkCard.open .pkff .art.f3 .ref-glare,#p5 .pkCard.open .pkff .art.f3 .ref-sweep,#p5 .pkCard.open .pkff .art.f3 .ref-spark,#p5 .pkCard.open .pkff .art.f4 .ref-holo,#p5 .pkCard.open .pkff .art.f4 .ref-glare,#p5 .pkCard.open .pkff .art.f4 .ref-sweep,#p5 .pkCard.open .pkff .art.f4 .ref-spark,#p5 .pkCard.open .pkff .art.f5 .ref-holo,#p5 .pkCard.open .pkff .art.f5 .ref-glare,#p5 .pkCard.open .pkff .art.f5 .ref-sweep,#p5 .pkCard.open .pkff .art.f5 .ref-spark{display:block!important}
+
+
+  /* Final SR override: restore the platinum frame after the shared aura rules. */
+  .art.f6{border:2px solid #f7fafc!important;box-shadow:0 0 0 1px #ffffff,0 0 8px rgba(255,255,255,.72),0 0 17px rgba(174,187,204,.5)!important}
+  .art.f6::before{display:block!important;content:""!important;inset:0!important;padding:2px!important;border:0!important;background:linear-gradient(112deg,#8d99a8 0%,#ffffff 18%,#c9d1db 34%,#ffffff 50%,#9faab8 68%,#f8fafc 84%,#8793a1 100%)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:inset 0 0 5px rgba(255,255,255,.92),0 0 6px rgba(210,220,232,.68)!important;opacity:.96!important;animation:srPlatinumFrame 4.8s ease-in-out infinite!important}
+  .art.f6::after{display:block!important;background:linear-gradient(132deg,transparent 28%,rgba(255,255,255,.08) 40%,rgba(255,255,255,.92) 49%,rgba(214,224,235,.22) 56%,transparent 70%)!important;opacity:.7!important;animation:srPlatinumSweep 4.2s cubic-bezier(.4,0,.2,1) infinite!important}
+
+
+  /* FFR rarity: a separate champagne-gold prism finish, distinct from RRR's classic gold. */
+  .art.f7{--foil-color:255,190,70;border:2px solid #ffd978!important;box-shadow:0 0 0 1px #fff2b0,0 0 10px rgba(255,198,66,.68),0 0 22px rgba(221,126,18,.38)!important}
+  .art.f7::before{display:block!important;content:""!important;inset:0!important;padding:2px!important;border:0!important;background:conic-gradient(from var(--ffr-angle,0deg),#9c5b14,#f7c84a,#fff1a3,#d99122,#fff8c9,#b96a17,#f4bf3d,#9c5b14)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:inset 0 0 5px rgba(255,255,255,.8),0 0 7px rgba(255,190,70,.7)!important;opacity:1!important;animation:ffrGoldFrame 5.2s linear infinite!important}
+  .art.f7::after{display:block!important;background:linear-gradient(130deg,transparent 26%,rgba(255,240,164,.12) 40%,rgba(255,255,235,.9) 49%,rgba(255,180,38,.2) 57%,transparent 72%)!important;opacity:.72!important;animation:ffrGoldSweep 4.5s cubic-bezier(.4,0,.2,1) infinite!important}
+  @keyframes ffrGoldFrame{to{--ffr-angle:360deg}}
+  @keyframes ffrGoldSweep{0%{background-position:145% 0}50%{background-position:35% 0}100%{background-position:-75% 0}}
+
+  /* X rarity: keep the full RGB rainbow frame after the global aura overrides. */
+  .art.f2[data-card-rarity="X"],.art.f2[data-card-rarity="x"]{--rainbow-angle:0deg;border:3px solid transparent!important;animation:none!important;box-shadow:0 0 0 1px #fff,0 0 14px rgba(255,0,190,.92),0 0 26px rgba(0,220,255,.82),0 0 38px rgba(165,35,255,.62)!important}
+  .art.f2[data-card-rarity="X"]::before,.art.f2[data-card-rarity="x"]::before{display:block!important;content:""!important;inset:0!important;border:0!important;padding:3px!important;border-radius:inherit!important;background:conic-gradient(from var(--rainbow-angle),#ff003c 0deg,#ff8500 50deg,#fff000 100deg,#00f878 160deg,#00d9ff 220deg,#4c50ff 280deg,#ed00ff 330deg,#ff003c 360deg)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:0 0 10px rgba(255,0,210,1),0 0 19px rgba(0,225,255,.92),inset 0 0 7px rgba(255,255,255,.95)!important;filter:saturate(1.45) brightness(1.08);animation:rainbowFrameSpin 5.5s linear infinite!important;opacity:1!important}
+  .art.f2[data-card-rarity="X"]::after,.art.f2[data-card-rarity="x"]::after{animation:none!important;opacity:0!important}
+
 	.cardDetail{margin:12px 0;padding:10px 12px;border:1px solid #6d568b;border-left:3px solid var(--gold);border-radius:8px;background:linear-gradient(135deg,rgba(244,201,107,.12),rgba(139,107,209,.08));box-shadow:inset 0 0 14px rgba(244,201,107,.05)}
 	.cardDetail>b{display:block;margin-bottom:4px;color:var(--gold);font:700 15px "Barlow Condensed",sans-serif;letter-spacing:.03em}.cardDetail p{margin:0;color:var(--ink);font-size:13px;line-height:1.5;white-space:pre-wrap}
+  /* Holo-only switch: this button changes the rainbow Holo tier (f2) only. */
+  body.holo-off .art.f2::after,
+  body.holo-off .art.f2>.fx,
+  body.holo-off .art.f2 .ref-holo,
+  body.holo-off .art.f2 .ref-glare,
+  body.holo-off .art.f2 .ref-sweep,
+  body.holo-off .art.f2 .ref-spark{
+    display:none!important;
+    animation:none!important;
+  }
+  body.holo-off .art.f2::before{
+    display:block!important;
+    background:none!important;
+    border:2px solid #d65cff!important;
+    padding:0!important;
+    -webkit-mask:none!important;
+    mask:none!important;
+    box-shadow:0 0 0 1px #fff3,0 0 8px #d65cff55!important;
+    animation:none!important;
+  }
+  body.holo-off .art.f2{
+    filter:none!important;
+  }
+
 	</style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><h1><span class="sigil" aria-hidden="true">✦</span> Arcana Vanguard <small>หอสมุดการ์ดเวทมนตร์</small></h1><div class="topActions"><span id="st" style="color:var(--mute);font-size:13px" aria-live="polite"></span><button class="btn sm" id="authBtn">Sign in</button><button class="btn sm" id="sparkleToggle" type="button" aria-pressed="false">✦ ปิดเอฟเฟกต์</button><button class="btn sm motionBtn" id="motionBtn" type="button" aria-pressed="false">⌁ เปิด Motion</button><button class="btn sm" id="editBtn" aria-pressed="false">✎ Edit</button></div></div>
+  <div class="fanmadeNotice">This Site is Fanmade</div>
+  <div class="top"><h1><span class="sigil" aria-hidden="true">✦</span> Arcana Vanguard <small>หอสมุดการ์ดเวทมนตร์</small></h1><div class="topActions"><span id="st" style="color:var(--mute);font-size:13px" aria-live="polite"></span><button class="btn sm" id="authBtn">Sign in</button><button class="btn sm" id="sparkleToggle" type="button" aria-pressed="true">✦ Holo: ปิด</button><button class="btn sm motionBtn" id="motionBtn" type="button" aria-pressed="false">⌁ เปิด Motion</button><button class="btn sm" id="editBtn" aria-pressed="false">✎ Edit</button></div></div>
   <div id="cloudNotice" class="cloudNotice" hidden></div>
   <div id="realtimeNotice" class="cloudNotice" hidden><span id="realtimeText">มีข้อมูลใหม่จากผู้ใช้อื่น</span> <button class="btn sm" id="realtimeRefresh">↻ รีเฟรชข้อมูล</button></div>
   <section id="cloudGate" class="cloudGate" hidden><h2>เข้าสู่ระบบเพื่อใช้แอป</h2><p>ข้อมูลโปรดักและ Card List เป็นข้อมูลร่วม ส่วนเด็ค คลังสะสม Pity และประวัติการสุ่มเป็นข้อมูลส่วนตัวของบัญชี</p><button class="btn primary" id="gateSignIn">เข้าสู่ระบบ / สมัครบัญชี</button></section>
@@ -715,7 +772,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
       <div id="years"></div>
     </section>
     <section id="p8" role="tabpanel" aria-labelledby="t8" hidden>
-      <div class="rarityShowcaseHead"><h2>ตัวอย่างเอฟเฟกต์แต่ละระดับ</h2><p class="dto">การ์ดตัวอย่างสำหรับดูสีกรอบ แสงคลื่น และประกายของแต่ละเรต · ไม่ถูกบันทึกลงฐานข้อมูล</p></div>
+      <div class="rarityShowcaseHead"><h2>ตัวอย่างเอฟเฟกต์แต่ละระดับ</h2><p class="dto">การ์ดตัวอย่างสำหรับดูสีกรอบ แสงคลื่น และประกายของแต่ละเรต · ไม่ถูกบันทึกลงฐานข้อมูล</p><div class="rarityShowcaseTools"><label class="btn sm" for="rarityShowcaseFile">ใส่ไฟล์การ์ด<input type="file" id="rarityShowcaseFile" accept="image/*" hidden></label><button class="btn sm" id="rarityShowcaseReset" type="button" hidden>ใช้ภาพตัวอย่างเดิม</button><span class="dto" id="rarityShowcaseFileName" aria-live="polite">ใช้ภาพตัวอย่างเดิม</span></div></div>
       <div id="rarityShowcase" class="rarityShowcase"></div>
     </section>
     <section id="p3" role="tabpanel" aria-labelledby="t3" hidden>
@@ -944,12 +1001,12 @@ async function load(){
 }
 $("realtimeRefresh").onclick=refreshFromRealtime;
 let q=Promise.resolve();
-function save(){q=q.then(async()=>{
+function save(options={}){q=q.then(async()=>{
   $("st").textContent="กำลังบันทึก…";
   try{
     if(Cloud?.configured){
       if(!Cloud.user)throw new Error("กรุณาเข้าสู่ระบบก่อน");
-      await Cloud.saveCatalog(DB());
+      await Cloud.saveCatalog(DB(),options);
     }else if(API){
       await post({action:"save",data:DB()});
     }else{
@@ -958,9 +1015,21 @@ function save(){q=q.then(async()=>{
     $("st").textContent=Cloud?.configured?"บันทึกลง Supabase แล้ว ✓":API?"บันทึกลง API แล้ว ✓":"บันทึกในเครื่องแล้ว ✓";
   }catch(e){
     const message=String(e?.message||e);
-    $("st").textContent="บันทึกไม่สำเร็จ";
-    console.error("catalog save failed",e);
-    notice("bad","บันทึกไม่สำเร็จ",message+" (ข้อมูลบนหน้าจอยังอยู่ แต่ยังไม่ยืนยันว่าเข้าฐานข้อมูลแล้ว)",{auto:7000});
+    if(/row-level security policy.*catalog_cards/i.test(message)){
+      $("st").textContent="สิทธิ์ฐานข้อมูลยังไม่พร้อม";
+      notice("bad","แก้ไขการ์ดยังบันทึกไม่ได้","Supabase ยังไม่อนุญาตบัญชีนี้เขียน catalog_cards · ให้เจ้าของโปรเจกต์รันไฟล์ SUPABASE_RLS_CATALOG_FIX.sql ใน Supabase SQL Editor แล้วลองใหม่",{auto:9000});
+      console.error("catalog_cards RLS policy rejected the write",e);
+      return;
+    }
+    if(e?.catalogSaved){
+      $("st").textContent="บันทึกการ์ดแล้ว ✓";
+      console.warn("catalog card data saved; secondary catalog step failed",e);
+      notice("ask","บันทึกการ์ดแล้ว ✓","ข้อมูลการ์ดถูกบันทึกแล้ว แต่ขั้นตอนจัดระเบียบข้อมูลรองมีปัญหา: "+message,{auto:7000});
+    }else{
+      $("st").textContent="บันทึกไม่สำเร็จ";
+      console.error("catalog save failed",e);
+      notice("bad","บันทึกไม่สำเร็จ",message+" (ข้อมูลบนหน้าจอยังอยู่ แต่ยังไม่ยืนยันว่าเข้าฐานข้อมูลแล้ว)",{auto:7000});
+    }
   }
 })}
 async function pic(f){
@@ -981,8 +1050,8 @@ function lay(fit,ori){
 /* Landscape cards sit sideways inside a normal portrait slot so every grid stays even. nat=true shows the natural landscape shape (card popup). */
 /* rarity tiers: f0 silver (R,RR) · f1 gold (RRR) · f2 rainbow · f3 pink (SP,SSP) · f4 crimson-gold (SEC,SSR,SCR) */
 /* Rarity tiers keep their own frame/star color; image artwork is not recolored. */
-const FOILT={R:0,RR:0,RRR:1,SVR:2,GR:2,FR:2,FFR:2,OR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SP:3,SSP:3,SEC:4,SSR:4,SCR:4};
-const FOILCLASS={R:0,RR:5,RRR:1,SVR:2,GR:2,FR:2,FFR:2,OR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SP:3,SSP:3,SEC:4,SSR:4,SCR:4};
+const FOILT={R:0,RR:0,RRR:1,SR:1,SVR:2,GR:2,FR:2,FFR:2,OR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SP:3,SSP:3,SEC:4,SSR:4,SCR:4};
+const FOILCLASS={R:0,RR:5,RRR:1,SR:6,SVR:2,GR:2,FR:2,FFR:7,OR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SP:3,SSP:3,SEC:4,SSR:4,SCR:4};
 const foil=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILCLASS?" f"+FOILCLASS[r]:""};
 const art=(c,nat)=>{
   const o=c.orient==="l"?"l":"p",slot=o==="l"&&!nat,ar=o==="l"&&nat?CH+"/"+CW:CW+"/"+CH;let inner;
@@ -995,15 +1064,37 @@ const art=(c,nat)=>{
 const SHOWCASE_GROUPS=[
   ["Common · พื้นฐาน",["C","N","U"]],
   ["Silver · เงิน",["R","RR"]],
+  ["Platinum · แพลทินัม",["SR"]],
   ["Gold · ทอง",["RRR"]],
   ["RGB Rainbow · RGB",["GR","SVR","FR","FFR","OR","OVR","ORR","DSR","ZR","X"]],
   ["Pink · ชมพู",["SP","SSP"]],
   ["Crimson-Gold · แดงทอง",["SEC","SSR","SCR"]]
 ];
+let SHOWCASE_IMAGE="";
+try{SHOWCASE_IMAGE=localStorage.getItem("vanguard-rarity-showcase-image")||""}catch(e){}
 function renderRarityShowcase(){
   const box=$("rarityShowcase");if(!box)return;
-  box.innerHTML=SHOWCASE_GROUPS.map(([group,rarities])=>`<h3 class="raritySampleTier">${h(group)}</h3>${rarities.map((rarity,i)=>{const c={id:`showcase-${rarity}`,name:`ตัวอย่าง ${rarity}`,nation:["Dragon Empire","Keter Sanctuary","Dark States","Stoicheia","Brandt Gate"][i%5],rarity};return `<article class="raritySample">${art(c,1)}<b>${h(rarity)}</b><small>${h(group.split(" · ")[0])}<br>ตัวอย่างเอฟเฟกต์เท่านั้น</small></article>`}).join("")}`).join("");
+  box.innerHTML=SHOWCASE_GROUPS.map(([group,rarities])=>`<h3 class="raritySampleTier">${h(group)}</h3>${rarities.map((rarity,i)=>{const c={id:`showcase-${rarity}`,name:`ตัวอย่าง ${rarity}`,nation:["Dragon Empire","Keter Sanctuary","Dark States","Stoicheia","Brandt Gate"][i%5],rarity,img:SHOWCASE_IMAGE};return `<article class="raritySample">${art(c,1)}<b>${h(rarity)}</b><small>${h(group.split(" · ")[0])}<br>ตัวอย่างเอฟเฟกต์เท่านั้น</small></article>`}).join("")}`).join("");
 }
+function updateShowcaseImageUI(){
+  const reset=$("rarityShowcaseReset"),name=$("rarityShowcaseFileName");
+  if(reset)reset.hidden=!SHOWCASE_IMAGE;
+  if(name)name.textContent=SHOWCASE_IMAGE?"ใช้ไฟล์ที่อัปโหลดกับทุกระดับแล้ว":"ใช้ภาพตัวอย่างเดิม";
+}
+$("rarityShowcaseFile").addEventListener("change",async e=>{
+  const file=e.target.files?.[0];if(!file)return;
+  try{
+    SHOWCASE_IMAGE=await shrink(file,900);
+    try{localStorage.setItem("vanguard-rarity-showcase-image",SHOWCASE_IMAGE)}catch(x){}
+    renderRarityShowcase();updateShowcaseImageUI();
+  }catch(x){notice("bad","ใส่ไฟล์การ์ดไม่สำเร็จ",String(x?.message||x),{auto:3500})}
+  e.target.value="";
+});
+$("rarityShowcaseReset").addEventListener("click",()=>{
+  SHOWCASE_IMAGE="";try{localStorage.removeItem("vanguard-rarity-showcase-image")}catch(e){}
+  renderRarityShowcase();updateShowcaseImageUI();
+});
+updateShowcaseImageUI();
 
 /* Premium finish interaction: subtle mouse parallax and optional phone tilt. */
 const reduceMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
@@ -1024,8 +1115,8 @@ function artFromEvent(e){return e.target?.closest?.(".art")||null}
 function openArtDetails(node){
   if(!node||node.classList.contains("back"))return;
   node.classList.remove("is-card-focused");void node.offsetWidth;node.classList.add("is-card-focused");setTimeout(()=>node.classList.remove("is-card-focused"),760);
-  const id=node.dataset.cardId||"",c=ALL.find(x=>String(x.id)===id)||{id,name:node.dataset.cardName||"การ์ด",rarity:node.dataset.cardRarity||""};
-  if(c.id)openLB(c,{readonly:true,source:"card"});
+  const id=node.dataset.cardId||"",c=ALL.find(x=>String(x.id)===id)||{id,name:node.dataset.cardName||"การ์ด",rarity:node.dataset.cardRarity||"",img:SHOWCASE_IMAGE||""};
+  if(c.id)openLB(c);
 }
 document.addEventListener("click",e=>{
   const node=e.target?.closest?.(".art[data-card-id]:not(.back)");
@@ -1741,7 +1832,7 @@ $("collectionSearch").oninput=renderCollection;$("collectionSort").onchange=rend
 $("collectionCards").onclick=e=>{const b=e.target.closest("[data-collection-card]");if(!b)return;const v=COLLECTION[b.dataset.collectionCard];if(v?.card)openLB({...v.card,pname:v.productName,collectionCount:v.count},{readonly:true,source:"collection"})};
 const PKW={},pkd=r=>{r=String(r).toUpperCase();return({C:60,N:60,U:40,R:25,RR:12,RRR:5,SR:3,PR:8})[r]??(r in FOILT?1.5:5)},pkw=r=>r in PKW?PKW[r]:pkd(r);
 try{Object.assign(PKW,JSON.parse(localStorage.getItem("cardlist-pkw")||"{}"))}catch(e){}
-const pkSaveW=()=>{const p=PRODUCTS.find(x=>x.id===$("pkP").value);if(p){p.gachaWeights={...PKW};save()}else{try{localStorage.setItem("cardlist-pkw",JSON.stringify(PKW))}catch(e){}}};
+const pkSaveW=()=>{const p=PRODUCTS.find(x=>x.id===$("pkP").value);if(p){p.gachaWeights={...PKW};save({skipCards:true})}else{try{localStorage.setItem("cardlist-pkw",JSON.stringify(PKW))}catch(e){}}};
 const PITYKEY="cardlist-pity",PITYMAX=200,PITYMIN=2,PACKSIZE=7;
 let PITY=0,PITYRST=true,PACKS_OPENED=0;
 try{PITY=Math.max(0,Math.min(PITYMAX,parseInt(localStorage.getItem(PITYKEY))||0))}catch(e){}
@@ -1820,7 +1911,7 @@ const GA={open:false,pid:"",qty:0,packs:[],pi:0,cards:[],rev:0,all:[],pendingWri
 	function raritySoundKey(rarity){const r=String(rarity||"").trim().toUpperCase();if(["SP","SSP"].includes(r))return "pink";if(["SEC","SSR","SCR"].includes(r))return "crimson";if(["SVR","GR","FR","FFR","OR","OVR","ORR","DSR","ZR","X"].includes(r))return "rainbow";if(r==="RRR")return "gold";if(["R","RR"].includes(r))return "silver";return "common"}
 	function gachaSound(kind,rarity=""){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;if(kind==="tear"){noisePop(ctx,t,.24,.07,1500);tone(ctx,430,t,.19,.035,"triangle",170);tone(ctx,110,t+.04,.16,.045,"sine",58)}else if(kind==="flip"){const p=RARITY_SOUNDS[raritySoundKey(rarity)]||RARITY_SOUNDS.common;noisePop(ctx,t,.055,.018,2600);tone(ctx,p.base,t+.015,.12,p.gain,p.type,p.top);p.notes.forEach((f,i)=>tone(ctx,f,t+.075+i*.065,.28,p.gain*.62,i%2?"sine":"triangle",f*1.015))}}
 	function revealBurst(card){
-	  const r=String(card?.rarity||"").toUpperCase();if(["C","U","R"].includes(r))return;
+	  const r=String(card?.rarity||"").toUpperCase();if(["C","U","R","T"].includes(r))return;
 	  const color=(["RRR"].includes(r)?"255,190,45":["SP","SSP"].includes(r)?"255,105,195":["SEC","SSR","SCR"].includes(r)?"255,92,70":["GR","SVR","FR","FFR","OR","OVR","ORR","DSR","ZR","X"].includes(r)?"205,90,255":"105,190,255");
 	  const f=document.createElement("div");f.className="ref-flash";f.style.setProperty("--reveal-color",color);document.body.appendChild(f);setTimeout(()=>f.remove(),1100);
 	  const n=r==="RRR"?10:6;for(let i=0;i<n;i++){const s=document.createElement("span");s.className="ref-burst-spark";s.style.setProperty("--reveal-color",color);s.style.left="50%";s.style.top="42%";s.style.setProperty("--dx",`${(Math.random()-.5)*42}vw`);s.style.setProperty("--dy",`${(Math.random()-.55)*44}vh`);s.style.animationDelay=`${Math.random()*.18}s`;document.body.appendChild(s);setTimeout(()=>s.remove(),2100)}
@@ -2046,29 +2137,29 @@ $("authForm").onsubmit=async e=>{e.preventDefault();$("authError").textContent="
 	(async()=>{await load();if($("cloudGate").hidden){if(!Cloud?.configured){try{FAVS=new Set(JSON.parse(localStorage.getItem(favKey())||"[]"))}catch(e){FAVS=new Set()}}index();search();products();renderPick();renderDeck();pkFill();renderCollection();renderBanGallery();myList("");deckMetaUI();renderPackCount();if(Cloud?.configured){$("pkRst").checked=PITYRST;}}
 })();
 
-/* ---------- Sparkle effect toggle ---------- */
+/* ---------- Holo effect toggle ---------- */
 (() => {
   const button = document.getElementById("sparkleToggle");
   if (!button) return;
 
-  const STORAGE_KEY = "vanguard-card-sparkles";
+  const STORAGE_KEY = "vanguard-card-holo";
   const safeGet = () => { try { return localStorage.getItem(STORAGE_KEY) === "off"; } catch (e) { return false; } };
   const safeSet = (value) => { try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {} };
   const isOffInitially = safeGet();
 
-  function updateSparkleUI(isOff) {
-    document.body.classList.toggle("sparkles-off", isOff);
-    button.textContent = isOff ? "✦ เปิดเอฟเฟกต์" : "✦ ปิดเอฟเฟกต์";
+  function updateHoloUI(isOff) {
+    document.body.classList.toggle("holo-off", isOff);
+    button.textContent = isOff ? "✦ Holo: เปิด" : "✦ Holo: ปิด";
     button.setAttribute("aria-pressed", String(!isOff));
-    button.setAttribute("aria-label", isOff ? "เปิดเอฟเฟกต์ระยิบระยับ" : "ปิดเอฟเฟกต์ระยิบระยับ");
+    button.setAttribute("aria-label", isOff ? "เปิดเอฟเฟกต์การ์ด Holo" : "ปิดเอฟเฟกต์การ์ด Holo");
   }
 
-  updateSparkleUI(isOffInitially);
+  updateHoloUI(isOffInitially);
 
   button.addEventListener("click", () => {
-    const isOff = !document.body.classList.contains("sparkles-off");
+    const isOff = !document.body.classList.contains("holo-off");
     safeSet(isOff ? "off" : "on");
-    updateSparkleUI(isOff);
+    updateHoloUI(isOff);
   });
 })();
 </script>
