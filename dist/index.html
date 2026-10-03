@@ -536,8 +536,112 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 	.art.f2{border-color:#ff62df!important;box-shadow:0 0 0 1px #fff,0 0 9px #ff35d4,0 0 18px #2bd9ff,0 0 29px #9d42ffbb!important}
 	.art.f3{border-color:#ff70bf!important;box-shadow:0 0 0 1px #ffe5f5,0 0 9px #ff2cab,0 0 21px #ed3e9faa!important}
 	.art.f4{border-color:#ff654d!important;box-shadow:0 0 0 1px #fff0a2,0 0 9px #ff4339,0 0 22px #ff942daa!important}
+	/* Rainbow group (GR, SVR, FR, FFR, OR, OVR, ORR, DSR, ZR, X): animated RGB frame. */
+	@property --rainbow-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+	.art.f2{border-color:transparent!important;--rainbow-angle:0deg;box-shadow:0 0 0 1px rgba(255,255,255,.9),0 0 12px rgba(255,60,210,.7),0 0 22px rgba(45,210,255,.55),0 0 32px rgba(170,60,255,.35)!important}
+	.art.f2::before{content:""!important;inset:0!important;border:0!important;padding:3px!important;background:conic-gradient(from var(--rainbow-angle),#ff205e,#ff9d19,#fff02a,#29e887,#20c8ff,#695cff,#e42cff,#ff205e)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:0 0 7px rgba(255,80,220,.85),0 0 14px rgba(45,220,255,.6)!important;animation:rainbowFrameSpin 3.6s linear infinite!important}
+	.art.f2::after{background:linear-gradient(to right,rgba(255,255,255,0) 28%,rgba(255,255,255,.22) 44%,rgba(255,255,255,.92) 50%,rgba(255,255,255,.18) 56%,rgba(255,255,255,0) 72%)!important}
 	@keyframes silverFoilSweep{0%{background-position:150% 0;opacity:.08}18%{opacity:.42}50%{background-position:35% 0;opacity:.88}68%{opacity:.34}100%{background-position:-80% 0;opacity:.08}}
+	@keyframes rainbowFrameSpin{to{--rainbow-angle:360deg}}
+	.art.f0::before,.art.f1::before,.art.f3::before,.art.f4::before{animation:rarityEdgePulse 3.8s ease-in-out infinite!important}
+	@keyframes rarityEdgePulse{0%,100%{box-shadow:inset 0 0 0 1px rgba(var(--foil-color),.48),inset 0 0 8px rgba(var(--foil-color),.28),0 0 4px rgba(var(--foil-color),.2)}45%{box-shadow:inset 0 0 0 1px rgba(var(--foil-color),.9),inset 0 0 13px rgba(var(--foil-color),.58),0 0 11px rgba(var(--foil-color),.55)}70%{box-shadow:inset 0 0 0 1px rgba(var(--foil-color),.62),inset 0 0 9px rgba(var(--foil-color),.38),0 0 6px rgba(var(--foil-color),.3)}}
 	@media(prefers-reduced-motion:reduce){.art:not(.back)::after{animation:none!important;opacity:.18!important}.art:not(.back)>.fx::before{animation:none!important;opacity:.5!important}.art:not(.back)>.fx::after{animation:none!important;opacity:.18!important}}
+	/* Drive reference: one broad light sweep, soft rarity-colored edge glow, and only a few twinkles. */
+	.art:not(.back){--foil-color:210,220,235;position:relative;isolation:isolate;box-shadow:0 8px 22px rgba(12,16,30,.35)}
+	.art.f0{--foil-color:105,190,255}.art.f1{--foil-color:255,190,45}.art.f2{--foil-color:205,90,255}.art.f3{--foil-color:255,105,195}.art.f4{--foil-color:255,92,70}
+	.art:not(.back)::after{inset:0!important;z-index:2!important;background:linear-gradient(to right,rgba(var(--foil-color),0) 0%,rgba(245,250,255,.28) 32%,rgba(255,255,255,.96) 50%,rgba(var(--foil-color),.3) 68%,rgba(var(--foil-color),0) 100%)!important;width:58%!important;left:-100%!important;transform:skewX(-20deg)!important;mix-blend-mode:screen!important;animation:sweepLightReference 4s infinite cubic-bezier(.4,0,.2,1)!important;opacity:.96!important}
+	.art:not(.back)::before{content:"";position:absolute;inset:0;border-radius:inherit;box-sizing:border-box;z-index:3!important;box-shadow:inset 0 0 11px rgba(var(--foil-color),.42),inset 0 0 0 1px rgba(var(--foil-color),.7),0 0 10px rgba(var(--foil-color),.24)!important;pointer-events:none!important}
+	.art:not(.back){animation:frameGlowPulse 3.8s ease-in-out infinite!important}
+	.art:not(.back)>.fx{z-index:4;--ss:100px!important;--dr:7s!important;--tw:3.8s!important;opacity:.42!important;mix-blend-mode:screen!important;background-image:radial-gradient(circle at 45% 35%,rgba(255,255,255,.72) 0 1.2px,transparent 3px),radial-gradient(circle at 80% 85%,rgba(255,255,255,.5) 0 1.3px,transparent 3px)!important;background-repeat:no-repeat!important;animation:referenceTwinkle 5.3s ease-in-out -2.1s infinite!important}
+	.art:not(.back)>.fx::before,.art:not(.back)>.fx::after{background:transparent!important;-webkit-mask:none!important;mask:none!important;filter:none!important}
+	.art:not(.back)>.fx::before{content:"";background-image:radial-gradient(circle at 15% 25%,rgba(255,255,255,.9) 0 1.3px,transparent 3px),radial-gradient(circle at 65% 55%,rgba(255,255,255,.68) 0 1.5px,transparent 3px)!important;animation:referenceTwinkle 4.2s ease-in-out -.7s infinite!important}
+	.art:not(.back)>.fx::after{content:"";background-image:radial-gradient(circle at 82% 18%,rgba(255,255,255,.82) 0 1.5px,transparent 3px),radial-gradient(circle at 28% 75%,rgba(255,255,255,.64) 0 1.2px,transparent 3px)!important;animation:referenceTwinkle 3.35s ease-in-out -1.8s infinite!important}
+	@keyframes sweepLightReference{0%{left:-115%;opacity:.04}16%{left:200%;opacity:.96}24%{left:200%;opacity:.9}100%{left:200%;opacity:.9}}
+	@keyframes referenceTwinkle{0%,20%{opacity:0;transform:scale(.8)}50%{opacity:.72;transform:scale(1.12)}80%,100%{opacity:0;transform:scale(.8)}}
+	@keyframes frameGlowPulse{0%,100%{filter:brightness(.98) drop-shadow(0 0 1px rgba(var(--foil-color),.35))}45%{filter:brightness(1.06) drop-shadow(0 0 6px rgba(var(--foil-color),.65))}68%{filter:brightness(1) drop-shadow(0 0 2px rgba(var(--foil-color),.42))}}
+	@media(prefers-reduced-motion:reduce){.art:not(.back){animation:none!important}.art:not(.back)>.fx,.art:not(.back)>.fx::before,.art:not(.back)>.fx::after{animation:none!important}.art:not(.back)>.fx{opacity:.18!important}}
+	.rarityShowcaseHead{margin:0 0 18px;padding:20px 22px;border:1px solid #806342;border-radius:16px;background:linear-gradient(135deg,#211b3d,#101326);box-shadow:0 12px 28px #0007,inset 0 0 24px #8b6bd122}.rarityShowcaseHead h2{margin:0 0 6px;color:var(--gold-soft);font:700 clamp(24px,4vw,34px) Cinzel,serif}.rarityShowcase{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:20px}.raritySample{min-width:0;padding:14px;border:1px solid #8a704c;border-radius:11px;background:linear-gradient(145deg,#201a3b,#0d1122);box-shadow:inset 0 0 0 3px #2c2147,inset 0 0 0 4px #806342,0 12px 26px #0008;text-align:center;position:relative}.raritySample:before{content:"";position:absolute;inset:7px;border:1px solid #f5d89233;border-radius:7px;pointer-events:none}.raritySample .art{width:min(100%,158px);margin:0 auto 12px;border-radius:7px;box-shadow:0 7px 16px #0009}.raritySample b{display:block;color:var(--gold-soft);font:700 18px "Barlow Condensed",sans-serif;letter-spacing:.04em}.raritySample small{display:block;margin-top:3px;color:var(--mute);font-size:11px;line-height:1.35}.raritySampleTier{margin:24px 0 8px;color:#d9c8ed;font:700 18px Cinzel,serif;grid-column:1/-1;border-bottom:1px solid #493b67;padding-bottom:7px}.raritySampleTier:first-child{margin-top:0}@media(max-width:650px){.rarityShowcase{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.raritySample{padding:10px}.raritySample .art{width:min(100%,145px)}.raritySample b{font-size:15px}.raritySample small{font-size:10px}}
+	/* Use the picture-frame rarity border on every real card, not only the Showcase samples. */
+	.art:not(.back){box-sizing:border-box;border:3px solid rgba(var(--foil-color),.84)!important;border-radius:8px!important;box-shadow:0 0 0 1px rgba(var(--foil-color),.72),inset 0 0 0 1px rgba(255,255,255,.3),inset 0 0 0 4px rgba(var(--foil-color),.24),0 8px 20px rgba(8,12,28,.58)!important}
+	.art:not(.back)::before{inset:2px!important;border:1px solid rgba(255,255,255,.24)!important;box-shadow:inset 0 0 0 1px rgba(var(--foil-color),.58),inset 0 0 9px rgba(var(--foil-color),.46)!important}
+	.art.f2{border-color:transparent!important;box-shadow:0 0 0 1px rgba(255,255,255,.9),0 0 12px rgba(255,60,210,.7),0 0 22px rgba(45,210,255,.55),0 0 32px rgba(170,60,255,.35)!important}
+	/* Rainbow frame must occupy the complete perimeter after the shared real-card frame rules. */
+	.art.f2::before{content:""!important;inset:0!important;border:0!important;padding:3px!important;border-radius:inherit!important;background:conic-gradient(from var(--rainbow-angle),#ff174f 0 14%,#ff9d19 14% 28%,#fff02a 28% 42%,#25e889 42% 56%,#20c8ff 56% 70%,#695cff 70% 84%,#e42cff 84% 93%,#ff174f 93% 100%)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:0 0 7px rgba(255,80,220,.9),0 0 15px rgba(45,220,255,.72),inset 0 0 5px rgba(255,255,255,.72)!important;animation:rainbowFrameSpin 3.6s linear infinite!important}
+	/* Every rarity gets its own RGB-like tone, glossy Holo edge, and soft aura. */
+	@property --tone-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+	.art.f0{--tone-angle:0deg;--tone-a:#62cfff;--tone-b:#dffaff;--tone-c:#268bd5;box-shadow:0 0 0 1px #b9f3ff,0 0 9px #51caffaa,0 0 22px #247fd855!important}
+	.art.f1{--tone-angle:0deg;--tone-a:#ffc43d;--tone-b:#fff1a8;--tone-c:#d78318;box-shadow:0 0 0 1px #fff0a3,0 0 9px #ffc438bb,0 0 22px #d47d2855!important}
+	.art.f3{--tone-angle:0deg;--tone-a:#ff66bc;--tone-b:#ffd2ec;--tone-c:#c92d91;box-shadow:0 0 0 1px #ffe2f4,0 0 9px #ff49b4bb,0 0 22px #c82c9055!important}
+	.art.f4{--tone-angle:0deg;--tone-a:#ff5c52;--tone-b:#ffd0ad;--tone-c:#b91e3f;box-shadow:0 0 0 1px #ffe1bf,0 0 9px #ff514bbb,0 0 22px #b51e3f55!important}
+	.art.f0::before,.art.f1::before,.art.f3::before,.art.f4::before{content:""!important;inset:0!important;border:0!important;padding:3px!important;border-radius:inherit!important;background:conic-gradient(from var(--tone-angle),var(--tone-c),var(--tone-a),var(--tone-b),var(--tone-a),var(--tone-c))!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:0 0 4px color-mix(in srgb,var(--tone-a) 54%,transparent),inset 0 0 4px rgba(255,255,255,.5)!important;opacity:.76!important;animation:toneFrameSpin 8s linear infinite!important}
+	@keyframes toneFrameSpin{to{--tone-angle:360deg}}
+	/* RRR reveal: keep a refined gold glint, but remove the oversized flash and pulse. */
+	#p5 .pkCard.rrr-gold.open{filter:drop-shadow(0 0 3px #fff3b0) drop-shadow(0 0 8px #f4c96b)!important}
+	#p5 .pkCard.rrr-gold.open .pkff,#p5 .pkCard.guar.open .pkff{box-shadow:inset 0 0 0 1px #fff1a8,0 0 5px #fff3b0,0 0 12px #f4c96b!important}
+	#p5 .pkCard.rrr-gold.open .pkRRRglint{opacity:.5!important;animation:rrr-sweep 4.2s ease-in-out infinite!important}
+	#p5 .pkCard.rrr-gold.open .pkRRRglint:after{opacity:.4!important;animation:rrr-pulse 3.6s ease-in-out infinite alternate!important}
+	/* Gacha reveal is intentionally restrained: keep Holo movement, remove the harsh flash. */
+	#p5 .pkCard.open .pkff .art:not(.back){animation:frameGlowPulse 7s ease-in-out infinite!important;filter:brightness(.96) saturate(.92)!important}
+	#p5 .pkCard.open .pkff .art:not(.back)::before{opacity:.62!important}
+	#p5 .pkCard.open .pkff .art:not(.back)::after{opacity:.3!important}
+	#p5 .pkCard.open .pkff .art:not(.back)>.fx{opacity:.14!important}
+	#p5 .pkCard.rrr-gold.open{filter:drop-shadow(0 0 2px rgba(255,224,128,.72))!important}
+	#p5 .pkCard.rrr-gold.open .pkff{box-shadow:inset 0 0 0 1px rgba(255,241,168,.82),0 0 4px rgba(255,243,176,.7),0 0 9px rgba(244,201,107,.55)!important}
+	#p5 .pkCard.rrr-gold.open .pkRRRglint{opacity:.28!important;animation:rrr-sweep 5.5s ease-in-out infinite!important}
+	#p5 .pkCard.rrr-gold.open .pkRRRglint:after{opacity:.22!important;animation:rrr-pulse 5s ease-in-out infinite alternate!important}
+	/* Aura-only mode: remove every rarity frame layer and keep only a soft colored glow. */
+	.art:not(.back){border-color:transparent!important;border-width:0!important;box-shadow:0 0 0 1px rgba(var(--foil-color),.18),0 0 7px rgba(var(--foil-color),.38),0 0 16px rgba(var(--foil-color),.2)!important}
+	.art:not(.back)::before,.art:not(.back)::after,.art:not(.back)>.fx{display:none!important}
+	.art.f2{border-color:transparent!important;box-shadow:0 0 5px rgba(255,70,220,.52),0 0 13px rgba(35,210,255,.35),0 0 21px rgba(150,65,255,.22)!important}
+	#p5 .pkCard.open .pkff{box-shadow:none!important}
+	#p5 .pkCard.open .pkRRRglint{display:none!important}
+	.art.f0::after,.art.f1::after,.art.f3::after,.art.f4::after{background:linear-gradient(to right,rgba(var(--foil-color),0) 25%,rgba(var(--foil-color),.14) 42%,rgba(255,255,255,.58) 50%,rgba(var(--foil-color),.14) 58%,rgba(var(--foil-color),0) 75%)!important;animation:toneSweep 5.8s infinite cubic-bezier(.4,0,.2,1)!important}
+	@keyframes toneSweep{0%{left:-115%;opacity:.03}18%{left:200%;opacity:.48}28%{left:200%;opacity:.32}100%{left:200%;opacity:.32}}
+	/* Restore a refined thin rarity frame and diagonal Holo light direction. */
+	.art:not(.back){border:1px solid rgba(var(--foil-color),.72)!important;border-radius:8px!important;box-shadow:0 0 0 1px rgba(var(--foil-color),.18),0 0 8px rgba(var(--foil-color),.34),0 0 17px rgba(var(--foil-color),.18)!important}
+	.art:not(.back)::before{display:block!important;content:""!important;inset:0!important;padding:2px!important;border:0!important;border-radius:inherit!important;background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(var(--foil-color),.75) 24%,rgba(var(--foil-color),.28) 50%,rgba(255,255,255,.6) 76%,rgba(var(--foil-color),.7))!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:inset 0 0 4px rgba(255,255,255,.5),0 0 5px rgba(var(--foil-color),.38)!important;opacity:.78!important;animation:liteFrameShimmer 7s ease-in-out infinite!important}
+	.art.f2::before{background:conic-gradient(from var(--rainbow-angle),#ff174f,#ff9d19,#fff02a,#25e889,#20c8ff,#695cff,#e42cff,#ff174f)!important;animation:rainbowFrameSpin 6s linear infinite!important}
+	.art:not(.back)::after{display:block!important;content:""!important;z-index:5!important;inset:-12%!important;width:42%!important;left:-90%!important;transform:rotate(28deg)!important;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08) 35%,rgba(255,255,255,.58) 50%,rgba(255,255,255,.08) 65%,transparent)!important;mix-blend-mode:screen!important;opacity:.42!important;animation:diagonalHoloSweep 5.8s ease-in-out infinite!important}
+	@keyframes liteFrameShimmer{0%,100%{opacity:.58;filter:brightness(.96)}45%{opacity:.9;filter:brightness(1.08)}70%{opacity:.7;filter:brightness(1)}}
+	@keyframes diagonalHoloSweep{0%{left:-90%;opacity:0}16%{left:150%;opacity:.52}25%,100%{left:150%;opacity:.22}}
+	/* RR uses its own f5 class so its silver-blue frame cannot be merged with R. */
+	.art.f5{--foil-color:105,190,255;border-color:#bfe8ff!important;box-shadow:0 0 0 1px rgba(235,251,255,.8),0 0 8px rgba(92,198,255,.42),0 0 17px rgba(42,130,235,.22)!important}
+	.art.f5::before{background:linear-gradient(135deg,#e9fbff,#62cfff 28%,#bfefff 52%,#268bd5 76%,#e9fbff)!important;opacity:.8!important}
+	.art.f5::after{background:linear-gradient(135deg,transparent 27%,rgba(220,246,255,.12) 42%,rgba(255,255,255,.62) 50%,rgba(165,220,255,.14) 58%,transparent 72%)!important;opacity:.46!important;animation:diagonalHoloSweep 5.8s ease-in-out infinite!important}
+	.art:not(.back)[data-card-id]{cursor:pointer}
+	.art:not(.back)[data-card-id]:focus-visible{outline:2px solid #fff1b2;outline-offset:4px}
+	.art:not(.back).is-card-focused{animation:rarityClickGlow .72s ease-out!important}
+	@keyframes rarityClickGlow{0%{filter:brightness(1)}35%{filter:brightness(1.18) drop-shadow(0 0 8px rgba(var(--foil-color),.78))}100%{filter:brightness(1)}}
+	/* Global Holo curtain: every face-up card gets the same diagonal light pass on every page. */
+	.art:not(.back)::after{display:block!important;content:""!important;position:absolute!important;inset:-16%!important;z-index:5!important;width:44%!important;left:-92%!important;pointer-events:none!important;transform:rotate(28deg)!important;background:linear-gradient(90deg,transparent 0%,transparent 30%,rgba(255,255,255,.08) 40%,rgba(255,255,255,.62) 50%,rgba(var(--foil-color),.16) 56%,transparent 70%,transparent 100%)!important;mix-blend-mode:screen!important;opacity:.48!important;animation:globalHoloCurtain 5.8s cubic-bezier(.4,0,.2,1) infinite!important}
+	@keyframes globalHoloCurtain{0%{left:-92%;opacity:0}14%{left:-20%;opacity:.18}25%{left:155%;opacity:.52}34%{left:155%;opacity:.2}100%{left:155%;opacity:.2}}
+	/* Holo scope: listing cards show only the rarity frame/aura; reveal and detail get the moving curtain. */
+	.art:not(.back)::after{display:none!important;animation:none!important}
+	#p5 .pkCard.open .pkff .art:not(.back)::after,#lbBody .art:not(.back)::after{display:block!important;content:""!important;position:absolute!important;inset:-16%!important;z-index:5!important;width:44%!important;left:-92%!important;pointer-events:none!important;transform:rotate(28deg)!important;background:linear-gradient(90deg,transparent 0%,transparent 30%,rgba(255,255,255,.1) 40%,rgba(255,255,255,.7) 50%,rgba(var(--foil-color),.2) 56%,transparent 70%,transparent 100%)!important;mix-blend-mode:screen!important;opacity:.58!important;animation:detailHoloCurtain 4.8s cubic-bezier(.4,0,.2,1) infinite!important}
+	#p5 .pkCard.open .pkff .art:not(.back){filter:brightness(1.04) drop-shadow(0 0 5px rgba(var(--foil-color),.55))!important}
+	#lbBody .art:not(.back){filter:brightness(1.04) drop-shadow(0 0 7px rgba(var(--foil-color),.58))!important}
+	@keyframes detailHoloCurtain{0%{left:-92%;opacity:0}18%{left:-18%;opacity:.2}35%{left:155%;opacity:.62}46%,100%{left:155%;opacity:.2}}
+	/* Final aura-only mode: no card frame anywhere; Holo is enabled only for reveal/detail scopes below. */
+	.art:not(.back){border:0!important;border-color:transparent!important;box-shadow:0 0 8px rgba(var(--foil-color),.34),0 0 17px rgba(var(--foil-color),.18)!important}
+	.art.f0{box-shadow:0 0 8px rgba(105,190,255,.34),0 0 17px rgba(38,139,213,.2)!important}
+	.art.f1{box-shadow:0 0 8px rgba(255,190,45,.34),0 0 17px rgba(215,131,24,.2)!important}
+	.art.f2{box-shadow:0 0 8px rgba(255,70,220,.38),0 0 17px rgba(35,210,255,.26),0 0 25px rgba(150,65,255,.16)!important}
+	.art.f3{box-shadow:0 0 8px rgba(255,105,195,.34),0 0 17px rgba(201,45,145,.2)!important}
+	.art.f4{box-shadow:0 0 8px rgba(255,92,70,.34),0 0 17px rgba(185,30,63,.2)!important}
+	.art.f5{box-shadow:0 0 8px rgba(92,198,255,.36),0 0 17px rgba(42,130,235,.22)!important}
+	.art:not(.back)::before{display:none!important;content:none!important}
+	.art:not(.back)::after{display:none!important;animation:none!important}
+	#p5 .pkCard.open .pkff .art:not(.back)::after,#lbBody .art:not(.back)::after{display:block!important;content:""!important;position:absolute!important;inset:-16%!important;z-index:5!important;width:44%!important;left:-92%!important;pointer-events:none!important;transform:rotate(28deg)!important;background:linear-gradient(90deg,transparent 0%,transparent 30%,rgba(255,255,255,.1) 40%,rgba(255,255,255,.7) 50%,rgba(var(--foil-color),.2) 56%,transparent 70%,transparent 100%)!important;mix-blend-mode:screen!important;opacity:.58!important;animation:detailHoloCurtain 4.8s cubic-bezier(.4,0,.2,1) infinite!important}
+	#p5 .pkCard.open .pkff .art:not(.back){filter:brightness(1.04) drop-shadow(0 0 5px rgba(var(--foil-color),.55))!important}
+	#lbBody .art:not(.back){filter:brightness(1.04) drop-shadow(0 0 7px rgba(var(--foil-color),.58))!important}
+	/* RRR balance: keep its gold identity, but match the restrained brightness of other rarities. */
+	.art.f1{filter:none!important;box-shadow:0 0 0 1px rgba(255,245,181,.9),0 0 7px rgba(255,184,45,.25),0 0 13px rgba(215,131,24,.14)!important}
+	.art.f1::before{opacity:.82!important;box-shadow:inset 0 0 4px rgba(255,238,168,.52)!important}
+	.art.f1::after{opacity:.22!important}
+	#p5 .pkCard.rrr-gold.open{filter:drop-shadow(0 0 2px rgba(255,224,128,.42))!important}
+	#p5 .pkCard.rrr-gold.open .pkff{box-shadow:inset 0 0 0 1px rgba(255,241,168,.72),0 0 4px rgba(255,243,176,.34),0 0 8px rgba(244,201,107,.24)!important}
+	#p5 .pkCard.rrr-gold.open .pkRRRglint{opacity:.08!important}
+	#p5 .pkCard.rrr-gold.open .pkRRRglint:after{opacity:.06!important}
 	.cardDetail{margin:12px 0;padding:10px 12px;border:1px solid #6d568b;border-left:3px solid var(--gold);border-radius:8px;background:linear-gradient(135deg,rgba(244,201,107,.12),rgba(139,107,209,.08));box-shadow:inset 0 0 14px rgba(244,201,107,.05)}
 	.cardDetail>b{display:block;margin-bottom:4px;color:var(--gold);font:700 15px "Barlow Condensed",sans-serif;letter-spacing:.03em}.cardDetail p{margin:0;color:var(--ink);font-size:13px;line-height:1.5;white-space:pre-wrap}
 	</style>
@@ -567,6 +671,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
       <button class="tab" role="tab" id="t4" aria-selected="false" aria-controls="p4">Banlist</button>
       <button class="tab" role="tab" id="t6" aria-selected="false" aria-controls="p6">Craft PR</button>
       <button class="tab" role="tab" id="t7" aria-selected="false" aria-controls="p7">Community</button>
+      <button class="tab" role="tab" id="t8" aria-selected="false" aria-controls="p8">Rarity Showcase</button>
     </div>
     <section id="p1" role="tabpanel" aria-labelledby="t1" hidden>
       <div class="grid">
@@ -589,6 +694,10 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
     <section id="p2" role="tabpanel" aria-labelledby="t2">
       <div class="pills" id="pills"></div>
       <div id="years"></div>
+    </section>
+    <section id="p8" role="tabpanel" aria-labelledby="t8" hidden>
+      <div class="rarityShowcaseHead"><h2>ตัวอย่างเอฟเฟกต์แต่ละระดับ</h2><p class="dto">การ์ดตัวอย่างสำหรับดูสีกรอบ แสงคลื่น และประกายของแต่ละเรต · ไม่ถูกบันทึกลงฐานข้อมูล</p></div>
+      <div id="rarityShowcase" class="rarityShowcase"></div>
     </section>
     <section id="p3" role="tabpanel" aria-labelledby="t3" hidden>
       <div class="grid">
@@ -854,14 +963,28 @@ function lay(fit,ori){
 /* rarity tiers: f0 silver (R,RR) · f1 gold (RRR) · f2 rainbow · f3 pink (SP,SSP) · f4 crimson-gold (SEC,SSR,SCR) */
 /* Rarity tiers keep their own frame/star color; image artwork is not recolored. */
 const FOILT={R:0,RR:0,RRR:1,SVR:2,GR:2,FR:2,FFR:2,OR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SP:3,SSP:3,SEC:4,SSR:4,SCR:4};
-const foil=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILT?" f"+FOILT[r]:""};
+const FOILCLASS={R:0,RR:5,RRR:1,SVR:2,GR:2,FR:2,FFR:2,OR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SP:3,SSP:3,SEC:4,SSR:4,SCR:4};
+const foil=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILCLASS?" f"+FOILCLASS[r]:""};
 const art=(c,nat)=>{
   const o=c.orient==="l"?"l":"p",slot=o==="l"&&!nat,ar=o==="l"&&nat?CH+"/"+CW:CW+"/"+CH;let inner;
   if(c.img&&c.fit&&c.fit.r){const L=lay(c.fit,o);inner=`<img src="${h(c.img)}" alt="${h(c.name)}" loading="lazy" draggable="false" style="position:absolute;max-width:none;left:${L.left}%;top:${L.top}%;width:${L.w}%;height:${L.h}%">`}
   else if(c.img)inner=`<img src="${h(c.img)}" alt="${h(c.name)}" loading="lazy"${c.orient?"":nat?' data-auto="nat"':' data-auto="1"'}>`;
   else inner=`<div class="ph" style="background:${bg(c)}">${h(c.name)}</div>`;
   if(slot)inner=`<div class="lf">${inner}</div>`;
-  return `<div class="art${slot?" slot":""}${foil(c)}" style="aspect-ratio:${ar}">${inner}${foil(c)?'<i class="fx"></i>':""}</div>`};
+  return `<div class="art${slot?" slot":""}${foil(c)}" data-card-id="${h(c.id||"")}" data-card-name="${h(c.name||"การ์ด")}" data-card-rarity="${h(c.rarity||"")}" role="button" tabindex="0" aria-label="ดูรายละเอียด ${h(c.name||"การ์ด")}" style="aspect-ratio:${ar}">${inner}${foil(c)?'<i class="fx"></i>':""}</div>`};
+
+const SHOWCASE_GROUPS=[
+  ["Common · พื้นฐาน",["C","N","U"]],
+  ["Silver · เงิน",["R","RR"]],
+  ["Gold · ทอง",["RRR"]],
+  ["RGB Rainbow · RGB",["GR","SVR","FR","FFR","OR","OVR","ORR","DSR","ZR","X"]],
+  ["Pink · ชมพู",["SP","SSP"]],
+  ["Crimson-Gold · แดงทอง",["SEC","SSR","SCR"]]
+];
+function renderRarityShowcase(){
+  const box=$("rarityShowcase");if(!box)return;
+  box.innerHTML=SHOWCASE_GROUPS.map(([group,rarities])=>`<h3 class="raritySampleTier">${h(group)}</h3>${rarities.map((rarity,i)=>{const c={id:`showcase-${rarity}`,name:`ตัวอย่าง ${rarity}`,nation:["Dragon Empire","Keter Sanctuary","Dark States","Stoicheia","Brandt Gate"][i%5],rarity};return `<article class="raritySample">${art(c,1)}<b>${h(rarity)}</b><small>${h(group.split(" · ")[0])}<br>ตัวอย่างเอฟเฟกต์เท่านั้น</small></article>`}).join("")}`).join("");
+}
 
 /* Premium finish interaction: subtle mouse parallax and optional phone tilt. */
 const reduceMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
@@ -879,6 +1002,23 @@ function setArtTilt(node,x=0,y=0){
 }
 function resetArtTilt(node){setArtTilt(node,0,0)}
 function artFromEvent(e){return e.target?.closest?.(".art")||null}
+function openArtDetails(node){
+  if(!node||node.classList.contains("back"))return;
+  node.classList.remove("is-card-focused");void node.offsetWidth;node.classList.add("is-card-focused");setTimeout(()=>node.classList.remove("is-card-focused"),760);
+  const id=node.dataset.cardId||"",c=ALL.find(x=>String(x.id)===id)||{id,name:node.dataset.cardName||"การ์ด",rarity:node.dataset.cardRarity||""};
+  if(c.id)openLB(c,{readonly:true,source:"card"});
+}
+document.addEventListener("click",e=>{
+  const node=e.target?.closest?.(".art[data-card-id]:not(.back)");
+  if(!node||e.target.closest(".pkCard,.pks,[data-i],[data-ban-card],[data-collection-card]"))return;
+  openArtDetails(node);
+});
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Enter"&&e.key!==" ")return;
+  const node=e.target?.closest?.(".art[data-card-id]:not(.back)");
+  if(!node||e.target.closest(".pkCard,.pks,[data-i],[data-ban-card],[data-collection-card]"))return;
+  e.preventDefault();openArtDetails(node);
+});
 document.addEventListener("pointermove",e=>{const node=artFromEvent(e);if(!node)return;activeArt=node;const r=node.getBoundingClientRect();setArtTilt(node,(e.clientX-(r.left+r.width/2))/(r.width/2),(e.clientY-(r.top+r.height/2))/(r.height/2))});
 document.addEventListener("pointerout",e=>{const node=artFromEvent(e);if(node&&(!e.relatedTarget||!node.contains(e.relatedTarget)))resetArtTilt(node)});
 document.addEventListener("pointerdown",e=>{const node=artFromEvent(e);if(node)activeArt=node});
@@ -909,13 +1049,16 @@ const gal=(c,i)=>`<button class="c${c.orient==="l"?" land":""}" data-i="${i}">${
 const row=(c,i)=>`<button class="row" data-i="${i}">${art(c)}<div><b>${h(c.name)}</b><small>${h(c.no)} · ${h(natTxt(c))}</small></div><small>${h([c.unit,c.grade!==""?"G"+c.grade:"",c.power,c.rarity].filter(x=>x!=="").join(" / "))}</small>${favStar(c)}</button>`;
 const num=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true});
 const nv=v=>{const n=parseFloat(v);return v===""||v==null||isNaN(n)?null:n};
-const sortFn=v=>{const[k,d]=String(v).split("-");return(a,b)=>{
-  if(k==="no")return num(a.no,b.no);
-  const x=nv(a[k]),y=nv(b[k]);
-  if(x===null&&y===null)return num(a.pname||"",b.pname||"")||num(a.no,b.no);
-  if(x===null)return 1;if(y===null)return -1;
-  return (x-y)*(d==="desc"?-1:1)||num(a.pname||"",b.pname||"")||num(a.no,b.no)}};
-const tsort=(a,b)=>{const i=CTYPES.indexOf(a),j=CTYPES.indexOf(b);return (i<0?999:i)-(j<0?999:j)||num(a,b)};
+	const sortFn=v=>{const[k,d]=String(v).split("-");return(a,b)=>{
+	  if(k==="no")return num(a.no,b.no);
+	  const x=nv(a[k]),y=nv(b[k]);
+	  if(x===null&&y===null)return num(a.pname||"",b.pname||"")||num(a.no,b.no);
+	  if(x===null)return 1;if(y===null)return -1;
+	  return (x-y)*(d==="desc"?-1:1)||num(a.pname||"",b.pname||"")||num(a.no,b.no)}};
+	const productNationRank=c=>{const names=nats(c);const ranks=names.map(n=>{const i=NATIONS.findIndex(x=>String(x.name)===String(n));return i<0?999:i});return ranks.length?Math.min(...ranks):999};
+	const productRarityBand=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase(),t=FOILT[r]??-1;return r==="RRR"?0:(t>1?2:1)};
+	const productCardSort=(a,b)=>productRarityBand(a)-productRarityBand(b)||productNationRank(a)-productNationRank(b)||String(natTxt(a)).localeCompare(String(natTxt(b)))||String(a.name||"").localeCompare(String(b.name||""),undefined,{numeric:true})||num(a.no,b.no);
+	const tsort=(a,b)=>{const i=CTYPES.indexOf(a),j=CTYPES.indexOf(b);return (i<0?999:i)-(j<0?999:j)||num(a,b)};
 
 /* Any plain picture that turns out wider than tall is shown landscape automatically */
 document.addEventListener("load",e=>{
@@ -988,8 +1131,8 @@ function renderPV(){
   const ns=["All",...new Set(cur.cards.flatMap(nats))];
   if(!ns.includes(nat))nat="All";
   const [k,d]=$("sort").value.split("-");
-  shown=cur.cards.map(c=>({...c,pid:cur.id,pname:cur.name})).filter(c=>nat==="All"||nats(c).includes(nat))
-    .sort(sortFn($("sort").value));
+	  shown=cur.cards.map(c=>({...c,pid:cur.id,pname:cur.name})).filter(c=>nat==="All"||nats(c).includes(nat))
+	    .sort(productCardSort);
   $("pvTitle").textContent=cur.name;$("pvCount").textContent=shown.length+" Results";
   $("pvNat").innerHTML=ns.map(n=>`<button class="pill" aria-pressed="${n===nat}" data-n="${h(n)}">${h(n)}</button>`).join("");
   $("vImg").setAttribute("aria-pressed",vw==="image");$("vTxt").setAttribute("aria-pressed",vw==="text");
@@ -1529,7 +1672,8 @@ function notice(kind,title,msg,o={}){
   if(o.auto)ntTimer=setTimeout(()=>{if(nt.open)nt.close()},o.auto);
   if(kind!=="ok"&&kind!=="ask")try{navigator.vibrate&&navigator.vibrate(120)}catch(x){}
 }
-$("nt").addEventListener("close",()=>clearTimeout(ntTimer));
+	$("nt").addEventListener("close",()=>clearTimeout(ntTimer));
+
 
 /* Ask before sharing/exporting an incomplete deck */
 function guard(fn){return function(){
@@ -1806,6 +1950,7 @@ $("pkWrap").addEventListener("pointermove",e=>{if(!tg||tg.id!==e.pointerId||tg.m
 $("pkWrap").addEventListener("pointerup",e=>{if(!tg||tg.mode!=="pack")return;const moved=Math.abs(e.clientX-tg.x);tg=null;
   if(moved<10){autoTear();return}
   if(tearP>=.85)tearDone();else tearSet(0)});
+$("pkWrap").addEventListener("click",()=>{if(GA.open&&!$("pkWrap").classList.contains("torn"))autoTear()});
 $("pkWrap").addEventListener("pointercancel",()=>{if(tg&&tg.mode==="pack"){tg=null;tearSet(0)}});
 
 /* การ์ด / ปุ่มท้ายจอ */
@@ -1862,7 +2007,7 @@ async function renderCommunity(){
 }
 $("craftNew").onclick=()=>recipeForm();$("craftRecipes").addEventListener("click",async e=>{const craftBtn=e.target.closest("[data-craft]");if(craftBtn){if(!confirm("คราฟต์ตามสูตรนี้และใช้การ์ดจากคลังส่วนตัวหรือไม่?"))return;try{await Cloud.craft(craftBtn.dataset.craft);COLLECTION=await Cloud.loadCollection();renderCollection();await renderCraft();notice("ok","คราฟต์สำเร็จ","การ์ดผลลัพธ์เพิ่มเข้าในคลังส่วนตัวแล้ว",{auto:3000})}catch(x){alert("คราฟต์ไม่สำเร็จ: "+x.message)}return}const edit=e.target.closest("[data-edit-recipe]");if(edit){const r=(await Cloud.loadRecipes()).find(x=>x.id===edit.dataset.editRecipe);if(r)recipeForm(r);return}const disable=e.target.closest("[data-disable-recipe]");if(disable){const r=(await Cloud.loadRecipes()).find(x=>x.id===disable.dataset.disableRecipe);if(r&&confirm("ปิดสูตรนี้หรือไม่?")){try{await Cloud.saveRecipe({...r,is_active:false});await renderCraft()}catch(x){alert(x.message)}}}});
 $("feedRefresh").onclick=renderCommunity;$("communityFeed").addEventListener("click",async e=>{const b=e.target.closest("[data-copy-deck]");if(!b)return;try{deck=fixDeck(await Cloud.copySharedDeck(b.dataset.copyDeck));deckMetaUI();myList("");document.querySelector('#t3').click();renderDeck();notice("ok","คัดลอกเด็คแล้ว","เด็คถูกบันทึกเป็นเด็คส่วนตัวใหม่",{auto:2600})}catch(x){alert("คัดลอกเด็คไม่สำเร็จ: "+x.message)}});
-$("t6").addEventListener("click",renderCraft);$("t7").addEventListener("click",renderCommunity);
+$("t6").addEventListener("click",renderCraft);$("t7").addEventListener("click",renderCommunity);$("t8").addEventListener("click",renderRarityShowcase);
 
 let authMode="in";
 function setAuthMode(mode){authMode=mode;const isIn=authMode==="in";$("authTitle").textContent=isIn?"เข้าสู่ระบบ":"สมัครบัญชี";$("authSubmit").textContent=isIn?"เข้าสู่ระบบ":"สมัครบัญชี";$("authMode").textContent=isIn?"สมัครบัญชีใหม่":"มีบัญชีแล้ว? เข้าสู่ระบบ";$("authName").parentElement.hidden=isIn;$("authPassword").autocomplete=isIn?"current-password":"new-password";$("authError").textContent=""}
@@ -1872,7 +2017,7 @@ $("gateSignIn").onclick=openAuth;$("authClose").onclick=()=>$("authDialog").clos
 $("authMode").onclick=()=>setAuthMode(authMode==="in"?"up":"in");
 setAuthMode("in");
 $("authForm").onsubmit=async e=>{e.preventDefault();$("authError").textContent="";const email=$("authEmail").value.trim(),password=$("authPassword").value;try{if(authMode==="in"){await Cloud.signIn(email,password);location.reload()}else{const out=await Cloud.signUp(email,password,$("authName").value.trim());if(out.session)location.reload();else{$("authError").textContent="คำขอสมัครถูกส่งแล้ว หากบัญชีนี้ยังไม่ยืนยันอีเมลให้ตรวจกล่องจดหมาย; ถ้าอีเมลนี้มีบัญชีอยู่แล้ว ให้กด ‘มีบัญชีแล้ว? เข้าสู่ระบบ’ แล้วใช้รหัสผ่านเดิม"}}}catch(x){const msg=String(x?.message||x);if(authMode==="up"&&/(already registered|already exists|email_exists|user already registered)/i.test(msg)){setAuthMode("in");$("authError").textContent="อีเมลนี้มีบัญชีอยู่แล้ว ระบบเปลี่ยนเป็นหน้าเข้าสู่ระบบให้แล้ว ให้ใช้รหัสผ่านเดิม"}else if(/invalid login credentials|invalid credentials/i.test(msg)){$("authError").textContent="อีเมลหรือรหัสผ่านไม่ถูกต้อง"}else if(/email_not_confirmed|email not confirmed/i.test(msg)){$("authError").textContent="บัญชีนี้ยังไม่ได้ยืนยันอีเมล ให้ยืนยันอีเมลก่อนเข้าสู่ระบบ หากยังไม่มีอีเมลให้ตรวจ Supabase Auth > Users และการตั้งค่าอีเมล"}else{$("authError").textContent=msg}}};
-(async()=>{await load();if($("cloudGate").hidden){if(!Cloud?.configured){try{FAVS=new Set(JSON.parse(localStorage.getItem(favKey())||"[]"))}catch(e){FAVS=new Set()}}index();search();products();renderPick();renderDeck();pkFill();renderCollection();renderBanGallery();myList("");deckMetaUI();renderPackCount();if(Cloud?.configured){$("pkRst").checked=PITYRST;}}
+	(async()=>{await load();if($("cloudGate").hidden){if(!Cloud?.configured){try{FAVS=new Set(JSON.parse(localStorage.getItem(favKey())||"[]"))}catch(e){FAVS=new Set()}}index();search();products();renderPick();renderDeck();pkFill();renderCollection();renderBanGallery();myList("");deckMetaUI();renderPackCount();if(Cloud?.configured){$("pkRst").checked=PITYRST;}}
 })();
 
 /* ---------- Sparkle effect toggle ---------- */
