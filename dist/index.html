@@ -642,6 +642,25 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 	#p5 .pkCard.rrr-gold.open .pkff{box-shadow:inset 0 0 0 1px rgba(255,241,168,.72),0 0 4px rgba(255,243,176,.34),0 0 8px rgba(244,201,107,.24)!important}
 	#p5 .pkCard.rrr-gold.open .pkRRRglint{opacity:.08!important}
 	#p5 .pkCard.rrr-gold.open .pkRRRglint:after{opacity:.06!important}
+	/* glow-wave-cards reference layers: Holo, glare, diagonal sweep and rare sparks. */
+	.art .ref-holo,.art .ref-glare,.art .ref-sweep,.art .ref-spark{display:none;position:absolute;pointer-events:none}
+	#lbBody .art .ref-holo,#lbBody .art .ref-glare,#lbBody .art .ref-sweep,#lbBody .art .ref-spark,#p5 .pkCard.open .pkff .art .ref-holo,#p5 .pkCard.open .pkff .art .ref-glare,#p5 .pkCard.open .pkff .art .ref-sweep,#p5 .pkCard.open .pkff .art .ref-spark{display:block}
+	#lbBody .art,#p5 .pkCard.open .pkff .art{transform:perspective(900px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));transition:transform .35s ease-out;overflow:hidden}
+	.art .ref-holo{inset:0;z-index:6;border-radius:inherit;opacity:.42;mix-blend-mode:color-dodge;background:repeating-linear-gradient(115deg,#ff0080 0%,#ff8c00 10%,#ffe600 20%,#00ff95 30%,#00c8ff 40%,#8a2bff 50%,#ff0080 60%);background-size:300% 300%;animation:referenceHolo 8s ease-in-out infinite alternate;filter:saturate(1.2) brightness(.75)}
+	.art .ref-glare{inset:0;z-index:7;border-radius:inherit;opacity:0;mix-blend-mode:overlay;background:radial-gradient(circle at var(--shine-x,50%) var(--shine-y,50%),rgba(255,255,255,.55),transparent 45%);transition:opacity .2s}
+	#lbBody .art:hover .ref-glare,#p5 .pkCard.open .pkff .art:hover .ref-glare{opacity:1}
+	.art .ref-sweep{inset:-50%;z-index:8;background:linear-gradient(135deg,transparent 38%,rgba(var(--foil-color),.2) 46%,rgba(255,255,255,.55) 50%,rgba(var(--foil-color),.2) 54%,transparent 62%);transform:translate(-32%,-32%);opacity:0;animation:referenceSweep var(--ref-speed,4s) ease-in-out infinite;animation-delay:var(--ref-delay,0s)}
+	#lbBody .art .ref-sweep,#p5 .pkCard.open .pkff .art .ref-sweep{--ref-speed:3.2s;--ref-delay:-.8s}
+	.art .ref-spark{z-index:9;width:8%;height:8%;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);filter:drop-shadow(0 0 4px rgba(var(--foil-color),.9));animation:referenceTwinkle 2.4s ease-in-out infinite}
+	.art .ref-spark.s1{left:15%;top:25%;animation-delay:-.7s}.art .ref-spark.s2{left:65%;top:55%;animation-delay:-1.8s}.art .ref-spark.s3{left:82%;top:18%;animation-delay:-1.2s}
+	@keyframes referenceHolo{from{background-position:0% 20%}to{background-position:100% 80%}}
+	@keyframes referenceSweep{0%{transform:translate(-32%,-32%);opacity:0}12%{opacity:1}50%{transform:translate(32%,32%);opacity:1}62%,100%{transform:translate(32%,32%);opacity:0}}
+	.ref-flash{position:fixed;inset:-60%;z-index:80;pointer-events:none;overflow:hidden;background:linear-gradient(135deg,transparent 36%,rgba(var(--reveal-color),.35) 45%,rgba(255,255,255,.82) 50%,rgba(var(--reveal-color),.35) 55%,transparent 64%);animation:referenceFlash 1.05s ease-out forwards}.ref-burst-spark{position:fixed;z-index:81;width:12px;height:12px;pointer-events:none;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);filter:drop-shadow(0 0 6px rgba(var(--reveal-color),.95));animation:referenceBurstSpark 1.8s ease-out forwards}@keyframes referenceFlash{from{transform:translate(-30%,-30%);opacity:1}to{transform:translate(30%,30%);opacity:0}}@keyframes referenceBurstSpark{0%{opacity:0;transform:translate(0,0) scale(.2)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1)}}
+	/* Basic rarities C / U / R stay clean: no aura, Holo, curtain, glare or sparks. */
+	.art[data-card-rarity="C"],.art[data-card-rarity="U"],.art[data-card-rarity="R"]{box-shadow:none!important;filter:none!important}
+	.art[data-card-rarity="C"] .ref-holo,.art[data-card-rarity="C"] .ref-glare,.art[data-card-rarity="C"] .ref-sweep,.art[data-card-rarity="C"] .ref-spark,.art[data-card-rarity="U"] .ref-holo,.art[data-card-rarity="U"] .ref-glare,.art[data-card-rarity="U"] .ref-sweep,.art[data-card-rarity="U"] .ref-spark,.art[data-card-rarity="R"] .ref-holo,.art[data-card-rarity="R"] .ref-glare,.art[data-card-rarity="R"] .ref-sweep,.art[data-card-rarity="R"] .ref-spark{display:none!important;animation:none!important}
+	/* Gacha exception: higher rarities show the full reference effect when revealed. */
+	#p5 .pkCard.open .pkff .art.f1 .ref-holo,#p5 .pkCard.open .pkff .art.f1 .ref-glare,#p5 .pkCard.open .pkff .art.f1 .ref-sweep,#p5 .pkCard.open .pkff .art.f1 .ref-spark,#p5 .pkCard.open .pkff .art.f2 .ref-holo,#p5 .pkCard.open .pkff .art.f2 .ref-glare,#p5 .pkCard.open .pkff .art.f2 .ref-sweep,#p5 .pkCard.open .pkff .art.f2 .ref-spark,#p5 .pkCard.open .pkff .art.f3 .ref-holo,#p5 .pkCard.open .pkff .art.f3 .ref-glare,#p5 .pkCard.open .pkff .art.f3 .ref-sweep,#p5 .pkCard.open .pkff .art.f3 .ref-spark,#p5 .pkCard.open .pkff .art.f4 .ref-holo,#p5 .pkCard.open .pkff .art.f4 .ref-glare,#p5 .pkCard.open .pkff .art.f4 .ref-sweep,#p5 .pkCard.open .pkff .art.f4 .ref-spark,#p5 .pkCard.open .pkff .art.f5 .ref-holo,#p5 .pkCard.open .pkff .art.f5 .ref-glare,#p5 .pkCard.open .pkff .art.f5 .ref-sweep,#p5 .pkCard.open .pkff .art.f5 .ref-spark{display:block!important}
 	.cardDetail{margin:12px 0;padding:10px 12px;border:1px solid #6d568b;border-left:3px solid var(--gold);border-radius:8px;background:linear-gradient(135deg,rgba(244,201,107,.12),rgba(139,107,209,.08));box-shadow:inset 0 0 14px rgba(244,201,107,.05)}
 	.cardDetail>b{display:block;margin-bottom:4px;color:var(--gold);font:700 15px "Barlow Condensed",sans-serif;letter-spacing:.03em}.cardDetail p{margin:0;color:var(--ink);font-size:13px;line-height:1.5;white-space:pre-wrap}
 	</style>
@@ -971,7 +990,7 @@ const art=(c,nat)=>{
   else if(c.img)inner=`<img src="${h(c.img)}" alt="${h(c.name)}" loading="lazy"${c.orient?"":nat?' data-auto="nat"':' data-auto="1"'}>`;
   else inner=`<div class="ph" style="background:${bg(c)}">${h(c.name)}</div>`;
   if(slot)inner=`<div class="lf">${inner}</div>`;
-  return `<div class="art${slot?" slot":""}${foil(c)}" data-card-id="${h(c.id||"")}" data-card-name="${h(c.name||"การ์ด")}" data-card-rarity="${h(c.rarity||"")}" role="button" tabindex="0" aria-label="ดูรายละเอียด ${h(c.name||"การ์ด")}" style="aspect-ratio:${ar}">${inner}${foil(c)?'<i class="fx"></i>':""}</div>`};
+	  return `<div class="art${slot?" slot":""}${foil(c)}" data-card-id="${h(c.id||"")}" data-card-name="${h(c.name||"การ์ด")}" data-card-rarity="${h(c.rarity||"")}" role="button" tabindex="0" aria-label="ดูรายละเอียด ${h(c.name||"การ์ด")}" style="aspect-ratio:${ar}">${inner}${foil(c)?'<i class="fx"></i>':""}<i class="ref-holo" aria-hidden="true"></i><i class="ref-glare" aria-hidden="true"></i><i class="ref-sweep" aria-hidden="true"></i><i class="ref-spark s1" aria-hidden="true"></i><i class="ref-spark s2" aria-hidden="true"></i><i class="ref-spark s3" aria-hidden="true"></i></div>`};
 
 const SHOWCASE_GROUPS=[
   ["Common · พื้นฐาน",["C","N","U"]],
@@ -1800,6 +1819,12 @@ const GA={open:false,pid:"",qty:0,packs:[],pi:0,cards:[],rev:0,all:[],pendingWri
 	};
 	function raritySoundKey(rarity){const r=String(rarity||"").trim().toUpperCase();if(["SP","SSP"].includes(r))return "pink";if(["SEC","SSR","SCR"].includes(r))return "crimson";if(["SVR","GR","FR","FFR","OR","OVR","ORR","DSR","ZR","X"].includes(r))return "rainbow";if(r==="RRR")return "gold";if(["R","RR"].includes(r))return "silver";return "common"}
 	function gachaSound(kind,rarity=""){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;if(kind==="tear"){noisePop(ctx,t,.24,.07,1500);tone(ctx,430,t,.19,.035,"triangle",170);tone(ctx,110,t+.04,.16,.045,"sine",58)}else if(kind==="flip"){const p=RARITY_SOUNDS[raritySoundKey(rarity)]||RARITY_SOUNDS.common;noisePop(ctx,t,.055,.018,2600);tone(ctx,p.base,t+.015,.12,p.gain,p.type,p.top);p.notes.forEach((f,i)=>tone(ctx,f,t+.075+i*.065,.28,p.gain*.62,i%2?"sine":"triangle",f*1.015))}}
+	function revealBurst(card){
+	  const r=String(card?.rarity||"").toUpperCase();if(["C","U","R"].includes(r))return;
+	  const color=(["RRR"].includes(r)?"255,190,45":["SP","SSP"].includes(r)?"255,105,195":["SEC","SSR","SCR"].includes(r)?"255,92,70":["GR","SVR","FR","FFR","OR","OVR","ORR","DSR","ZR","X"].includes(r)?"205,90,255":"105,190,255");
+	  const f=document.createElement("div");f.className="ref-flash";f.style.setProperty("--reveal-color",color);document.body.appendChild(f);setTimeout(()=>f.remove(),1100);
+	  const n=r==="RRR"?10:6;for(let i=0;i<n;i++){const s=document.createElement("span");s.className="ref-burst-spark";s.style.setProperty("--reveal-color",color);s.style.left="50%";s.style.top="42%";s.style.setProperty("--dx",`${(Math.random()-.5)*42}vw`);s.style.setProperty("--dy",`${(Math.random()-.55)*44}vh`);s.style.animationDelay=`${Math.random()*.18}s`;document.body.appendChild(s);setTimeout(()=>s.remove(),2100)}
+	}
 const trackW=()=>$("pkTrack").getBoundingClientRect().width||1;
 
 function tearSet(p){
@@ -1878,6 +1903,7 @@ function pkFlip(i){
   el.classList.add("open");
 	  const r=GA.cards[i],rarity=String(r?.c?.rarity||"").trim();
 	  gachaSound("flip",rarity);
+	  revealBurst(r?.c);
   if(r&&r.guar)el.classList.add("guar");
   GA.rev++;
   if(GA.rev>=GA.cards.length)pkPackDone();
