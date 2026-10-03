@@ -483,6 +483,21 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 	.art.f1:hover,.art.f2:hover,.art.f3:hover,.art.f4:hover{z-index:5}
 	@keyframes foilWaveShort{0%{background-position:135% 0;opacity:.1}38%{opacity:.52}58%{background-position:0 0;opacity:.62}100%{background-position:-95% 0;opacity:.08}}
 	@media(prefers-reduced-motion:reduce){.art.f0::after,.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after{animation:none!important}.art.f0,.art.f1,.art.f2,.art.f3,.art.f4{box-shadow:none}}
+
+	/* Vanguard-style game foil: crisp neon rim, a short energy pulse, and one clean light pass. */
+	.art.f0,.art.f1,.art.f2,.art.f3,.art.f4{animation:vanguardFramePulse 2.8s ease-in-out infinite}
+	.art.f0::before,.art.f1::before,.art.f2::before,.art.f3::before,.art.f4::before{border-radius:inherit}
+	.art.f0::before{box-shadow:inset 0 0 0 1px #eef7ff,inset 0 0 5px #b9e0ff,0 0 5px #7cb9ff,0 0 11px #4278ff88!important}
+	.art.f1::before{box-shadow:inset 0 0 0 1px #fff6ba,inset 0 0 5px #ffd94a,0 0 6px #ffb31a,0 0 13px #ff8f1c99!important}
+	.art.f2::before{background:conic-gradient(from var(--foil-angle,0deg),#ff4db8,#ffe56b,#65f3d5,#65baff,#c782ff,#ff4db8) 0 0/100% 100%!important;box-shadow:inset 0 0 0 1px #fff,0 0 6px #ff5bdc,0 0 14px #66d9ff,0 0 22px #a84dff99!important;animation:foilBorderSpin 2.8s linear infinite!important}
+	.art.f3::before{box-shadow:inset 0 0 0 1px #fff0fb,inset 0 0 5px #ff8fcf,0 0 6px #ff4db3,0 0 15px #ff37a888!important}
+	.art.f4::before{box-shadow:inset 0 0 0 1px #fff8c9,inset 0 0 5px #ffd86d,0 0 7px #ff5c52,0 0 16px #ff6430aa!important}
+	.art.f0::after,.art.f1::after,.art.f3::after,.art.f4::after{animation:foilWaveGame 2.15s cubic-bezier(.35,0,.25,1) infinite!important}
+	.art.f2::after{animation:foilWaveGame 2.35s cubic-bezier(.35,0,.25,1) infinite!important}
+	@keyframes vanguardFramePulse{0%,100%{filter:drop-shadow(0 0 1px currentColor)}50%{filter:drop-shadow(0 0 5px currentColor)}}
+	@keyframes foilBorderSpin{to{--foil-angle:360deg}}
+	@keyframes foilWaveGame{0%{background-position:145% 0;opacity:.05}20%{opacity:.32}48%{background-position:45% 0;opacity:.82}62%{opacity:.42}100%{background-position:-75% 0;opacity:.06}}
+	@media(prefers-reduced-motion:reduce){.art.f0,.art.f1,.art.f2,.art.f3,.art.f4{animation:none!important}.art.f2::before{animation:none!important}}
 	</style>
 </head>
 <body>
