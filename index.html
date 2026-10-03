@@ -919,12 +919,90 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
   .art.f2[data-card-rarity="X"] .ref-spark{background:conic-gradient(from 20deg,#ff3159,#ff9e24,#fff044,#32e987,#36dfff,#555dff,#e940ff,#ff3159)!important}
   .art.f2[data-card-rarity="GR"] .ref-spark{background:linear-gradient(135deg,#fff8e9,#eab65e 34%,#c73b50 67%,#fff6e8)!important;filter:drop-shadow(0 0 4px #fff2d4) drop-shadow(0 0 10px rgba(201,49,72,.9))!important}
   .art.f4[data-card-rarity="CSR"] .ref-spark{background:linear-gradient(135deg,#fff0be,#dbab50 34%,#c51c3c 68%,#220810)!important}
+/* Global effect toggle: keep the card artwork and rarity border, but remove animated foil, glow, sparkle, and reveal layers from every zone. */
+body.sparkles-off .art:not(.back),
+body.sparkles-off .art:not(.back)::after,
+body.sparkles-off .art:not(.back)>.fx,
+body.sparkles-off .art:not(.back)>.ref-holo,
+body.sparkles-off .art:not(.back)>.ref-glare,
+body.sparkles-off .art:not(.back)>.ref-sweep,
+body.sparkles-off .art:not(.back)>.ref-spark,
+body.sparkles-off .pkgloss,
+body.sparkles-off .pkglow,
+body.sparkles-off .pkRRRglint,
+body.sparkles-off .ref-flash,
+body.sparkles-off .ref-burst-spark {
+  animation:none!important;
+}
+body.sparkles-off .art:not(.back) {
+  box-shadow:none!important;
+  filter:none!important;
+}
+body.sparkles-off .art:not(.back)::after,
+body.sparkles-off .art:not(.back)>.fx,
+body.sparkles-off .art:not(.back)>.ref-holo,
+body.sparkles-off .art:not(.back)>.ref-glare,
+body.sparkles-off .art:not(.back)>.ref-sweep,
+body.sparkles-off .art:not(.back)>.ref-spark,
+body.sparkles-off .pkgloss,
+body.sparkles-off .pkglow,
+body.sparkles-off .pkRRRglint,
+body.sparkles-off .ref-flash,
+body.sparkles-off .ref-burst-spark {
+  display:none!important;
+}
+body.sparkles-off .art.f0::before,
+body.sparkles-off .art.f1::before,
+body.sparkles-off .art.f2::before,
+body.sparkles-off .art.f3::before,
+body.sparkles-off .art.f4::before {
+  animation:none!important;
+}
+/* Card viewer exit control: text is clearer than a small X and remains easy to tap on mobile. */
+#lb .lb { padding:64px 24px 24px; }
+#lb .cardViewerClose {
+  right:14px;
+  top:14px;
+  z-index:5;
+  min-width:76px;
+  min-height:44px;
+  padding:9px 16px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:var(--card);
+  color:var(--ink);
+  font:700 16px/1 Barlow,sans-serif;
+  box-shadow:0 4px 14px rgba(0,0,0,.2);
+}
+#lb .cardViewerClose:hover,
+#lb .cardViewerClose:focus-visible {
+  border-color:var(--red);
+  color:var(--red);
+  outline:2px solid color-mix(in srgb, var(--red) 35%, transparent);
+  outline-offset:2px;
+}
+@media(max-width:520px){
+  #lb .lb { padding:64px 16px 18px; }
+  #lb .cardViewerClose { right:10px; top:10px; min-width:74px; min-height:42px; }
+}
+
+/* Stars are a card-detail interaction only: keep them hidden on every card grid and show them only in the card viewer. */
+body .art .ref-spark.ref-spark { display:none!important; }
+#lbBody .art .ref-spark,
+#p5 .pkCard.open .pkff .art .ref-spark { display:block!important; }
+body.sparkles-off #lbBody .art .ref-spark,
+body.sparkles-off #p5 .pkCard.open .pkff .art .ref-spark { display:none!important; }
+
+/* Contextual background stars: hidden on normal pages, visible only while viewing or revealing a card. */
+body::before { display:none!important; }
+body:has(#lb[open])::before,
+body:has(#p5 .pkCard.open)::before { display:block!important; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="fanmadeNotice">This Site is Fanmade</div>
-  <div class="top"><h1><span class="sigil" aria-hidden="true">✦</span> Vanguard Vanjai <small>หอสมุดการ์ดเวทมนตร์</small></h1><div class="topActions"><span id="st" style="color:var(--mute);font-size:13px" aria-live="polite"></span><button class="btn sm" id="authBtn">Sign in</button><button class="btn sm" id="sparkleToggle" type="button" aria-pressed="true">✦ Holo: ปิด</button><button class="btn sm motionBtn" id="motionBtn" type="button" aria-pressed="false">⌁ เปิด Motion</button><button class="btn sm" id="editBtn" aria-pressed="false">✎ Edit</button></div></div>
+  <div class="top"><h1><span class="sigil" aria-hidden="true">✦</span> Vanguard Vanjai <small>หอสมุดการ์ดเวทมนตร์</small></h1><div class="topActions"><span id="st" style="color:var(--mute);font-size:13px" aria-live="polite"></span><button class="btn sm" id="authBtn">Sign in</button><button class="btn sm" id="sparkleToggle" type="button" aria-pressed="true">✦ เอฟเฟกต์: เปิด</button><button class="btn sm motionBtn" id="motionBtn" type="button" aria-pressed="false">⌁ เปิด Motion</button><button class="btn sm" id="editBtn" aria-pressed="false">✎ Edit</button></div></div>
   <div id="cloudNotice" class="cloudNotice" hidden></div>
   <div id="realtimeNotice" class="cloudNotice" hidden><span id="realtimeText">มีข้อมูลใหม่จากผู้ใช้อื่น</span> <button class="btn sm" id="realtimeRefresh">↻ รีเฟรชข้อมูล</button></div>
   <section id="cloudGate" class="cloudGate" hidden><h2>เข้าสู่ระบบเพื่อใช้แอป</h2><p>ข้อมูลโปรดักและ Card List เป็นข้อมูลร่วม ส่วนเด็ค คลังสะสม Pity และประวัติการสุ่มเป็นข้อมูลส่วนตัวของบัญชี</p><button class="btn primary" id="gateSignIn">เข้าสู่ระบบ / สมัครบัญชี</button></section>
@@ -1068,7 +1146,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 </div>
 
 <dialog id="authDialog"><button class="x" id="authClose" aria-label="Close">×</button><div class="pad"><h2 id="authTitle">เข้าสู่ระบบ</h2><form id="authForm"><div class="fld"><label for="authName">ชื่อที่แสดงใน Feed (สมัครใหม่)</label><input id="authName" maxlength="40" autocomplete="nickname" placeholder="Player"></div><div class="fld"><label for="authEmail">อีเมล</label><input id="authEmail" type="email" autocomplete="email" required></div><div class="fld"><label for="authPassword">รหัสผ่าน</label><input id="authPassword" type="password" autocomplete="current-password" minlength="8" required></div><div class="actions"><button class="btn primary" id="authSubmit" type="submit">เข้าสู่ระบบ</button><button class="btn" id="authMode" type="button">สมัครบัญชีใหม่</button></div><p class="dto" id="authHint">ข้อมูลส่วนตัวจะถูกจำกัดด้วยนโยบาย RLS ใน Supabase</p><p class="bad" id="authError" role="alert"></p></form></div></dialog>
-<dialog id="lb"><button class="x" id="lbx" aria-label="Close">×</button><div class="lb" id="lbBody"></div></dialog>
+<dialog id="lb"><button class="x cardViewerClose" id="lbx" aria-label="ออกจากการดูการ์ด">ออก</button><div class="lb" id="lbBody"></div></dialog>
 <dialog id="ed"><div class="pad" id="edBody"></div></dialog>
 <dialog id="sp" style="max-width:min(1100px,96vw)"><button class="x" id="spx" aria-label="Close">×</button><div class="pad" id="spBody"></div></dialog>
 <dialog id="nt" role="alertdialog"><div class="pad" id="ntBody"></div></dialog>
@@ -1998,6 +2076,7 @@ td:first-child{width:40px;text-align:right;font-weight:bold}td:nth-child(3){widt
 
 
 
+
 </style></head><body><h1>${h(deck.name||"My deck")}</h1><p class="sub">${dtotal()} cards</p>
 <div class="meta"><div>Player: <span></span></div><div>ID: <span></span></div></div>${body}</body></html>`;
   const f=document.createElement("iframe");f.style.cssText="position:fixed;right:0;bottom:0;width:0;height:0;border:0";
@@ -2475,29 +2554,27 @@ function pairSummaryHtml(r){if(r.status!=='finished')return '';const list=r.play
 function pairRenderActive(){const r=pairRoom(),panel=$("pairRoomPanel");if(!panel)return;if(!r){panel.hidden=true;return}panel.hidden=false;const host=pairHost(r);$("pairRoomTitle").textContent=r.name;$("pairRoomCode").textContent=r.code;$("pairRoomRole").textContent=host?'ผู้จัดห้อง':'ผู้เล่น';$("pairRoomRole").className=`pairStatus ${host?'live':''}`;$("pairRoomStatus").textContent=r.status==='lobby'?'รอเริ่ม':r.status==='active'?`กำลังแข่ง · รอบ ${r.currentRound}`:'จบการแข่งขัน';$("pairRoomStatus").className=`pairStatus ${r.status==='active'?'live':r.status==='finished'?'done':''}`;$("pairRoundLabel").textContent=r.currentRound?`${pairFormatName(r.format)} · รอบ ${r.currentRound}/${r.maxRounds}`:`${pairFormatName(r.format)} · ${r.players.filter(p=>!p.dropped).length} ผู้เล่น`;$('pairStart').hidden=!host;$('pairStart').disabled=r.status==='finished'||r.decisionNeeded||!r.players.some(p=>!p.dropped)|| (r.status==='active'&&r.matches.filter(m=>m.round===r.currentRound).some(m=>m.status!=='complete'));$('pairDeleteRoom').hidden=!host;$('pairDeleteRoom').textContent=host?'ลบห้อง':'ลบห้อง';const current=r.matches.filter(m=>m.round===r.currentRound);$('pairMatches').innerHTML=current.length?current.map(m=>pairMatchHtml(r,m)).join(''):r.players.length?'<div class="pairEmpty">ผู้จัดกดเริ่มรอบเพื่อสร้างคู่แข่ง</div>':'<div class="pairEmpty">ยังไม่มีผู้เล่น</div>';$('pairStandings').innerHTML=`<table class="pairStandings"><thead><tr><th>#</th><th>ชื่อ</th><th>แต้ม</th><th>Win Rate</th><th>W</th><th>D</th><th>L</th></tr></thead><tbody>${r.players.filter(p=>!p.dropped).slice().sort((a,b)=>(b.points-a.points)||(pairWinRate(b)-pairWinRate(a))).map((p,i)=>`<tr><td>${i+1}</td><td class="${p.id===r.currentPlayerId?'pairMe':''}">${h(p.name)}</td><td><b>${p.points}</b></td><td class="pairWinRate">${pairWinRate(p)}%</td><td>${p.wins}</td><td>${p.draws}</td><td>${p.losses}</td></tr>`).join('')}</tbody></table>`;const dec=$('pairDecision');dec.hidden=!r.decisionNeeded;dec.innerHTML=r.decisionNeeded?`<b>แต้มเท่ากัน: ${h(pairTopTied(r).map(p=>p.name).join(', '))}</b><br>ต้องการให้แข่งต่อเพื่อหาผู้ชนะ หรือใช้ Win Rate ตัดสิน?<br><button class="btn sm primary" data-pair-continue>แข่งต่อ 1 รอบ</button><button class="btn sm" data-pair-winrate>ใช้ Win Rate ตัดสิน</button>`:'';const sum=$('pairSummary');sum.hidden=r.status!=='finished';sum.innerHTML=pairSummaryHtml(r);const mg=$('pairManage');mg.hidden=!host;$('pairPlayersManage').innerHTML=host?r.players.filter(p=>!p.dropped).map(p=>`<div class="pairManageRow"><b>${h(p.name)}</b><span class="dto">${p.joinedBy===r.createdBy?'ผู้จัด':''}</span>${p.joinedBy===r.createdBy?'':'<button class="btn sm" data-pair-kick="'+h(p.id)+'">เตะออก</button>'}</div>`).join(''):'';$('pairMatches').querySelectorAll('[data-pair-result]').forEach(b=>b.onclick=()=>{const [mid,pid]=b.dataset.pairResult.split('|');pairRecord(r.matches.find(m=>m.id===mid),pid)});$('pairMatches').querySelectorAll('[data-pair-draw]').forEach(b=>b.onclick=()=>pairRecord(r.matches.find(m=>m.id===b.dataset.pairDraw),'draw'));$('pairPlayersManage').querySelectorAll('[data-pair-kick]').forEach(b=>b.onclick=()=>pairKick(b.dataset.pairKick));dec.querySelector('[data-pair-continue]')?.addEventListener('click',()=>{r.decisionNeeded=false;r.maxRounds++;pairSaveRender();pairMakeRound(r)});dec.querySelector('[data-pair-winrate]')?.addEventListener('click',()=>pairFinish(r,'แต้มเสมอ ใช้ Win Rate ตัดสิน') )}
 $('pairCreateForm').addEventListener('submit',pairCreateRoom);$('pairJoinForm').addEventListener('submit',pairJoinRoom);$('pairStart').onclick=()=>pairMakeRound(pairRoom());$('pairDeleteRoom').onclick=pairDeleteRoom;$('pairRefresh').onclick=async()=>{try{await pairPullRemote()}catch(e){pairNotify('รีเฟรชห้องไม่สำเร็จ',e.message,'bad')}pairRenderRooms();pairRenderActive()};$('pairLeaveRoom').onclick=()=>{PAIRING.activeId=null;pairRenderActive()};$('pairCopyCode').onclick=async()=>{const c=pairRoom()?.code||'';try{await navigator.clipboard.writeText(c);pairNotify('คัดลอกรหัสแล้ว',c)}catch(e){pairNotify('รหัสห้อง',c,'ask')}};pairRenderRooms();pairRenderActive();pairPullRemote().catch(e=>console.warn('Pairing remote unavailable',e.message));
 
-/* ---------- Holo effect toggle ---------- */
+/* ---------- Global card effects toggle ---------- */
 (() => {
   const button = document.getElementById("sparkleToggle");
   if (!button) return;
-
-  const STORAGE_KEY = "vanguard-card-holo";
+  const STORAGE_KEY = "vanguard-card-effects";
   const safeGet = () => { try { return localStorage.getItem(STORAGE_KEY) === "off"; } catch (e) { return false; } };
   const safeSet = (value) => { try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {} };
   const isOffInitially = safeGet();
-
-  function updateHoloUI(isOff) {
-    document.body.classList.toggle("holo-off", isOff);
-    button.textContent = isOff ? "✦ Holo: เปิด" : "✦ Holo: ปิด";
+  function updateEffectsUI(isOff) {
+    document.body.classList.toggle("sparkles-off", isOff);
+    document.body.classList.remove("holo-off");
+    button.textContent = isOff ? "✦ เอฟเฟกต์: ปิด" : "✦ เอฟเฟกต์: เปิด";
     button.setAttribute("aria-pressed", String(!isOff));
-    button.setAttribute("aria-label", isOff ? "เปิดเอฟเฟกต์การ์ด Holo" : "ปิดเอฟเฟกต์การ์ด Holo");
+    button.setAttribute("aria-label", isOff ? "เปิดเอฟเฟกต์การ์ดทุกโซน" : "ปิดเอฟเฟกต์การ์ดทุกโซน");
+    button.title = isOff ? "เปิดเอฟเฟกต์การ์ดทุกโซน" : "ปิดเอฟเฟกต์การ์ดทุกโซน";
   }
-
-  updateHoloUI(isOffInitially);
-
+  updateEffectsUI(isOffInitially);
   button.addEventListener("click", () => {
-    const isOff = !document.body.classList.contains("holo-off");
+    const isOff = !document.body.classList.contains("sparkles-off");
     safeSet(isOff ? "off" : "on");
-    updateHoloUI(isOff);
+    updateEffectsUI(isOff);
   });
 })();
 </script>
