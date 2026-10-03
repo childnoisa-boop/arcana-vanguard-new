@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Arcana Vanguard · หอสมุดการ์ดเวทมนตร์</title>
+<title>Vanguard Vanjai · หอสมุดการ์ดเวทมนตร์</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#14213d;--paper:#f4f6fb;--line:#d5dbe8;--red:#c8102e;--mute:#5b6478;--card:#fff}
@@ -386,7 +386,7 @@ body.sparkles-off .art.f0>.fx::after,body.sparkles-off .art.f1>.fx::after,body.s
 .art.f0>.fx,.art.f1>.fx,.art.f2>.fx,.art.f3>.fx,.art.f4>.fx{--fc:#f5f8ff!important;--fc2:#bfc9d8!important}
 @keyframes silverFoil{0%{background-position:135% 0;opacity:.08}28%{opacity:.34}52%{background-position:15% 0;opacity:.48}78%{opacity:.2}100%{background-position:-75% 0;opacity:.08}}
 .favStar{position:absolute;right:6px;top:6px;z-index:6;border:1px solid rgba(0,0,0,.18);border-radius:99px;background:rgba(255,255,255,.92);color:#9aa1b2;font:700 18px/1 Arial;padding:3px 6px;cursor:pointer;box-shadow:0 1px 4px #0003}.favStar.on{color:#e6a400;background:#fff7c7}.c,.row{position:relative}.row .favStar{position:static;justify-self:end}.lbFav{margin:0 0 10px;color:#9aa1b2;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 12px;cursor:pointer;font:600 14px Barlow,sans-serif}.lbFav.on{color:#a66b00;background:#fff7c7;border-color:#e6a400}
-/* ---------- Arcana Vanguard fantasy theme ---------- */
+/* ---------- Vanguard Vanjai fantasy theme ---------- */
 :root{--ink:#f4ead0;--paper:#0b1020;--line:#4b3b68;--red:#c78b3c;--mute:#b5abc7;--card:#15152c;--gold:#f4c96b;--violet:#8b6bd1;--ember:#df7351}
 body{font-family:Barlow,Arial,sans-serif;background:radial-gradient(ellipse at 50% -15%,#2d214d 0%,#10162b 42%,#070a14 100%);background-attachment:fixed;color:var(--ink)}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:radial-gradient(circle at 12% 18%,#f4c96b 0 1px,transparent 2px),radial-gradient(circle at 82% 28%,#8b6bd1 0 1px,transparent 2px),radial-gradient(circle at 56% 78%,#f4c96b 0 1px,transparent 2px);background-size:170px 190px,230px 260px,310px 280px;z-index:-1}
@@ -405,7 +405,7 @@ dialog{background:linear-gradient(145deg,#181630,#0d1122);border-color:#7d5c8d;b
 @media(max-width:560px){.top{padding:12px}.top:after{display:none}h1{font-size:27px}.tab{padding:10px 13px;font-size:14px}.pkpanel{padding:12px!important}.pkwrap{width:min(270px,76vw)}.pkCard{filter:none}}
 @media(prefers-reduced-motion:reduce){body:before{display:none}.btn:hover,.collectionCard:hover{transform:none}.pkwrap,.pkCard{animation:none!important}}
 
-/* ---------- Arcana Vanguard cohesive UI refinement ---------- */
+/* ---------- Vanguard Vanjai cohesive UI refinement ---------- */
 :root{--gold:#e7b95f;--gold-soft:#f5d892;--ink:#f7f0df;--paper:#080b18;--line:#493b67;--card:#12152a;--card-2:#191936;--mute:#aaa4c0;--red:#bd6f55;--violet:#7c63bd}
 body{background-color:#080b18;background-image:radial-gradient(ellipse at 50% -20%,#44305f 0%,#16152f 30%,#080b18 72%),linear-gradient(115deg,#090c19,#17132b 48%,#080b18);color:var(--ink)}
 body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.08;background:linear-gradient(115deg,transparent 0 47%,#e7b95f 47.15% 47.3%,transparent 47.45% 100%),linear-gradient(65deg,transparent 0 70%,#8068c8 70.15% 70.3%,transparent 70.45% 100%);mix-blend-mode:screen}
@@ -538,7 +538,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 	.art.f2{border-color:#ff62df!important;box-shadow:0 0 0 1px #fff,0 0 9px #ff35d4,0 0 18px #2bd9ff,0 0 29px #9d42ffbb!important}
 	.art.f3{border-color:#ff70bf!important;box-shadow:0 0 0 1px #ffe5f5,0 0 9px #ff2cab,0 0 21px #ed3e9faa!important}
 	.art.f4{border-color:#ff654d!important;box-shadow:0 0 0 1px #fff0a2,0 0 9px #ff4339,0 0 22px #ff942daa!important}
-	/* Rainbow group (GR, SVR, FR, FFR, OR, OVR, ORR, DSR, ZR, X): animated RGB frame. */
+	/* Rainbow base frame for FR/OR/ORR/DSR/ZR; special f2 rarities use their own palettes below. */
 	@property --rainbow-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
 	.art.f2{border-color:transparent!important;--rainbow-angle:0deg;box-shadow:0 0 0 1px rgba(255,255,255,.9),0 0 12px rgba(255,60,210,.7),0 0 22px rgba(45,210,255,.55),0 0 32px rgba(170,60,255,.35)!important}
 	.art.f2::before{content:""!important;inset:0!important;border:0!important;padding:3px!important;background:conic-gradient(from var(--rainbow-angle),#ff205e,#ff9d19,#fff02a,#29e887,#20c8ff,#695cff,#e42cff,#ff205e)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:0 0 7px rgba(255,80,220,.85),0 0 14px rgba(45,220,255,.6)!important;animation:rainbowFrameSpin 3.6s linear infinite!important}
@@ -562,7 +562,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 	@keyframes referenceTwinkle{0%,20%{opacity:0;transform:scale(.8)}50%{opacity:.72;transform:scale(1.12)}80%,100%{opacity:0;transform:scale(.8)}}
 	@keyframes frameGlowPulse{0%,100%{filter:brightness(.98) drop-shadow(0 0 1px rgba(var(--foil-color),.35))}45%{filter:brightness(1.06) drop-shadow(0 0 6px rgba(var(--foil-color),.65))}68%{filter:brightness(1) drop-shadow(0 0 2px rgba(var(--foil-color),.42))}}
 	@media(prefers-reduced-motion:reduce){.art:not(.back){animation:none!important}.art:not(.back)>.fx,.art:not(.back)>.fx::before,.art:not(.back)>.fx::after{animation:none!important}.art:not(.back)>.fx{opacity:.18!important}}
-	.rarityShowcaseTools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}.rarityShowcaseTools .dto{margin:0}.rarityShowcaseHead{margin:0 0 18px;padding:20px 22px;border:1px solid #806342;border-radius:16px;background:linear-gradient(135deg,#211b3d,#101326);box-shadow:0 12px 28px #0007,inset 0 0 24px #8b6bd122}.rarityShowcaseHead h2{margin:0 0 6px;color:var(--gold-soft);font:700 clamp(24px,4vw,34px) Cinzel,serif}.rarityShowcase{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:20px}.raritySample{min-width:0;padding:14px;border:1px solid #8a704c;border-radius:11px;background:linear-gradient(145deg,#201a3b,#0d1122);box-shadow:inset 0 0 0 3px #2c2147,inset 0 0 0 4px #806342,0 12px 26px #0008;text-align:center;position:relative}.raritySample:before{content:"";position:absolute;inset:7px;border:1px solid #f5d89233;border-radius:7px;pointer-events:none}.raritySample .art{width:min(100%,158px);margin:0 auto 12px;border-radius:7px;box-shadow:0 7px 16px #0009}.raritySample b{display:block;color:var(--gold-soft);font:700 18px "Barlow Condensed",sans-serif;letter-spacing:.04em}.raritySample small{display:block;margin-top:3px;color:var(--mute);font-size:11px;line-height:1.35}.raritySampleTier{margin:24px 0 8px;color:#d9c8ed;font:700 18px Cinzel,serif;grid-column:1/-1;border-bottom:1px solid #493b67;padding-bottom:7px}.raritySampleTier:first-child{margin-top:0}@media(max-width:650px){.rarityShowcase{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.raritySample{padding:10px}.raritySample .art{width:min(100%,145px)}.raritySample b{font-size:15px}.raritySample small{font-size:10px}}
+	.rarityShowcaseTools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}.rarityShowcaseTools .dto{margin:0}.rarityShowcaseHead{margin:0 0 18px;padding:20px 22px;border:1px solid #806342;border-radius:16px;background:linear-gradient(135deg,#211b3d,#101326);box-shadow:0 12px 28px #0007,inset 0 0 24px #8b6bd122}.rarityShowcaseHead h2{margin:0 0 6px;color:var(--gold-soft);font:700 clamp(24px,4vw,34px) Cinzel,serif}.rarityShowcase{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:22px;align-items:start}.raritySample{min-width:0;text-align:center;position:relative}.raritySample:before,.raritySample b,.raritySample small,.raritySampleTier{display:none}.raritySample .art{width:min(100%,158px);margin:0 auto;border-radius:7px;box-shadow:0 7px 16px #0009}@media(max-width:650px){.rarityShowcase{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.raritySample .art{width:100%}}
 	/* Use the picture-frame rarity border on every real card, not only the Showcase samples. */
 	.art:not(.back){box-sizing:border-box;border:3px solid rgba(var(--foil-color),.84)!important;border-radius:8px!important;box-shadow:0 0 0 1px rgba(var(--foil-color),.72),inset 0 0 0 1px rgba(255,255,255,.3),inset 0 0 0 4px rgba(var(--foil-color),.24),0 8px 20px rgba(8,12,28,.58)!important}
 	.art:not(.back)::before{inset:2px!important;border:1px solid rgba(255,255,255,.24)!important;box-shadow:inset 0 0 0 1px rgba(var(--foil-color),.58),inset 0 0 9px rgba(var(--foil-color),.46)!important}
@@ -674,7 +674,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 	@keyframes referenceHolo{from{background-position:0% 20%}to{background-position:100% 80%}}
 	@keyframes referenceSweep{0%{transform:translate(-32%,-32%);opacity:0}12%{opacity:1}50%{transform:translate(32%,32%);opacity:1}62%,100%{transform:translate(32%,32%);opacity:0}}
 	.ref-flash{position:fixed;inset:-60%;z-index:80;pointer-events:none;overflow:hidden;background:linear-gradient(135deg,transparent 36%,rgba(var(--reveal-color),.2) 45%,rgba(255,255,255,.42) 50%,rgba(var(--reveal-color),.2) 55%,transparent 64%);animation:referenceFlash 1.05s ease-out forwards}.ref-burst-spark{position:fixed;z-index:81;width:12px;height:12px;pointer-events:none;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);filter:drop-shadow(0 0 3px rgba(var(--reveal-color),.6));animation:referenceBurstSpark 1.8s ease-out forwards}@keyframes referenceFlash{from{transform:translate(-30%,-30%);opacity:.7}to{transform:translate(30%,30%);opacity:0}}@keyframes referenceBurstSpark{0%{opacity:0;transform:translate(0,0) scale(.2)}20%{opacity:.65}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1)}}
-	/* Basic rarities C / U / R stay clean: no aura, Holo, curtain, glare or sparks. */
+	/* Base C/U stay clean. R receives its silver-blue frame and moving stars from the final foil overrides. */
 	.art[data-card-rarity="C"],.art[data-card-rarity="U"],.art[data-card-rarity="R"],.art[data-card-rarity="T"]{box-shadow:none!important;filter:none!important}
 	.art[data-card-rarity="C"] .ref-holo,.art[data-card-rarity="C"] .ref-glare,.art[data-card-rarity="C"] .ref-sweep,.art[data-card-rarity="C"] .ref-spark,.art[data-card-rarity="U"] .ref-holo,.art[data-card-rarity="U"] .ref-glare,.art[data-card-rarity="U"] .ref-sweep,.art[data-card-rarity="U"] .ref-spark,.art[data-card-rarity="R"] .ref-holo,.art[data-card-rarity="R"] .ref-glare,.art[data-card-rarity="R"] .ref-sweep,.art[data-card-rarity="R"] .ref-spark,.art[data-card-rarity="T"] .ref-holo,.art[data-card-rarity="T"] .ref-glare,.art[data-card-rarity="T"] .ref-sweep,.art[data-card-rarity="T"] .ref-spark{display:none!important;animation:none!important}
 	/* Softer Holo: reduce brightness and rainbow saturation while keeping the moving reflection. */
@@ -704,26 +704,135 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
   .art.f2[data-card-rarity="X"]::before,.art.f2[data-card-rarity="x"]::before{display:block!important;content:""!important;inset:0!important;border:0!important;padding:3px!important;border-radius:inherit!important;background:conic-gradient(from var(--rainbow-angle),#ff003c 0deg,#ff8500 50deg,#fff000 100deg,#00f878 160deg,#00d9ff 220deg,#4c50ff 280deg,#ed00ff 330deg,#ff003c 360deg)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:0 0 10px rgba(255,0,210,1),0 0 19px rgba(0,225,255,.92),inset 0 0 7px rgba(255,255,255,.95)!important;filter:saturate(1.45) brightness(1.08);animation:rainbowFrameSpin 5.5s linear infinite!important;opacity:1!important}
   .art.f2[data-card-rarity="X"]::after,.art.f2[data-card-rarity="x"]::after{animation:none!important;opacity:0!important}
 
-	.cardDetail{margin:12px 0;padding:10px 12px;border:1px solid #6d568b;border-left:3px solid var(--gold);border-radius:8px;background:linear-gradient(135deg,rgba(244,201,107,.12),rgba(139,107,209,.08));box-shadow:inset 0 0 14px rgba(244,201,107,.05)}
+  /* SSR rarity: a continuously blended violet-rainbow prism with velvet-crimson accents. */
+  @property --ssr-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+  .art.f4[data-card-rarity="SSR"],.art.f4[data-card-rarity="ssr"]{--foil-color:188,54,156;border:3px solid transparent!important;box-shadow:0 0 0 1px #f6d8ff,0 0 10px rgba(186,58,208,.78),0 0 22px rgba(112,25,126,.55),0 0 32px rgba(164,24,58,.36)!important}
+  .art.f4[data-card-rarity="SSR"]::before,.art.f4[data-card-rarity="ssr"]::before{display:block!important;content:""!important;inset:0!important;padding:3px!important;border:0!important;border-radius:inherit!important;background:conic-gradient(from var(--ssr-angle,0deg),#4b176f 0deg,#7138d5 42deg,#a43bd0 84deg,#f05cff 126deg,#e91f65 178deg,#7d102e 222deg,#c72c58 264deg,#ff7198 306deg,#7d2aa5 340deg,#4b176f 360deg)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:inset 0 0 6px rgba(255,225,255,.92),0 0 9px rgba(221,71,231,.82),0 0 16px rgba(152,20,76,.58)!important;filter:saturate(1.3) brightness(1.06)!important;opacity:1!important;animation:ssrVioletFrame 12s linear infinite!important}
+  .art.f4[data-card-rarity="SSR"]::after,.art.f4[data-card-rarity="ssr"]::after{display:block!important;background:linear-gradient(128deg,transparent 18%,rgba(126,38,181,.1) 30%,rgba(255,88,218,.18) 40%,rgba(255,255,255,.78) 49%,rgba(255,74,135,.38) 55%,rgba(126,38,181,.16) 66%,transparent 82%)!important;background-size:240% 240%!important;opacity:.68!important;animation:ssrVelvetSweep 8s linear infinite!important}
+  .art.f4[data-card-rarity="SSR"]>.fx,.art.f4[data-card-rarity="ssr"]>.fx{display:block!important;inset:-10%!important;z-index:7!important;pointer-events:none!important;opacity:.82!important;background:radial-gradient(circle at 18% 24%,#fff 0 1.5px,transparent 3px),radial-gradient(circle at 76% 18%,#ffd9ff 0 1.2px,transparent 3px),radial-gradient(circle at 62% 78%,#ffb7dc 0 1.6px,transparent 3px),radial-gradient(circle at 28% 82%,#cba7ff 0 1px,transparent 2.5px)!important;animation:ssrSparkleDrift 3.8s ease-in-out infinite!important}
+  .art.f4[data-card-rarity="SSR"]>.fx::before,.art.f4[data-card-rarity="ssr"]>.fx::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.62) 48%,rgba(255,104,221,.24) 53%,transparent 68%);background-size:220% 220%;animation:ssrSparkleSweep 3.2s linear infinite!important;opacity:.72}
+  .art.f4[data-card-rarity="SSR"]>.fx::after,.art.f4[data-card-rarity="ssr"]>.fx::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 42% 42%,rgba(255,255,255,.95) 0 1px,transparent 3px),radial-gradient(circle at 86% 56%,rgba(255,116,200,.9) 0 1px,transparent 3px);animation:ssrSparkleTwinkle 2.1s ease-in-out infinite alternate!important;opacity:.88}
+  .raritySample .art{transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s ease!important}
+  .raritySample:hover .art{transform:translateY(-8px) scale(1.035) rotateX(2deg) rotateY(-3deg);filter:brightness(1.08) saturate(1.12) drop-shadow(0 14px 18px rgba(19,8,38,.68))}
+  .raritySample:hover .art.f4[data-card-rarity="SSR"]>.fx,.raritySample:hover .art.f4[data-card-rarity="ssr"]>.fx{opacity:1!important;animation-duration:1.8s!important}
+  @keyframes ssrVioletFrame{from{--ssr-angle:0deg}to{--ssr-angle:360deg}}
+  @keyframes ssrVelvetSweep{0%{background-position:150% 50%;opacity:.22}50%{background-position:50% 50%;opacity:.72}100%{background-position:-50% 50%;opacity:.22}}
+  @keyframes ssrSparkleDrift{0%,100%{transform:translate(-1%,-1%) scale(.96);opacity:.48}50%{transform:translate(1%,1%) scale(1.04);opacity:1}}
+  @keyframes ssrSparkleSweep{0%{background-position:150% 50%;opacity:.12}45%{background-position:42% 50%;opacity:.8}100%{background-position:-50% 50%;opacity:.12}}
+  @keyframes ssrSparkleTwinkle{0%{transform:scale(.72);opacity:.25}55%{transform:scale(1.18);opacity:1}100%{transform:scale(.86);opacity:.38}}
+
+  /* Showcase labels echo each rarity frame; the card itself keeps the artwork intact. */
+  .raritySample{display:flex;flex-direction:column;align-items:center;overflow:visible;perspective:1000px}
+  .raritySample .raritySampleName{display:block;margin:11px 0 0;color:var(--sample-ink,#eff6ff);font:800 clamp(17px,2.5vw,22px)/1.1 Cinzel,serif;letter-spacing:.14em;text-shadow:0 0 4px var(--sample-glow,rgba(180,210,255,.7)),0 0 12px var(--sample-glow,rgba(180,210,255,.55));transition:filter .25s ease,transform .25s ease}
+  .raritySample .raritySampleName::after{content:"";display:block;width:42px;height:2px;margin:6px auto 0;border-radius:99px;background:linear-gradient(90deg,transparent,var(--sample-accent,#dceaff),transparent);filter:drop-shadow(0 0 4px var(--sample-glow,rgba(180,210,255,.7)))}
+  .raritySample .raritySampleCaption{display:block;margin-top:5px;color:#c6bbdb;font:600 10px/1.2 "Barlow Condensed",sans-serif;letter-spacing:.16em;text-transform:uppercase;opacity:.8}
+  .raritySample[data-rarity="C"],.raritySample[data-rarity="N"],.raritySample[data-rarity="U"]{--sample-ink:#e5efff;--sample-accent:#dceaff;--sample-glow:rgba(180,210,255,.7)}
+  .raritySample[data-rarity="R"],.raritySample[data-rarity="RR"],.raritySample[data-rarity="SR"]{--sample-ink:#e8f7ff;--sample-accent:#82d5ff;--sample-glow:rgba(91,190,255,.82)}
+  .raritySample[data-rarity="RRR"]{--sample-ink:#fff0b4;--sample-accent:#ffd34f;--sample-glow:rgba(255,190,45,.86)}
+  .raritySample[data-rarity="GR"],.raritySample[data-rarity="SVR"],.raritySample[data-rarity="FR"],.raritySample[data-rarity="FFR"],.raritySample[data-rarity="OR"],.raritySample[data-rarity="EMR"],.raritySample[data-rarity="ORR"],.raritySample[data-rarity="DSR"],.raritySample[data-rarity="ZR"],.raritySample[data-rarity="X"]{--sample-ink:#ffeaff;--sample-accent:#ef9cff;--sample-glow:rgba(233,93,255,.92)}
+  .raritySample[data-rarity="SSP"]{--sample-ink:#ffe2f3;--sample-accent:#ff70bf;--sample-glow:rgba(255,72,180,.9)}
+  .raritySample[data-rarity="SEC"],.raritySample[data-rarity="SSR"],.raritySample[data-rarity="CSR"]{--sample-ink:#ffe5ef;--sample-accent:#e55b91;--sample-glow:rgba(194,36,91,.9)}
+  .raritySample[data-rarity="X"] .raritySampleName{color:transparent;background:linear-gradient(90deg,#fff 0%,#ff9ee7 28%,#c1a0ff 58%,#91ecff 82%,#fff 100%);-webkit-background-clip:text;background-clip:text;text-shadow:0 0 9px rgba(255,105,225,.72),0 0 17px rgba(153,92,255,.58)}
+
+  /* All card faces lift and catch a glassy reflection while hovered. */
+  .art:not(.back){transform-origin:center;transition:transform .34s cubic-bezier(.2,.8,.2,1),filter .34s ease,box-shadow .34s ease}
+  .art:not(.back):hover{z-index:12;transform:perspective(1000px) translateY(-5px) scale(1.025) rotateX(calc(var(--tilt-x,0deg) + 1.5deg)) rotateY(calc(var(--tilt-y,0deg) - 2deg));filter:brightness(1.12) saturate(1.12) drop-shadow(0 13px 18px rgba(12,8,28,.68)) drop-shadow(0 0 5px rgba(220,180,255,.28))}
+  .raritySample .art{transition:transform .38s cubic-bezier(.2,.8,.2,1),filter .38s ease,box-shadow .38s ease}
+  .raritySample:hover .art{transform:perspective(1000px) translateY(-8px) scale(1.045) rotateX(calc(var(--tilt-x,0deg) + 2deg)) rotateY(calc(var(--tilt-y,0deg) - 3deg));filter:brightness(1.14) saturate(1.16) drop-shadow(0 15px 20px rgba(19,8,38,.72)) drop-shadow(0 0 8px rgba(var(--foil-color,210,220,235),.3))}
+  .raritySample:hover .raritySampleName{filter:brightness(1.2);transform:translateY(-1px)}
+
+  /* X: moving white, pink and violet starlight plus a traveling light around the frame. */
+  @property --x-frame-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+  .art.f2[data-card-rarity="X"]>.fx,.art.f2[data-card-rarity="x"]>.fx{display:block!important;position:absolute!important;inset:0!important;z-index:8!important;pointer-events:none!important;opacity:.88!important;mix-blend-mode:screen!important;background-image:radial-gradient(circle at 15% 22%,rgba(255,255,255,.98) 0 1.2px,transparent 3px),radial-gradient(circle at 68% 18%,rgba(255,177,232,.96) 0 1.4px,transparent 3.2px),radial-gradient(circle at 81% 66%,rgba(206,169,255,.98) 0 1.4px,transparent 3.2px),radial-gradient(circle at 35% 79%,rgba(255,255,255,.9) 0 1.1px,transparent 2.8px),radial-gradient(circle at 48% 46%,rgba(255,139,228,.84) 0 1px,transparent 2.8px)!important;background-size:190% 190%!important;background-position:0% 25%!important;animation:xSparkleFlow 4s linear infinite!important;filter:drop-shadow(0 0 3px rgba(255,255,255,.9)) drop-shadow(0 0 7px rgba(220,112,255,.6))!important}
+  .art.f2[data-card-rarity="X"]>.fx::before,.art.f2[data-card-rarity="x"]>.fx::before{content:""!important;display:block!important;position:absolute!important;inset:0!important;background:linear-gradient(124deg,transparent 34%,rgba(255,255,255,.04) 42%,rgba(255,255,255,.72) 49%,rgba(255,126,224,.42) 53%,rgba(173,131,255,.28) 57%,transparent 66%) 0 0/230% 230% no-repeat!important;opacity:.56!important;animation:xSparkleRibbon 2.8s linear infinite!important}
+  .art.f2[data-card-rarity="X"]>.fx::after,.art.f2[data-card-rarity="x"]>.fx::after{content:""!important;display:block!important;position:absolute!important;inset:0!important;z-index:3!important;padding:3px!important;border:0!important;border-radius:inherit!important;background:conic-gradient(from var(--x-frame-angle),transparent 0deg 292deg,rgba(255,255,255,.3) 304deg,#fff 316deg,#ff84df 328deg,#bf9bff 340deg,transparent 352deg 360deg)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:0 0 8px rgba(255,255,255,.9),0 0 14px rgba(255,93,218,.78),0 0 20px rgba(160,104,255,.62)!important;opacity:.84!important;animation:xFrameSweep 2.8s linear infinite!important}
+  .art.f2[data-card-rarity="X"] .ref-spark,.art.f2[data-card-rarity="x"] .ref-spark{display:block!important;position:absolute!important;z-index:10!important;width:4px!important;height:4px!important;border:0!important;border-radius:50%!important;background:#fff!important;pointer-events:none!important;box-shadow:0 0 5px #fff,0 0 10px rgba(255,117,228,.95),0 0 15px rgba(177,130,255,.75)!important}
+  .art.f2[data-card-rarity="X"] .ref-spark.s1,.art.f2[data-card-rarity="x"] .ref-spark.s1{left:18%!important;top:24%!important;animation:xSparkleBlink 1.65s ease-in-out 0s infinite!important}
+  .art.f2[data-card-rarity="X"] .ref-spark.s2,.art.f2[data-card-rarity="x"] .ref-spark.s2{left:72%!important;top:42%!important;background:#ffb4e8!important;animation:xSparkleBlink 1.8s ease-in-out -.62s infinite!important}
+  .art.f2[data-card-rarity="X"] .ref-spark.s3,.art.f2[data-card-rarity="x"] .ref-spark.s3{left:42%!important;top:73%!important;background:#d5b5ff!important;animation:xSparkleBlink 1.5s ease-in-out -1.08s infinite!important}
+  .art.f2[data-card-rarity="X"]:hover>.fx::after,.art.f2[data-card-rarity="x"]:hover>.fx::after{opacity:1!important;animation-duration:.82s!important;filter:brightness(1.25) drop-shadow(0 0 5px #fff)!important}
+  .art.f2[data-card-rarity="X"]:hover>.fx,.art.f2[data-card-rarity="x"]:hover>.fx{opacity:1!important;animation-duration:1.3s!important}
+  .art.f2[data-card-rarity="X"]:hover>.fx::before,.art.f2[data-card-rarity="x"]:hover>.fx::before{opacity:.95!important;animation-duration:1.15s!important}
+  .art.f2[data-card-rarity="X"]:hover::before,.art.f2[data-card-rarity="x"]:hover::before{animation-duration:1.35s!important;filter:brightness(1.28) saturate(1.5) drop-shadow(0 0 8px rgba(255,76,226,.9))!important}
+  body.sparkles-off .art.f2[data-card-rarity="X"] .ref-spark,body.sparkles-off .art.f2[data-card-rarity="x"] .ref-spark{display:none!important;animation:none!important}
+  @keyframes xSparkleFlow{0%{background-position:0% 25%;opacity:.56}50%{opacity:.95}100%{background-position:100% 75%;opacity:.62}}
+  @keyframes xSparkleRibbon{0%{background-position:145% 50%;opacity:.18}48%{opacity:.78}100%{background-position:-45% 50%;opacity:.2}}
+  @keyframes xFrameSweep{to{--x-frame-angle:360deg}}
+  @keyframes xSparkleBlink{0%,100%{opacity:.08;transform:scale(.45)}42%{opacity:1;transform:scale(1.3)}64%{opacity:.36;transform:scale(.78)}}
+  @media(prefers-reduced-motion:reduce){.art:not(.back):hover,.raritySample:hover .art{transform:none!important}.art.f2[data-card-rarity="X"]>.fx,.art.f2[data-card-rarity="X"]>.fx::before,.art.f2[data-card-rarity="X"]>.fx::after,.art.f2[data-card-rarity="x"]>.fx,.art.f2[data-card-rarity="x"]>.fx::before,.art.f2[data-card-rarity="x"]>.fx::after,.art.f2[data-card-rarity="X"] .ref-spark,.art.f2[data-card-rarity="x"] .ref-spark{animation:none!important}}
+
+  /* X keeps its RGB frame; FFR-shaped stars and every sparkle use the same rainbow. */
+  .art.f2[data-card-rarity="X"],.art.f2[data-card-rarity="x"]{--foil-color:190,95,255}
+  .art.f2[data-card-rarity="X"]>.fx,.art.f2[data-card-rarity="x"]>.fx{background-image:radial-gradient(circle at 15% 22%,#ff365c 0 1.4px,transparent 3.2px),radial-gradient(circle at 68% 18%,#ffb52e 0 1.5px,transparent 3.2px),radial-gradient(circle at 81% 66%,#fbf34a 0 1.4px,transparent 3.2px),radial-gradient(circle at 35% 79%,#38f08b 0 1.4px,transparent 3px),radial-gradient(circle at 48% 46%,#45ddff 0 1.5px,transparent 3.2px),radial-gradient(circle at 72% 47%,#716cff 0 1.4px,transparent 3px),radial-gradient(circle at 22% 68%,#e956ff 0 1.5px,transparent 3px)!important;filter:drop-shadow(0 0 4px rgba(255,255,255,.88)) drop-shadow(0 0 8px rgba(37,221,255,.72)) drop-shadow(0 0 12px rgba(235,47,255,.55))!important}
+  .art.f2[data-card-rarity="X"]>.fx::before,.art.f2[data-card-rarity="x"]>.fx::before{background:linear-gradient(124deg,transparent 34%,rgba(255,55,75,.24) 42%,rgba(255,198,42,.58) 47%,rgba(54,239,133,.52) 51%,rgba(54,216,255,.72) 55%,rgba(97,93,255,.58) 59%,rgba(234,57,255,.35) 63%,transparent 70%) 0 0/230% 230% no-repeat!important}
+  .art.f2[data-card-rarity="X"]>.fx::after,.art.f2[data-card-rarity="x"]>.fx::after{background:conic-gradient(from var(--x-frame-angle),transparent 0deg 292deg,rgba(255,50,75,.5) 302deg,#ffb72f 311deg,#fff34f 320deg,#45ef97 329deg,#48ddff 338deg,#6965ff 347deg,#e84fff 356deg,transparent 360deg)!important;box-shadow:0 0 8px rgba(255,74,121,.8),0 0 13px rgba(61,223,255,.78),0 0 19px rgba(207,72,255,.68)!important}
+
+  /* EMR: deep emerald mixed with bright jade and mint. */
+  @property --emr-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+  .art.f2[data-card-rarity="EMR"],.art.f2[data-card-rarity="emr"]{--foil-color:54,216,118;border:3px solid transparent!important;box-shadow:0 0 0 1px rgba(211,255,225,.95),0 0 10px rgba(50,210,112,.82),0 0 21px rgba(6,77,43,.72),0 0 32px rgba(113,255,167,.3)!important}
+  .art.f2[data-card-rarity="EMR"]::before,.art.f2[data-card-rarity="emr"]::before{display:block!important;content:""!important;inset:0!important;padding:3px!important;border:0!important;border-radius:inherit!important;background:conic-gradient(from var(--emr-angle),#062318 0deg,#0b6038 54deg,#53bd79 104deg,#d7ffe2 153deg,#76d69a 204deg,#0b5231 258deg,#173c24 310deg,#062318 360deg)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:inset 0 0 7px rgba(218,255,229,.94),0 0 10px rgba(49,215,111,.82),0 0 18px rgba(5,89,48,.66)!important;opacity:1!important;animation:emrFrameSpin 7s linear infinite!important}
+  .art.f2[data-card-rarity="EMR"]::after,.art.f2[data-card-rarity="emr"]::after{display:block!important;content:""!important;inset:-12%!important;width:42%!important;left:-90%!important;background:linear-gradient(90deg,transparent,rgba(89,255,163,.14) 34%,rgba(235,255,241,.82) 50%,rgba(65,225,133,.28) 60%,transparent)!important;opacity:.64!important;animation:diagonalHoloSweep 5s ease-in-out infinite!important}
+  @keyframes emrFrameSpin{to{--emr-angle:360deg}}
+
+  /* SVR: moonlit blue, cool silver and icy highlights. */
+  @property --svr-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+  .art.f2[data-card-rarity="SVR"],.art.f2[data-card-rarity="svr"]{--foil-color:147,202,255;border:3px solid transparent!important;box-shadow:0 0 0 1px rgba(239,249,255,.98),0 0 11px rgba(103,174,255,.86),0 0 23px rgba(31,81,161,.62),0 0 34px rgba(202,232,255,.36)!important}
+  .art.f2[data-card-rarity="SVR"]::before,.art.f2[data-card-rarity="svr"]::before{display:block!important;content:""!important;inset:0!important;padding:3px!important;border:0!important;border-radius:inherit!important;background:conic-gradient(from var(--svr-angle),#10264a 0deg,#3579c7 48deg,#c4e5ff 98deg,#f4fbff 143deg,#77afea 192deg,#dcefff 240deg,#315d9b 298deg,#10264a 360deg)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:inset 0 0 7px rgba(247,252,255,.96),0 0 10px rgba(99,176,255,.82),0 0 18px rgba(41,84,156,.58)!important;opacity:1!important;animation:svrFrameSpin 8s linear infinite!important}
+  .art.f2[data-card-rarity="SVR"]::after,.art.f2[data-card-rarity="svr"]::after{display:block!important;content:""!important;inset:-12%!important;width:42%!important;left:-90%!important;background:linear-gradient(90deg,transparent,rgba(137,199,255,.2) 35%,rgba(255,255,255,.9) 50%,rgba(157,207,255,.28) 60%,transparent)!important;opacity:.72!important;animation:diagonalHoloSweep 5s ease-in-out infinite!important}
+  @keyframes svrFrameSpin{to{--svr-angle:360deg}}
+
+  /* CSR: crimson red, near-black, and antique gold. */
+  @property --csr-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+  .art.f4[data-card-rarity="CSR"],.art.f4[data-card-rarity="csr"]{--foil-color:214,43,62;border:3px solid transparent!important;box-shadow:0 0 0 1px rgba(255,208,139,.96),0 0 11px rgba(208,28,57,.9),0 0 20px rgba(24,5,10,.9),0 0 30px rgba(230,161,52,.42)!important}
+  .art.f4[data-card-rarity="CSR"]::before,.art.f4[data-card-rarity="csr"]::before{display:block!important;content:""!important;inset:0!important;padding:3px!important;border:0!important;border-radius:inherit!important;background:conic-gradient(from var(--csr-angle),#10080a 0deg,#5d0819 42deg,#c31838 88deg,#fa4b4d 127deg,#dcaa4b 168deg,#171013 208deg,#780d24 254deg,#f0c467 303deg,#10080a 360deg)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:inset 0 0 7px rgba(255,225,168,.88),0 0 10px rgba(216,35,65,.85),0 0 18px rgba(20,4,8,.84)!important;opacity:1!important;animation:csrFrameSpin 7.4s linear infinite!important}
+  .art.f4[data-card-rarity="CSR"]::after,.art.f4[data-card-rarity="csr"]::after{display:block!important;content:""!important;inset:-12%!important;width:42%!important;left:-90%!important;background:linear-gradient(90deg,transparent,rgba(226,41,66,.2) 35%,rgba(255,226,165,.88) 50%,rgba(197,21,51,.36) 59%,transparent)!important;opacity:.68!important;animation:diagonalHoloSweep 5s ease-in-out infinite!important}
+  @keyframes csrFrameSpin{to{--csr-angle:360deg}}
+
+  /* FFR-style eight-point stars, individually tinted to each special frame. */
+  .art.f2[data-card-rarity="X"] .ref-spark,.art.f2[data-card-rarity="x"] .ref-spark,.art.f2[data-card-rarity="EMR"] .ref-spark,.art.f2[data-card-rarity="emr"] .ref-spark,.art.f2[data-card-rarity="SVR"] .ref-spark,.art.f2[data-card-rarity="svr"] .ref-spark,.art.f4[data-card-rarity="CSR"] .ref-spark,.art.f4[data-card-rarity="csr"] .ref-spark{display:block!important;z-index:10!important;width:8%!important;height:8%!important;border-radius:0!important;clip-path:polygon(50% 0,61% 37%,100% 50%,61% 63%,50% 100%,39% 63%,0 50%,39% 37%)!important;opacity:.86;animation:xSparkleBlink 1.65s ease-in-out infinite!important}
+  .art.f2[data-card-rarity="X"] .ref-spark,.art.f2[data-card-rarity="x"] .ref-spark{background:conic-gradient(from 20deg,#ff3159,#ff9e24,#fff044,#32e987,#36dfff,#555dff,#e940ff,#ff3159)!important;filter:drop-shadow(0 0 4px rgba(255,255,255,.94)) drop-shadow(0 0 9px rgba(43,220,255,.8)) drop-shadow(0 0 13px rgba(220,50,255,.66))!important}
+  .art.f2[data-card-rarity="EMR"] .ref-spark,.art.f2[data-card-rarity="emr"] .ref-spark{background:linear-gradient(135deg,#effff3,#70fba5 38%,#13804c 72%,#d9ffe5)!important;filter:drop-shadow(0 0 4px rgba(165,255,195,.95)) drop-shadow(0 0 10px rgba(34,211,109,.85))!important}
+  .art.f2[data-card-rarity="SVR"] .ref-spark,.art.f2[data-card-rarity="svr"] .ref-spark{background:linear-gradient(135deg,#fff,#a7d7ff 38%,#477fca 70%,#eff9ff)!important;filter:drop-shadow(0 0 4px rgba(240,250,255,.96)) drop-shadow(0 0 10px rgba(94,174,255,.86))!important}
+  .art.f4[data-card-rarity="CSR"] .ref-spark,.art.f4[data-card-rarity="csr"] .ref-spark{background:linear-gradient(135deg,#fff0be,#dbab50 35%,#c51c3c 67%,#220810)!important;filter:drop-shadow(0 0 4px rgba(255,220,152,.95)) drop-shadow(0 0 10px rgba(218,31,61,.9))!important}
+  .art.f2[data-card-rarity="X"] .ref-spark.s1,.art.f2[data-card-rarity="x"] .ref-spark.s1,.art.f2[data-card-rarity="EMR"] .ref-spark.s1,.art.f2[data-card-rarity="emr"] .ref-spark.s1,.art.f2[data-card-rarity="SVR"] .ref-spark.s1,.art.f2[data-card-rarity="svr"] .ref-spark.s1,.art.f4[data-card-rarity="CSR"] .ref-spark.s1,.art.f4[data-card-rarity="csr"] .ref-spark.s1{animation-delay:0s!important}
+  .art.f2[data-card-rarity="X"] .ref-spark.s2,.art.f2[data-card-rarity="x"] .ref-spark.s2,.art.f2[data-card-rarity="EMR"] .ref-spark.s2,.art.f2[data-card-rarity="emr"] .ref-spark.s2,.art.f2[data-card-rarity="SVR"] .ref-spark.s2,.art.f2[data-card-rarity="svr"] .ref-spark.s2,.art.f4[data-card-rarity="CSR"] .ref-spark.s2,.art.f4[data-card-rarity="csr"] .ref-spark.s2{animation-delay:-.58s!important}
+  .art.f2[data-card-rarity="X"] .ref-spark.s3,.art.f2[data-card-rarity="x"] .ref-spark.s3,.art.f2[data-card-rarity="EMR"] .ref-spark.s3,.art.f2[data-card-rarity="emr"] .ref-spark.s3,.art.f2[data-card-rarity="SVR"] .ref-spark.s3,.art.f2[data-card-rarity="svr"] .ref-spark.s3,.art.f4[data-card-rarity="CSR"] .ref-spark.s3,.art.f4[data-card-rarity="csr"] .ref-spark.s3{animation-delay:-1.08s!important}
+
+  /* SSP: amplify its pink-violet halo without changing the shared pink palette. */
+  .art.f3[data-card-rarity="SSP"],.art.f3[data-card-rarity="ssp"]{--foil-color:255,92,193;border:2px solid #ffd8f1!important;box-shadow:0 0 0 1px rgba(255,239,250,.98),0 0 11px rgba(255,96,204,.92),0 0 23px rgba(205,36,144,.72),0 0 36px rgba(255,150,224,.46)!important;filter:brightness(1.08) saturate(1.17)!important;animation:sspHaloPulse 2.8s ease-in-out infinite!important}
+  .art.f3[data-card-rarity="SSP"]::before,.art.f3[data-card-rarity="ssp"]::before{display:block!important;content:""!important;inset:0!important;padding:2px!important;border:0!important;border-radius:inherit!important;background:linear-gradient(128deg,#fff4fb 0%,#ff9bd9 20%,#d12991 43%,#ffd8f1 56%,#e849ae 76%,#fff0fb 100%)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:inset 0 0 7px rgba(255,235,248,.96),0 0 12px rgba(255,91,197,.86)!important;opacity:1!important;animation:sspFramePulse 2.8s ease-in-out infinite!important}
+  .art.f3[data-card-rarity="SSP"]::after,.art.f3[data-card-rarity="ssp"]::after{display:block!important;content:""!important;inset:-12%!important;width:42%!important;left:-90%!important;background:linear-gradient(90deg,transparent,rgba(255,139,219,.22) 36%,rgba(255,246,253,.92) 50%,rgba(246,87,188,.32) 60%,transparent)!important;opacity:.76!important;animation:diagonalHoloSweep 4.2s ease-in-out infinite!important}
+  @keyframes sspHaloPulse{0%,100%{filter:brightness(1.04) saturate(1.1);box-shadow:0 0 0 1px rgba(255,239,250,.94),0 0 10px rgba(255,96,204,.78),0 0 22px rgba(205,36,144,.62),0 0 34px rgba(255,150,224,.34)}50%{filter:brightness(1.16) saturate(1.25);box-shadow:0 0 0 1px #fff,0 0 15px rgba(255,126,221,.98),0 0 30px rgba(228,53,174,.82),0 0 45px rgba(255,172,232,.58)}}
+  @keyframes sspFramePulse{0%,100%{filter:brightness(1);opacity:.82}50%{filter:brightness(1.25);opacity:1}}
+
+  /* The sample-name glow follows each custom frame palette too. */
+  .raritySample[data-rarity="X"] .raritySampleName{background:linear-gradient(90deg,#ff4664,#ffb33a,#f6ef56,#49e890,#49dfff,#7177ff,#ed5aff);-webkit-background-clip:text;background-clip:text;text-shadow:0 0 8px rgba(255,157,58,.78),0 0 16px rgba(67,217,255,.74),0 0 22px rgba(205,71,255,.55)}
+  .raritySample[data-rarity="EMR"]{--sample-ink:#d8ffe5;--sample-accent:#79efa1;--sample-glow:rgba(54,208,116,.92)}
+  .raritySample[data-rarity="EMR"] .raritySampleName{background:linear-gradient(90deg,#c7ffd8,#53dc87,#e7ffef);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 9px rgba(46,213,112,.9),0 0 19px rgba(4,96,52,.72)}
+  .raritySample[data-rarity="SVR"]{--sample-ink:#eff8ff;--sample-accent:#a8d6ff;--sample-glow:rgba(100,172,243,.96)}
+  .raritySample[data-rarity="SVR"] .raritySampleName{background:linear-gradient(90deg,#d6eaff,#fff,#7ab8f1,#fff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 9px rgba(129,193,251,.92),0 0 19px rgba(231,246,255,.72)}
+  .raritySample[data-rarity="CSR"]{--sample-ink:#ffe1ad;--sample-accent:#d9a541;--sample-glow:rgba(216,39,62,.96)}
+  .raritySample[data-rarity="CSR"] .raritySampleName{background:linear-gradient(90deg,#ffd987,#a80e2c,#14090b,#f6cc77);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 8px rgba(214,38,61,.95),0 0 17px rgba(221,164,70,.72)}
+  .raritySample[data-rarity="SSP"]{--sample-ink:#ffe8f6;--sample-accent:#ff87d3;--sample-glow:rgba(255,67,184,1)}
+  .raritySample[data-rarity="SSP"] .raritySampleName{animation:sspNamePulse 2.4s ease-in-out infinite;text-shadow:0 0 7px rgba(255,137,218,.95),0 0 17px rgba(255,53,184,.92),0 0 27px rgba(170,29,132,.72)}
+  @keyframes sspNamePulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.32)}}
+
+  .art.f2[data-card-rarity="X"]:hover>.fx::after,.art.f2[data-card-rarity="x"]:hover>.fx::after{animation-duration:.82s!important}
+  .art.f2[data-card-rarity="EMR"]:hover::before,.art.f2[data-card-rarity="emr"]:hover::before{animation-duration:1.25s!important}
+  .art.f2[data-card-rarity="SVR"]:hover::before,.art.f2[data-card-rarity="svr"]:hover::before{animation-duration:1.25s!important}
+  .art.f4[data-card-rarity="CSR"]:hover::before,.art.f4[data-card-rarity="csr"]:hover::before{animation-duration:1.15s!important}
+  body.sparkles-off .art.f2[data-card-rarity="X"] .ref-spark,body.sparkles-off .art.f2[data-card-rarity="x"] .ref-spark,body.sparkles-off .art.f2[data-card-rarity="EMR"] .ref-spark,body.sparkles-off .art.f2[data-card-rarity="emr"] .ref-spark,body.sparkles-off .art.f2[data-card-rarity="SVR"] .ref-spark,body.sparkles-off .art.f2[data-card-rarity="svr"] .ref-spark,body.sparkles-off .art.f4[data-card-rarity="CSR"] .ref-spark,body.sparkles-off .art.f4[data-card-rarity="csr"] .ref-spark{display:none!important;animation:none!important}
+  @media(prefers-reduced-motion:reduce){.art.f2[data-card-rarity="X"]::before,.art.f2[data-card-rarity="EMR"]::before,.art.f2[data-card-rarity="SVR"]::before,.art.f4[data-card-rarity="CSR"]::before,.art.f3[data-card-rarity="SSP"],.art.f3[data-card-rarity="SSP"]::before,.art.f3[data-card-rarity="SSP"]::after,.art.f2[data-card-rarity="X"] .ref-spark,.art.f2[data-card-rarity="EMR"] .ref-spark,.art.f2[data-card-rarity="SVR"] .ref-spark,.art.f4[data-card-rarity="CSR"] .ref-spark,.raritySample[data-rarity="SSP"] .raritySampleName{animation:none!important}.art.f3[data-card-rarity="SSP"]{filter:none!important}}
+
+		.cardDetail{margin:12px 0;padding:10px 12px;border:1px solid #6d568b;border-left:3px solid var(--gold);border-radius:8px;background:linear-gradient(135deg,rgba(244,201,107,.12),rgba(139,107,209,.08));box-shadow:inset 0 0 14px rgba(244,201,107,.05)}
 	.cardDetail>b{display:block;margin-bottom:4px;color:var(--gold);font:700 15px "Barlow Condensed",sans-serif;letter-spacing:.03em}.cardDetail p{margin:0;color:var(--ink);font-size:13px;line-height:1.5;white-space:pre-wrap}
   /* Holo-only switch: this button changes the rainbow Holo tier (f2) only. */
   body.holo-off .art.f2::after,
   body.holo-off .art.f2>.fx,
   body.holo-off .art.f2 .ref-holo,
   body.holo-off .art.f2 .ref-glare,
-  body.holo-off .art.f2 .ref-sweep,
-  body.holo-off .art.f2 .ref-spark{
+  body.holo-off .art.f2 .ref-sweep{
     display:none!important;
-    animation:none!important;
-  }
-  body.holo-off .art.f2::before{
-    display:block!important;
-    background:none!important;
-    border:2px solid #d65cff!important;
-    padding:0!important;
-    -webkit-mask:none!important;
-    mask:none!important;
-    box-shadow:0 0 0 1px #fff3,0 0 8px #d65cff55!important;
     animation:none!important;
   }
   body.holo-off .art.f2{
@@ -735,12 +844,87 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 
 .pairDecision{margin:10px 0;padding:13px 15px;border:1px solid #d5ae62;border-radius:10px;background:#f4c96b12;color:#ffe6ad}.pairDecision b{color:#fff2bf}.pairDecision .btn{margin:8px 7px 0 0}.pairSummary{margin-top:14px;padding:17px;border:1px solid #9bd49b;border-radius:12px;background:linear-gradient(145deg,#18382d,#101b20)}.pairSummary h3{margin:0 0 8px;color:#d7ffe7}.pairSummary .champ{font:700 25px Cinzel,serif;color:#f4d77e}.pairPlayersManage{display:grid;gap:7px}.pairManageRow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:1px solid #493b67;border-radius:8px;background:#111428}.pairManageRow .dto{margin-right:auto}.pairActionNote{font-size:11px;color:#aaa4c0;margin-top:6px}.pairMatch.reportable{border-color:#d5ae62;box-shadow:0 0 0 1px #d5ae6222}.pairWinRate{color:#f4d77e;font-weight:700}
 
-	</style>
+	
+  /* Spectral animation refinements: visible moving stars and smooth color-flow frames. */
+  .art.f2[data-card-rarity="EMR"]::before,.art.f2[data-card-rarity="emr"]::before{animation:emrFrameSpin 12s linear infinite!important}
+  .art.f2[data-card-rarity="SVR"]::before,.art.f2[data-card-rarity="svr"]::before{animation:svrFrameSpin 14s linear infinite!important}
+  .art.f2[data-card-rarity="SVR"]::after,.art.f2[data-card-rarity="svr"]::after{animation-duration:6.5s!important}
+  .art.f4[data-card-rarity="CSR"]::before,.art.f4[data-card-rarity="csr"]::before{animation:csrFrameSpin 12s linear infinite!important}
+
+  /* SSP's pink prism ring now makes a continuous, gentle color orbit. */
+  @property --ssp-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+  .art.f3[data-card-rarity="SSP"]::before,.art.f3[data-card-rarity="ssp"]::before{background:conic-gradient(from var(--ssp-angle),#fff2fb 0deg,#f486d0 54deg,#9e2674 112deg,#ffd9f0 166deg,#ee5eb9 222deg,#fff5fc 276deg,#a83980 322deg,#fff2fb 360deg)!important;animation:sspFrameRotate 14s linear infinite!important}
+  @keyframes sspFrameRotate{to{--ssp-angle:360deg}}
+
+  /* GR: softly orbiting gold, rose-red and pearl-white foil. */
+  @property --gr-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+  .art.f2[data-card-rarity="GR"],.art.f2[data-card-rarity="gr"]{--foil-color:214,126,100;border:3px solid transparent!important;box-shadow:0 0 0 1px rgba(255,242,222,.98),0 0 10px rgba(222,158,61,.84),0 0 20px rgba(188,48,67,.57),0 0 31px rgba(255,223,198,.36)!important}
+  .art.f2[data-card-rarity="GR"]::before,.art.f2[data-card-rarity="gr"]::before{display:block!important;content:""!important;inset:0!important;padding:3px!important;border:0!important;border-radius:inherit!important;background:conic-gradient(from var(--gr-angle),#78402e 0deg,#c94753 48deg,#eebc78 100deg,#fff5e7 148deg,#d8a346 197deg,#b95058 248deg,#f3d7bf 300deg,#78402e 360deg)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:inset 0 0 7px rgba(255,248,236,.95),0 0 10px rgba(230,179,91,.78),0 0 18px rgba(190,58,76,.56)!important;opacity:1!important;animation:grFrameFlow 15s linear infinite!important}
+  .art.f2[data-card-rarity="GR"]::after,.art.f2[data-card-rarity="gr"]::after{display:block!important;content:""!important;inset:-12%!important;width:42%!important;left:-90%!important;background:linear-gradient(90deg,transparent,rgba(234,155,95,.18) 34%,rgba(255,249,232,.9) 50%,rgba(205,58,82,.24) 60%,transparent)!important;opacity:.66!important;animation:diagonalHoloSweep 6s ease-in-out infinite!important}
+  @keyframes grFrameFlow{to{--gr-angle:360deg}}
+  .raritySample[data-rarity="GR"]{--sample-ink:#fff0dc;--sample-accent:#eab66e;--sample-glow:rgba(208,91,79,.94)}
+  .raritySample[data-rarity="GR"] .raritySampleName{background:linear-gradient(90deg,#fff3da,#dfa64d,#d94d5c,#fff7ea);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 9px rgba(235,174,85,.84),0 0 18px rgba(204,59,80,.7)}
+
+
+  /* Respect reduced-motion preferences for special rarity layers. */
+  @media(prefers-reduced-motion:reduce){.art.f2[data-card-rarity="EMR"]::before,.art.f2[data-card-rarity="SVR"]::before,.art.f4[data-card-rarity="CSR"]::before,.art.f3[data-card-rarity="SSP"]::before,.art.f2[data-card-rarity="GR"]::before,.art.f2[data-card-rarity="GR"]::after{animation:none!important}}
+  body.holo-off .art.f2>.fx{display:none!important;animation:none!important}
+
+  /* The EMR/CSR/SVR stars travel as well as twinkle; stagger their paths so they visibly move one by one. */
+  .art.f2[data-card-rarity="EMR"] .ref-spark.s1,.art.f2[data-card-rarity="emr"] .ref-spark.s1,.art.f2[data-card-rarity="SVR"] .ref-spark.s1,.art.f2[data-card-rarity="svr"] .ref-spark.s1,.art.f4[data-card-rarity="CSR"] .ref-spark.s1,.art.f4[data-card-rarity="csr"] .ref-spark.s1{animation:rarityStarFlightA 2.7s ease-in-out infinite!important;animation-delay:0s!important}
+  .art.f2[data-card-rarity="EMR"] .ref-spark.s2,.art.f2[data-card-rarity="emr"] .ref-spark.s2,.art.f2[data-card-rarity="SVR"] .ref-spark.s2,.art.f2[data-card-rarity="svr"] .ref-spark.s2,.art.f4[data-card-rarity="CSR"] .ref-spark.s2,.art.f4[data-card-rarity="csr"] .ref-spark.s2{animation:rarityStarFlightB 3.1s ease-in-out infinite!important;animation-delay:-.85s!important}
+  .art.f2[data-card-rarity="EMR"] .ref-spark.s3,.art.f2[data-card-rarity="emr"] .ref-spark.s3,.art.f2[data-card-rarity="SVR"] .ref-spark.s3,.art.f2[data-card-rarity="svr"] .ref-spark.s3,.art.f4[data-card-rarity="CSR"] .ref-spark.s3,.art.f4[data-card-rarity="csr"] .ref-spark.s3{animation:rarityStarFlightC 3.4s ease-in-out infinite!important;animation-delay:-1.55s!important}
+  @keyframes rarityStarFlightA{0%,100%{opacity:.15;transform:translate(0,0) scale(.48)}34%{opacity:1;transform:translate(7px,-8px) scale(1.25)}68%{opacity:.34;transform:translate(-4px,5px) scale(.72)}}
+  @keyframes rarityStarFlightB{0%,100%{opacity:.12;transform:translate(0,0) scale(.48)}38%{opacity:1;transform:translate(-8px,6px) scale(1.2)}72%{opacity:.32;transform:translate(4px,-5px) scale(.7)}}
+  @keyframes rarityStarFlightC{0%,100%{opacity:.14;transform:translate(0,0) scale(.45)}31%{opacity:.36;transform:translate(5px,7px) scale(.72)}62%{opacity:1;transform:translate(-6px,-7px) scale(1.28)}}
+  @media(prefers-reduced-motion:reduce){.art.f2[data-card-rarity="EMR"] .ref-spark,.art.f2[data-card-rarity="SVR"] .ref-spark,.art.f4[data-card-rarity="CSR"] .ref-spark{animation:none!important;transform:none!important;opacity:.85!important}}
+  /* Continuous rarity-colored orbit on every framed foil tier. */
+  @property --tier-orbit-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+  @keyframes tierColorOrbit{to{--tier-orbit-angle:360deg}}
+  @keyframes foilStarDriftA{0%,100%{opacity:.16;transform:translate(0,0) rotate(0deg) scale(.48)}32%{opacity:1;transform:translate(7px,-7px) rotate(35deg) scale(1.22)}68%{opacity:.35;transform:translate(-4px,5px) rotate(74deg) scale(.72)}}
+  @keyframes foilStarDriftB{0%,100%{opacity:.14;transform:translate(0,0) rotate(0deg) scale(.45)}36%{opacity:1;transform:translate(-7px,6px) rotate(-42deg) scale(1.18)}72%{opacity:.32;transform:translate(4px,-5px) rotate(-86deg) scale(.7)}}
+  @keyframes foilStarDriftC{0%,100%{opacity:.15;transform:translate(0,0) rotate(0deg) scale(.44)}30%{opacity:.36;transform:translate(5px,7px) rotate(46deg) scale(.72)}64%{opacity:1;transform:translate(-6px,-7px) rotate(92deg) scale(1.24)}}
+  .art:is(.f0,.f1,.f2,.f3,.f4,.f5,.f6,.f7){isolation:isolate;position:relative}
+  .art:is(.f0,.f1,.f2,.f3,.f4,.f5,.f6,.f7)::before{display:block!important;content:""!important;position:absolute!important;inset:0!important;z-index:4!important;pointer-events:none!important;box-sizing:border-box!important;border:0!important;border-radius:inherit!important;padding:2px!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important}
+  .art.f0[data-card-rarity="R"]{--foil-color:105,190,255;border:0!important;box-shadow:0 0 9px rgba(87,181,255,.46),0 0 21px rgba(38,112,213,.24)!important}
+  .art.f0[data-card-rarity="R"]::before{background:conic-gradient(from var(--tier-orbit-angle),#184d77,#63cfff,#edfdff,#8acfff,#2b64ad,#184d77)!important;animation:tierColorOrbit 7.1s linear infinite!important}
+  .art.f1[data-card-rarity="RRR"]{--foil-color:255,190,45;border:0!important;box-shadow:0 0 9px rgba(255,185,45,.48),0 0 22px rgba(188,99,18,.24)!important}
+  .art.f1[data-card-rarity="RRR"]::before{background:conic-gradient(from var(--tier-orbit-angle),#8f4b0c,#e89d20,#fff0a9,#fff9df,#d48a19,#8f4b0c)!important;animation:tierColorOrbit 6.8s linear infinite!important}
+  .art.f2[data-card-rarity="FR"]::before,.art.f2[data-card-rarity="OR"]::before,.art.f2[data-card-rarity="ORR"]::before,.art.f2[data-card-rarity="DSR"]::before,.art.f2[data-card-rarity="ZR"]::before{background:conic-gradient(from var(--tier-orbit-angle),#812dba,#e649a8,#ffd052,#62e7bd,#62c5ff,#6961da,#c850ef,#812dba)!important;animation:tierColorOrbit 7.4s linear infinite!important}
+  .art.f5[data-card-rarity="RR"]{--foil-color:105,190,255;border:0!important;box-shadow:0 0 9px rgba(92,198,255,.48),0 0 22px rgba(42,130,235,.25)!important}
+  .art.f5[data-card-rarity="RR"]::before{background:conic-gradient(from var(--tier-orbit-angle),#315d91,#83d9ff,#effcff,#c8f1ff,#448fd0,#315d91)!important;animation:tierColorOrbit 7.7s linear infinite!important}
+  .art.f6[data-card-rarity="SR"]{--foil-color:226,232,240;border:0!important;box-shadow:0 0 9px rgba(255,255,255,.48),0 0 22px rgba(174,187,204,.25)!important}
+  .art.f6[data-card-rarity="SR"]::before{background:conic-gradient(from var(--tier-orbit-angle),#738092,#dbe2ec,#fff,#b5c0cf,#f9fbff,#8793a3,#738092)!important;animation:tierColorOrbit 7.2s linear infinite!important}
+  .art.f2[data-card-rarity="FR"],.art.f2[data-card-rarity="OR"],.art.f2[data-card-rarity="ORR"],.art.f2[data-card-rarity="DSR"],.art.f2[data-card-rarity="ZR"]{box-shadow:0 0 11px rgba(var(--foil-color),.42),0 0 23px rgba(107,65,220,.24)!important}
+  .art.f4[data-card-rarity="SEC"]{--foil-color:255,92,70;border:0!important;box-shadow:0 0 10px rgba(208,28,57,.5),0 0 22px rgba(230,161,52,.28)!important}
+  .art.f4[data-card-rarity="SEC"]::before{background:conic-gradient(from var(--tier-orbit-angle),#17070a,#720d20,#cf203d,#f36a4e,#dfa849,#fff0bf,#871329,#17070a)!important;animation:tierColorOrbit 7.6s linear infinite!important}
+  .art.f7[data-card-rarity="FFR"]{--foil-color:255,190,70;border:0!important;box-shadow:0 0 10px rgba(255,198,66,.48),0 0 22px rgba(221,126,18,.24)!important}
+  .art.f7[data-card-rarity="FFR"]::before{background:conic-gradient(from var(--ffr-angle,0deg),#995712,#e5a92e,#fff0a2,#fffbe0,#d28a22,#f5d376,#995712)!important;animation:ffrGoldFrame 5.2s linear infinite!important}
+  /* Speed up existing custom orbits so no premium frame looks parked. */
+  .art.f2[data-card-rarity="X"]::before,.art.f2[data-card-rarity="x"]::before{animation:rainbowFrameSpin 5.2s linear infinite!important}
+  .art.f2[data-card-rarity="EMR"]::before,.art.f2[data-card-rarity="emr"]::before{animation:emrFrameSpin 7.1s linear infinite!important}
+  .art.f2[data-card-rarity="SVR"]::before,.art.f2[data-card-rarity="svr"]::before{animation:svrFrameSpin 7.2s linear infinite!important}
+  .art.f2[data-card-rarity="GR"]::before,.art.f2[data-card-rarity="gr"]::before{animation:grFrameFlow 7.8s linear infinite!important}
+  .art.f3[data-card-rarity="SSP"]::before,.art.f3[data-card-rarity="ssp"]::before{animation:sspFrameRotate 7.4s linear infinite!important}
+  .art.f4[data-card-rarity="SSR"]::before,.art.f4[data-card-rarity="ssr"]::before{animation:ssrVioletFrame 7.6s linear infinite!important}
+  .art.f4[data-card-rarity="CSR"]::before,.art.f4[data-card-rarity="csr"]::before{animation:csrFrameSpin 7.2s linear infinite!important}
+  /* Every framed tier gets three independent moving, palette-lit stars. */
+  .art:is(.f0,.f1,.f2,.f3,.f4,.f5,.f6,.f7) .ref-spark{display:block!important;position:absolute!important;z-index:10!important;width:7%!important;height:7%!important;border-radius:0!important;clip-path:polygon(50% 0,61% 37%,100% 50%,61% 63%,50% 100%,39% 63%,0 50%,39% 37%)!important;pointer-events:none!important;animation-play-state:running!important}
+  .art:is(.f0,.f1,.f2,.f3,.f4,.f5,.f6,.f7) .ref-spark.s1{animation:foilStarDriftA 3.1s ease-in-out -.16s infinite!important}
+  .art:is(.f0,.f1,.f2,.f3,.f4,.f5,.f6,.f7) .ref-spark.s2{animation:foilStarDriftB 3.7s ease-in-out -.92s infinite!important}
+  .art:is(.f0,.f1,.f2,.f3,.f4,.f5,.f6,.f7) .ref-spark.s3{animation:foilStarDriftC 4.1s ease-in-out -1.86s infinite!important}
+  .art:is(.f0,.f1,.f2,.f3,.f4,.f5,.f6,.f7) .ref-spark{filter:drop-shadow(0 0 4px rgba(255,255,255,.86)) drop-shadow(0 0 9px rgba(var(--foil-color),.92))!important}
+  body.sparkles-off .art:is(.f0,.f1,.f2,.f3,.f4,.f5,.f6,.f7) .ref-spark{display:none!important;animation:none!important}
+  .art:is(.f0,.f1,.f2,.f3,.f4,.f5,.f6,.f7) .ref-spark{background:linear-gradient(135deg,#fff 0%,rgba(var(--foil-color),.94) 47%,#fff 100%)!important}
+  .art.f2[data-card-rarity="X"] .ref-spark{background:conic-gradient(from 20deg,#ff3159,#ff9e24,#fff044,#32e987,#36dfff,#555dff,#e940ff,#ff3159)!important}
+  .art.f2[data-card-rarity="GR"] .ref-spark{background:linear-gradient(135deg,#fff8e9,#eab65e 34%,#c73b50 67%,#fff6e8)!important;filter:drop-shadow(0 0 4px #fff2d4) drop-shadow(0 0 10px rgba(201,49,72,.9))!important}
+  .art.f4[data-card-rarity="CSR"] .ref-spark{background:linear-gradient(135deg,#fff0be,#dbab50 34%,#c51c3c 68%,#220810)!important}
+</style>
 </head>
 <body>
 <div class="wrap">
   <div class="fanmadeNotice">This Site is Fanmade</div>
-  <div class="top"><h1><span class="sigil" aria-hidden="true">✦</span> Arcana Vanguard <small>หอสมุดการ์ดเวทมนตร์</small></h1><div class="topActions"><span id="st" style="color:var(--mute);font-size:13px" aria-live="polite"></span><button class="btn sm" id="authBtn">Sign in</button><button class="btn sm" id="sparkleToggle" type="button" aria-pressed="true">✦ Holo: ปิด</button><button class="btn sm motionBtn" id="motionBtn" type="button" aria-pressed="false">⌁ เปิด Motion</button><button class="btn sm" id="editBtn" aria-pressed="false">✎ Edit</button></div></div>
+  <div class="top"><h1><span class="sigil" aria-hidden="true">✦</span> Vanguard Vanjai <small>หอสมุดการ์ดเวทมนตร์</small></h1><div class="topActions"><span id="st" style="color:var(--mute);font-size:13px" aria-live="polite"></span><button class="btn sm" id="authBtn">Sign in</button><button class="btn sm" id="sparkleToggle" type="button" aria-pressed="true">✦ Holo: ปิด</button><button class="btn sm motionBtn" id="motionBtn" type="button" aria-pressed="false">⌁ เปิด Motion</button><button class="btn sm" id="editBtn" aria-pressed="false">✎ Edit</button></div></div>
   <div id="cloudNotice" class="cloudNotice" hidden></div>
   <div id="realtimeNotice" class="cloudNotice" hidden><span id="realtimeText">มีข้อมูลใหม่จากผู้ใช้อื่น</span> <button class="btn sm" id="realtimeRefresh">↻ รีเฟรชข้อมูล</button></div>
   <section id="cloudGate" class="cloudGate" hidden><h2>เข้าสู่ระบบเพื่อใช้แอป</h2><p>ข้อมูลโปรดักและ Card List เป็นข้อมูลร่วม ส่วนเด็ค คลังสะสม Pity และประวัติการสุ่มเป็นข้อมูลส่วนตัวของบัญชี</p><button class="btn primary" id="gateSignIn">เข้าสู่ระบบ / สมัครบัญชี</button></section>
@@ -832,13 +1016,13 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
         <div class="grid">
           <div><label for="pkP">สินค้า / ซอง</label><select id="pkP"></select></div>
           <div><label for="pkQty">จำนวนซองที่เปิด สูงสุด 5 ซอง (1 ซอง = 7 ใบ)</label><input id="pkQty" type="number" min="1" max="5" value="1"></div>
-          <label class="pkSoundToggle"><input type="checkbox" id="pkSound" checked> เปิดเสียงแกะซองและพลิกการ์ด</label>
+          <label class="pkSoundToggle"><input type="checkbox" id="pkSound" checked> เปิดเสียงฉีกซองและเสียงเฉพาะเรตสูงตอนหงายการ์ด</label>
         </div>
         <div class="pkbar">
           <div class="pity" id="pkPity">
             <div class="pityTop"><b>Pity</b><span id="pkPityTxt">0/200</span></div>
             <div class="pityBar"><i id="pkPityBar"></i></div>
-            <small class="dto" style="margin:0">พอ Pity เต็ม 200 ใบถัดไปจะการันตีการ์ดระดับสูงกว่า RRR (SVR / SP / SEC …) แล้วรีเซ็ตกลับเป็น 0</small>
+            <small class="dto" style="margin:0">พอ Pity เต็ม 200 ใบถัดไปจะการันตีการ์ดระดับสูงกว่า RRR (SVR / SEC …) แล้วรีเซ็ตกลับเป็น 0</small>
           </div>
           <div class="pkacts">
             <label class="chk" style="margin:0;display:flex;gap:6px;align-items:center"><input type="checkbox" id="pkRst" checked style="width:auto"> รีเซ็ต Pity เมื่อสุ่มได้การ์ดสูงกว่า RRR</label>
@@ -914,7 +1098,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 <datalist id="nations"></datalist>
 <datalist id="clans"></datalist>
 <datalist id="types"><option>Booster Pack</option><option>Constructed Deck</option><option>Trial Deck</option><option>Starter Deck</option><option>Master Deck Set</option><option>Stride Deck Set</option><option>Others</option><option>PR Card</option></datalist>
-<datalist id="rarities"><option>C</option><option>N</option><option>U</option><option>R</option><option>RR</option><option>RRR</option><option>SR</option><option>PR</option><option>SVR</option><option>GR</option><option>FR</option><option>FFR</option><option>OR</option><option>OVR</option><option>ORR</option><option>DSR</option><option>ZR</option><option>X</option><option>SP</option><option>SSP</option><option>SEC</option><option>SSR</option><option>SCR</option></datalist>
+<datalist id="rarities"><option>C</option><option>N</option><option>U</option><option>R</option><option>RR</option><option>RRR</option><option>SR</option><option>PR</option><option>SVR</option><option>GR</option><option>FR</option><option>FFR</option><option>OR</option><option>EMR</option><option>ORR</option><option>DSR</option><option>ZR</option><option>X</option><option>SSP</option><option>SEC</option><option>SSR</option><option>CSR</option></datalist>
 <datalist id="triggers"><option>Critical</option><option>Heal</option><option>Front</option><option>Draw</option><option>Over</option></datalist>
 	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 	<script src="./config.js"></script>
@@ -1077,33 +1261,34 @@ function lay(fit,ori){
   return{left:50-cx*w,top:50-cy*hh,w,h:hh,cx,cy};
 }
 /* Landscape cards sit sideways inside a normal portrait slot so every grid stays even. nat=true shows the natural landscape shape (card popup). */
-/* rarity tiers: f0 silver (R,RR) · f1 gold (RRR) · f2 rainbow · f3 pink (SP,SSP) · f4 crimson-gold (SEC,SSR,SCR) */
+/* rarity tiers: f0 silver (R) · f1 gold (RRR) · f2 rainbow/special · f3 pink (SSP) · f4 crimson-gold · f5 blue-silver (RR) · f6 platinum (SR) · f7 champagne (FFR) */
 /* Rarity tiers keep their own frame/star color; image artwork is not recolored. */
-const FOILT={R:0,RR:0,RRR:1,SR:1,SVR:2,GR:2,FR:2,FFR:2,OR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SP:3,SSP:3,SEC:4,SSR:4,SCR:4};
-const FOILCLASS={R:0,RR:5,RRR:1,SR:6,SVR:2,GR:2,FR:2,FFR:7,OR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SP:3,SSP:3,SEC:4,SSR:4,SCR:4};
-const foil=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILCLASS?" f"+FOILCLASS[r]:""};
+const FOILT={R:0,RR:0,RRR:1,SR:1,SVR:2,GR:2,FR:2,FFR:2,OR:2,EMR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SSP:3,SEC:4,SSR:4,CSR:4,SCR:4};
+const FOILCLASS={R:0,RR:5,RRR:1,SR:6,SVR:2,GR:2,FR:2,FFR:7,OR:2,EMR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SSP:3,SEC:4,SSR:4,CSR:4,SCR:4};
+const rarityLabel=r=>{const x=String(r??"").trim().toUpperCase();return x==="OVR"?"EMR":x==="SCR"?"CSR":x};
+const foil=c=>{const r=rarityLabel(c&&c.rarity);return r in FOILCLASS?" f"+FOILCLASS[r]:""};
 const art=(c,nat)=>{
   const o=c.orient==="l"?"l":"p",slot=o==="l"&&!nat,ar=o==="l"&&nat?CH+"/"+CW:CW+"/"+CH;let inner;
   if(c.img&&c.fit&&c.fit.r){const L=lay(c.fit,o);inner=`<img src="${h(c.img)}" alt="${h(c.name)}" loading="lazy" draggable="false" style="position:absolute;max-width:none;left:${L.left}%;top:${L.top}%;width:${L.w}%;height:${L.h}%">`}
   else if(c.img)inner=`<img src="${h(c.img)}" alt="${h(c.name)}" loading="lazy"${c.orient?"":nat?' data-auto="nat"':' data-auto="1"'}>`;
   else inner=`<div class="ph" style="background:${bg(c)}">${h(c.name)}</div>`;
   if(slot)inner=`<div class="lf">${inner}</div>`;
-	  return `<div class="art${slot?" slot":""}${foil(c)}" data-card-id="${h(c.id||"")}" data-card-name="${h(c.name||"การ์ด")}" data-card-rarity="${h(c.rarity||"")}" role="button" tabindex="0" aria-label="ดูรายละเอียด ${h(c.name||"การ์ด")}" style="aspect-ratio:${ar}">${inner}${foil(c)?'<i class="fx"></i>':""}<i class="ref-holo" aria-hidden="true"></i><i class="ref-glare" aria-hidden="true"></i><i class="ref-sweep" aria-hidden="true"></i><i class="ref-spark s1" aria-hidden="true"></i><i class="ref-spark s2" aria-hidden="true"></i><i class="ref-spark s3" aria-hidden="true"></i></div>`};
+	  return `<div class="art${slot?" slot":""}${foil(c)}" data-card-id="${h(c.id||"")}" data-card-name="${h(c.name||"การ์ด")}" data-card-rarity="${h(rarityLabel(c.rarity))}" role="button" tabindex="0" aria-label="ดูรายละเอียด ${h(c.name||"การ์ด")}" style="aspect-ratio:${ar}">${inner}${foil(c)?'<i class="fx"></i>':""}<i class="ref-holo" aria-hidden="true"></i><i class="ref-glare" aria-hidden="true"></i><i class="ref-sweep" aria-hidden="true"></i><i class="ref-spark s1" aria-hidden="true"></i><i class="ref-spark s2" aria-hidden="true"></i><i class="ref-spark s3" aria-hidden="true"></i></div>`};
 
 const SHOWCASE_GROUPS=[
   ["Common · พื้นฐาน",["C","N","U"]],
   ["Silver · เงิน",["R","RR"]],
   ["Platinum · แพลทินัม",["SR"]],
   ["Gold · ทอง",["RRR"]],
-  ["RGB Rainbow · RGB",["GR","SVR","FR","FFR","OR","OVR","ORR","DSR","ZR","X"]],
-  ["Pink · ชมพู",["SP","SSP"]],
-  ["Crimson-Gold · แดงทอง",["SEC","SSR","SCR"]]
+  ["RGB Rainbow · RGB",["GR","SVR","FR","FFR","OR","EMR","ORR","DSR","ZR","X"]],
+  ["Pink · ชมพู",["SSP"]],
+  ["Crimson-Gold · แดงทอง",["SEC","SSR","CSR"]]
 ];
 let SHOWCASE_IMAGE="";
 try{SHOWCASE_IMAGE=localStorage.getItem("vanguard-rarity-showcase-image")||""}catch(e){}
 function renderRarityShowcase(){
   const box=$("rarityShowcase");if(!box)return;
-  box.innerHTML=SHOWCASE_GROUPS.map(([group,rarities])=>`<h3 class="raritySampleTier">${h(group)}</h3>${rarities.map((rarity,i)=>{const c={id:`showcase-${rarity}`,name:`ตัวอย่าง ${rarity}`,nation:["Dragon Empire","Keter Sanctuary","Dark States","Stoicheia","Brandt Gate"][i%5],rarity,img:SHOWCASE_IMAGE};return `<article class="raritySample">${art(c,1)}<b>${h(rarity)}</b><small>${h(group.split(" · ")[0])}<br>ตัวอย่างเอฟเฟกต์เท่านั้น</small></article>`}).join("")}`).join("");
+  box.innerHTML=SHOWCASE_GROUPS.flatMap(([,rarities])=>rarities.map((rarity,i)=>{const c={id:`showcase-${rarity}`,name:rarity,nation:["Dragon Empire","Keter Sanctuary","Dark States","Stoicheia","Brandt Gate"][i%5],rarity,img:SHOWCASE_IMAGE};return `<article class="raritySample" data-rarity="${h(rarity)}">${art(c,1)}<b class="raritySampleName">${h(rarity)}</b><small class="raritySampleCaption">ตัวอย่างระดับ</small></article>`})).join("");
 }
 function updateShowcaseImageUI(){
   const reset=$("rarityShowcaseReset"),name=$("rarityShowcaseFileName");
@@ -1185,7 +1370,7 @@ function isFav(id){return FAVS.has(String(id))}
 function favStar(c){return `<span class="favStar${isFav(c.id)?" on":""}" data-fav="${h(c.id)}" role="button" tabindex="0" aria-label="${isFav(c.id)?"ลบ Favourite":"เพิ่ม Favourite"}">${isFav(c.id)?"★":"☆"}</span>`}
 async function toggleFavourite(id){const key=String(id),next=!FAVS.has(key);if(next)FAVS.add(key);else FAVS.delete(key);try{if(Cloud?.configured)await Cloud.setFavourite(key,next);else localStorage.setItem(favKey(),JSON.stringify([...FAVS]));search();if(cur)renderPV()}catch(e){if(next)FAVS.delete(key);else FAVS.add(key);notice("bad","Favourite บันทึกไม่สำเร็จ",String(e?.message||e),{auto:4500})}}
 const gal=(c,i)=>`<button class="c${c.orient==="l"?" land":""}" data-i="${i}">${favStar(c)}${art(c,1)}<div class="t"><b>${h(c.name)}</b><span>${h(c.no)}${c.grade!==""?" · Grade "+h(c.grade):""}</span></div></button>`;
-const row=(c,i)=>`<button class="row" data-i="${i}">${art(c)}<div><b>${h(c.name)}</b><small>${h(c.no)} · ${h(natTxt(c))}${c.clan?" · "+h(c.clan):""}</small></div><small>${h([c.unit,c.grade!==""?"G"+c.grade:"",c.power,c.rarity].filter(x=>x!=="").join(" / "))}</small>${favStar(c)}</button>`;
+const row=(c,i)=>`<button class="row" data-i="${i}">${art(c)}<div><b>${h(c.name)}</b><small>${h(c.no)} · ${h(natTxt(c))}${c.clan?" · "+h(c.clan):""}</small></div><small>${h([c.unit,c.grade!==""?"G"+c.grade:"",c.power,rarityLabel(c.rarity)].filter(x=>x!=="").join(" / "))}</small>${favStar(c)}</button>`;
 const num=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true});
 const nv=v=>{const n=parseFloat(v);return v===""||v==null||isNaN(n)?null:n};
 	const sortFn=v=>{const[k,d]=String(v).split("-");return(a,b)=>{
@@ -1322,7 +1507,7 @@ function bindCardRotation(node){
 }
 
 function openLB(c,options={}){
-  const r=[["Card No.",c.no],["Nation",natTxt(c)],["เผ่า / Race",c.race],["Clan",c.clan],["ไอคอน",c.icon],["Card type",c.unit],["Grade",c.grade],["Power",c.power],["Protection / Shield",c.shield],["Rarity",c.rarity],["Trigger",c.trigger],["Product",c.pname],["In collection",c.collectionCount==null?"":c.collectionCount+" copies"]].filter(x=>x[1]!=="");
+  const r=[["Card No.",c.no],["Nation",natTxt(c)],["เผ่า / Race",c.race],["Clan",c.clan],["ไอคอน",c.icon],["Card type",c.unit],["Grade",c.grade],["Power",c.power],["Protection / Shield",c.shield],["Rarity",rarityLabel(c.rarity)],["Trigger",c.trigger],["Product",c.pname],["In collection",c.collectionCount==null?"":c.collectionCount+" copies"]].filter(x=>x[1]!=="");
   const cardDescription=String(c.description||"").trim();
   const detailBlock=`<div class="cardDetail"><b>รายละเอียดการ์ด</b><p>${h(cardDescription||"ยังไม่มีรายละเอียดการ์ด")}</p></div>`;
   const action=options.readonly?`<p class="dto">${options.source==="collection"?"การ์ดนี้อยู่ในคลังสะสม · ไม่ได้เพิ่มเข้าเด็ค":"รายละเอียดการ์ดใน Banlist"}</p>`:'<button class="btn primary" id="lbAdd">Add to deck</button> <button class="btn ed" id="lbEdit">Edit this card</button>';
@@ -1560,7 +1745,7 @@ function banForm(){
  const showNew=()=>{const t=$("banNewType").value;$("edBody").querySelector(".banNewZone").hidden=t!=="zone";$("edBody").querySelector(".banNewLimit").hidden=t!=="limit";$("edBody").querySelector(".banNewGroup").hidden=t!=="together"};
  const renderRows=()=>{rows.innerHTML=BANLIST.map((r,i)=>{const c=banFindCard(r.cardId),name=c?.name||r.name||"การ์ดที่ถูกลบ";return `<div class="banRow" data-i="${i}" data-ruleid="${h(r.id)}" data-card="${h(r.cardId)}" data-name="${h(name)}"><b>${h(name)}</b><select data-f="type">${banTypes.map(([v,l])=>`<option value="${v}" ${r.type===v?"selected":""}>${l}</option>`).join("")}</select><label class="rowZone" ${r.type!=="zone"?"hidden":""}>กอง<select data-f="zone">${zoneOpts}</select></label><label class="rowLimit" ${r.type!=="limit"?"hidden":""}>จำนวน<input data-f="limit" type="number" min="0" value="${Math.max(0,parseInt(r.limit)||0)}"></label><label class="rowGroup" ${r.type!=="together"?"hidden":""}>กลุ่ม<input data-f="group" value="${h(r.group||"")}"></label><button class="btn sm" data-del="${i}">ลบ</button></div>`}).join("")||'<p class="dto">ยังไม่มีกฎใน Banlist</p>';rows.querySelectorAll(".banRow").forEach((row,i)=>{const z=row.querySelector('[data-f="zone"]');if(z)z.value=BANLIST[i].zoneId||ZONES[0]?.id||""})};
  const sync=()=>{BANLIST=[...rows.querySelectorAll(".banRow")].map(r=>({id:r.dataset.ruleid,cardId:r.dataset.card,name:r.dataset.name,type:r.querySelector('[data-f="type"]').value,zoneId:r.querySelector('[data-f="zone"]')?.value||ZONES[0]?.id||"",limit:Math.max(0,parseInt(r.querySelector('[data-f="limit"]')?.value)||0),group:r.querySelector('[data-f="group"]')?.value.trim()||""}));saveBanlist();renderDeck()};
- const renderResults=()=>{const q=search.value.trim().toLowerCase();if(q.length<2){results.innerHTML='<p class="dto">พิมพ์อย่างน้อย 2 ตัวอักษรเพื่อค้นหาในการ์ดทั้งหมด</p>';return}const m=new Map(ALL.map(c=>[c.id,c]));Object.values(COLLECTION).forEach(v=>{if(v?.card&&!m.has(v.id||v.card.id))m.set(v.id||v.card.id,v.card)});const hits=[...m.values()].filter(c=>(String(c.name||"")+" "+String(c.no||"")+" "+String(c.rarity||"")).toLowerCase().includes(q)).slice(0,30);results.innerHTML=hits.map(c=>`<button type="button" class="banResult" data-add="${h(c.id)}"><span>${h(c.name)}</span><small>${h(c.no||"")} · ${h(c.rarity||"—")}</small><b>＋</b></button>`).join("")||'<p class="dto">ไม่พบการ์ด</p>'};
+ const renderResults=()=>{const q=search.value.trim().toLowerCase();if(q.length<2){results.innerHTML='<p class="dto">พิมพ์อย่างน้อย 2 ตัวอักษรเพื่อค้นหาในการ์ดทั้งหมด</p>';return}const m=new Map(ALL.map(c=>[c.id,c]));Object.values(COLLECTION).forEach(v=>{if(v?.card&&!m.has(v.id||v.card.id))m.set(v.id||v.card.id,v.card)});const hits=[...m.values()].filter(c=>(String(c.name||"")+" "+String(c.no||"")+" "+String(c.rarity||"")).toLowerCase().includes(q)).slice(0,30);results.innerHTML=hits.map(c=>`<button type="button" class="banResult" data-add="${h(c.id)}"><span>${h(c.name)}</span><small>${h(c.no||"")} · ${h(rarityLabel(c.rarity)||"—")}</small><b>＋</b></button>`).join("")||'<p class="dto">ไม่พบการ์ด</p>'};
  $("banNewType").onchange=showNew;showNew();renderRows();renderResults();search.oninput=renderResults;
  results.onclick=e=>{const b=e.target.closest("[data-add]");if(!b)return;const c=banFindCard(b.dataset.add);if(!c)return;BANLIST.push({id:uid(),cardId:c.id,name:c.name,type:$("banNewType").value,zoneId:$("banNewZone").value,limit:Math.max(0,parseInt($("banNewLimit").value)||0),group:$("banNewGroup").value.trim()||"กลุ่ม 1"});saveBanlist();renderRows();renderDeck()};
  rows.onchange=e=>{const r=e.target.closest(".banRow");if(!r)return;if(e.target.dataset.f==="type"){const t=e.target.value;r.querySelector(".rowZone").hidden=t!=="zone";r.querySelector(".rowLimit").hidden=t!=="limit";r.querySelector(".rowGroup").hidden=t!=="together"}sync()};rows.oninput=e=>{if(e.target.closest(".banRow"))sync()};
@@ -1587,7 +1772,7 @@ function renderBanGallery(){
  const q=$("banGallerySearch").value.trim().toLowerCase(),all=banGalleryEntries();
  const matches=c=>!q||(String(c.name||"")+" "+String(c.no||"")+" "+String(c.rarity||"")).toLowerCase().includes(q);
  const cardMap=new Map(all.map(v=>[String(v.card.id),v.card]));
- const cardHtml=(c,i)=>`<button type="button" class="banGalleryCard" data-ban-card="${h(c.id)}" aria-label="ดูรายละเอียด ${h(c.name||"การ์ด")}"><span class="banNumber">${i+1}</span>${art(c,true)}<b>${h(c.name||"การ์ด")}</b><small>${h(c.no||"")}${c.rarity?" · "+h(c.rarity):""}</small></button>`;
+ const cardHtml=(c,i)=>`<button type="button" class="banGalleryCard" data-ban-card="${h(c.id)}" aria-label="ดูรายละเอียด ${h(c.name||"การ์ด")}"><span class="banNumber">${i+1}</span>${art(c,true)}<b>${h(c.name||"การ์ด")}</b><small>${h(c.no||"")}${c.rarity?" · "+h(rarityLabel(c.rarity)):""}</small></button>`;
  const rowsBy=(rules,keyFn,labelFn)=>{const m=new Map();rules.forEach(r=>{const c=cardMap.get(String(r.cardId));if(!c||!matches(c))return;const key=keyFn(r),row=m.get(key)||{label:labelFn(r),cards:[]};if(!row.cards.some(x=>String(x.id)===String(c.id)))row.cards.push(c);m.set(key,row)});return [...m.values()]};
  const cardRow=(cards,empty="ไม่มีการ์ดในหมวดนี้")=>cards.length?`<div class="banRuleCards">${cards.map(cardHtml).join("")}</div>`:`<p class="banCategoryEmpty">${empty}</p>`;
  const cat=(type,title,rows)=>`<details class="banTypeGroup banCategory"><summary>${title}<span class="banOpenHint">กดเพื่อเปิดดู</span></summary><div class="banCategoryBody">${rows.length?rows.map(row=>`<div class="banRuleRow"><div class="banRuleLabel">${h(row.label)}</div>${cardRow(row.cards)}</div>`).join(""):cardRow([])}</div></details>`;
@@ -1903,7 +2088,7 @@ function renderCollection(){
  a.sort((x,y)=>sort==="name"?String(x.card.name).localeCompare(String(y.card.name)):sort==="count-desc"?(y.count-x.count||tierOf(y.card)-tierOf(x.card)):sort==="rarity-asc"?(tierOf(x.card)-tierOf(y.card)||String(x.card.name).localeCompare(String(y.card.name))):(tierOf(y.card)-tierOf(x.card)||String(x.card.name).localeCompare(String(y.card.name))));
  const all=Object.values(COLLECTION).filter(v=>v?.card&&v.count>0),total=all.reduce((n,v)=>n+(+v.count||0),0);
  $("collectionSummary").textContent=total+" ใบ · "+all.length+" แบบ";
- box.innerHTML=a.map(v=>`<button type="button" class="collectionCard" data-collection-card="${h(v.id||v.card.id)}" aria-label="ดูรายละเอียด ${h(v.card.name||"การ์ด")}">${art(v.card,1)}<span class="colRarity">${h(v.card.rarity||"—")}</span><span class="colQty">×${v.count}</span><b>${h(v.card.name||"การ์ด")}</b><small>${h(v.card.no||"")}${v.productName?" · "+h(v.productName):""}</small></button>`).join("")||'<p class="dto">ยังไม่มีการ์ดในคลัง · เปิดซองเพื่อเริ่มสะสม</p>';
+ box.innerHTML=a.map(v=>`<button type="button" class="collectionCard" data-collection-card="${h(v.id||v.card.id)}" aria-label="ดูรายละเอียด ${h(v.card.name||"การ์ด")}">${art(v.card,1)}<span class="colRarity">${h(rarityLabel(v.card.rarity)||"—")}</span><span class="colQty">×${v.count}</span><b>${h(v.card.name||"การ์ด")}</b><small>${h(v.card.no||"")}${v.productName?" · "+h(v.productName):""}</small></button>`).join("")||'<p class="dto">ยังไม่มีการ์ดในคลัง · เปิดซองเพื่อเริ่มสะสม</p>';
 }
 $("collectionSearch").oninput=renderCollection;$("collectionSort").onchange=renderCollection;
 $("collectionCards").onclick=e=>{const b=e.target.closest("[data-collection-card]");if(!b)return;const v=COLLECTION[b.dataset.collectionCard];if(v?.card)openLB({...v.card,pname:v.productName,collectionCount:v.count},{readonly:true,source:"collection"})};
@@ -1919,7 +2104,7 @@ const pitySave=()=>{if(Cloud?.configured)return;try{localStorage.setItem(PITYKEY
 const tierOf=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILT?FOILT[r]:-1};
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 /* สุ่มจากข้อมูลสด ๆ ทุกครั้ง การ์ด/สินค้าที่เพิ่งเพิ่มจึงเข้าสุ่มทันที */
-const pkPool=()=>{const p=PRODUCTS.find(x=>x.id===$("pkP").value);return p&&Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false):[]};
+const pkPool=()=>{const p=PRODUCTS.find(x=>x.id===$("pkP").value);return p&&Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP"):[]};
 
 function pkPityUI(){
   const pc=Math.round(PITY/PITYMAX*100),full=PITY>=PITYMAX;
@@ -1930,8 +2115,8 @@ function pkPityUI(){
 function pkRates(){
   const product=PRODUCTS.find(x=>x.id===$("pkP").value);Object.keys(PKW).forEach(k=>delete PKW[k]);Object.assign(PKW,product?.gachaWeights||{});
   const pool=pkPool(),rs=[...new Set(pool.map(c=>String(c.rarity||"").trim()))],total=rs.reduce((n,r)=>n+Math.max(0,pkw(r)),0);
-  $("pkR").innerHTML=rs.map(r=>`<div><label>${h(r||"(ไม่ระบุ)")} <small>${pool.filter(c=>String(c.rarity||"").trim()===r).length} ใบ · ${total?((Math.max(0,pkw(r))/total)*100).toFixed(2):"0.00"}%</small></label><input type="number" min="0" step="0.5" data-r="${h(r)}" value="${pkw(r)}"></div>`).join("")||'<p class="dto">สินค้านี้ยังไม่มีการ์ดที่เปิดสุ่มได้</p>';
-  const hi=[...new Set(pool.filter(c=>tierOf(c)>=PITYMIN).map(c=>c.rarity||"(ไม่ระบุ)"))];
+  $("pkR").innerHTML=rs.map(r=>`<div><label>${h(rarityLabel(r)||"(ไม่ระบุ)")} <small>${pool.filter(c=>String(c.rarity||"").trim()===r).length} ใบ · ${total?((Math.max(0,pkw(r))/total)*100).toFixed(2):"0.00"}%</small></label><input type="number" min="0" step="0.5" data-r="${h(r)}" value="${pkw(r)}"></div>`).join("")||'<p class="dto">สินค้านี้ยังไม่มีการ์ดที่เปิดสุ่มได้</p>';
+  const hi=[...new Set(pool.filter(c=>tierOf(c)>=PITYMIN).map(c=>rarityLabel(c.rarity)||"(ไม่ระบุ)"))];
   $("pkTierNote").textContent=hi.length?"การ์ดที่ถือว่า “สูงกว่า RRR” ในสินค้านี้: "+hi.join(" / "):"สินค้านี้ยังไม่มีการ์ดระดับสูงกว่า RRR — ถ้า Pity เต็ม จะสุ่มจากระดับสูงสุดที่มีให้แทน";
 }
 function pkFill(){
@@ -1977,19 +2162,40 @@ const GA={open:false,pid:"",qty:0,packs:[],pi:0,cards:[],rev:0,all:[],pendingWri
 	function soundInit(){if(!SOUND_ON)return null;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;try{audioCtx=audioCtx||new AC();if(audioCtx.state==="suspended")audioCtx.resume();return audioCtx}catch(e){return null}}
 	function tone(ctx,freq,start,dur,gain=.045,type="sine",endFreq=0){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(freq,start);if(endFreq)o.frequency.exponentialRampToValueAtTime(Math.max(20,endFreq),start+dur);g.gain.setValueAtTime(.0001,start);g.gain.exponentialRampToValueAtTime(gain,start+.012);g.gain.exponentialRampToValueAtTime(.0001,start+dur);o.connect(g);g.connect(ctx.destination);o.start(start);o.stop(start+dur+.02)}
 	function noisePop(ctx,start,dur,gain=.035,cut=1800){const n=Math.max(1,Math.floor(ctx.sampleRate*dur)),b=ctx.createBuffer(1,n,ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);const src=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();src.buffer=b;f.type="lowpass";f.frequency.value=cut;g.gain.setValueAtTime(gain,start);g.gain.exponentialRampToValueAtTime(.0001,start+dur);src.connect(f);f.connect(g);g.connect(ctx.destination);src.start(start);src.stop(start+dur)}
-	const RARITY_SOUNDS={
-	  common:{base:520,top:660,type:"sine",gain:.026,notes:[]},
-	  silver:{base:720,top:980,type:"triangle",gain:.038,notes:[1080]},
-	  gold:{base:820,top:1240,type:"triangle",gain:.052,notes:[1320,1660]},
-	  rainbow:{base:980,top:1540,type:"sine",gain:.052,notes:[1240,1560,1960,2440]},
-	  pink:{base:880,top:1380,type:"triangle",gain:.05,notes:[1175,1480,1860]},
-	  crimson:{base:460,top:900,type:"sawtooth",gain:.05,notes:[740,1100,1480]}
-	};
-	function raritySoundKey(rarity){const r=String(rarity||"").trim().toUpperCase();if(["SP","SSP"].includes(r))return "pink";if(["SEC","SSR","SCR"].includes(r))return "crimson";if(["SVR","GR","FR","FFR","OR","OVR","ORR","DSR","ZR","X"].includes(r))return "rainbow";if(r==="RRR")return "gold";if(["R","RR"].includes(r))return "silver";return "common"}
-	function gachaSound(kind,rarity=""){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;if(kind==="tear"){noisePop(ctx,t,.24,.07,1500);tone(ctx,430,t,.19,.035,"triangle",170);tone(ctx,110,t+.04,.16,.045,"sine",58)}else if(kind==="flip"){const p=RARITY_SOUNDS[raritySoundKey(rarity)]||RARITY_SOUNDS.common;noisePop(ctx,t,.055,.018,2600);tone(ctx,p.base,t+.015,.12,p.gain,p.type,p.top);p.notes.forEach((f,i)=>tone(ctx,f,t+.075+i*.065,.28,p.gain*.62,i%2?"sine":"triangle",f*1.015))}}
+		function packTearSound(ctx,start){
+		  const dur=.56,n=Math.max(1,Math.floor(ctx.sampleRate*dur)),buf=ctx.createBuffer(1,n,ctx.sampleRate),data=buf.getChannelData(0),grainSize=Math.max(24,Math.floor(ctx.sampleRate*.003));let grain=.5;
+		  for(let i=0;i<n;i++){if(i%grainSize===0)grain=.12+Math.random()*.88;const u=i/(n-1),envelope=Math.pow(Math.max(0,Math.sin(Math.PI*Math.pow(u,.88))),.72),seam=.22+.78*Math.pow(Math.abs(Math.sin(Math.PI*(u*4.2+.08*Math.sin(u*18)))),1.35);data[i]=(Math.random()*2-1)*envelope*seam*(.24+.76*grain)}
+		  const src=ctx.createBufferSource(),hp=ctx.createBiquadFilter(),lp=ctx.createBiquadFilter(),g=ctx.createGain();src.buffer=buf;hp.type="highpass";hp.frequency.setValueAtTime(260,start);lp.type="lowpass";lp.frequency.setValueAtTime(1500,start);lp.frequency.exponentialRampToValueAtTime(7200,start+.22);lp.frequency.exponentialRampToValueAtTime(1900,start+dur);g.gain.setValueAtTime(.0001,start);g.gain.linearRampToValueAtTime(.062,start+.035);g.gain.setValueAtTime(.047,start+.22);g.gain.exponentialRampToValueAtTime(.0001,start+dur);src.connect(hp);hp.connect(lp);lp.connect(g);g.connect(ctx.destination);src.start(start);src.stop(start+dur);
+		  noisePop(ctx,start+.09,.032,.014,7200);noisePop(ctx,start+.24,.042,.018,6100);noisePop(ctx,start+.39,.035,.016,5200);tone(ctx,185,start+.01,.21,.016,"sawtooth",78);tone(ctx,1240,start+.31,.16,.012,"triangle",390)
+		}
+		const RARITY_SOUNDS={
+		  common:{base:520,top:660,type:"sine",gain:.026,notes:[]},
+		  silver:{base:720,top:980,type:"triangle",gain:.038,notes:[1080]},
+		  gold:{base:820,top:1240,type:"triangle",gain:.052,notes:[1320,1660]},
+		  rainbow:{base:980,top:1540,type:"sine",gain:.052,notes:[1240,1560,1960,2440]},
+		  crimson:{base:460,top:900,type:"sawtooth",gain:.05,notes:[740,1100,1480]}
+		};
+		const CARD_REVEAL_STINGERS={
+		  X:{noise:[.055,.012,6200],notes:[[587,.02,.16,.042,"sine",1175],[880,.09,.18,.034,"triangle",1320],[1175,.17,.22,.032,"sine",1760],[1760,.25,.30,.026,"sine",2093]]},
+		  ZR:{noise:[.09,.02,950],notes:[[146.8,0,.20,.042,"triangle",110],[293.7,.05,.20,.036,"sine",587],[587,.16,.22,.03,"triangle",1175],[1175,.24,.25,.024,"sine",880]]},
+		  SSP:{noise:[.06,.009,5200],notes:[[659.3,0,.17,.038,"triangle",784],[880,.08,.21,.034,"sine",1175],[1318.5,.17,.24,.03,"triangle",1760],[1760,.24,.25,.024,"sine",1568]]},
+		  SEC:{noise:[.105,.024,760],notes:[[164.8,0,.22,.044,"sawtooth",82.4],[246.9,.04,.19,.036,"sawtooth",196],[493.9,.12,.20,.034,"triangle",740],[740,.21,.26,.027,"sawtooth",988]]},
+		  SSR:{noise:[.065,.014,3400],notes:[[311.1,0,.17,.038,"triangle",466],[466,.07,.19,.033,"sawtooth",622],[622,.15,.21,.03,"sine",932],[1244,.23,.24,.024,"sine",988]]},
+		  CSR:{noise:[.07,.014,2500],notes:[[392,0,.18,.04,"triangle",523],[523,.09,.19,.036,"triangle",659],[659,.18,.22,.032,"sine",784],[784,.27,.25,.03,"triangle",1047],[1047,.36,.28,.024,"sine",1568]]},
+		  EMR:{noise:[.055,.012,1900],notes:[[329.6,0,.20,.038,"sine",392],[392,.08,.20,.034,"triangle",493.9],[493.9,.17,.22,.03,"sine",659.3],[784,.25,.27,.024,"sine",1047]]},
+		  OR:{noise:[.06,.01,5600],notes:[[440,0,.17,.038,"sine",554.4],[554.4,.08,.20,.034,"triangle",698.5],[698.5,.16,.22,.03,"sine",880],[1108.7,.24,.27,.025,"sine",1663]]},
+		  FFR:{noise:[.06,.014,5800],notes:[[587.3,0,.16,.04,"triangle",880],[880,.07,.18,.036,"sine",1174.7],[1174.7,.15,.21,.032,"triangle",1760],[1760,.23,.27,.026,"sine",2349]]},
+		  GR:{noise:[.08,.018,1550],notes:[[293.7,0,.19,.042,"triangle",349.2],[440,.08,.20,.036,"sine",587.3],[587.3,.17,.22,.032,"triangle",740],[880,.25,.28,.024,"sine",1175]]},
+		  SVR:{noise:[.07,.011,6200],notes:[[493.9,0,.17,.038,"sine",739.9],[739.9,.08,.20,.034,"triangle",987.8],[987.8,.16,.22,.03,"sine",1479.8],[1975.5,.24,.27,.024,"sine",1480]]}
+		};
+		let rarityStingerQueueAt=0;
+		function soundRarityCode(rarity){const r=String(rarity||"").trim().toUpperCase();return r==="OVR"?"EMR":r==="SCR"?"CSR":r}
+		function playCardRevealStinger(ctx,rarity){const p=CARD_REVEAL_STINGERS[soundRarityCode(rarity)];if(!p)return false;const t=Math.max(ctx.currentTime,rarityStingerQueueAt);rarityStingerQueueAt=t+.24;if(p.noise)noisePop(ctx,t,...p.noise);p.notes.forEach(([f,dt,dur,gain,type,end])=>tone(ctx,f,t+dt,dur,gain,type,end));return true}
+		function raritySoundKey(rarity){const r=soundRarityCode(rarity);if(["SEC","SSR","CSR"].includes(r))return "crimson";if(["SVR","GR","FR","FFR","OR","EMR","OVR","ORR","DSR","ZR","X"].includes(r))return "rainbow";if(r==="RRR")return "gold";if(["R","RR"].includes(r))return "silver";return "common"}
+		function gachaSound(kind,rarity=""){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;if(kind==="tear"){packTearSound(ctx,t)}else if(kind==="flip"){if(playCardRevealStinger(ctx,rarity))return;const p=RARITY_SOUNDS[raritySoundKey(rarity)]||RARITY_SOUNDS.common;noisePop(ctx,t,.055,.018,2600);tone(ctx,p.base,t+.015,.12,p.gain,p.type,p.top);p.notes.forEach((f,i)=>tone(ctx,f,t+.075+i*.065,.28,p.gain*.62,i%2?"sine":"triangle",f*1.015))}}
 	function revealBurst(card){
 	  const r=String(card?.rarity||"").toUpperCase();if(["C","U","R","T"].includes(r))return;
-	  const color=(["RRR"].includes(r)?"255,190,45":["SP","SSP"].includes(r)?"255,105,195":["SEC","SSR","SCR"].includes(r)?"255,92,70":["GR","SVR","FR","FFR","OR","OVR","ORR","DSR","ZR","X"].includes(r)?"205,90,255":"105,190,255");
+	  const color=(["RRR"].includes(r)?"255,190,45":r==="SSP"?"255,105,195":["SEC","SSR","CSR","SCR"].includes(r)?"255,92,70":["GR","SVR","FR","FFR","OR","EMR","OVR","ORR","DSR","ZR","X"].includes(r)?"205,90,255":"105,190,255");
 	  const f=document.createElement("div");f.className="ref-flash";f.style.setProperty("--reveal-color",color);document.body.appendChild(f);setTimeout(()=>f.remove(),1100);
 	  const n=r==="RRR"?10:6;for(let i=0;i<n;i++){const s=document.createElement("span");s.className="ref-burst-spark";s.style.setProperty("--reveal-color",color);s.style.left="50%";s.style.top="42%";s.style.setProperty("--dx",`${(Math.random()-.5)*42}vw`);s.style.setProperty("--dy",`${(Math.random()-.55)*44}vh`);s.style.animationDelay=`${Math.random()*.18}s`;document.body.appendChild(s);setTimeout(()=>s.remove(),2100)}
 	}
@@ -2062,7 +2268,7 @@ function pkShowCards(){
     const rrr=String(c.rarity||"").trim().toUpperCase()==="RRR";
     return `<div class="pkCard${rrr?" rrr-gold":""}" data-i="${i}" role="button" tabindex="0" aria-label="การ์ดที่ ${i+1}${rrr?" · RRR สีทอง":""}" style="--d:${i*70}ms">
       <div class="pkin"><div class="pkfb"><div class="art back"></div></div><div class="pkff">${art(c,1)}${rrr?'<span class="pkRRRglint" aria-hidden="true"></span>':""}</div></div>
-      <span class="pkr2">${h(c.rarity||"—")}</span></div>`}).join("");
+      <span class="pkr2">${h(rarityLabel(c.rarity)||"—")}</span></div>`}).join("");
   $("gFoot").innerHTML=`<button class="btn sm" data-g="all">หงายทั้งหมด</button><span class="gfootmsg">หงายแล้ว 0/${GA.cards.length}</span>`+pkSkipHTML();
   pkPityUI();
 }
@@ -2122,9 +2328,9 @@ function pkFinish(){
   const list=Object.values(cnt).sort((a,b)=>(tierOf(b.c)-tierOf(a.c))||num(a.c.no,b.c.no)),best=list.length?list[0]:null;
   $("gStagePack").hidden=true;$("gStageCards").hidden=false;
   const allHighPacks=GA.packs.filter(p=>p?.allHigh).length;
-  $("gSub").textContent="สรุป: เปิด "+GA.qty+" ซอง · ได้ "+GA.all.length+" ใบ"+(best?" · สูงสุด "+best.c.rarity:"")+(allHighPacks?" · ALL-HIGH 0.2% ×"+allHighPacks:"");
+  $("gSub").textContent="สรุป: เปิด "+GA.qty+" ซอง · ได้ "+GA.all.length+" ใบ"+(best?" · สูงสุด "+rarityLabel(best.c.rarity):"")+(allHighPacks?" · ALL-HIGH 0.2% ×"+allHighPacks:"");
   const el=$("gCards");el.className="gsum";
-  el.innerHTML=list.map(({c,n})=>{const pull=GA.all.find(r=>r.c.id===c.id&&tierOf(r.c)>=1&&r.packOpenId&&r.slotNumber);return `<div class="pks" data-id="${h(c.id)}">${art(c,1)}<span class="pkr2">${h(c.rarity||"—")}${n>1?" ×"+n:""}</span>${Cloud?.configured&&pull?`<button class="btn sm sharePull" data-share-pull="${h(pull.packOpenId)}" data-slot="${pull.slotNumber}">แชร์ลง Feed</button>`:""}</div>`}).join("");
+  el.innerHTML=list.map(({c,n})=>{const pull=GA.all.find(r=>r.c.id===c.id&&tierOf(r.c)>=1&&r.packOpenId&&r.slotNumber);return `<div class="pks" data-id="${h(c.id)}">${art(c,1)}<span class="pkr2">${h(rarityLabel(c.rarity)||"—")}${n>1?" ×"+n:""}</span>${Cloud?.configured&&pull?`<button class="btn sm sharePull" data-share-pull="${h(pull.packOpenId)}" data-slot="${pull.slotNumber}">แชร์ลง Feed</button>`:""}</div>`}).join("");
   $("gFoot").innerHTML=`<button class="btn primary" data-g="again">เปิดอีกครั้ง</button><button class="btn sm" data-g="close">ปิด</button>`;
   $("pkMsg").textContent="เปิด "+GA.qty+" ซอง · ได้ "+GA.all.length+" ใบ · Pity "+PITY+"/"+PITYMAX;
   pitySave();pkPityUI();
@@ -2203,13 +2409,13 @@ async function renderCraft(){
     box.innerHTML=recipes.map(r=>{const target=ALL.find(c=>c.id===r.target_card_id);const owned=(COLLECTION[r.target_card_id]?.count)||0;
       const mats=r.ingredients.map(i=>{const c=ALL.find(x=>x.id===i.material_card_id);return `<div class="craftMaterialCard">${c?art(c,1):'<div class="art"></div>'}<small title="${h(c?.name||"การ์ด")}">${h(c?.name||"การ์ด")}</small><em>×${i.quantity} · มี ${COLLECTION[i.material_card_id]?.count||0}</em></div>`}).join("");
       return `<article class="featureCard"><h3>${h(r.title)}</h3><p>${h(r.description||"")}</p><div class="craftVisual"><div class="craftTargetCard">${target?art(target,1):'<div class="art"></div>'}<b>${h(target?.name||"การ์ดเป้าหมาย")} ×${r.output_quantity}</b><small class="featureMeta">มีในคลัง ${owned}</small></div><div><b>สิ่งที่ใช้คราฟ</b><div class="craftMaterials">${mats||'<span class="dto">ยังไม่มีวัตถุดิบ</span>'}</div></div></div><p class="featureMeta">${r.created_by===Cloud.user.id?"สูตรของคุณ":"สูตรชุมชน"}</p><div class="featureActions"><button class="btn primary" data-craft="${h(r.id)}">คราฟต์</button>${r.created_by===Cloud.user.id?`<button class="btn" data-edit-recipe="${h(r.id)}">แก้สูตร</button><button class="btn" data-disable-recipe="${h(r.id)}">ปิดสูตร</button>`:""}</div></article>`}).join("")||'<p class="dto">ยังไม่มีสูตร · ผู้ใช้ที่ล็อกอินสร้างสูตรคราฟต์ได้</p>';
-    hist.innerHTML=history.map(x=>`<article class="featureCard"><b>${h(x.recipe_title_snapshot)}</b><div>ได้รับ ${h(x.card?.name||"การ์ด")} ${x.card?.rarity?"· "+h(x.card.rarity):""} ×${x.output_quantity}</div><small class="featureMeta">${new Date(x.created_at).toLocaleString()}</small></article>`).join("")||'<p class="dto">ยังไม่มีประวัติการคราฟต์</p>';
+    hist.innerHTML=history.map(x=>`<article class="featureCard"><b>${h(x.recipe_title_snapshot)}</b><div>ได้รับ ${h(x.card?.name||"การ์ด")} ${x.card?.rarity?"· "+h(rarityLabel(x.card.rarity)):""} ×${x.output_quantity}</div><small class="featureMeta">${new Date(x.created_at).toLocaleString()}</small></article>`).join("")||'<p class="dto">ยังไม่มีประวัติการคราฟต์</p>';
   }catch(e){box.innerHTML=`<p class="bad">โหลดสูตรไม่สำเร็จ: ${h(e.message)}</p>`;hist.innerHTML=""}
 }
 async function recipeForm(recipe=null){
   if(!Cloud?.configured||!Cloud.user)return alert("เข้าสู่ระบบก่อนสร้างหรือแก้สูตร");
   const allCards=ALL.slice().sort((a,b)=>a.name.localeCompare(b.name));const existing=recipe?.ingredients||[];const isEdit=!!recipe;
-  const options=(q="",selected="")=>{const query=String(q).trim().toLowerCase();return allCards.filter(c=>!query||String(c.name||"").toLowerCase().includes(query)||String(c.no||"").toLowerCase().includes(query)).map(c=>`<option value="${h(c.id)}" ${c.id===selected?"selected":""}>${h(c.name)}${c.no?" · "+h(c.no):""}${c.rarity?" · "+h(c.rarity):""}</option>`).join("")};
+  const options=(q="",selected="")=>{const query=String(q).trim().toLowerCase();return allCards.filter(c=>!query||String(c.name||"").toLowerCase().includes(query)||String(c.no||"").toLowerCase().includes(query)).map(c=>`<option value="${h(c.id)}" ${c.id===selected?"selected":""}>${h(c.name)}${c.no?" · "+h(c.no):""}${c.rarity?" · "+h(rarityLabel(c.rarity)):""}</option>`).join("")};
   const selectedTarget=recipe?.target_card_id||"",targetCard=ALL.find(c=>c.id===selectedTarget);
   $("edBody").innerHTML=`<h3>${isEdit?"แก้สูตรคราฟต์":"สร้างสูตรคราฟต์พิเศษ / PR"}</h3><p class="dto">ค้นหาชื่อการ์ดได้ทั้งการ์ดผลลัพธ์และวัตถุดิบ · ผู้ใช้ทุกคนที่ล็อกอินเห็นและใช้สูตรได้</p><div class="grid"><div><label>ชื่อสูตร<input id="recipeTitle" maxlength="100" value="${h(recipe?.title||"")}" required></label></div><div><label>ค้นหาการ์ดผลลัพธ์<input id="recipeTargetSearch" class="recipeSearch" placeholder="พิมพ์ชื่อการ์ด"></label><select id="recipeTarget"><option value="">เลือกการ์ด</option>${options("",selectedTarget)}</select></div><div><label>คำอธิบาย<input id="recipeDesc" maxlength="2000" value="${h(recipe?.description||"")}" placeholder="เงื่อนไขหรือรายละเอียดเพิ่มเติม"></label></div><div><label>จำนวนการ์ดที่ได้รับ<input id="recipeOutput" type="number" min="1" value="${Number(recipe?.output_quantity)||1}"></label></div></div><h4 class="yr">วัตถุดิบที่ใช้</h4><div class="recipeIngredients" id="recipeIngredients"></div><div class="actions"><button type="button" class="btn" id="recipeAddIngredient">＋ เพิ่มวัตถุดิบ</button><button type="button" class="btn primary" id="recipeSave">บันทึกสูตร</button><button type="button" class="btn" id="recipeCancel">ยกเลิก</button></div>`;
   const targetSearch=$("recipeTargetSearch"),targetSelect=$("recipeTarget");targetSearch.oninput=()=>{const v=targetSelect.value;targetSelect.innerHTML='<option value="">เลือกการ์ด</option>'+options(targetSearch.value,v);if([...targetSelect.options].some(o=>o.value===v))targetSelect.value=v};
@@ -2224,7 +2430,7 @@ async function renderCommunity(){
   const box=$("communityFeed");if(!box)return;if(!Cloud?.configured||!Cloud.user){box.innerHTML='<p class="dto">เข้าสู่ระบบเพื่อดู Community Feed</p>';return}
   box.innerHTML='<p class="dto">กำลังโหลด Feed…</p>';
   try{const [pulls,decks]=await Promise.all([Cloud.loadRareFeed(),Cloud.loadSharedDecks()]);const items=[...pulls.map(x=>({kind:"pull",date:x.created_at,data:x})),...decks.map(x=>({kind:"deck",date:x.shared_at,data:x}))].sort((a,b)=>new Date(b.date)-new Date(a.date));
-    box.innerHTML=items.map(it=>{const d=it.data;if(it.kind==="pull"){const c=ALL.find(x=>x.id===d.card_id);return `<article class="featureCard feedItem">${c?art(c,1):'<div class="feedBadge">'+h(d.rarity_snapshot)+'</div>'}<div><span class="feedBadge">RARE PULL</span><h3>${h(d.display_name_snapshot)} แชร์ผลสุ่ม ${h(d.rarity_snapshot)}</h3><p>${h(d.card_name_snapshot)}${d.product_name_snapshot?" · "+h(d.product_name_snapshot):""}</p><small class="featureMeta">${new Date(d.created_at).toLocaleString()}</small></div></article>`}
+    box.innerHTML=items.map(it=>{const d=it.data;if(it.kind==="pull"){const c=ALL.find(x=>x.id===d.card_id);return `<article class="featureCard feedItem">${c?art(c,1):'<div class="feedBadge">'+h(rarityLabel(d.rarity_snapshot))+'</div>'}<div><span class="feedBadge">RARE PULL</span><h3>${h(d.display_name_snapshot)} แชร์ผลสุ่ม ${h(rarityLabel(d.rarity_snapshot))}</h3><p>${h(d.card_name_snapshot)}${d.product_name_snapshot?" · "+h(d.product_name_snapshot):""}</p><small class="featureMeta">${new Date(d.created_at).toLocaleString()}</small></div></article>`}
       return `<article class="featureCard"><span class="feedBadge">SHARED DECK</span><h3>${h(d.name)}</h3><p>${h(d.description||"")}</p><p class="featureMeta">โดย ${h(d.owner_name)} · ${new Date(d.shared_at).toLocaleString()}</p><div class="featureActions"><button class="btn primary" data-copy-deck="${h(d.id)}">คัดลอกเข้าเด็คของฉัน</button></div></article>`}).join("")||'<p class="dto">ยังไม่มีโพสต์ · แชร์เด็คหรือกดแชร์ผลสุ่ม RRR+ หลังเปิดซองเพื่อเริ่ม Feed</p>';
   }catch(e){box.innerHTML=`<p class="bad">โหลด Feed ไม่สำเร็จ: ${h(e.message)}</p>`}
 }
