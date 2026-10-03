@@ -769,7 +769,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
     <section id="p1" role="tabpanel" aria-labelledby="t1" hidden>
       <div class="grid">
         <div><label for="nation">Nation</label><select id="nation"></select></div>
-        <div><label for="kw">Keyword</label><input id="kw" type="search" placeholder="Card name"></div>
+        <div><label for="kw">Keyword</label><input id="kw" type="search" placeholder="ชื่อ / รายละเอียด / เผ่า / Clan / ไอคอน"></div>
         <div><label for="ssort">Sort</label><select id="ssort"><option value="">Default</option><option value="grade-desc">Grade (Descending)</option><option value="grade-asc">Grade (Ascending)</option><option value="power-desc">Power (Descending)</option><option value="power-asc">Power (Ascending)</option></select></div><label class="shareCheck"><input type="checkbox" id="favOnly"> ★ เฉพาะ Favourite</label>
       </div>
       <p><button class="link" id="advBtn" aria-expanded="false">▼ Advance Search</button></p>
@@ -779,6 +779,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
         <div><label for="power">Power</label><select id="power"></select></div>
         <div><label for="rarity">Rarity</label><select id="rarity"></select></div>
         <div><label for="trigger">Trigger</label><select id="trigger"></select></div>
+        <div><label for="clan">Clan</label><select id="clan"></select></div>
       </div>
       <div class="actions"><button class="btn primary" id="go">Search</button><button class="btn" id="clear">Clear All</button></div>
       <p class="count" id="count" aria-live="polite"></p>
@@ -911,6 +912,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
   </div>
 </dialog>
 <datalist id="nations"></datalist>
+<datalist id="clans"></datalist>
 <datalist id="types"><option>Booster Pack</option><option>Constructed Deck</option><option>Others</option><option>PR Card</option></datalist>
 <datalist id="rarities"><option>C</option><option>N</option><option>U</option><option>R</option><option>RR</option><option>RRR</option><option>SR</option><option>PR</option><option>SVR</option><option>GR</option><option>FR</option><option>FFR</option><option>OR</option><option>OVR</option><option>ORR</option><option>DSR</option><option>ZR</option><option>X</option><option>SP</option><option>SSP</option><option>SEC</option><option>SSR</option><option>SCR</option></datalist>
 <datalist id="triggers"><option>Critical</option><option>Heal</option><option>Front</option><option>Draw</option><option>Over</option></datalist>
@@ -942,6 +944,7 @@ const col=n=>{const v=NATIONS.find(x=>x.name===n);if(v)return v.color;let x=0;fo
 const DEFN=[["Dragon Empire","#c0392b"],["Dark States","#6c3483"],["Brandt Gate","#3d4a5c"],["Keter Sanctuary","#b7950b"],["Stoicheia","#1f77b4"],["Lyrical Monasterio","#d0508a"]].map(([name,color])=>({name,color}));
 const DEFZ=[{id:"main",name:"Main deck",size:50,copies:4},{id:"ride",name:"Ride deck",size:null,copies:null,perGrade:1},{id:"g",name:"G zone",size:16,copies:4},{id:"token",name:"Token",size:null,copies:null}];
 const DEFT=["Normal Unit","Trigger Unit","Normal Order","Set Order","Blitz Order","Token"];
+const DEFCLANS=["Royal Paladin","Shadow Paladin","Gold Paladin","Kagero","Narukami","Genesis","Oracle Think Tank","Angel Feather","Aqua Force","Bermuda Triangle","Nova Grappler","Dimension Police","Link Joker","Dark Irregulars","Pale Moon","Spike Brothers","Murakumo","Nubatama","Tachikaze","Megacolony","Great Nature","Neo Nectar","Granblue","Gear Chronicle"];
 const Cloud=window.CardCloud;
 let PRODUCTS=[],NATIONS=[],ZONES=[],CTYPES=DEFT.slice(),PW="",loaded=false,REMOTE_DECKS={},stopRealtime=null,refreshBusy=false;
 const DB=()=>({products:PRODUCTS,nations:NATIONS,zones:ZONES,ctypes:CTYPES,settings:{nations:NATIONS,zones:ZONES,ctypes:CTYPES}});
@@ -1182,7 +1185,7 @@ function isFav(id){return FAVS.has(String(id))}
 function favStar(c){return `<span class="favStar${isFav(c.id)?" on":""}" data-fav="${h(c.id)}" role="button" tabindex="0" aria-label="${isFav(c.id)?"ลบ Favourite":"เพิ่ม Favourite"}">${isFav(c.id)?"★":"☆"}</span>`}
 async function toggleFavourite(id){const key=String(id),next=!FAVS.has(key);if(next)FAVS.add(key);else FAVS.delete(key);try{if(Cloud?.configured)await Cloud.setFavourite(key,next);else localStorage.setItem(favKey(),JSON.stringify([...FAVS]));search();if(cur)renderPV()}catch(e){if(next)FAVS.delete(key);else FAVS.add(key);notice("bad","Favourite บันทึกไม่สำเร็จ",String(e?.message||e),{auto:4500})}}
 const gal=(c,i)=>`<button class="c${c.orient==="l"?" land":""}" data-i="${i}">${favStar(c)}${art(c,1)}<div class="t"><b>${h(c.name)}</b><span>${h(c.no)}${c.grade!==""?" · Grade "+h(c.grade):""}</span></div></button>`;
-const row=(c,i)=>`<button class="row" data-i="${i}">${art(c)}<div><b>${h(c.name)}</b><small>${h(c.no)} · ${h(natTxt(c))}</small></div><small>${h([c.unit,c.grade!==""?"G"+c.grade:"",c.power,c.rarity].filter(x=>x!=="").join(" / "))}</small>${favStar(c)}</button>`;
+const row=(c,i)=>`<button class="row" data-i="${i}">${art(c)}<div><b>${h(c.name)}</b><small>${h(c.no)} · ${h(natTxt(c))}${c.clan?" · "+h(c.clan):""}</small></div><small>${h([c.unit,c.grade!==""?"G"+c.grade:"",c.power,c.rarity].filter(x=>x!=="").join(" / "))}</small>${favStar(c)}</button>`;
 const num=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true});
 const nv=v=>{const n=parseFloat(v);return v===""||v==null||isNaN(n)?null:n};
 	const sortFn=v=>{const[k,d]=String(v).split("-");return(a,b)=>{
@@ -1215,7 +1218,7 @@ $("editBtn").onclick=async()=>{
   document.body.classList.toggle("edit",on);$("editBtn").setAttribute("aria-pressed",on);$("editBtn").textContent=on?"✓ Done":"✎ Edit"};
 
 /* Card Search */
-const F=["nation","unit","grade","power","rarity","trigger"];
+const F=["nation","unit","grade","power","rarity","trigger","clan"];
 let ALL=[],found=[],FAVS=new Set();
 function index(){
   ALL=PRODUCTS.flatMap(p=>p.cards.map(c=>({...c,pid:p.id,pname:p.name})));
@@ -1226,10 +1229,13 @@ function index(){
   const opt='<option value="">All</option>'+nn.map(x=>`<option>${h(x)}</option>`).join("");
   ["nation","dnat"].forEach(id=>{const v=$(id).value;$(id).innerHTML=opt;$(id).value=v});
   $("nations").innerHTML=nn.map(n=>`<option>${h(n)}`).join("");
+  const clans=[...new Set([...DEFCLANS,...ALL.map(c=>String(c.clan||"")).filter(Boolean)])].sort((a,b)=>a.localeCompare(b));
+  const clanValue=$("clan").value;$("clan").innerHTML='<option value="">All</option>'+clans.map(x=>`<option>${h(x)}</option>`).join("");$("clan").value=clanValue;
+  const clanList=$("clans");if(clanList)clanList.innerHTML=clans.map(x=>`<option>${h(x)}</option>`).join("");
 }
 function search(){
   const kw=$("kw").value.trim().toLowerCase();
-  found=ALL.filter(c=>F.every(f=>!$(f).value||(f==="nation"?nats(c).includes($(f).value):String(c[f])===$(f).value))&&(!kw||c.name.toLowerCase().includes(kw))&&(!$('favOnly').checked||isFav(c.id)));
+  found=ALL.filter(c=>F.every(f=>!$(f).value||(f==="nation"?nats(c).includes($(f).value):String(c[f]??"")===$(f).value))&&(!kw||[c.name,c.description,c.race,c.clan,c.icon,c.no].some(v=>String(v||"").toLowerCase().includes(kw)))&&(!$('favOnly').checked||isFav(c.id)));
   if($("ssort").value)found.sort(sortFn($("ssort").value));
   $("count").textContent=found.length+" Results";
   $("found").innerHTML=found.map(gal).join("");
@@ -1308,7 +1314,7 @@ function bindCardRotation(node){
 }
 
 function openLB(c,options={}){
-  const r=[["Card No.",c.no],["Nation",natTxt(c)],["Card type",c.unit],["Grade",c.grade],["Power",c.power],["Protection / Shield",c.shield],["Rarity",c.rarity],["Trigger",c.trigger],["Product",c.pname],["In collection",c.collectionCount==null?"":c.collectionCount+" copies"]].filter(x=>x[1]!=="");
+  const r=[["Card No.",c.no],["Nation",natTxt(c)],["เผ่า / Race",c.race],["Clan",c.clan],["ไอคอน",c.icon],["Card type",c.unit],["Grade",c.grade],["Power",c.power],["Protection / Shield",c.shield],["Rarity",c.rarity],["Trigger",c.trigger],["Product",c.pname],["In collection",c.collectionCount==null?"":c.collectionCount+" copies"]].filter(x=>x[1]!=="");
   const cardDescription=String(c.description||"").trim();
   const detailBlock=`<div class="cardDetail"><b>รายละเอียดการ์ด</b><p>${h(cardDescription||"ยังไม่มีรายละเอียดการ์ด")}</p></div>`;
   const action=options.readonly?`<p class="dto">${options.source==="collection"?"การ์ดนี้อยู่ในคลังสะสม · ไม่ได้เพิ่มเข้าเด็ค":"รายละเอียดการ์ดใน Banlist"}</p>`:'<button class="btn primary" id="lbAdd">Add to deck</button> <button class="btn ed" id="lbEdit">Edit this card</button>';
@@ -1420,7 +1426,7 @@ function form(title,fields,o,imgKey,onSave,onDel,crop){
   }
   $("ed").showModal();
 }
-const CF=[["name","Name"],["no","Card number"],["description","รายละเอียดการ์ด"],["nation","Nation","nations"],["nation2","Second nation (Duo nation, optional)","nations"],["unit","Card type","@types"],["grade","Grade"],["power","Power"],["shield","ป้องกัน / Shield"],["rarity","Rarity","rarities"],["trigger","Trigger","triggers"],["is_gacha_pool","Gacha pool","@bool"]];
+const CF=[["name","Name"],["no","Card number"],["description","รายละเอียดการ์ด"],["race","เผ่า / Race"],["clan","Clan","clans"],["icon","ไอคอน (ไม่บังคับ)"],["nation","Nation","nations"],["nation2","Second nation (Duo nation, optional)","nations"],["unit","Card type","@types"],["grade","Grade"],["power","Power"],["shield","ป้องกัน / Shield"],["rarity","Rarity","rarities"],["trigger","Trigger","triggers"],["is_gacha_pool","Gacha pool","@bool"]];
 function cardForm(c,pid){
   const n=!c,p=PRODUCTS.find(x=>x.id===pid);
   form(n?"Add card":"Edit card",CF,c||{no:String(p.cards.length+1).padStart(3,"0")},"img",v=>{
@@ -1441,7 +1447,7 @@ $("newProd").onclick=()=>prodForm();
 $("addCard").onclick=()=>cardForm(null,cur.id);
 $("editProd").onclick=()=>prodForm(cur);
 $("bulk").onchange=async e=>{
-  for(const f of e.target.files){try{const u=await pic(f);let o;try{if(await meta(u)>1)o="l"}catch(x){}cur.cards.push({id:uid(),orient:o,no:String(cur.cards.length+1).padStart(3,"0"),name:f.name.replace(/\.[^.]+$/,""),nation:"",unit:"",grade:"",power:"",rarity:"",trigger:"",img:u})}catch(x){alert("Upload failed: "+x.message)}}
+  for(const f of e.target.files){try{const u=await pic(f);let o;try{if(await meta(u)>1)o="l"}catch(x){}cur.cards.push({id:uid(),orient:o,no:String(cur.cards.length+1).padStart(3,"0"),name:f.name.replace(/\.[^.]+$/,""),race:"",clan:"",icon:"",nation:"",unit:"",grade:"",power:"",rarity:"",trigger:"",img:u})}catch(x){alert("Upload failed: "+x.message)}}
   e.target.value="";refresh()};
 
 /* Backup / Restore (copy-paste, works on phone and PC) */

@@ -60,6 +60,9 @@ create table public.catalog_cards (
   id uuid primary key default gen_random_uuid(),
   card_no text not null,
   name text not null,
+  race text not null default '',
+  clan text not null default '',
+  icon text not null default '',
   nation text,
   second_nation text,
   card_type text,
@@ -82,6 +85,9 @@ create table public.catalog_cards (
 create index catalog_cards_card_no_idx on public.catalog_cards (card_no);
 create index catalog_cards_name_idx on public.catalog_cards (lower(name));
 create index catalog_cards_rarity_idx on public.catalog_cards (rarity);
+create index catalog_cards_race_idx on public.catalog_cards (lower(race));
+create index catalog_cards_clan_idx on public.catalog_cards (lower(clan));
+create index catalog_cards_icon_idx on public.catalog_cards (lower(icon));
 
 create table public.product_cards (
   product_id uuid not null references public.catalog_products(id) on delete cascade,

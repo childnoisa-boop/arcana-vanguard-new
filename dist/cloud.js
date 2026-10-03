@@ -21,7 +21,7 @@
   };
   const chunks = (items, size = 400) => Array.from({ length: Math.ceil(items.length / size) }, (_, i) => items.slice(i * size, (i + 1) * size));
   const cleanNumber = (value) => value === '' || value == null || !Number.isFinite(Number(value)) ? null : Number(value);
-  const CARD_FIELDS = new Set(['id','no','name','description','nation','nation2','unit','grade','power','shield','rarity','trigger','img','fit','orient','pid','pname','collectionCount','is_gacha_pool']);
+  const CARD_FIELDS = new Set(['id','no','name','description','race','clan','icon','nation','nation2','unit','grade','power','shield','rarity','trigger','img','fit','orient','pid','pname','collectionCount','is_gacha_pool']);
 
   async function rows(table, query) {
     const { data, error } = await query;
@@ -36,6 +36,9 @@
       no: productNo || row.card_no || '',
       name: row.name || '',
       description: row.description || '',
+      race: row.race || '',
+      clan: row.clan || '',
+      icon: row.icon || '',
       nation: row.nation || '',
       nation2: row.second_nation || '',
       unit: row.card_type || '',
@@ -61,6 +64,9 @@
       card_no: String(card.no || ''),
       name: String(card.name || ''),
       description: String(card.description || ''),
+      race: card.race || null,
+      clan: card.clan || null,
+      icon: card.icon || null,
       nation: card.nation || null,
       second_nation: card.nation2 || null,
       card_type: card.unit || null,
