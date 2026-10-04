@@ -1083,7 +1083,7 @@ body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)::after
 .collectionProgressHero{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.collectionProgressEyebrow{display:block;color:#cdb8e8;font:700 11px/1.1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase}.collectionProgress h4{margin:3px 0 4px;color:var(--gold-soft);font:700 24px/1.1 Cinzel,serif}.collectionProgressHero p{margin:0;color:#c8bdd5;font-size:12px}.collectionProgressPct{color:#f4c96b;font:700 34px/1 "Barlow Condensed",sans-serif;white-space:nowrap}.progressTrack{height:10px;margin:14px 0 12px;overflow:hidden;border-radius:99px;background:#0a0d1b;border:1px solid #594873}.progressTrack i,.miniProgress i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#9b6bd6,#f4c96b);box-shadow:0 0 12px #f4c96b66;transition:width .3s ease}.collectionProgressStats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.collectionProgressStat{padding:8px 10px;border:1px solid #493b67;border-radius:8px;background:#0f1223}.collectionProgressStat b{display:block;color:#f2e7cf;font:700 20px/1 "Barlow Condensed",sans-serif}.collectionProgressStat small{color:#b9aec8;font-size:11px}.collectionBreakdown{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}.collectionBreakdown h5{margin:0 0 8px;color:#e4d6f0;font-size:13px}.progressRows{display:grid;gap:7px}.progressRowTop{display:flex;justify-content:space-between;gap:8px;margin-bottom:3px;font-size:11px}.progressRowTop span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#ded1e6}.progressRowTop small{color:#b9aec8;white-space:nowrap}.miniProgress{height:5px;overflow:hidden;border-radius:99px;background:#0a0d1b}.miniProgress i{box-shadow:none;background:linear-gradient(90deg,#7650ad,#d6a95e)}
 @media(max-width:600px){.collectionProgressHero{gap:10px}.collectionProgress h4{font-size:21px}.collectionProgressPct{font-size:30px}.collectionProgressStats{grid-template-columns:repeat(2,minmax(0,1fr))}.collectionBreakdown{grid-template-columns:1fr;gap:12px}}
 /* PR craft celebration: a short forge burst with sparks and a rising card seal. */
-.craftFxLayer{position:fixed;inset:0;z-index:150;pointer-events:none;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(244,201,107,.18),transparent 28%,transparent 62%);animation:craftFxFade 1.35s ease-out forwards}
+.craftFxLayer{position:fixed;inset:0;z-index:150;pointer-events:auto;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(244,201,107,.18),transparent 28%,transparent 62%);animation:craftFxFade 1.35s ease-out forwards}
 .craftFxCore{width:clamp(90px,18vw,150px);aspect-ratio:59/86;border:2px solid #f4c96b;border-radius:10px;background:linear-gradient(145deg,#fff4bf,#b8792d 42%,#5d2b83 72%,#15152d);box-shadow:0 0 8px #fff4b0,0 0 24px #f4c96b,0 0 56px #c35cff;animation:craftFxCard 1.15s cubic-bezier(.2,.8,.25,1) forwards}
 .craftFxCore:before{content:"✦ PR ✦";display:grid;place-items:center;height:100%;color:#fff7d1;font:700 clamp(15px,3vw,24px) Barlow,sans-serif;text-shadow:0 0 8px #fff,0 0 18px #f4c96b;animation:craftFxStamp .8s ease-out .18s both}
 .craftFxSpark{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:#fff6c4;box-shadow:0 0 8px #fff,0 0 16px #f4c96b;animation:craftFxSpark 1s ease-out forwards;transform:translate(-50%,-50%)}
@@ -1110,10 +1110,10 @@ body.sparkles-off:not(.viewer-effects-on) #gCards .pkCard.open .pkff .art:not(.b
 body.sparkles-off:not(.viewer-effects-on) #gCards .pkCard.open .pkff .art:not(.back) .ph{display:block!important}
 
 /* Craft result card: show the actual crafted card in the center of the celebration. */
-.craftFxCore.craftFxHasCard{width:clamp(180px,30vw,300px);aspect-ratio:auto;background:transparent;border:0;box-shadow:none;display:flex;flex-direction:column;align-items:center;gap:10px}.craftFxCore.craftFxHasCard::before{display:none}
+.craftFxCore.craftFxHasCard{position:relative;z-index:2;width:clamp(180px,30vw,300px);aspect-ratio:auto;background:transparent;border:0;box-shadow:none;display:flex;flex-direction:column;align-items:center;gap:10px}.craftFxCore.craftFxHasCard::before{display:none}
 .craftFxResultCard{width:clamp(150px,25vw,240px);padding:8px;border-radius:14px;background:linear-gradient(145deg,#fff4bf,#f4c96b 42%,#7f45a8 72%,#15152d);box-shadow:0 0 10px #fff4b0,0 0 28px #f4c96b,0 0 65px #c35cff;animation:craftFxCard 1.15s cubic-bezier(.2,.8,.25,1) forwards}
 .craftFxResultCard .art{width:100%;aspect-ratio:59/86;border-radius:8px;display:block!important;border:0!important;box-shadow:none!important}
-.craftFxResultLabel{color:#fff7d1;font:700 clamp(18px,3vw,26px) Barlow,sans-serif;text-align:center;text-shadow:0 0 8px #fff,0 0 18px #f4c96b}.craftFxResultName{color:#fff7d1;font:500 clamp(12px,2vw,16px) Barlow,sans-serif;text-align:center;max-width:280px}
+.craftFxResultTitle{color:#fff7d1;font:700 clamp(22px,4vw,34px) Barlow,sans-serif;text-align:center;text-shadow:0 0 8px #fff,0 0 18px #f4c96b}.craftFxResultName{color:#fff7d1;font:500 clamp(12px,2vw,16px) Barlow,sans-serif;text-align:center;max-width:280px}.craftFxClose{position:absolute;right:-42px;top:-10px;z-index:4;width:34px;height:34px;border:1px solid rgba(255,255,255,.45);border-radius:50%;background:rgba(16,18,35,.78);color:#fff;font-size:23px;line-height:1;cursor:pointer}.craftHeadActions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}.craftPopupToggle{display:flex;align-items:center;gap:7px;color:var(--mute);font-size:12px;white-space:nowrap}.craftPopupToggle input{accent-color:var(--red)}
 body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0!important;box-shadow:none!important;filter:none!important}
 </style>
 </head>
@@ -1210,7 +1210,7 @@ body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0
     <section id="p5" role="tabpanel" aria-labelledby="t5" hidden>
       <div class="pkpanel">
         <div class="grid">
-          <div><label for="pkP">สินค้า / ซอง</label><select id="pkP"></select></div>
+          <div><label for="pkP">สินค้า / ซอง</label><select id="pkP"></select><div id="allProductsCoverBox" hidden style="margin-top:8px"><label for="allProductsCover">รูปซองรวมทุกโปรดัก</label><input type="file" id="allProductsCover" accept="image/*"><button type="button" class="btn sm" id="clearAllProductsCover" style="margin-top:6px">ลบรูปปก</button><img id="allProductsCoverPreview" alt="ตัวอย่างรูปซองรวมทุกโปรดัก" hidden style="display:block;max-width:150px;max-height:90px;margin-top:8px;border-radius:7px;border:1px solid var(--line);object-fit:cover"></div></div>
           <div><label for="pkQty">จำนวนซองที่เปิด สูงสุด 5 ซอง (1 ซอง = 7 ใบ)</label><input id="pkQty" type="number" min="1" max="5" value="1"></div>
           <label class="pkSoundToggle"><input type="checkbox" id="pkSound" checked> เปิดเสียงฉีกซองและเสียงเฉพาะเรตสูงตอนหงายการ์ด</label>
         </div>
@@ -1234,7 +1234,7 @@ body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0
       <section class="collectionProgress gachaProgressOnly" aria-labelledby="gachaProgressTitle"><div class="collectionProgressHero"><div><span class="collectionProgressEyebrow">Collection Progress</span><h4 id="gachaProgressTitle">ความคืบหน้าการสะสม</h4><p>ดูรายละเอียดทั้งหมดได้ที่เมนู กระเป๋า</p></div><strong class="collectionProgressPct" id="gachaProgressPct">0%</strong></div><div class="progressTrack" aria-hidden="true"><i id="gachaProgressBar" style="width:0%"></i></div><div class="collectionProgressStats"><div class="collectionProgressStat"><b id="gachaProgressOwned">0</b><small>แบบที่มีแล้ว</small></div><div class="collectionProgressStat"><b id="gachaProgressTotal">0</b><small>การ์ดทั้งหมด</small></div></div></section>
     </section>
     <section id="p6" role="tabpanel" aria-labelledby="t6" hidden>
-      <div class="banGalleryHead"><div><h2>คราฟการ์ดพิเศษ / PR</h2><p class="dto">สูตรคราฟต์มองเห็นร่วมกัน แต่ใช้วัตถุดิบจากคลังส่วนตัวของผู้คราฟต์เท่านั้น</p></div><button class="btn primary" id="craftNew">＋ สร้างสูตร</button></div>
+      <div class="banGalleryHead"><div><h2>คราฟการ์ดพิเศษ / PR</h2><p class="dto">สูตรคราฟต์มองเห็นร่วมกัน แต่ใช้วัตถุดิบจากคลังส่วนตัวของผู้คราฟต์เท่านั้น</p></div><div class="craftHeadActions"><label class="craftPopupToggle"><input type="checkbox" id="craftPopupToggle" checked> แสดงป๊อปอัพผลคราฟต์</label><button class="btn primary" id="craftNew">＋ สร้างสูตร</button></div></div>
       <div id="craftRecipes" class="featureList"></div>
       <h3 class="yr">ประวัติการคราฟต์ของฉัน</h3><div id="craftHistory" class="featureList"></div>
     </section>
@@ -2285,24 +2285,21 @@ $("dfin").onclick=()=>{
 /* ---------- Pack Opener / Gacha ---------- */
 
 function renderPackCount(){$("pkLifetime").textContent="เปิดแล้ว "+(Number(PACKS_OPENED)||0)+" ซอง"}
-function collectionAdd(cards){
- const prod=PRODUCTS.find(p=>p.id===GA.pid),name=prod?.name||"";
- const valid=cards.map((r,i)=>({r,i,c:r?.c})).filter(x=>x.c);
+function collectionAdd(cards){const prod=PRODUCTS.find(p=>p.id===GA.pid),name=prod?.name||(GA.pid===ALL_PRODUCTS_ID?ALL_PRODUCTS_LABEL:"");
  if(Cloud?.configured&&Cloud.user){
-  if(!valid.length||!GA.pid)return Promise.resolve(null);
-  const pending=Cloud.recordPack(GA.pid,valid.map(x=>x.c)).then(async packId=>{
-   valid.forEach((x,slot)=>{x.r.packOpenId=packId;x.r.slotNumber=slot+1});
+  const valid=cards.map((r,i)=>({r,i,c:r?.c})).filter(x=>x.c);
+  const groups=new Map();
+  valid.forEach(x=>{const pid=GA.pid===ALL_PRODUCTS_ID?(x.c.pid||PRODUCTS[0]?.id):GA.pid;if(pid){if(!groups.has(pid))groups.set(pid,[]);groups.get(pid).push(x)}});
+  const writes=[...groups].map(([pid,items])=>Cloud.recordPack(pid,items.map(x=>x.c)).then(packId=>{items.forEach((x,slot)=>{x.r.packOpenId=packId;x.r.slotNumber=slot+1});return packId}));
+  const pending=Promise.all(writes).then(async()=>{
    try{
-    const state=await Cloud.loadGachaState();PITY=Number(state.pity_count)||0;PACKS_OPENED=Number(state.packs_opened)||0;COLLECTION=await Cloud.loadCollection();pkPityUI();renderPackCount();renderCollection();
+     const state=await Cloud.loadGachaState();PITY=Number(state.pity_count)||0;PACKS_OPENED=Number(state.packs_opened)||0;COLLECTION=await Cloud.loadCollection();pkPityUI();renderPackCount();renderCollection();
    }catch(reloadError){console.error("gacha write succeeded but reload failed",reloadError);notice("ask","สุ่มบันทึกแล้ว ✓","ผลสุ่มเข้าบัญชีแล้ว แต่โหลดคลังกลับมาแสดงใหม่ไม่สำเร็จ: "+String(reloadError?.message||reloadError),{auto:8000})}
    return true;
   }).catch(e=>{console.error("gacha save failed",e);notice("bad","บันทึกผลซองไม่สำเร็จ",String(e?.message||e),{auto:8000});return null});
   GA.pendingWrites.push(pending);return pending;
  }
- valid.forEach(x=>{const c=x.c,id=c.id,v=COLLECTION[id]||{id,card:{...c},count:0,productName:name};v.card={...c};v.count=(+v.count||0)+1;v.productName=name;COLLECTION[id]=v});PACKS_OPENED++;
- try{localStorage.setItem(COLKEY,JSON.stringify(COLLECTION));localStorage.setItem("cardlist-packs-opened",String(PACKS_OPENED))}catch(e){}
- renderPackCount();renderCollection();return Promise.resolve(null)
-}
+ cards.forEach(r=>{const c=r?.c;if(!c)return;const id=c.id,v=COLLECTION[id]||{id,card:{...c},count:0,productName:name};v.card={...c};v.count=(+v.count||0)+1;v.productName=name;COLLECTION[id]=v});PACKS_OPENED++;try{localStorage.setItem(COLKEY,JSON.stringify(COLLECTION));localStorage.setItem("cardlist-packs-opened",String(PACKS_OPENED))}catch(e){}renderPackCount();renderCollection();return Promise.resolve(null)}
 function renderCollectionProgress(){
  const catalog=Array.from(new Map(ALL.filter(c=>c?.id).map(c=>[c.id,c])).values());
  const fallback=Object.values(COLLECTION).filter(v=>v?.card&&v.card.id).map(v=>v.card);
@@ -2334,6 +2331,7 @@ function setCollectionCollapsed(collapsed){collectionCollapsed=!!collapsed;const
 $("collectionToggle").onclick=()=>setCollectionCollapsed(!collectionCollapsed);setCollectionCollapsed(collectionCollapsed);
 $("collectionSearch").oninput=debounce(()=>{collectionPage=1;renderCollection()},250);$("collectionSort").onchange=()=>{collectionPage=1;renderCollection()};
 $("collectionCards").onclick=e=>{const b=e.target.closest("[data-collection-card]");if(!b)return;const v=COLLECTION[b.dataset.collectionCard];if(v?.card)openLB({...v.card,pname:v.productName,collectionCount:v.count},{readonly:true,source:"collection"})};
+const ALL_PRODUCTS_ID="__all_products__",ALL_PRODUCTS_LABEL="รวมทุกโปรดัก";
 const PKW={},pkd=r=>{r=String(r).toUpperCase();return({C:60,N:60,U:40,R:25,RR:12,RRR:5,SR:3,PR:8})[r]??(r in FOILT?1.5:5)},pkw=r=>r in PKW?PKW[r]:pkd(r);
 try{Object.assign(PKW,JSON.parse(localStorage.getItem("cardlist-pkw")||"{}"))}catch(e){}
 const pkSaveW=()=>{const p=PRODUCTS.find(x=>x.id===$("pkP").value);if(p){p.gachaWeights={...PKW};save({skipCards:true})}else{try{localStorage.setItem("cardlist-pkw",JSON.stringify(PKW))}catch(e){}}};
@@ -2346,7 +2344,7 @@ const pitySave=()=>{if(Cloud?.configured)return;try{localStorage.setItem(PITYKEY
 const tierOf=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILT?FOILT[r]:-1};
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 /* สุ่มจากข้อมูลสด ๆ ทุกครั้ง การ์ด/สินค้าที่เพิ่งเพิ่มจึงเข้าสุ่มทันที */
-const pkPool=()=>{const pid=$("pkP").value;return ALL.filter(c=>c.pid===pid&&c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP")};
+const pkPool=()=>{const pid=$("pkP").value;if(pid===ALL_PRODUCTS_ID)return ALL.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP");return ALL.filter(c=>c.pid===pid&&c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP")};
 
 function pkPityUI(){
   const pc=Math.round(PITY/PITYMAX*100),full=PITY>=PITYMAX;
@@ -2361,12 +2359,20 @@ function pkRates(){
   const hi=[...new Set(pool.filter(c=>tierOf(c)>=PITYMIN).map(c=>rarityLabel(c.rarity)||"(ไม่ระบุ)"))];
   $("pkTierNote").textContent=hi.length?"การ์ดที่ถือว่า “สูงกว่า RRR” ในสินค้านี้: "+hi.join(" / "):"สินค้านี้ยังไม่มีการ์ดระดับสูงกว่า RRR — ถ้า Pity เต็ม จะสุ่มจากระดับสูงสุดที่มีให้แทน";
 }
+const ALL_PRODUCTS_COVER_KEY="cardlist-all-products-cover";
+let allProductsCover="";
+try{allProductsCover=localStorage.getItem(ALL_PRODUCTS_COVER_KEY)||""}catch(e){}
+function syncAllProductsCoverUI(){const box=$("allProductsCoverBox"),img=$("allProductsCoverPreview");if(!box||!img)return;const active=$("pkP").value===ALL_PRODUCTS_ID;box.hidden=!active;img.hidden=!active||!allProductsCover;img.src=allProductsCover||""}
+$("allProductsCover")?.addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)return;try{allProductsCover=await pic(f);localStorage.setItem(ALL_PRODUCTS_COVER_KEY,allProductsCover);syncAllProductsCoverUI()}catch(x){alert("เพิ่มรูปปกไม่สำเร็จ: "+x.message)}e.target.value=""});
+$("clearAllProductsCover")?.addEventListener("click",()=>{allProductsCover="";try{localStorage.removeItem(ALL_PRODUCTS_COVER_KEY)}catch(e){}syncAllProductsCoverUI()});
 function pkFill(){
   const cur=$("pkP").value;
+  const total=PRODUCTS.reduce((n,p)=>n+(Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP").length:0),0);
+  const allOpt=`<option value="${ALL_PRODUCTS_ID}">${ALL_PRODUCTS_LABEL}${total?" ("+total+" การ์ด)":" — ยังไม่มีการ์ด"}</option>`;
   const productOpts=PRODUCTS.map(p=>`<option value="${h(p.id)}">${h(p.name)}${p.cards&&p.cards.length?" ("+p.cards.length+" การ์ด)":" — ยังไม่มีการ์ด"}</option>`).join("");
-  $("pkP").innerHTML=productOpts||'<option value="">— ยังไม่มีสินค้า —</option>';
-  if(PRODUCTS.some(p=>p.id===cur))$("pkP").value=cur;
-  pkRates();pkPityUI();
+  $("pkP").innerHTML=(allOpt+productOpts)||'<option value="">— ยังไม่มีสินค้า —</option>';
+  if(cur===ALL_PRODUCTS_ID||PRODUCTS.some(p=>p.id===cur))$("pkP").value=cur;
+  syncAllProductsCoverUI();pkRates();pkPityUI();
 }
 /* สุ่ม 1 ใบตามน้ำหนัก (W) จากกองที่ให้ */
 function pkPickFrom(src){
@@ -2437,8 +2443,28 @@ const GA={open:false,pid:"",qty:0,packs:[],pi:0,cards:[],rev:0,all:[],pendingWri
 		function raritySoundKey(rarity){const r=soundRarityCode(rarity);if(["SEC","SSR","CSR"].includes(r))return "crimson";if(["SVR","GR","FR","FFR","OR","EMR","OVR","ORR","DSR","ZR","X"].includes(r))return "rainbow";if(r==="RRR")return "gold";if(["R","RR"].includes(r))return "silver";return "common"}
 		function gachaSound(kind,rarity=""){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;if(kind==="tear"){packTearSound(ctx,t)}else if(kind==="flip"){if(playCardRevealStinger(ctx,rarity))return;const p=RARITY_SOUNDS[raritySoundKey(rarity)]||RARITY_SOUNDS.common;noisePop(ctx,t,.055,.018,2600);tone(ctx,p.base,t+.015,.12,p.gain,p.type,p.top);p.notes.forEach((f,i)=>tone(ctx,f,t+.075+i*.065,.28,p.gain*.62,i%2?"sine":"triangle",f*1.015))}}
 	function craftSound(){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;tone(ctx,261.6,t,.12,.035,"triangle",392);tone(ctx,392,t+.09,.16,.045,"sine",659.3);tone(ctx,523.3,t+.2,.24,.055,"triangle",784);tone(ctx,1046.5,t+.34,.3,.035,"sine",1318.5)}
-	function craftCelebration(card,quantity=1){const layer=document.createElement("div");layer.className="craftFxLayer";const core=document.createElement("div");core.className="craftFxCore";if(card){core.classList.add("craftFxHasCard");const result=document.createElement("div");result.className="craftFxResultCard";result.innerHTML=art(card,2);core.appendChild(result);const label=document.createElement("div");label.className="craftFxResultLabel";label.textContent="คราฟสำเร็จ";core.appendChild(label);const nameLabel=document.createElement("div");nameLabel.className="craftFxResultName";nameLabel.textContent=`${card.name||"การ์ด"} ×${quantity}`;core.appendChild(nameLabel)}else{core.textContent="✦ PR ✦"}layer.appendChild(core);for(let i=0;i<18;i++){const sp=document.createElement("i");sp.className="craftFxSpark";sp.style.setProperty("--dx",`${(Math.random()-.5)*70}vw`);sp.style.setProperty("--dy",`${(Math.random()-.5)*66}vh`);sp.style.animationDelay=`${Math.random()*.18}s`;layer.appendChild(sp)}document.body.appendChild(layer);craftSound();setTimeout(()=>layer.remove(),1800)}
-	function revealBurst(card){
+	const CRAFT_POPUP_KEY="cardlist-craft-popup";
+let craftPopupEnabled=true;
+try{craftPopupEnabled=localStorage.getItem(CRAFT_POPUP_KEY)!=="0"}catch(e){}
+function syncCraftPopupToggle(){const toggle=$("craftPopupToggle");if(toggle)toggle.checked=craftPopupEnabled}
+$("craftPopupToggle").onchange=()=>{craftPopupEnabled=$("craftPopupToggle").checked;try{localStorage.setItem(CRAFT_POPUP_KEY,craftPopupEnabled?"1":"0")}catch(e){}}
+syncCraftPopupToggle();
+function craftCelebration(card,quantity=1){
+  if(!craftPopupEnabled)return;
+  const layer=document.createElement("div");layer.className="craftFxLayer";layer.setAttribute("role","dialog");layer.setAttribute("aria-label","คราฟสำเร็จ");
+  const core=document.createElement("div");core.className="craftFxCore";
+  if(card){
+    core.classList.add("craftFxHasCard");
+    const title=document.createElement("div");title.className="craftFxResultTitle";title.textContent="คราฟสำเร็จ";core.appendChild(title);
+    const result=document.createElement("div");result.className="craftFxResultCard";result.innerHTML=art(card,2);core.appendChild(result);
+    const nameLabel=document.createElement("div");nameLabel.className="craftFxResultName";nameLabel.textContent=`${card.name||"การ์ด"} ×${quantity}`;core.appendChild(nameLabel);
+  }else{core.textContent="✦ PR ✦"}
+  const close=document.createElement("button");close.type="button";close.className="craftFxClose";close.setAttribute("aria-label","ปิดผลคราฟต์");close.textContent="×";close.onclick=()=>layer.remove();
+  layer.appendChild(core);layer.appendChild(close);layer.addEventListener("click",e=>{if(e.target===layer)layer.remove()});
+  for(let i=0;i<18;i++){const sp=document.createElement("i");sp.className="craftFxSpark";sp.style.setProperty("--dx",`${(Math.random()-.5)*70}vw`);sp.style.setProperty("--dy",`${(Math.random()-.5)*66}vh`);sp.style.animationDelay=`${Math.random()*.18}s`;layer.appendChild(sp)}
+  document.body.appendChild(layer);craftSound();setTimeout(()=>layer.remove(),1800)
+}
+		function revealBurst(card){
 	  const r=String(card?.rarity||"").toUpperCase();if(["C","U","R","T"].includes(r))return;
 	  const color=(["RRR"].includes(r)?"255,190,45":r==="SSP"?"255,105,195":["SEC","SSR","CSR","SCR"].includes(r)?"255,92,70":["GR","SVR","FR","FFR","OR","EMR","OVR","ORR","DSR","ZR","X"].includes(r)?"205,90,255":"105,190,255");
 	  const f=document.createElement("div");f.className="ref-flash";f.style.setProperty("--reveal-color",color);if(r==="RRR")f.style.opacity=".32";document.body.appendChild(f);setTimeout(()=>f.remove(),1100);
@@ -2475,22 +2501,23 @@ function pkOpenStart(){
   GA.pool=pool;GA.packs=[];GA.all=[];GA.pendingWrites=[];GA.recordedPI=-1;
   GA.pi=0;pitySave();pkSaveW();
   const p=PRODUCTS.find(x=>x.id===GA.pid);
-  $("gTitle").textContent="เปิดซอง · "+(p?.name||"");
+  $("gTitle").textContent="เปิดซอง · "+(p?p.name:(GA.pid===ALL_PRODUCTS_ID?ALL_PRODUCTS_LABEL:""));
   $("pkMsg").textContent="เปิด "+GA.qty+" ซอง · "+(GA.qty*PACKSIZE)+" ใบ · Pity "+PITY+"/"+PITYMAX;
   if(!$("gacha").open)$("gacha").showModal();
   GA.open=true;document.body.classList.add("gacha-effects-on");
   pkShowPack();
 }
 function pkShowPack(){
-  const p=PRODUCTS.find(x=>x.id===GA.pid),cover=p?.cover;
+  const p=PRODUCTS.find(x=>x.id===GA.pid);
+  const aggregate=GA.pid===ALL_PRODUCTS_ID,cover=aggregate?allProductsCover:p?.cover;
   let inner;
   const packW=p&&p.packMode==="custom"?Math.max(35,Math.min(100,parseInt(p.packW)||82)):100;
   const packH=p&&p.packMode==="custom"?Math.max(35,Math.min(100,parseInt(p.packH)||92)):100;
   const packX=p&&Number.isFinite(+p.packX)?Math.max(0,Math.min(100,+p.packX)):50,packY=p&&Number.isFinite(+p.packY)?Math.max(0,Math.min(100,+p.packY)):50;
   const packStyle=`style="width:${packW}%;height:${packH}%;object-fit:cover;object-position:${packX}% ${packY}%"`;
   if(cover){
-    inner=`<div class="pkbgg" style="background-image:url(&quot;${h(cover)}&quot;)"></div><img class="pkfg" ${packStyle} src="${h(cover)}" alt="รูปซอง ${h(p?.name||"สินค้า")}">`;
-  }else inner=`<div class="ph pkdefault" style="background-color:${p?tcol(p.type):"#243a68"}"><span class="pktag">${h(p?.type||"Booster Pack")}</span><b>${h(p?.name||"")}</b>${p?.year?`<span class="pktype">${h(p.year)}</span>`:""}</div>`;
+    inner=`<div class="pkbgg" style="background-image:url(&quot;${h(cover)}&quot;)"></div><img class="pkfg" ${packStyle} src="${h(cover)}" alt="รูปซอง ${h(aggregate?ALL_PRODUCTS_LABEL:p.name)}">`;
+  }else inner=`<div class="ph pkdefault" style="background-color:${p?tcol(p.type):"#243a68"}"><span class="pktag">${h(p&&p.type?p.type:"Booster Pack")}</span><b>${h(aggregate?ALL_PRODUCTS_LABEL:(p?p.name:""))}</b>${p&&p.year?`<span class="pktype">${h(p.year)}</span>`:""}</div>`;
   $("pkImg").innerHTML=inner;$("pkImg2").innerHTML=inner;
   $("pkWrap").classList.remove("torn");
   const cl=$("pkClip");cl.style.transition="none";cl.style.transform="";cl.style.opacity="";tearP=0;
@@ -2591,7 +2618,7 @@ function pkClose(){clearInterval(GA.skipTimer);GA.skipTimer=0;GA.skipBusy=false;
 
 /* ---------- เหตุการณ์ ---------- */
 $("t5").addEventListener("click",pkFill);
-$("pkP").onchange=pkRates;
+$("pkP").onchange=()=>{syncAllProductsCoverUI();pkRates()};
 $("pkR").oninput=e=>{const i=e.target.closest("[data-r]");if(i){if(!requireAdmin()){pkRates();return}PKW[i.dataset.r]=Math.max(0,+i.value||0);pkSaveW()}};
 $("pkQty").onchange=()=>{$("pkQty").value=Math.max(1,Math.min(5,parseInt($("pkQty").value)||1))};
 $("pkRst").checked=PITYRST;
