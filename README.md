@@ -4,7 +4,7 @@ Vanilla HTML/CSS/JavaScript card catalog and collection app. The hosted configur
 
 ## Shared vs private data
 
-- **Shared:** product/card catalog, Banlist rules, active PR craft recipes, decks only when the owner shares them, and rare pulls only when the owner explicitly shares them.
+- **Shared:** product/card catalog, Banlist rules, active PR craft recipes, decks only when the owner shares them.
 - **Private to the signed-in account:** opened-pack history, Pity/counters, pull collection, saved decks unless individually shared, and craft history/materials.
 - Supabase RLS enforces these boundaries. All authenticated users can edit the shared catalog and Banlist. Card images go into the public `card-art` bucket; do not upload images that should remain private.
 - Local preview mode stores sample content in that browser only; it is not a multi-user cloud deployment.

@@ -348,12 +348,6 @@
     const { data, error } = await client.rpc('record_pack_open', { p_product_id: productId, p_card_ids: cards.map((x) => x.id) });
     fail(error); return data;
   }
-  async function shareRarePull(packOpenId, slotNumber) {
-    required();
-    const { data, error } = await client.rpc('share_rare_pull', { p_pack_open_id: packOpenId, p_slot_number: slotNumber });
-    fail(error); return data;
-  }
-
   async function loadDecks() {
     required();
     const decks = await rows('decks', client.from('decks').select('*').eq('owner_id', user.id).is('deleted_at', null).order('updated_at', { ascending: false }).range(0, 999));
@@ -395,13 +389,6 @@
     const z = {};
     for (const row of cards) (z[row.zone_key] ||= {})[row.card_id] = row.quantity;
     return { id: crypto.randomUUID(), name: `${decks[0].name} (copy)`, description: decks[0].description || '', isShared: false, z, names: {} };
-  }
-
-  async function loadRareFeed() {
-    required();
-    return rows('rare_pull_feed_events', client.from('rare_pull_feed_events')
-      .select('id,display_name_snapshot,card_id,card_name_snapshot,rarity_snapshot,product_name_snapshot,created_at')
-      .order('created_at', { ascending: false }).limit(50));
   }
 
   async function loadRecipes() {
@@ -453,8 +440,8 @@
     configured, get user() { return user; }, get admin() { return admin; }, client,
     init, signIn, signUp, signOut,
     loadCatalog, saveCatalog, loadAppSettings, saveAppSettings, subscribeCatalog, loadBanlist, saveBanlist, loadFavourites, setFavourite, loadCollection, loadGachaState,
-    setPityReset, resetPity, recordPack, shareRarePull,
+    setPityReset, resetPity, recordPack,
     loadDecks, saveDeck, deleteDeck, loadSharedDecks, copySharedDeck,
-    loadRareFeed, loadRecipes, saveRecipe, craft, loadCraftHistory, uploadDataUri,
+    loadRecipes, saveRecipe, craft, loadCraftHistory, uploadDataUri,
   });
 })();
