@@ -1093,6 +1093,15 @@ body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)::after
 @keyframes craftFxSpark{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}20%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.7)}}
 @media(prefers-reduced-motion:reduce){.craftFxLayer,.craftFxCore,.craftFxSpark,.craftFxCore:before{animation-duration:.01ms!important;animation-iteration-count:1!important}}
 
+
+/* Global effects OFF: remove every card frame, foil border and edge glow. The detail viewer is excluded. */
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back),
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)::before,
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)::after,
+body.sparkles-off:not(.viewer-effects-on) .pkff .art:not(.back),
+body.sparkles-off:not(.viewer-effects-on) .pkff .art:not(.back)::before,
+body.sparkles-off:not(.viewer-effects-on) .pkff .art:not(.back)::after{border:0!important;outline:0!important;box-shadow:none!important;background-image:none!important;filter:none!important;animation:none!important;display:none!important}
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back){display:block!important;background-color:transparent!important}
 </style>
 </head>
 <body>
@@ -1188,7 +1197,7 @@ body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)::after
     <section id="p5" role="tabpanel" aria-labelledby="t5" hidden>
       <div class="pkpanel">
         <div class="grid">
-          <div><label for="pkP">สินค้า / ซอง</label><select id="pkP"></select></div>
+          <div><label for="pkP">สินค้า / ซอง</label><select id="pkP"></select><div id="allProductsCoverBox" hidden style="margin-top:8px"><label for="allProductsCover">รูปซองรวมทุกโปรดัก</label><input type="file" id="allProductsCover" accept="image/*"><button type="button" class="btn sm" id="clearAllProductsCover" style="margin-top:6px">ลบรูปปก</button><img id="allProductsCoverPreview" alt="ตัวอย่างรูปซองรวมทุกโปรดัก" hidden style="display:block;max-width:150px;max-height:90px;margin-top:8px;border-radius:7px;border:1px solid var(--line);object-fit:cover"></div></div>
           <div><label for="pkQty">จำนวนซองที่เปิด สูงสุด 5 ซอง (1 ซอง = 7 ใบ)</label><input id="pkQty" type="number" min="1" max="5" value="1"></div>
           <label class="pkSoundToggle"><input type="checkbox" id="pkSound" checked> เปิดเสียงฉีกซองและเสียงเฉพาะเรตสูงตอนหงายการ์ด</label>
         </div>
@@ -2258,8 +2267,8 @@ $("dfin").onclick=()=>{
 /* ---------- Pack Opener / Gacha ---------- */
 
 function renderPackCount(){$("pkLifetime").textContent="เปิดแล้ว "+(Number(PACKS_OPENED)||0)+" ซอง"}
-function collectionAdd(cards){const prod=PRODUCTS.find(p=>p.id===GA.pid),name=prod?.name||"";
- if(Cloud?.configured&&Cloud.user){const pending=Cloud.recordPack(GA.pid,cards.map(r=>r?.c).filter(Boolean)).then(async packId=>{
+function collectionAdd(cards){const prod=PRODUCTS.find(p=>p.id===GA.pid),name=prod?.name||(GA.pid===ALL_PRODUCTS_ID?ALL_PRODUCTS_LABEL:"");
+ if(Cloud?.configured&&Cloud.user){const recordProductId=GA.pid===ALL_PRODUCTS_ID?(cards.map(r=>r?.c).find(c=>c?.pid)?.pid||PRODUCTS[0]?.id||null):GA.pid;const pending=recordProductId?Cloud.recordPack(recordProductId,cards.map(r=>r?.c).filter(Boolean)):Promise.reject(new Error("ไม่พบ Product สำหรับบันทึกผลซอง"));pending.then(async packId=>{
    cards.forEach((r,i)=>{if(r){r.packOpenId=packId;r.slotNumber=i+1}});
    try{
      const state=await Cloud.loadGachaState();
@@ -2318,7 +2327,7 @@ const pitySave=()=>{if(Cloud?.configured)return;try{localStorage.setItem(PITYKEY
 const tierOf=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILT?FOILT[r]:-1};
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 /* สุ่มจากข้อมูลสด ๆ ทุกครั้ง การ์ด/สินค้าที่เพิ่งเพิ่มจึงเข้าสุ่มทันที */
-const pkPool=()=>{if($("pkP").value===ALL_PRODUCTS_ID)return PRODUCTS.flatMap(p=>Array.isArray(p.cards)?p.cards:[]).filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP");const p=PRODUCTS.find(x=>x.id===$("pkP").value);return p&&Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP"):[]};
+const pkPool=()=>{if($("pkP").value===ALL_PRODUCTS_ID)return PRODUCTS.flatMap(p=>Array.isArray(p.cards)?p.cards.map(c=>({...c,pid:p.id,pname:p.name})):[]).filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP");const p=PRODUCTS.find(x=>x.id===$("pkP").value);return p&&Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP"):[]};
 
 function pkPityUI(){
   const pc=Math.round(PITY/PITYMAX*100),full=PITY>=PITYMAX;
@@ -2333,6 +2342,12 @@ function pkRates(){
   const hi=[...new Set(pool.filter(c=>tierOf(c)>=PITYMIN).map(c=>rarityLabel(c.rarity)||"(ไม่ระบุ)"))];
   $("pkTierNote").textContent=hi.length?"การ์ดที่ถือว่า “สูงกว่า RRR” ในสินค้านี้: "+hi.join(" / "):"สินค้านี้ยังไม่มีการ์ดระดับสูงกว่า RRR — ถ้า Pity เต็ม จะสุ่มจากระดับสูงสุดที่มีให้แทน";
 }
+const ALL_PRODUCTS_COVER_KEY="cardlist-all-products-cover";
+let allProductsCover="";
+try{allProductsCover=localStorage.getItem(ALL_PRODUCTS_COVER_KEY)||""}catch(e){}
+function syncAllProductsCoverUI(){const box=$("allProductsCoverBox"),img=$("allProductsCoverPreview");if(!box||!img)return;const active=$("pkP").value===ALL_PRODUCTS_ID;box.hidden=!active;img.hidden=!active||!allProductsCover;img.src=allProductsCover||""}
+$("allProductsCover")?.addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)return;try{allProductsCover=await pic(f);localStorage.setItem(ALL_PRODUCTS_COVER_KEY,allProductsCover);syncAllProductsCoverUI()}catch(x){alert("เพิ่มรูปปกไม่สำเร็จ: "+x.message)}e.target.value=""});
+$("clearAllProductsCover")?.addEventListener("click",()=>{allProductsCover="";try{localStorage.removeItem(ALL_PRODUCTS_COVER_KEY)}catch(e){}syncAllProductsCoverUI()});
 function pkFill(){
   const cur=$("pkP").value;
   const total=PRODUCTS.reduce((n,p)=>n+(Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP").length:0),0);
@@ -2340,7 +2355,7 @@ function pkFill(){
   const productOpts=PRODUCTS.map(p=>`<option value="${h(p.id)}">${h(p.name)}${p.cards&&p.cards.length?" ("+p.cards.length+" การ์ด)":" — ยังไม่มีการ์ด"}</option>`).join("");
   $("pkP").innerHTML=(allOpt+productOpts)||'<option value="">— ยังไม่มีสินค้า —</option>';
   if(cur===ALL_PRODUCTS_ID||PRODUCTS.some(p=>p.id===cur))$("pkP").value=cur;
-  pkRates();pkPityUI();
+  syncAllProductsCoverUI();pkRates();pkPityUI();
 }
 /* สุ่ม 1 ใบตามน้ำหนัก (W) จากกองที่ให้ */
 function pkPickFrom(src){
@@ -2457,14 +2472,15 @@ function pkOpenStart(){
 }
 function pkShowPack(){
   const p=PRODUCTS.find(x=>x.id===GA.pid);
+  const aggregate=GA.pid===ALL_PRODUCTS_ID,cover=aggregate?allProductsCover:p?.cover;
   let inner;
   const packW=p&&p.packMode==="custom"?Math.max(35,Math.min(100,parseInt(p.packW)||82)):100;
   const packH=p&&p.packMode==="custom"?Math.max(35,Math.min(100,parseInt(p.packH)||92)):100;
   const packX=p&&Number.isFinite(+p.packX)?Math.max(0,Math.min(100,+p.packX)):50,packY=p&&Number.isFinite(+p.packY)?Math.max(0,Math.min(100,+p.packY)):50;
   const packStyle=`style="width:${packW}%;height:${packH}%;object-fit:cover;object-position:${packX}% ${packY}%"`;
-  if(p&&p.cover){
-    inner=`<div class="pkbgg" style="background-image:url(&quot;${h(p.cover)}&quot;)"></div><img class="pkfg" ${packStyle} src="${h(p.cover)}" alt="รูปซอง ${h(p.name)}">`;
-  }else inner=`<div class="ph pkdefault" style="background-color:${p?tcol(p.type):"#243a68"}"><span class="pktag">${h(p&&p.type?p.type:"Booster Pack")}</span><b>${h(p?p.name:"")}</b>${p&&p.year?`<span class="pktype">${h(p.year)}</span>`:""}</div>`;
+  if(cover){
+    inner=`<div class="pkbgg" style="background-image:url(&quot;${h(cover)}&quot;)"></div><img class="pkfg" ${packStyle} src="${h(cover)}" alt="รูปซอง ${h(aggregate?ALL_PRODUCTS_LABEL:p.name)}">`;
+  }else inner=`<div class="ph pkdefault" style="background-color:${p?tcol(p.type):"#243a68"}"><span class="pktag">${h(p&&p.type?p.type:"Booster Pack")}</span><b>${h(aggregate?ALL_PRODUCTS_LABEL:(p?p.name:""))}</b>${p&&p.year?`<span class="pktype">${h(p.year)}</span>`:""}</div>`;
   $("pkImg").innerHTML=inner;$("pkImg2").innerHTML=inner;
   $("pkWrap").classList.remove("torn");
   const cl=$("pkClip");cl.style.transition="none";cl.style.transform="";cl.style.opacity="";tearP=0;
@@ -2565,7 +2581,7 @@ function pkClose(){clearInterval(GA.skipTimer);GA.skipTimer=0;GA.skipBusy=false;
 
 /* ---------- เหตุการณ์ ---------- */
 $("t5").addEventListener("click",pkFill);
-$("pkP").onchange=pkRates;
+$("pkP").onchange=()=>{syncAllProductsCoverUI();pkRates()};
 $("pkR").oninput=e=>{const i=e.target.closest("[data-r]");if(i){if(!requireAdmin()){pkRates();return}PKW[i.dataset.r]=Math.max(0,+i.value||0);pkSaveW()}};
 $("pkQty").onchange=()=>{$("pkQty").value=Math.max(1,Math.min(5,parseInt($("pkQty").value)||1))};
 $("pkRst").checked=PITYRST;
