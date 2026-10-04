@@ -974,6 +974,22 @@ body.sparkles-off:not(.viewer-effects-on) .art.f4::before {
   font:700 16px/1 Barlow,sans-serif;
   box-shadow:0 4px 14px rgba(0,0,0,.2);
 }
+/* While a card is open, background cards remain visible but lose all animated effects. */
+body.card-viewer-open .art:not(.showcase-viewer)::before,
+body.card-viewer-open .art:not(.showcase-viewer)::after,
+body.card-viewer-open .art:not(.showcase-viewer)>.fx,
+body.card-viewer-open .art:not(.showcase-viewer)>.ref-holo,
+body.card-viewer-open .art:not(.showcase-viewer)>.ref-glare,
+body.card-viewer-open .art:not(.showcase-viewer)>.ref-sweep,
+body.card-viewer-open .art:not(.showcase-viewer)>.ref-spark,
+body.card-viewer-open .pkgloss,
+body.card-viewer-open .pkglow,
+body.card-viewer-open .pkRRRglint { display:none!important; animation:none!important; opacity:0!important; }
+body.card-viewer-open .art:not(.showcase-viewer) {
+  border:0!important; outline:0!important; box-shadow:none!important; filter:none!important; background-image:none!important;
+}
+body.card-viewer-open .pkCard { filter:none!important; }
+
 #lb .cardViewerClose:hover,
 #lb .cardViewerClose:focus-visible {
   border-color:var(--red);
@@ -1236,7 +1252,6 @@ body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0
     <section id="p6" role="tabpanel" aria-labelledby="t6" hidden>
       <div class="banGalleryHead"><div><h2>คราฟการ์ดพิเศษ / PR</h2><p class="dto">สูตรคราฟต์มองเห็นร่วมกัน แต่ใช้วัตถุดิบจากคลังส่วนตัวของผู้คราฟต์เท่านั้น</p></div><div class="craftHeadActions"><label class="craftPopupToggle"><input type="checkbox" id="craftPopupToggle" checked> แสดงป๊อปอัพผลคราฟต์</label><button class="btn primary" id="craftNew">＋ สร้างสูตร</button></div></div>
       <div id="craftRecipes" class="featureList"></div>
-      <h3 class="yr">ประวัติการคราฟต์ของฉัน</h3><div id="craftHistory" class="featureList"></div>
     </section>
     <section id="p7" role="tabpanel" aria-labelledby="t7" hidden>
       <div class="banGalleryHead"><div><h2>กระเป๋า (Inventory)</h2><p class="dto">ดูความคืบหน้าและการ์ดที่สะสมได้ทั้งหมด</p></div></div>
@@ -1736,10 +1751,10 @@ function openLB(c,options={}){
     $("lbEdit").onclick=()=>{$("lb").close();cardForm(c,c.pid)};
     $("lbAdd").onclick=()=>{deckAdd(c.id,1);$("st").textContent="Added to deck ("+dtotal()+")"};
   }
-  $("lb").showModal();
+  document.body.classList.add("card-viewer-open");$("lb").showModal();
 }
-$("lbx").onclick=()=>{$("lb").close();document.body.classList.remove("viewer-effects-on")};
-$("lb").onclick=e=>{if(e.target===$("lb")){ $("lb").close();document.body.classList.remove("viewer-effects-on") }};
+$("lbx").onclick=()=>{$("lb").close();document.body.classList.remove("viewer-effects-on","card-viewer-open")};
+$("lb").onclick=e=>{if(e.target===$("lb")){ $("lb").close();document.body.classList.remove("viewer-effects-on","card-viewer-open") }};$("lb").addEventListener("close",()=>document.body.classList.remove("viewer-effects-on","card-viewer-open"));
 
 /* ---------- editing ---------- */
 function shrink(file,max=500){return new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;
@@ -2679,16 +2694,15 @@ $("gFoot").addEventListener("click",e=>{
   else if(a==="close")pkClose();
 });
 async function renderCraft(){
-  const box=$("craftRecipes"),hist=$("craftHistory");if(!box||!hist)return;
-  if(!Cloud?.configured||!Cloud.user){box.innerHTML='<p class="dto">เข้าสู่ระบบเพื่อดูสูตรคราฟต์ร่วม</p>';hist.innerHTML="";return}
-  box.innerHTML='<p class="dto">กำลังโหลดสูตร…</p>';hist.innerHTML='<p class="dto">กำลังโหลดประวัติ…</p>';
+  const box=$("craftRecipes");if(!box)return;
+  if(!Cloud?.configured||!Cloud.user){box.innerHTML='<p class="dto">เข้าสู่ระบบเพื่อดูสูตรคราฟต์ร่วม</p>';return}
+  box.innerHTML='<p class="dto">กำลังโหลดสูตร…</p>';
   try{
-    const [recipes,history]=await Promise.all([Cloud.loadRecipes(),Cloud.loadCraftHistory()]);
+    const recipes=await Cloud.loadRecipes();
     box.innerHTML=recipes.map(r=>{const target=ALL.find(c=>c.id===r.target_card_id);const owned=(COLLECTION[r.target_card_id]?.count)||0;
       const mats=r.ingredients.map(i=>{const c=ALL.find(x=>x.id===i.material_card_id);return `<div class="craftMaterialCard">${c?art(c,1):'<div class="art"></div>'}<small title="${h(c?.name||"การ์ด")}">${h(c?.name||"การ์ด")}</small><em>×${i.quantity} · มี ${COLLECTION[i.material_card_id]?.count||0}</em></div>`}).join("");
       return `<article class="featureCard"><h3>${h(r.title)}</h3><p>${h(r.description||"")}</p><div class="craftVisual"><div class="craftTargetCard">${target?art(target,1):'<div class="art"></div>'}<b>${h(target?.name||"การ์ดเป้าหมาย")} ×${r.output_quantity}</b><small class="featureMeta">มีในคลัง ${owned}</small></div><div><b>สิ่งที่ใช้คราฟ</b><div class="craftMaterials">${mats||'<span class="dto">ยังไม่มีวัตถุดิบ</span>'}</div></div></div><p class="featureMeta">${r.created_by===Cloud.user.id?"สูตรของคุณ":"สูตรชุมชน"}</p><div class="featureActions"><button class="btn primary" data-craft="${h(r.id)}">คราฟต์</button>${r.created_by===Cloud.user.id?`<button class="btn" data-edit-recipe="${h(r.id)}">แก้สูตร</button><button class="btn" data-disable-recipe="${h(r.id)}">ปิดสูตร</button>`:""}</div></article>`}).join("")||'<p class="dto">ยังไม่มีสูตร · ผู้ใช้ที่ล็อกอินสร้างสูตรคราฟต์ได้</p>';
-    hist.innerHTML=history.map(x=>`<article class="featureCard"><b>${h(x.recipe_title_snapshot)}</b><div>ได้รับ ${h(x.card?.name||"การ์ด")} ${x.card?.rarity?"· "+h(rarityLabel(x.card.rarity)):""} ×${x.output_quantity}</div><small class="featureMeta">${new Date(x.created_at).toLocaleString()}</small></article>`).join("")||'<p class="dto">ยังไม่มีประวัติการคราฟต์</p>';
-  }catch(e){box.innerHTML=`<p class="bad">โหลดสูตรไม่สำเร็จ: ${h(e.message)}</p>`;hist.innerHTML=""}
+  }catch(e){box.innerHTML=`<p class="bad">โหลดสูตรไม่สำเร็จ: ${h(e.message)}</p>`}
 }
 async function recipeForm(recipe=null){
   if(!Cloud?.configured||!Cloud.user)return alert("เข้าสู่ระบบก่อนสร้างหรือแก้สูตร");
