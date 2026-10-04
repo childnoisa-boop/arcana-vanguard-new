@@ -100,6 +100,8 @@
       packH: fit.packH ?? 92,
       packX: fit.packX ?? 50,
       packY: fit.packY ?? 50,
+      packCover: fit.packCover || '',
+      includeAllProducts: fit.includeAllProducts !== false,
       gachaWeights: row.gacha_weights || {},
       cards,
     };
@@ -200,6 +202,7 @@
     };
     for (const product of db.products || []) {
       product.cover = await publicImage(product.cover, `${product.id}-pack`);
+      product.packCover = await publicImage(product.packCover, `${product.id}-pack-cover`);
       for (const card of product.cards || []) card.img = await publicImage(card.img, `${card.id}-card`);
     }
     const products = (db.products || []).map((p) => ({
@@ -208,7 +211,7 @@
       product_type: p.type || 'Others',
       release_year: cleanNumber(p.year),
       cover_url: p.cover || null,
-      cover_fit: { fit: p.fit || null, packMode: p.packMode || 'auto', packW: p.packW ?? 82, packH: p.packH ?? 92, packX: p.packX ?? 50, packY: p.packY ?? 50 },
+      cover_fit: { fit: p.fit || null, packMode: p.packMode || 'auto', packW: p.packW ?? 82, packH: p.packH ?? 92, packX: p.packX ?? 50, packY: p.packY ?? 50, packCover: p.packCover || '', includeAllProducts: p.includeAllProducts !== false },
       gacha_weights: p.gachaWeights || {},
       updated_by: user.id,
       updated_at: new Date().toISOString(),
@@ -325,7 +328,16 @@
     required();
     const inventory = await rows('user_collection_cards', client.from('user_collection_cards').select('card_id,quantity').eq('user_id', user.id).range(0, 9999));
     const cardIds = inventory.map((x) => x.card_id);
-    const cards = cardIds.length ? await rows('catalog_cards', client.from('catalog_cards').select('*').in('id', cardIds).range(0, 9999)) : [];
+    // Do not send every collected card id in one `in (...)` request. A large
+    // collection can produce an oversized URL and browsers report that as the
+    // unhelpful generic `TypeError: Failed to fetch`. Chunking also keeps the
+    // post-gacha refresh reliable as the collection grows.
+    const cards = cardIds.length
+      ? (await Promise.all(chunks(cardIds, 200).map((ids) => rows(
+          'catalog_cards',
+          client.from('catalog_cards').select('*').in('id', ids).range(0, 9999),
+        )))).flat()
+      : [];
     const byId = new Map(cards.map((x) => [x.id, cardFromRow(x)]));
     return Object.fromEntries(inventory.map((x) => [x.card_id, { id: x.card_id, card: byId.get(x.card_id) || { id: x.card_id, name: 'การ์ดที่ไม่อยู่ใน Card List' }, count: x.quantity, productName: '' }]));
   }

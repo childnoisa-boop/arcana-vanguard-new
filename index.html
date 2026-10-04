@@ -1131,6 +1131,10 @@ body.sparkles-off:not(.viewer-effects-on) #gCards .pkCard.open .pkff .art:not(.b
 	.craftFxResultCard .art{width:100%;height:100%;aspect-ratio:auto;border-radius:8px;display:block!important;border:0!important;box-shadow:none!important}
 .craftFxResultTitle{color:#fff7d1;font:700 clamp(22px,4vw,34px) Barlow,sans-serif;text-align:center;text-shadow:0 0 8px #fff,0 0 18px #f4c96b}.craftFxResultName{color:#fff7d1;font:500 clamp(12px,2vw,16px) Barlow,sans-serif;text-align:center;max-width:280px}.craftFxClose{position:absolute;right:-42px;top:-10px;z-index:4;width:34px;height:34px;border:1px solid rgba(255,255,255,.45);border-radius:50%;background:rgba(16,18,35,.78);color:#fff;font-size:23px;line-height:1;cursor:pointer}.craftHeadActions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}.craftPopupToggle{display:flex;align-items:center;gap:7px;color:var(--mute);font-size:12px;white-space:nowrap}.craftPopupToggle input{accent-color:var(--red)}
 body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0!important;box-shadow:none!important;filter:none!important}
+
+  /* T cards are standard cards: no purple aura, frame, holo, or sparkle. */
+  .art[data-card-rarity="T"],.art[data-card-rarity="t"]{--foil-color:210,220,235!important;border:0!important;border-color:transparent!important;box-shadow:none!important;filter:none!important;animation:none!important}
+  .art[data-card-rarity="T"]::before,.art[data-card-rarity="T"]::after,.art[data-card-rarity="t"]::before,.art[data-card-rarity="t"]::after,.art[data-card-rarity="T"]>.fx,.art[data-card-rarity="t"]>.fx,.art[data-card-rarity="T"] .ref-holo,.art[data-card-rarity="T"] .ref-glare,.art[data-card-rarity="T"] .ref-sweep,.art[data-card-rarity="T"] .ref-spark,.art[data-card-rarity="t"] .ref-holo,.art[data-card-rarity="t"] .ref-glare,.art[data-card-rarity="t"] .ref-sweep,.art[data-card-rarity="t"] .ref-spark{display:none!important;animation:none!important;content:none!important}
 </style>
 </head>
 <body>
@@ -1317,6 +1321,7 @@ body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0
 </dialog>
 <datalist id="nations"></datalist>
 <datalist id="clans"></datalist>
+<datalist id="races"></datalist>
 <datalist id="types"><option>Booster Pack</option><option>Constructed Deck</option><option>Trial Deck</option><option>Starter Deck</option><option>Master Deck Set</option><option>Stride Deck Set</option><option>Others</option><option>PR Card</option></datalist>
 <datalist id="rarities"><option>C</option><option>R</option><option>RR</option><option>RRR</option><option>SR</option><option>PR</option><option>SVR</option><option>GR</option><option>FR</option><option>FFR</option><option>OR</option><option>EMR</option><option>ORR</option><option>DSR</option><option>ZR</option><option>X</option><option>SSP</option><option>SEC</option><option>SSR</option><option>CSR</option></datalist>
 <datalist id="triggers"><option>Critical</option><option>Heal</option><option>Front</option><option>Draw</option><option>Over</option></datalist>
@@ -1653,6 +1658,8 @@ function index(){
   const clans=[...new Set([...DEFCLANS,...ALL.map(c=>String(c.clan||"")).filter(Boolean)])].sort((a,b)=>a.localeCompare(b));
   const clanValue=$("clan").value;$("clan").innerHTML='<option value="">All</option>'+clans.map(x=>`<option>${h(x)}</option>`).join("");$("clan").value=clanValue;
   const clanList=$("clans");if(clanList)clanList.innerHTML=clans.map(x=>`<option>${h(x)}</option>`).join("");
+  const races=[...new Set(ALL.map(c=>String(c.race||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+  const raceList=$("races");if(raceList)raceList.innerHTML=races.map(x=>`<option>${h(x)}</option>`).join("");
 }
 const debounce=(fn,wait=250)=>{let t;return(...args)=>{clearTimeout(t);t=setTimeout(()=>fn(...args),wait)}};
 function updatePager(id,page,total,go){const nav=$(id);if(!nav)return;const pages=Math.max(1,Math.ceil(total/PAGE_SIZE));nav.hidden=total<=PAGE_SIZE;nav.querySelector("[data-page]").textContent=`หน้า ${Math.min(page,pages)} / ${pages}`;const prev=nav.querySelector("[data-prev]"),next=nav.querySelector("[data-next]");prev.disabled=page<=1;next.disabled=page>=pages;prev.onclick=()=>{if(page>1)go(page-1)};next.onclick=()=>{if(page<pages)go(page+1)}}
@@ -1740,9 +1747,11 @@ function bindCardRotation(node){
 function openLB(c,options={}){
   const r=[["Card No.",c.no],["Nation",natTxt(c)],["เผ่า / Race",c.race],["Clan",c.clan],["ไอคอน",c.icon],["Card type",c.unit],["Grade",c.grade],["Power",c.power],["Shield",c.shield],["Rarity",rarityLabel(c.rarity)],["Trigger",c.trigger],["Product",c.pname],["In collection",c.collectionCount==null?"":c.collectionCount+" copies"]].filter(x=>x[1]!=="");
   const cardDescription=String(c.description||"").trim();
+  const cardAbility=String(c.ability||"").trim();
+  const abilityBlock=cardAbility?`<div class="cardDetail cardAbility"><b>Ability</b><p>${h(cardAbility)}</p></div>`:"";
   const detailBlock=`<div class="cardDetail"><b>รายละเอียดการ์ด</b><p>${h(cardDescription||"ยังไม่มีรายละเอียดการ์ด")}</p></div>`;
   const action=options.readonly?`<p class="dto">${options.source==="collection"?"การ์ดนี้อยู่ในคลังสะสม · ไม่ได้เพิ่มเข้าเด็ค":"รายละเอียดการ์ดใน Banlist"}</p>`:'<button class="btn primary" id="lbAdd">Add to deck</button> <button class="btn ed" id="lbEdit">Edit this card</button>';
-  $("lbBody").innerHTML=`${art(c,1)}<div><h3>${h(c.name)}</h3><button type="button" class="lbFav${isFav(c.id)?" on":""}" id="lbFav">${isFav(c.id)?"★ อยู่ใน Favourite":"☆ เพิ่ม Favourite"}</button> <button type="button" class="btn sm" id="lbResetView">↺ Reset view</button> <button type="button" class="btn sm" id="lbEffects">✦ เอฟเฟค: เปิด</button><p class="lbRotateHint">ลากการ์ดเบา ๆ เพื่อดูแสง Holo/Glare เปลี่ยนตามมุม</p>${detailBlock}<dl>${r.map(x=>`<dt>${x[0]}</dt><dd>${h(x[1])}</dd>`).join("")}</dl>${action}</div>`;
+  $("lbBody").innerHTML=`${art(c,1)}<div><h3>${h(c.name)}</h3><button type="button" class="lbFav${isFav(c.id)?" on":""}" id="lbFav">${isFav(c.id)?"★ อยู่ใน Favourite":"☆ เพิ่ม Favourite"}</button> <button type="button" class="btn sm" id="lbResetView">↺ Reset view</button> <button type="button" class="btn sm" id="lbEffects">✦ เอฟเฟค: เปิด</button><p class="lbRotateHint">ลากการ์ดเบา ๆ เพื่อดูแสง Holo/Glare เปลี่ยนตามมุม</p>${abilityBlock}${detailBlock}<dl>${r.map(x=>`<dt>${x[0]}</dt><dd>${h(x[1])}</dd>`).join("")}</dl>${action}</div>`;
   const viewerArt=$("lbBody").querySelector(".art");
   viewerArt.classList.add("showcase-viewer");bindCardRotation(viewerArt);
   $("lbResetView").onclick=()=>resetCardRotation(viewerArt);$("lbEffects").onclick=()=>{document.body.classList.toggle("viewer-effects-on");$("lbEffects").textContent=document.body.classList.contains("viewer-effects-on")?"✦ เอฟเฟค: เปิด":"✦ เอฟเฟค: ปิด"};document.body.classList.add("viewer-effects-on");
@@ -1851,7 +1860,7 @@ function form(title,fields,o,imgKey,onSave,onDel,crop){
   $("ed").showModal();
 }
 const ABILITIES=["Persona Ride","Intercept","Boost","Regalis Piece","Ace Unit","Sentinel"];
-const CF=[["name","Name"],["no","Card number"],["description","รายละเอียดการ์ด"],["race","เผ่า / Race"],["clan","Clan","clans"],["icon","ไอคอน (ไม่บังคับ)"],["ability","Ability (ไม่บังคับ)","@ability"],["nation","Nation","nations"],["nation2","Second nation (Duo nation, optional)","nations"],["unit","Card type","@types"],["grade","Grade"],["power","Power"],["shield","ป้องกัน / Shield"],["rarity","Rarity","rarities"],["trigger","Trigger","triggers"],["is_gacha_pool","Gacha pool","@bool"]];
+const CF=[["name","Name"],["no","Card number"],["description","รายละเอียดการ์ด"],["race","เผ่า / Race","races"],["clan","Clan","clans"],["icon","ไอคอน (ไม่บังคับ)"],["ability","Ability (ไม่บังคับ)","@ability"],["nation","Nation","nations"],["nation2","Second nation (Duo nation, optional)","nations"],["unit","Card type","@types"],["grade","Grade"],["power","Power"],["shield","ป้องกัน / Shield"],["rarity","Rarity","rarities"],["trigger","Trigger","triggers"],["is_gacha_pool","Gacha pool","@bool"]];
 function cardForm(c,pid){
   const n=!c,p=PRODUCTS.find(x=>x.id===pid);
   form(n?"Add card":"Edit card",CF,c||{no:String(p.cards.length+1).padStart(3,"0")},"img",v=>{
@@ -1861,12 +1870,23 @@ function cardForm(c,pid){
     $("ed").close();refresh()},n?null:()=>{p.cards=p.cards.filter(x=>x.id!==c.id)},true);
 }
 function prodForm(p){
-  const n=!p;
-  form(n?"New product":"Edit product",[["name","Product name"],["year","Year released"],["type","Type","types"]],p||{year:new Date().getFullYear(),type:"Booster Pack"},"cover",v=>{
+  const n=!p;let packCover=p?.packCover||"";
+  form(n?"New product":"Edit product",[["name","Product name"],["year","Year released"],["type","Type","types"],["includeAllProducts","เข้าร่วมสุ่มรวมทุก Product","@bool"]],p||{year:new Date().getFullYear(),type:"Booster Pack",includeAllProducts:true},"cover",v=>{
     if(!v.name)return alert("Please enter a product name.");
     v.year=parseInt(v.year)||new Date().getFullYear();
+    v.includeAllProducts=v.includeAllProducts!=="false";
+    v.packCover=packCover;
     if(n)PRODUCTS.push({id:uid(),cards:[],...v});else Object.assign(p,v);
     $("ed").close();refresh()},n?null:()=>{PRODUCTS=PRODUCTS.filter(x=>x!==p);if(cur===p){$("pv").hidden=true;$("home").hidden=false}},"b");
+  const actions=$("edBody").querySelector(".actions");
+  if(actions){
+    actions.insertAdjacentHTML("beforebegin",`<div class="fld productPackCoverField"><label>รูปซองสำหรับหน้าสุ่ม (แยกจากรูปปก Product)</label><div class="imgrow"><div><input type="file" id="packCoverFile" accept="image/*"><input id="packCoverUrl" placeholder="หรือวางลิงก์รูปซอง" value="${packCover.startsWith("data:")?"":h(packCover)}"></div><button type="button" class="btn sm" id="clearPackCover">ล้างรูปซอง</button></div><img id="packCoverPreview" alt="ตัวอย่างรูปซอง" style="display:${packCover?"block":"none"};max-width:170px;max-height:120px;object-fit:contain;margin-top:8px;border:1px solid var(--line);border-radius:6px;background:var(--paper)"></div>`);
+    const preview=$("packCoverPreview"),url=$("packCoverUrl");
+    const sync=()=>{preview.src=packCover||"";preview.style.display=packCover?"block":"none";url.value=packCover.startsWith("data:")?"":packCover};
+    $("packCoverFile").onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{packCover=await pic(f);sync()}catch(x){alert("อัปโหลดรูปซองไม่สำเร็จ: "+x.message)}e.target.value=""};
+    url.onchange=()=>{packCover=url.value.trim();sync()};
+    $("clearPackCover").onclick=()=>{packCover="";sync()};sync();
+  }
 }
 $("newProd").onclick=()=>prodForm();
 $("addCard").onclick=()=>cardForm(null,cur.id);
@@ -2304,7 +2324,7 @@ function collectionAdd(cards){const prod=PRODUCTS.find(p=>p.id===GA.pid),name=pr
  if(Cloud?.configured&&Cloud.user){
   const valid=cards.map((r,i)=>({r,i,c:r?.c})).filter(x=>x.c);
   const groups=new Map();
-  valid.forEach(x=>{const pid=GA.pid===ALL_PRODUCTS_ID?(x.c.pid||PRODUCTS[0]?.id):GA.pid;if(pid){if(!groups.has(pid))groups.set(pid,[]);groups.get(pid).push(x)}});
+  valid.forEach(x=>{const pid=GA.pid===ALL_PRODUCTS_ID?(x.r.packProductId||x.c.pid||PRODUCTS[0]?.id):GA.pid;if(pid){if(!groups.has(pid))groups.set(pid,[]);groups.get(pid).push(x)}});
   const writes=[...groups].map(([pid,items])=>Cloud.recordPack(pid,items.map(x=>x.c)).then(packId=>{items.forEach((x,slot)=>{x.r.packOpenId=packId;x.r.slotNumber=slot+1});return packId}));
   const pending=Promise.all(writes).then(async()=>{
    try{
@@ -2359,7 +2379,7 @@ const pitySave=()=>{if(Cloud?.configured)return;try{localStorage.setItem(PITYKEY
 const tierOf=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILT?FOILT[r]:-1};
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 /* สุ่มจากข้อมูลสด ๆ ทุกครั้ง การ์ด/สินค้าที่เพิ่งเพิ่มจึงเข้าสุ่มทันที */
-const pkPool=()=>{const pid=$("pkP").value;if(pid===ALL_PRODUCTS_ID)return ALL.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP");return ALL.filter(c=>c.pid===pid&&c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP")};
+const pkPool=()=>{const pid=$("pkP").value;if(pid===ALL_PRODUCTS_ID){const allowed=new Set(PRODUCTS.filter(p=>p.includeAllProducts!==false).map(p=>p.id));return ALL.filter(c=>allowed.has(c.pid)&&c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP")}return ALL.filter(c=>c.pid===pid&&c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP")};
 
 function pkPityUI(){
   const pc=Math.round(PITY/PITYMAX*100),full=PITY>=PITYMAX;
@@ -2382,7 +2402,7 @@ $("allProductsCover")?.addEventListener("change",async e=>{const f=e.target.file
 $("clearAllProductsCover")?.addEventListener("click",()=>{allProductsCover="";try{localStorage.removeItem(ALL_PRODUCTS_COVER_KEY)}catch(e){}syncAllProductsCoverUI()});
 function pkFill(){
   const cur=$("pkP").value;
-  const total=PRODUCTS.reduce((n,p)=>n+(Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP").length:0),0);
+  const total=PRODUCTS.reduce((n,p)=>n+(p.includeAllProducts===false?0:(Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP").length:0)),0);
   const allOpt=`<option value="${ALL_PRODUCTS_ID}">${ALL_PRODUCTS_LABEL}${total?" ("+total+" การ์ด)":" — ยังไม่มีการ์ด"}</option>`;
   const productOpts=PRODUCTS.map(p=>`<option value="${h(p.id)}">${h(p.name)}${p.cards&&p.cards.length?" ("+p.cards.length+" การ์ด)":" — ยังไม่มีการ์ด"}</option>`).join("");
   $("pkP").innerHTML=(allOpt+productOpts)||'<option value="">— ยังไม่มีสินค้า —</option>';
@@ -2413,9 +2433,19 @@ function pkOne(pool,used){
 }
 /* 1 ซอง = 7 ใบ (ไม่ซ้ำกันในซอง ถ้าการ์ดในสินค้ามีพอ) */
 function pkPack(pool){
-  const high=pool.filter(c=>tierOf(c)>=1),allHigh=high.length>=PACKSIZE&&Math.random()<0.002;
-  const src=allHigh?high:pool,used=new Set(),out=[];
+  // The database records a pack against one product and requires exactly
+  // seven cards from that product's pool. In the aggregate "all products"
+  // mode, choose one source product per pack instead of mixing products.
+  let source=pool,packProductId=GA.pid;
+  if(GA.pid===ALL_PRODUCTS_ID){
+    const candidates=PRODUCTS.filter(p=>p.includeAllProducts!==false).map(p=>({id:p.id,cards:(p.cards||[]).filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP")})).filter(x=>x.cards.length);
+    const chosen=rnd(candidates);
+    if(chosen){source=chosen.cards;packProductId=chosen.id}
+  }
+  const high=source.filter(c=>tierOf(c)>=1),allHigh=high.length>=PACKSIZE&&Math.random()<0.002;
+  const src=allHigh?high:source,used=new Set(),out=[];
   for(let i=0;i<PACKSIZE;i++){const r=pkOne(src,used);if(!r)break;used.add(r.c.id);out.push(r)}
+  out.forEach(r=>{r.packProductId=packProductId});
   out.allHigh=allHigh&&out.length===PACKSIZE;return out
 }
 
@@ -2528,7 +2558,7 @@ function pkOpenStart(){
 }
 function pkShowPack(){
   const p=PRODUCTS.find(x=>x.id===GA.pid);
-  const aggregate=GA.pid===ALL_PRODUCTS_ID,cover=aggregate?allProductsCover:p?.cover;
+  const aggregate=GA.pid===ALL_PRODUCTS_ID,cover=aggregate?allProductsCover:(p?.packCover||p?.cover);
   let inner;
   const packW=p&&p.packMode==="custom"?Math.max(35,Math.min(100,parseInt(p.packW)||82)):100;
   const packH=p&&p.packMode==="custom"?Math.max(35,Math.min(100,parseInt(p.packH)||92)):100;
