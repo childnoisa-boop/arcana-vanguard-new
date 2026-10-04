@@ -1102,6 +1102,13 @@ body.sparkles-off:not(.viewer-effects-on) .pkff .art:not(.back),
 body.sparkles-off:not(.viewer-effects-on) .pkff .art:not(.back)::before,
 body.sparkles-off:not(.viewer-effects-on) .pkff .art:not(.back)::after{border:0!important;outline:0!important;box-shadow:none!important;background-image:none!important;filter:none!important;animation:none!important;display:none!important}
 body.sparkles-off:not(.viewer-effects-on) .art:not(.back){display:block!important;background-color:transparent!important}
+
+/* Craft result card: show the actual crafted card in the center of the celebration. */
+.craftFxCore.craftFxHasCard{width:clamp(180px,30vw,300px);aspect-ratio:auto;background:transparent;border:0;box-shadow:none;display:flex;flex-direction:column;align-items:center;gap:10px}
+.craftFxResultCard{width:clamp(150px,25vw,240px);padding:8px;border-radius:14px;background:linear-gradient(145deg,#fff4bf,#f4c96b 42%,#7f45a8 72%,#15152d);box-shadow:0 0 10px #fff4b0,0 0 28px #f4c96b,0 0 65px #c35cff;animation:craftFxCard 1.15s cubic-bezier(.2,.8,.25,1) forwards}
+.craftFxResultCard .art{width:100%;aspect-ratio:59/86;border-radius:8px;display:block!important;border:0!important;box-shadow:none!important}
+.craftFxResultLabel{color:#fff7d1;font:700 clamp(15px,2.5vw,22px) Barlow,sans-serif;text-align:center;text-shadow:0 0 8px #fff,0 0 18px #f4c96b}
+body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0!important;box-shadow:none!important;filter:none!important}
 </style>
 </head>
 <body>
@@ -2268,20 +2275,19 @@ $("dfin").onclick=()=>{
 
 function renderPackCount(){$("pkLifetime").textContent="เปิดแล้ว "+(Number(PACKS_OPENED)||0)+" ซอง"}
 function collectionAdd(cards){const prod=PRODUCTS.find(p=>p.id===GA.pid),name=prod?.name||(GA.pid===ALL_PRODUCTS_ID?ALL_PRODUCTS_LABEL:"");
- if(Cloud?.configured&&Cloud.user){const recordProductId=GA.pid===ALL_PRODUCTS_ID?(cards.map(r=>r?.c).find(c=>c?.pid)?.pid||PRODUCTS[0]?.id||null):GA.pid;const pending=recordProductId?Cloud.recordPack(recordProductId,cards.map(r=>r?.c).filter(Boolean)):Promise.reject(new Error("ไม่พบ Product สำหรับบันทึกผลซอง"));pending.then(async packId=>{
-   cards.forEach((r,i)=>{if(r){r.packOpenId=packId;r.slotNumber=i+1}});
+ if(Cloud?.configured&&Cloud.user){
+  const valid=cards.map((r,i)=>({r,i,c:r?.c})).filter(x=>x.c);
+  const groups=new Map();
+  valid.forEach(x=>{const pid=GA.pid===ALL_PRODUCTS_ID?(x.c.pid||PRODUCTS[0]?.id):GA.pid;if(pid){if(!groups.has(pid))groups.set(pid,[]);groups.get(pid).push(x)}});
+  const writes=[...groups].map(([pid,items])=>Cloud.recordPack(pid,items.map(x=>x.c)).then(packId=>{items.forEach((x,slot)=>{x.r.packOpenId=packId;x.r.slotNumber=slot+1});return packId}));
+  const pending=Promise.all(writes).then(async()=>{
    try{
-     const state=await Cloud.loadGachaState();
-     PITY=Number(state.pity_count)||0;
-     PACKS_OPENED=Number(state.packs_opened)||0;
-     COLLECTION=await Cloud.loadCollection();
-     pkPityUI();renderPackCount();renderCollection();
-   }catch(reloadError){
-     console.error("gacha write succeeded but reload failed",reloadError);
-     notice("ask","สุ่มบันทึกแล้ว ✓","ผลสุ่มเข้าบัญชีแล้ว แต่โหลดคลังกลับมาแสดงใหม่ไม่สำเร็จ: "+String(reloadError?.message||reloadError),{auto:8000});
-   }
-   return packId;
- }).catch(e=>{console.error("gacha save failed",e);notice("bad","บันทึกผลซองไม่สำเร็จ",String(e?.message||e),{auto:8000});return null});GA.pendingWrites.push(pending);return pending}
+     const state=await Cloud.loadGachaState();PITY=Number(state.pity_count)||0;PACKS_OPENED=Number(state.packs_opened)||0;COLLECTION=await Cloud.loadCollection();pkPityUI();renderPackCount();renderCollection();
+   }catch(reloadError){console.error("gacha write succeeded but reload failed",reloadError);notice("ask","สุ่มบันทึกแล้ว ✓","ผลสุ่มเข้าบัญชีแล้ว แต่โหลดคลังกลับมาแสดงใหม่ไม่สำเร็จ: "+String(reloadError?.message||reloadError),{auto:8000})}
+   return true;
+  }).catch(e=>{console.error("gacha save failed",e);notice("bad","บันทึกผลซองไม่สำเร็จ",String(e?.message||e),{auto:8000});return null});
+  GA.pendingWrites.push(pending);return pending;
+ }
  cards.forEach(r=>{const c=r?.c;if(!c)return;const id=c.id,v=COLLECTION[id]||{id,card:{...c},count:0,productName:name};v.card={...c};v.count=(+v.count||0)+1;v.productName=name;COLLECTION[id]=v});PACKS_OPENED++;try{localStorage.setItem(COLKEY,JSON.stringify(COLLECTION));localStorage.setItem("cardlist-packs-opened",String(PACKS_OPENED))}catch(e){}renderPackCount();renderCollection();return Promise.resolve(null)}
 function renderCollectionProgress(){
  const catalog=Array.from(new Map(ALL.filter(c=>c?.id).map(c=>[c.id,c])).values());
@@ -2327,7 +2333,7 @@ const pitySave=()=>{if(Cloud?.configured)return;try{localStorage.setItem(PITYKEY
 const tierOf=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILT?FOILT[r]:-1};
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 /* สุ่มจากข้อมูลสด ๆ ทุกครั้ง การ์ด/สินค้าที่เพิ่งเพิ่มจึงเข้าสุ่มทันที */
-const pkPool=()=>{if($("pkP").value===ALL_PRODUCTS_ID)return PRODUCTS.flatMap(p=>Array.isArray(p.cards)?p.cards.map(c=>({...c,pid:p.id,pname:p.name})):[]).filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP");const p=PRODUCTS.find(x=>x.id===$("pkP").value);return p&&Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP"):[]};
+const pkPool=()=>{if($("pkP").value===ALL_PRODUCTS_ID)return ALL.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP");const p=PRODUCTS.find(x=>x.id===$("pkP").value);return p&&Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP"):[]};
 
 function pkPityUI(){
   const pc=Math.round(PITY/PITYMAX*100),full=PITY>=PITYMAX;
@@ -2426,7 +2432,7 @@ const GA={open:false,pid:"",qty:0,packs:[],pi:0,cards:[],rev:0,all:[],pendingWri
 		function raritySoundKey(rarity){const r=soundRarityCode(rarity);if(["SEC","SSR","CSR"].includes(r))return "crimson";if(["SVR","GR","FR","FFR","OR","EMR","OVR","ORR","DSR","ZR","X"].includes(r))return "rainbow";if(r==="RRR")return "gold";if(["R","RR"].includes(r))return "silver";return "common"}
 		function gachaSound(kind,rarity=""){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;if(kind==="tear"){packTearSound(ctx,t)}else if(kind==="flip"){if(playCardRevealStinger(ctx,rarity))return;const p=RARITY_SOUNDS[raritySoundKey(rarity)]||RARITY_SOUNDS.common;noisePop(ctx,t,.055,.018,2600);tone(ctx,p.base,t+.015,.12,p.gain,p.type,p.top);p.notes.forEach((f,i)=>tone(ctx,f,t+.075+i*.065,.28,p.gain*.62,i%2?"sine":"triangle",f*1.015))}}
 	function craftSound(){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;tone(ctx,261.6,t,.12,.035,"triangle",392);tone(ctx,392,t+.09,.16,.045,"sine",659.3);tone(ctx,523.3,t+.2,.24,.055,"triangle",784);tone(ctx,1046.5,t+.34,.3,.035,"sine",1318.5)}
-	function craftCelebration(){const layer=document.createElement("div");layer.className="craftFxLayer";const core=document.createElement("div");core.className="craftFxCore";layer.appendChild(core);for(let i=0;i<18;i++){const sp=document.createElement("i");sp.className="craftFxSpark";sp.style.setProperty("--dx",`${(Math.random()-.5)*70}vw`);sp.style.setProperty("--dy",`${(Math.random()-.5)*66}vh`);sp.style.animationDelay=`${Math.random()*.18}s`;layer.appendChild(sp)}document.body.appendChild(layer);craftSound();setTimeout(()=>layer.remove(),1500)}
+	function craftCelebration(card,quantity=1){const layer=document.createElement("div");layer.className="craftFxLayer";const core=document.createElement("div");core.className="craftFxCore";if(card){core.classList.add("craftFxHasCard");const result=document.createElement("div");result.className="craftFxResultCard";result.innerHTML=art(card,1);core.appendChild(result);const label=document.createElement("div");label.className="craftFxResultLabel";label.textContent=`ได้รับ ${card.name||"การ์ด"} ×${quantity}`;core.appendChild(label)}else{core.textContent="✦ PR ✦"}layer.appendChild(core);for(let i=0;i<18;i++){const sp=document.createElement("i");sp.className="craftFxSpark";sp.style.setProperty("--dx",`${(Math.random()-.5)*70}vw`);sp.style.setProperty("--dy",`${(Math.random()-.5)*66}vh`);sp.style.animationDelay=`${Math.random()*.18}s`;layer.appendChild(sp)}document.body.appendChild(layer);craftSound();setTimeout(()=>layer.remove(),1800)}
 	function revealBurst(card){
 	  const r=String(card?.rarity||"").toUpperCase();if(["C","U","R","T"].includes(r))return;
 	  const color=(["RRR"].includes(r)?"255,190,45":r==="SSP"?"255,105,195":["SEC","SSR","CSR","SCR"].includes(r)?"255,92,70":["GR","SVR","FR","FFR","OR","EMR","OVR","ORR","DSR","ZR","X"].includes(r)?"205,90,255":"105,190,255");
@@ -2672,8 +2678,7 @@ async function renderCommunity(){
       return `<article class="featureCard"><span class="feedBadge">SHARED DECK</span><h3>${h(d.name)}</h3><p>${h(d.description||"")}</p><p class="featureMeta">โดย ${h(d.owner_name)} · ${new Date(d.shared_at).toLocaleString()}</p><div class="featureActions"><button class="btn primary" data-copy-deck="${h(d.id)}">คัดลอกเข้าเด็คของฉัน</button></div></article>`}).join("")||'<p class="dto">ยังไม่มีโพสต์ · แชร์เด็คหรือกดแชร์ผลสุ่ม RRR+ หลังเปิดซองเพื่อเริ่ม Feed</p>';
   }catch(e){box.innerHTML=`<p class="bad">โหลด Feed ไม่สำเร็จ: ${h(e.message)}</p>`}
 }
-$("craftNew").onclick=()=>recipeForm();$("craftRecipes").addEventListener("click",async e=>{const craftBtn=e.target.closest("[data-craft]");if(craftBtn){if(craftBtn.disabled)return;craftBtn.disabled=true;craftBtn.classList.add("crafting");craftCelebration();try{await Cloud.craft(craftBtn.dataset.craft);COLLECTION=await Cloud.loadCollection();renderCollection();await renderCraft();notice("ok","คราฟต์สำเร็จ","การ์ดผลลัพธ์เพิ่มเข้าในคลังส่วนตัวแล้ว",{auto:3000})}catch(x){craftBtn.disabled=false;craftBtn.classList.remove("crafting");alert("คราฟต์ไม่สำเร็จ: "+x.message)}return}const edit=e.target.closest("[data-edit-recipe]");if(edit){const r=(await Cloud.loadRecipes()).find(x=>x.id===edit.dataset.editRecipe);if(r)recipeForm(r);return}const disable=e.target.closest("[data-disable-recipe]");if(disable){const r=(await Cloud.loadRecipes()).find(x=>x.id===disable.dataset.disableRecipe);if(r&&confirm("ปิดสูตรนี้หรือไม่?")){try{await Cloud.saveRecipe({...r,is_active:false});await renderCraft()}catch(x){alert(x.message)}}}});
-
+$("craftNew").onclick=()=>recipeForm();$("craftRecipes").addEventListener("click",async e=>{const craftBtn=e.target.closest("[data-craft]");if(craftBtn){if(craftBtn.disabled)return;craftBtn.disabled=true;craftBtn.classList.add("crafting");let recipe=null;try{recipe=(await Cloud.loadRecipes()).find(r=>r.id===craftBtn.dataset.craft);if(!recipe)throw new Error("ไม่พบสูตรคราฟต์");const missing=(recipe.ingredients||[]).map(i=>{const have=Number(COLLECTION[i.material_card_id]?.count||0),need=Number(i.quantity)||0;const card=ALL.find(c=>c.id===i.material_card_id);return have<need?`${card?.name||"การ์ด"} · ต้องใช้ ${need} ใบ แต่มี ${have} ใบ`:null}).filter(Boolean);if(missing.length){notice("bad","วัตถุดิบไม่ครบ",missing.join(" · "),{auto:6500});return}await Cloud.craft(craftBtn.dataset.craft);COLLECTION=await Cloud.loadCollection();renderCollection();const target=ALL.find(c=>c.id===recipe.target_card_id);await renderCraft();if(target)craftCelebration(target,recipe.output_quantity);notice("ok","คราฟต์สำเร็จ",`ได้รับ ${target?.name||"การ์ดผลลัพธ์"} ×${recipe.output_quantity} และเพิ่มเข้าคลังแล้ว`,{auto:3500})}catch(x){const msg=String(x?.message||x);if(/ingredient|material|resource|insufficient|not enough|วัตถุดิบ|ไม่ครบ/i.test(msg))notice("bad","วัตถุดิบไม่ครบ",msg,{auto:6500});else notice("bad","คราฟต์ไม่สำเร็จ",msg,{auto:6500})}finally{craftBtn.disabled=false;craftBtn.classList.remove("crafting")}return}const edit=e.target.closest("[data-edit-recipe]");if(edit){const r=(await Cloud.loadRecipes()).find(x=>x.id===edit.dataset.editRecipe);if(r)recipeForm(r);return}const disable=e.target.closest("[data-disable-recipe]");if(disable){const r=(await Cloud.loadRecipes()).find(x=>x.id===disable.dataset.disableRecipe);if(r&&confirm("ปิดสูตรนี้หรือไม่?")){try{await Cloud.saveRecipe({...r,is_active:false});await renderCraft()}catch(x){alert(x.message)}}}});
 $("t6").addEventListener("click",renderCraft);$("t7").addEventListener("click",renderCollection);$("t8").addEventListener("click",renderRarityShowcase);
 
 let authMode="in";
