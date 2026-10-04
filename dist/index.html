@@ -450,8 +450,8 @@ body.sparkles-off #p5 .pkCard.open .pkff .art.f1::before,body.sparkles-off #p5 .
 
 /* ---------- Premium visual card finish: restrained 3D + directional foil ---------- */
 .motionBtn{display:none}
-.art{--tilt-x:0deg;--tilt-y:0deg;--depth-x:0px;--depth-y:0px;--shine-x:50%;--shine-y:50%;transform:perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));transform-style:preserve-3d;transition:transform .18s ease,box-shadow .24s ease;will-change:transform}
-.art>img,.art>.ph,.art>.lf>img,.art>.lf>.ph{transform:translate3d(var(--depth-x),var(--depth-y),0) scale(1.018);transition:transform .18s ease;will-change:transform}
+.art.tilt-active{will-change:transform}.art{--tilt-x:0deg;--tilt-y:0deg;--depth-x:0px;--depth-y:0px;--shine-x:50%;--shine-y:50%;transform:perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));transform-style:preserve-3d;transition:transform .18s ease,box-shadow .24s ease}
+.art>img,.art>.ph,.art>.lf>img,.art>.lf>.ph{transform:translate3d(var(--depth-x),var(--depth-y),0) scale(1.018);transition:transform .18s ease}
 .art>.fx{transform:translate3d(var(--depth-x),var(--depth-y),0);transition:transform .18s ease;mix-blend-mode:screen}
 .art.f0::after,.art.f1::after,.art.f2::after,.art.f3::after,.art.f4::after{display:block!important;inset:0!important;pointer-events:none!important;mix-blend-mode:screen!important;opacity:.34!important;animation:premiumFoilSweep 6.2s ease-in-out infinite!important;background:linear-gradient(115deg,transparent 28%,rgba(255,255,255,.08) 40%,rgba(255,255,255,.82) 50%,rgba(255,235,170,.24) 56%,transparent 70%) 0 0/260% 100% no-repeat!important}
 .art.f0::before{box-shadow:inset 0 0 0 1px #dbe7fa,inset 0 0 12px rgba(194,214,244,.55)!important}
@@ -651,7 +651,7 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
 	#p5 .pkCard.rrr-gold.open .pkRRRglint{opacity:.08!important}
 	#p5 .pkCard.rrr-gold.open .pkRRRglint:after{opacity:.06!important}
   /* Card viewer: subtle drag tilt with angle-reactive Holo/Glare. */
-  #lbBody .art.card-rotatable{touch-action:none;cursor:grab;user-select:none;transform:perspective(1100px) rotateX(calc(var(--tilt-x,0deg) + var(--spin-x,0deg))) rotateY(calc(var(--tilt-y,0deg) + var(--spin-y,0deg)))!important;transition:transform .18s ease,box-shadow .24s ease!important}
+  #lbBody .art.card-rotatable{will-change:transform;touch-action:none;cursor:grab;user-select:none;transform:perspective(1100px) rotateX(calc(var(--tilt-x,0deg) + var(--spin-x,0deg))) rotateY(calc(var(--tilt-y,0deg) + var(--spin-y,0deg)))!important;transition:transform .18s ease,box-shadow .24s ease!important}
   #lbBody .art.card-rotatable.is-rotating{cursor:grabbing;transition:none!important}
   #lbBody .art.card-rotatable img,#lbBody .art.card-rotatable .ph{user-select:none;-webkit-user-drag:none}
   #lbBody .art.card-rotatable .ref-holo{top:-35%;bottom:-35%;left:-88%;width:76%;opacity:.58!important;border-radius:30%;mix-blend-mode:screen!important;background:linear-gradient(108deg,transparent 0%,transparent 24%,rgba(255,0,180,.05) 35%,rgba(0,220,255,.14) 43%,rgba(255,255,255,.5) 50%,rgba(255,222,70,.16) 57%,rgba(140,70,255,.08) 65%,transparent 76%,transparent 100%) 0 0/100% 100%!important;animation:holoViewerWave 3.8s linear infinite!important;filter:blur(2.2px) saturate(.95) brightness(1) hue-rotate(calc(var(--spin-y,0deg) * .7))!important;transform:translate3d(calc(var(--spin-y,0deg) * .08),calc(var(--spin-x,0deg) * -.06),0) rotate(18deg) scale(1.06)!important;transition:filter .12s linear,transform .12s linear}
@@ -920,42 +920,42 @@ body.sparkles-off .art.f0::after,body.sparkles-off .art.f1::after,body.sparkles-
   .art.f2[data-card-rarity="GR"] .ref-spark{background:linear-gradient(135deg,#fff8e9,#eab65e 34%,#c73b50 67%,#fff6e8)!important;filter:drop-shadow(0 0 4px #fff2d4) drop-shadow(0 0 10px rgba(201,49,72,.9))!important}
   .art.f4[data-card-rarity="CSR"] .ref-spark{background:linear-gradient(135deg,#fff0be,#dbab50 34%,#c51c3c 68%,#220810)!important}
 /* Global effect toggle: keep the card artwork and rarity border, but remove animated foil, glow, sparkle, and reveal layers from every zone. */
-body.sparkles-off .art:not(.back),
-body.sparkles-off .art:not(.back)::after,
-body.sparkles-off .art:not(.back)>.fx,
-body.sparkles-off .art:not(.back)>.ref-holo,
-body.sparkles-off .art:not(.back)>.ref-glare,
-body.sparkles-off .art:not(.back)>.ref-sweep,
-body.sparkles-off .art:not(.back)>.ref-spark,
-body.sparkles-off .pkgloss,
-body.sparkles-off .pkglow,
-body.sparkles-off .pkRRRglint,
-body.sparkles-off .ref-flash,
-body.sparkles-off .ref-burst-spark {
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back),
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)::after,
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)>.fx,
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)>.ref-holo,
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)>.ref-glare,
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)>.ref-sweep,
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)>.ref-spark,
+body.sparkles-off:not(.viewer-effects-on) .pkgloss,
+body.sparkles-off:not(.viewer-effects-on) .pkglow,
+body.sparkles-off:not(.viewer-effects-on) .pkRRRglint,
+body.sparkles-off:not(.viewer-effects-on) .ref-flash,
+body.sparkles-off:not(.viewer-effects-on) .ref-burst-spark {
   animation:none!important;
 }
-body.sparkles-off .art:not(.back) {
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back) {
   box-shadow:none!important;
   filter:none!important;
 }
-body.sparkles-off .art:not(.back)::after,
-body.sparkles-off .art:not(.back)>.fx,
-body.sparkles-off .art:not(.back)>.ref-holo,
-body.sparkles-off .art:not(.back)>.ref-glare,
-body.sparkles-off .art:not(.back)>.ref-sweep,
-body.sparkles-off .art:not(.back)>.ref-spark,
-body.sparkles-off .pkgloss,
-body.sparkles-off .pkglow,
-body.sparkles-off .pkRRRglint,
-body.sparkles-off .ref-flash,
-body.sparkles-off .ref-burst-spark {
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)::after,
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)>.fx,
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)>.ref-holo,
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)>.ref-glare,
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)>.ref-sweep,
+body.sparkles-off:not(.viewer-effects-on) .art:not(.back)>.ref-spark,
+body.sparkles-off:not(.viewer-effects-on) .pkgloss,
+body.sparkles-off:not(.viewer-effects-on) .pkglow,
+body.sparkles-off:not(.viewer-effects-on) .pkRRRglint,
+body.sparkles-off:not(.viewer-effects-on) .ref-flash,
+body.sparkles-off:not(.viewer-effects-on) .ref-burst-spark {
   display:none!important;
 }
-body.sparkles-off .art.f0::before,
-body.sparkles-off .art.f1::before,
-body.sparkles-off .art.f2::before,
-body.sparkles-off .art.f3::before,
-body.sparkles-off .art.f4::before {
+body.sparkles-off:not(.viewer-effects-on) .art.f0::before,
+body.sparkles-off:not(.viewer-effects-on) .art.f1::before,
+body.sparkles-off:not(.viewer-effects-on) .art.f2::before,
+body.sparkles-off:not(.viewer-effects-on) .art.f3::before,
+body.sparkles-off:not(.viewer-effects-on) .art.f4::before {
   animation:none!important;
 }
 /* Card viewer exit control: text is clearer than a small X and remains easy to tap on mobile. */
@@ -990,8 +990,8 @@ body.sparkles-off .art.f4::before {
 body .art .ref-spark.ref-spark { display:none!important; }
 #lbBody .art .ref-spark,
 #p5 .pkCard.open .pkff .art .ref-spark { display:block!important; }
-body.sparkles-off #lbBody .art .ref-spark,
-body.sparkles-off #p5 .pkCard.open .pkff .art .ref-spark { display:none!important; }
+body.sparkles-off:not(.viewer-effects-on) #lbBody .art .ref-spark,
+body.sparkles-off:not(.viewer-effects-on) #p5 .pkCard.open .pkff .art .ref-spark { display:none!important; }
 
 /* Contextual background stars: hidden on normal pages, visible only while viewing or revealing a card. */
 body::before { display:none!important; }
@@ -1031,13 +1031,68 @@ body:has(#p5 .pkCard.open)::before { display:block!important; }
 }
 
 .collectionHeadActions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.collectionHeadActions .count{white-space:nowrap}.collectionBody[hidden]{display:none!important}
+.pageNav{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px auto 4px;color:var(--mute);font-size:13px}.pageNav[hidden]{display:none!important}.cards,.dpick,.collectionCards{contain:layout style}
 .loadMore{display:block;margin:14px auto 4px;min-width:140px}.gachaProgressOnly{margin-top:16px}.gachaProgressOnly .collectionProgressStats{grid-template-columns:repeat(2,minmax(0,1fr));max-width:360px}
-body.sparkles-off.viewer-effects-on #lbBody .art:not(.back)::after,body.sparkles-off.viewer-effects-on #lbBody .art:not(.back)>.fx,body.sparkles-off.viewer-effects-on #lbBody .art:not(.back)>.ref-holo,body.sparkles-off.viewer-effects-on #lbBody .art:not(.back)>.ref-glare,body.sparkles-off.viewer-effects-on #lbBody .art:not(.back)>.ref-sweep,body.sparkles-off.viewer-effects-on #lbBody .art:not(.back)>.ref-spark{display:block!important}
+/* Viewer effects reuse the same rarity CSS as the enabled card list. */
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable{will-change:transform;transform:perspective(1100px) rotateX(calc(var(--tilt-x,0deg) + var(--spin-x,0deg))) rotateY(calc(var(--tilt-y,0deg) + var(--spin-y,0deg)))!important}
+/* RRR reveal: keep the gold finish visible but lower the flash/glow intensity. */
+#p5 .pkCard.rrr-gold.open{filter:drop-shadow(0 0 1px rgba(255,224,128,.48)) drop-shadow(0 0 5px rgba(244,201,107,.34))!important}
+#p5 .pkCard.rrr-gold.open .pkff{box-shadow:inset 0 0 0 1px rgba(255,241,168,.62),0 0 3px rgba(255,243,176,.42),0 0 8px rgba(244,201,107,.28)!important;animation:rrrGoldPulseSoft 2.4s ease-in-out infinite alternate!important}
+#p5 .pkCard.rrr-gold.open .pkRRRglint{opacity:.22!important;animation-duration:4.8s!important}
+#p5 .pkCard.rrr-gold.open .pkRRRglint:after{opacity:.16!important;animation-duration:4.2s!important}
+@keyframes rrrGoldPulseSoft{from{filter:brightness(.99) drop-shadow(0 0 2px rgba(255,192,38,.22))}to{filter:brightness(1.035) drop-shadow(0 0 7px rgba(255,245,176,.38))}}
+/* Gacha-scoped RRR brightness cap (wins over the legacy reveal rules). */
+body.gacha-effects-on .pkCard.rrr-gold.open{filter:drop-shadow(0 0 1px rgba(255,224,128,.48)) drop-shadow(0 0 5px rgba(244,201,107,.34))!important}
+body.gacha-effects-on .pkCard.rrr-gold.open .pkff{box-shadow:inset 0 0 0 1px rgba(255,241,168,.62),0 0 3px rgba(255,243,176,.42),0 0 8px rgba(244,201,107,.28)!important;animation:rrrGoldPulseSoft 2.4s ease-in-out infinite alternate!important}
+body.gacha-effects-on .pkCard.rrr-gold.open .pkRRRglint{opacity:.22!important;animation-duration:4.8s!important}
+body.gacha-effects-on .pkCard.rrr-gold.open .pkRRRglint:after{opacity:.16!important;animation-duration:4.2s!important}
+/* Viewer frame visibility: every foil tier keeps a live colored frame when the list toggle is off. */
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f0,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f1,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f2,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f3,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f4,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f5,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f6,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f7{border:2px solid rgba(var(--foil-color),.88)!important;box-shadow:0 0 0 1px rgba(var(--foil-color),.42),0 0 12px rgba(var(--foil-color),.42),0 8px 20px rgba(0,0,0,.46)!important}
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f0::before,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f1::before,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f2::before,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f3::before,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f4::before,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f5::before,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f6::before,
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f7::before{display:block!important;content:""!important;inset:0!important;border:1px solid rgba(255,255,255,.34)!important;box-shadow:inset 0 0 0 1px rgba(var(--foil-color),.64),inset 0 0 9px rgba(var(--foil-color),.46)!important;opacity:1!important;animation:frameGlowPulse 3.8s ease-in-out infinite!important}
+/* X viewer parity: exactly reuse the enabled-list RGB frame treatment. */
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f2[data-card-rarity="X"],body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f2[data-card-rarity="x"]{--rainbow-angle:0deg;border:3px solid transparent!important;animation:none!important;box-shadow:0 0 0 1px #fff,0 0 14px rgba(255,0,190,.92),0 0 26px rgba(0,220,255,.82),0 0 38px rgba(165,35,255,.62)!important}
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f2[data-card-rarity="X"]::before,body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f2[data-card-rarity="x"]::before{display:block!important;content:""!important;inset:0!important;border:0!important;padding:3px!important;border-radius:inherit!important;background:conic-gradient(from var(--rainbow-angle),#ff003c 0deg,#ff8500 50deg,#fff000 100deg,#00f878 160deg,#00d9ff 220deg,#4c50ff 280deg,#ed00ff 330deg,#ff003c 360deg)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:0 0 10px rgba(255,0,210,1),0 0 19px rgba(0,225,255,.92),inset 0 0 7px rgba(255,255,255,.95)!important;filter:saturate(1.45) brightness(1.08)!important;animation:rainbowFrameSpin 5.5s linear infinite!important;opacity:1!important}
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f2[data-card-rarity="X"]::after,body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable.f2[data-card-rarity="x"]::after{display:block!important;animation:none!important;opacity:0!important}
+/* R/N/U/T are non-star tiers; T intentionally follows the Common (C) visual level. */
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable[data-card-rarity="R"] .ref-spark{display:none!important;animation:none!important}
+/* Viewer stars: all rarity tiers move in the detail view; R intentionally has no stars. */
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable:not([data-card-rarity="R"]) .ref-spark{display:block!important;animation:foilStarDriftA 3.1s ease-in-out -.16s infinite!important}
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable:not([data-card-rarity="R"]) .ref-spark.s2{animation-name:foilStarDriftB!important;animation-delay:-.92s!important}
+body.sparkles-off.viewer-effects-on #lbBody .art.card-rotatable:not([data-card-rarity="R"]) .ref-spark.s3{animation-name:foilStarDriftC!important;animation-delay:-1.86s!important}
+/* High rarity stars use explicit flight animations so they remain visibly moving in the viewer. */
+body.sparkles-off.viewer-effects-on #lbBody .art[data-card-rarity="SVR"] .ref-spark,body.sparkles-off.viewer-effects-on #lbBody .art[data-card-rarity="EMR"] .ref-spark,body.sparkles-off.viewer-effects-on #lbBody .art[data-card-rarity="CSR"] .ref-spark{display:block!important;animation:rarityStarFlightA 2.7s ease-in-out infinite!important}
+body.sparkles-off.viewer-effects-on #lbBody .art[data-card-rarity="SVR"] .ref-spark.s2,body.sparkles-off.viewer-effects-on #lbBody .art[data-card-rarity="EMR"] .ref-spark.s2,body.sparkles-off.viewer-effects-on #lbBody .art[data-card-rarity="CSR"] .ref-spark.s2{animation-name:rarityStarFlightB!important;animation-delay:-.85s!important}
+body.sparkles-off.viewer-effects-on #lbBody .art[data-card-rarity="SVR"] .ref-spark.s3,body.sparkles-off.viewer-effects-on #lbBody .art[data-card-rarity="EMR"] .ref-spark.s3,body.sparkles-off.viewer-effects-on #lbBody .art[data-card-rarity="CSR"] .ref-spark.s3{animation-name:rarityStarFlightC!important;animation-delay:-1.55s!important}
 body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)::after,body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)>.fx,body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)>.ref-holo,body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)>.ref-glare,body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)>.ref-sweep,body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)>.ref-spark{display:block!important}
 /* Collection progress dashboard: owned unique cards versus the loaded catalog. */
 .collectionProgress{margin:14px 0 16px;padding:14px;border:1px solid #66517f;border-radius:12px;background:linear-gradient(145deg,#211b3d,#111426);box-shadow:inset 0 0 24px #8b6bd110}
 .collectionProgressHero{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.collectionProgressEyebrow{display:block;color:#cdb8e8;font:700 11px/1.1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase}.collectionProgress h4{margin:3px 0 4px;color:var(--gold-soft);font:700 24px/1.1 Cinzel,serif}.collectionProgressHero p{margin:0;color:#c8bdd5;font-size:12px}.collectionProgressPct{color:#f4c96b;font:700 34px/1 "Barlow Condensed",sans-serif;white-space:nowrap}.progressTrack{height:10px;margin:14px 0 12px;overflow:hidden;border-radius:99px;background:#0a0d1b;border:1px solid #594873}.progressTrack i,.miniProgress i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#9b6bd6,#f4c96b);box-shadow:0 0 12px #f4c96b66;transition:width .3s ease}.collectionProgressStats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.collectionProgressStat{padding:8px 10px;border:1px solid #493b67;border-radius:8px;background:#0f1223}.collectionProgressStat b{display:block;color:#f2e7cf;font:700 20px/1 "Barlow Condensed",sans-serif}.collectionProgressStat small{color:#b9aec8;font-size:11px}.collectionBreakdown{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}.collectionBreakdown h5{margin:0 0 8px;color:#e4d6f0;font-size:13px}.progressRows{display:grid;gap:7px}.progressRowTop{display:flex;justify-content:space-between;gap:8px;margin-bottom:3px;font-size:11px}.progressRowTop span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#ded1e6}.progressRowTop small{color:#b9aec8;white-space:nowrap}.miniProgress{height:5px;overflow:hidden;border-radius:99px;background:#0a0d1b}.miniProgress i{box-shadow:none;background:linear-gradient(90deg,#7650ad,#d6a95e)}
 @media(max-width:600px){.collectionProgressHero{gap:10px}.collectionProgress h4{font-size:21px}.collectionProgressPct{font-size:30px}.collectionProgressStats{grid-template-columns:repeat(2,minmax(0,1fr))}.collectionBreakdown{grid-template-columns:1fr;gap:12px}}
+/* PR craft celebration: a short forge burst with sparks and a rising card seal. */
+.craftFxLayer{position:fixed;inset:0;z-index:150;pointer-events:none;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(244,201,107,.18),transparent 28%,transparent 62%);animation:craftFxFade 1.35s ease-out forwards}
+.craftFxCore{width:clamp(90px,18vw,150px);aspect-ratio:59/86;border:2px solid #f4c96b;border-radius:10px;background:linear-gradient(145deg,#fff4bf,#b8792d 42%,#5d2b83 72%,#15152d);box-shadow:0 0 8px #fff4b0,0 0 24px #f4c96b,0 0 56px #c35cff;animation:craftFxCard 1.15s cubic-bezier(.2,.8,.25,1) forwards}
+.craftFxCore:before{content:"✦ PR ✦";display:grid;place-items:center;height:100%;color:#fff7d1;font:700 clamp(15px,3vw,24px) Barlow,sans-serif;text-shadow:0 0 8px #fff,0 0 18px #f4c96b;animation:craftFxStamp .8s ease-out .18s both}
+.craftFxSpark{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:#fff6c4;box-shadow:0 0 8px #fff,0 0 16px #f4c96b;animation:craftFxSpark 1s ease-out forwards;transform:translate(-50%,-50%)}
+@keyframes craftFxFade{0%{opacity:1}72%{opacity:1}100%{opacity:0}}
+@keyframes craftFxCard{0%{opacity:0;transform:translateY(42px) scale(.42) rotate(-8deg)}28%{opacity:1;transform:translateY(0) scale(1.08) rotate(3deg)}68%{transform:translateY(-8px) scale(1) rotate(0)}100%{opacity:0;transform:translateY(-42px) scale(.9) rotate(2deg)}}
+@keyframes craftFxStamp{0%{opacity:0;transform:scale(.4)}60%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
+@keyframes craftFxSpark{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}20%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.7)}}
+@media(prefers-reduced-motion:reduce){.craftFxLayer,.craftFxCore,.craftFxSpark,.craftFxCore:before{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
 </style>
 </head>
 <body>
@@ -1082,11 +1137,11 @@ body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)::after
         <div><label for="power">Power</label><select id="power"></select></div>
         <div><label for="rarity">Rarity</label><select id="rarity"></select></div>
         <div><label for="trigger">Trigger</label><select id="trigger"></select></div>
-        <div><label for="clan">Clan</label><select id="clan"></select></div>
+        <div><label for="clan">Clan</label><select id="clan"></select></div><div><label for="icon">Icon</label><select id="icon"></select></div>
       </div>
       <div class="actions"><button class="btn primary" id="go">Search</button><button class="btn" id="clear">Clear All</button></div>
       <p class="count" id="count" aria-live="polite"></p>
-      <div class="cards" id="found"></div><button class="btn loadMore" id="foundMore" type="button" hidden>โหลดเพิ่ม</button>
+      <div class="cards" id="found"></div><div class="pageNav" id="foundNav" hidden><button class="btn sm" data-prev type="button">← ก่อนหน้า</button><span data-page>หน้า 1 / 1</span><button class="btn sm" data-next type="button">ถัดไป →</button></div>
     </section>
     <section id="p2" role="tabpanel" aria-labelledby="t2">
       <div class="pills" id="pills"></div>
@@ -1120,7 +1175,7 @@ body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)::after
         <div>
           <div class="grid" style="margin-bottom:10px"><div><label for="dnat">Nation</label><select id="dnat"></select></div><div><label for="dkw">Keyword</label><input id="dkw" type="search" placeholder="Card name"></div></div>
           <p class="dto" id="dto"></p>
-          <div class="dpick" id="dpick"></div><button class="btn loadMore" id="dpickMore" type="button" hidden>โหลดเพิ่ม</button>
+          <div class="dpick" id="dpick"></div><div class="pageNav" id="dpickNav" hidden><button class="btn sm" data-prev type="button">← ก่อนหน้า</button><span data-page>หน้า 1 / 1</span><button class="btn sm" data-next type="button">ถัดไป →</button></div>
         </div>
         <div class="dside"><h3 class="yr" style="margin:0 0 8px">Deck <span id="dcount"></span></h3><div class="pills" id="ztabs" style="margin-bottom:8px"></div><p class="dto" id="zrule"></p><div id="dlist"></div><div class="chk" id="dcheck"></div></div>
       </div>
@@ -1171,7 +1226,7 @@ body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)::after
         <div class="collectionProgressStats"><div class="collectionProgressStat"><b id="collectionOwned">0</b><small>แบบที่มีแล้ว</small></div><div class="collectionProgressStat"><b id="collectionMissing">0</b><small>แบบที่ยังขาด</small></div><div class="collectionProgressStat"><b id="collectionTotal">0</b><small>การ์ดทั้งหมด</small></div><div class="collectionProgressStat"><b id="collectionCopies">0</b><small>จำนวนใบทั้งหมด</small></div></div>
         <div class="collectionBreakdown"><div><h5>ความคืบหน้าแยกตามชุด</h5><div id="collectionSetProgress" class="progressRows"></div></div><div><h5>ความคืบหน้าแยกตาม Rarity</h5><div id="collectionRarityProgress" class="progressRows"></div></div></div>
       </div>
-      <div class="collectionTools"><input type="search" id="collectionSearch" placeholder="ค้นหาชื่อการ์ด / หมายเลข / เรต"><label>เรียง<select id="collectionSort"><option value="rarity-desc">เรตสูง → ต่ำ</option><option value="rarity-asc">เรตต่ำ → สูง</option><option value="count-desc">จำนวนมาก → น้อย</option><option value="name">ชื่อ A–Z</option></select></label></div><div id="collectionCards" class="collectionCards"></div><button class="btn loadMore" id="collectionMore" type="button" hidden>โหลดเพิ่ม</button>
+      <div class="collectionTools"><input type="search" id="collectionSearch" placeholder="ค้นหาชื่อการ์ด / หมายเลข / เรต"><label>เรียง<select id="collectionSort"><option value="rarity-desc">เรตสูง → ต่ำ</option><option value="rarity-asc">เรตต่ำ → สูง</option><option value="count-desc">จำนวนมาก → น้อย</option><option value="name">ชื่อ A–Z</option></select></label></div><div id="collectionCards" class="collectionCards"></div><div class="pageNav" id="collectionNav" hidden><button class="btn sm" data-prev type="button">← ก่อนหน้า</button><span data-page>หน้า 1 / 1</span><button class="btn sm" data-next type="button">ถัดไป →</button></div>
       </div></section>
     </section>
 
@@ -1226,7 +1281,7 @@ body.sparkles-off.gacha-effects-on #p5 .pkCard.open .pkff .art:not(.back)::after
 <datalist id="nations"></datalist>
 <datalist id="clans"></datalist>
 <datalist id="types"><option>Booster Pack</option><option>Constructed Deck</option><option>Trial Deck</option><option>Starter Deck</option><option>Master Deck Set</option><option>Stride Deck Set</option><option>Others</option><option>PR Card</option></datalist>
-<datalist id="rarities"><option>C</option><option>N</option><option>U</option><option>R</option><option>RR</option><option>RRR</option><option>SR</option><option>PR</option><option>SVR</option><option>GR</option><option>FR</option><option>FFR</option><option>OR</option><option>EMR</option><option>ORR</option><option>DSR</option><option>ZR</option><option>X</option><option>SSP</option><option>SEC</option><option>SSR</option><option>CSR</option></datalist>
+<datalist id="rarities"><option>C</option><option>R</option><option>RR</option><option>RRR</option><option>SR</option><option>PR</option><option>SVR</option><option>GR</option><option>FR</option><option>FFR</option><option>OR</option><option>EMR</option><option>ORR</option><option>DSR</option><option>ZR</option><option>X</option><option>SSP</option><option>SEC</option><option>SSR</option><option>CSR</option></datalist>
 <datalist id="triggers"><option>Critical</option><option>Heal</option><option>Front</option><option>Draw</option><option>Over</option></datalist>
 	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 	<script src="./config.js"></script>
@@ -1393,7 +1448,7 @@ function lay(fit,ori){
 /* Rarity tiers keep their own frame/star color; image artwork is not recolored. */
 const FOILT={R:0,RR:0,RRR:1,SR:1,SVR:2,GR:2,FR:2,FFR:2,OR:2,EMR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SSP:3,SEC:4,SSR:4,CSR:4,SCR:4};
 const FOILCLASS={R:0,RR:5,RRR:1,SR:6,SVR:2,GR:2,FR:2,FFR:7,OR:2,EMR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SSP:3,SEC:4,SSR:4,CSR:4,SCR:4};
-const rarityLabel=r=>{const x=String(r??"").trim().toUpperCase();return x==="OVR"?"EMR":x==="SCR"?"CSR":x};
+const rarityLabel=r=>{const x=String(r??"").trim().toUpperCase();if(x==="N"||x==="U")return "C";return x==="OVR"?"EMR":x==="SCR"?"CSR":x};
 const foil=c=>{const r=rarityLabel(c&&c.rarity);return r in FOILCLASS?" f"+FOILCLASS[r]:""};
 const art=(c,nat)=>{
   const o=c.orient==="l"?"l":"p",slot=o==="l"&&!nat,ar=o==="l"&&nat?CH+"/"+CW:CW+"/"+CH;let inner;
@@ -1443,6 +1498,7 @@ const reduceMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matc
 let activeArt=null,gyroBound=false;
 function setArtTilt(node,x=0,y=0){
   if(!node||reduceMotion)return;
+  node.classList.add("tilt-active");
   const ix=Math.max(-1,Math.min(1,Number(x)||0)),iy=Math.max(-1,Math.min(1,Number(y)||0));
   const rare=node.classList.contains("f2")||node.classList.contains("f3")||node.classList.contains("f4"),scale=rare?1.15:.82;
   node.style.setProperty("--tilt-x",`${(-iy*2.6*scale).toFixed(2)}deg`);
@@ -1452,7 +1508,7 @@ function setArtTilt(node,x=0,y=0){
   node.style.setProperty("--shine-x",`${(50+ix*34).toFixed(1)}%`);
   node.style.setProperty("--shine-y",`${(50+iy*30).toFixed(1)}%`);
 }
-function resetArtTilt(node){setArtTilt(node,0,0)}
+function resetArtTilt(node){setArtTilt(node,0,0);node?.classList.remove("tilt-active")}
 function artFromEvent(e){return e.target?.closest?.(".art")||null}
 function openArtDetails(node){
   if(!node||node.classList.contains("back"))return;
@@ -1471,9 +1527,11 @@ document.addEventListener("keydown",e=>{
   if(!node||e.target.closest(".pkCard,.pks,[data-i],[data-ban-card],[data-collection-card]"))return;
   e.preventDefault();openArtDetails(node);
 });
-document.addEventListener("pointermove",e=>{const node=artFromEvent(e);if(!node)return;activeArt=node;const r=node.getBoundingClientRect();setArtTilt(node,(e.clientX-(r.left+r.width/2))/(r.width/2),(e.clientY-(r.top+r.height/2))/(r.height/2))});
-document.addEventListener("pointerout",e=>{const node=artFromEvent(e);if(node&&(!e.relatedTarget||!node.contains(e.relatedTarget)))resetArtTilt(node)});
-document.addEventListener("pointerdown",e=>{const node=artFromEvent(e);if(node)activeArt=node});
+let tiltFrame=0,tiltJob=null;
+function queueArtTilt(node,x,y){tiltJob={node,x,y};if(tiltFrame)return;tiltFrame=requestAnimationFrame(()=>{tiltFrame=0;const job=tiltJob;tiltJob=null;if(job)setArtTilt(job.node,job.x,job.y)})}
+document.addEventListener("pointermove",e=>{const node=artFromEvent(e);if(!node)return;if(document.body.classList.contains("sparkles-off")&&!node.closest("#lbBody,.gstage"))return;activeArt=node;const r=node._tiltRect||node.getBoundingClientRect();node._tiltRect=r;const hw=Math.max(1,r.width/2),hh=Math.max(1,r.height/2);queueArtTilt(node,(e.clientX-(r.left+r.width/2))/hw,(e.clientY-(r.top+r.height/2))/hh)},{passive:true});
+document.addEventListener("pointerout",e=>{const node=artFromEvent(e);if(node&&(!e.relatedTarget||!node.contains(e.relatedTarget))){node._tiltRect=null;resetArtTilt(node)}});
+document.addEventListener("pointerdown",e=>{const node=artFromEvent(e);if(node&&(!document.body.classList.contains("sparkles-off")||node.closest("#lbBody,.gstage")))activeArt=node});
 function applyGyro(e){
   if(reduceMotion)return;
   const x=Math.max(-1,Math.min(1,(Number(e.gamma)||0)/32)),y=Math.max(-1,Math.min(1,((Number(e.beta)||45)-45)/32));
@@ -1539,12 +1597,12 @@ $("editBtn").onclick=async()=>{
   document.body.classList.toggle("edit",on);$("editBtn").setAttribute("aria-pressed",on);$("editBtn").textContent=on?"✓ Done":"✎ Edit"};
 
 /* Card Search */
-const F=["nation","unit","grade","power","rarity","trigger","clan"];
-let ALL=[],found=[],FAVS=new Set(),searchLimit=40,deckPickLimit=40,collectionLimit=40;
+const F=["nation","unit","grade","power","rarity","trigger","clan","icon"];
+const PAGE_SIZE=20;let ALL=[],found=[],FAVS=new Set(),searchPage=1,deckPickPage=1,collectionPage=1;
 function index(){
   ALL=PRODUCTS.flatMap(p=>p.cards.map(c=>({...c,pid:p.id,pname:p.name})));
   F.filter(f=>f!=="nation").forEach(f=>{const cur=$(f).value;
-    const v=[...new Set(ALL.map(c=>c[f]).filter(x=>x!==""))].sort(f==="unit"?tsort:num);
+    const v=[...new Set(ALL.map(c=>f==="rarity"?rarityLabel(c[f]):c[f]).filter(x=>x!==""))].sort(f==="unit"?tsort:num);
     $(f).innerHTML='<option value="">All</option>'+v.map(x=>`<option>${h(x)}</option>`).join("");$(f).value=cur});
   const nn=[...new Set([...NATIONS.map(n=>n.name),...ALL.flatMap(nats)])];
   const opt='<option value="">All</option>'+nn.map(x=>`<option>${h(x)}</option>`).join("");
@@ -1555,18 +1613,19 @@ function index(){
   const clanList=$("clans");if(clanList)clanList.innerHTML=clans.map(x=>`<option>${h(x)}</option>`).join("");
 }
 const debounce=(fn,wait=250)=>{let t;return(...args)=>{clearTimeout(t);t=setTimeout(()=>fn(...args),wait)}};
+function updatePager(id,page,total,go){const nav=$(id);if(!nav)return;const pages=Math.max(1,Math.ceil(total/PAGE_SIZE));nav.hidden=total<=PAGE_SIZE;nav.querySelector("[data-page]").textContent=`หน้า ${Math.min(page,pages)} / ${pages}`;const prev=nav.querySelector("[data-prev]"),next=nav.querySelector("[data-next]");prev.disabled=page<=1;next.disabled=page>=pages;prev.onclick=()=>{if(page>1)go(page-1)};next.onclick=()=>{if(page<pages)go(page+1)}}
 function search(){
-  searchLimit=searchLimit||40;
   const kw=$("kw").value.trim().toLowerCase();
-  found=ALL.filter(c=>F.every(f=>!$(f).value||(f==="nation"?nats(c).includes($(f).value):String(c[f]??"")===$(f).value))&&(!kw||[c.name,c.description,c.race,c.clan,c.icon,c.no].some(v=>String(v||"").toLowerCase().includes(kw)))&&(!$('favOnly').checked||isFav(c.id)));
+  found=ALL.filter(c=>F.every(f=>!$(f).value||(f==="nation"?nats(c).includes($(f).value):(f==="rarity"?rarityLabel(c[f]):String(c[f]??""))===$(f).value))&&(!kw||[c.name,c.description,c.race,c.clan,c.icon,c.no].some(v=>String(v||"").toLowerCase().includes(kw)))&&(!$('favOnly').checked||isFav(c.id)));
   if($("ssort").value)found.sort(sortFn($("ssort").value));
-  $("count").textContent=(found.length?Math.min(searchLimit,found.length):0)+" / "+found.length+" Results";
-  $("found").innerHTML=found.slice(0,searchLimit).map((c,i)=>gal(c,i)).join("");
-  $("foundMore").hidden=searchLimit>=found.length;
+  const start=(searchPage-1)*PAGE_SIZE;
+  $("count").textContent=(found.length?Math.min(start+PAGE_SIZE,found.length):0)+" / "+found.length+" Results";
+  $("found").innerHTML=found.slice(start,start+PAGE_SIZE).map((c,i)=>gal(c,start+i)).join("");
+  updatePager("foundNav",searchPage,found.length,p=>{searchPage=p;search()});
 }
 $("advBtn").onclick=()=>{const o=$("adv").hidden;$("adv").hidden=!o;$("advBtn").setAttribute("aria-expanded",o);$("advBtn").textContent=(o?"▲":"▼")+" Advance Search"};
-$("foundMore").onclick=()=>{searchLimit+=40;search()};$("kw").oninput=debounce(()=>{searchLimit=40;search()},250);$("go").onclick=search;$("ssort").onchange=search;$("favOnly").onchange=search;$("kw").onkeydown=e=>{if(e.key==="Enter")search()};
-$("clear").onclick=()=>{F.forEach(f=>$(f).value="");$("kw").value="";$("ssort").value="";$("favOnly").checked=false;search()};
+$("kw").oninput=debounce(()=>{searchPage=1;search()},250);$("go").onclick=()=>{searchPage=1;search()};$("ssort").onchange=()=>{searchPage=1;search()};$("favOnly").onchange=()=>{searchPage=1;search()};$("kw").onkeydown=e=>{if(e.key==="Enter")search()};
+$("clear").onclick=()=>{F.forEach(f=>$(f).value="");$("kw").value="";$("ssort").value="";$("favOnly").checked=false;searchPage=1;search()};
 $("found").onclick=e=>{const f=e.target.closest("[data-fav]");if(f){e.preventDefault();e.stopPropagation();toggleFavourite(f.dataset.fav);return}const b=e.target.closest("[data-i]");if(b)openLB(found[b.dataset.i])};
 
 /* Product folders */
@@ -1621,7 +1680,8 @@ function bindCardRotation(node){
   if(!node)return;
   node.classList.add("card-rotatable");
   node._spinX=0;node._spinY=0;
-  let drag=null;
+  let drag=null,rotationFrame=0,rotationJob=null;
+  const flushRotation=()=>{rotationFrame=0;const job=rotationJob;rotationJob=null;if(!job)return;node.style.setProperty("--spin-x",`${job.x.toFixed(2)}deg`);node.style.setProperty("--spin-y",`${job.y.toFixed(2)}deg`);node.style.setProperty("--shine-x",`${(50+job.y*3).toFixed(1)}%`);node.style.setProperty("--shine-y",`${(50-job.x*2.5).toFixed(1)}%`)};
   const finish=()=>{drag=null;node.classList.remove("is-rotating")};
   node.onpointerdown=e=>{if(e.button!==undefined&&e.button!==0)return;drag={x:e.clientX,y:e.clientY};node.classList.add("is-rotating");try{node.setPointerCapture(e.pointerId)}catch(_){};e.preventDefault()};
   node.onpointermove=e=>{
@@ -1629,22 +1689,20 @@ function bindCardRotation(node){
     node._spinY=Math.max(-14,Math.min(14,node._spinY+(e.clientX-drag.x)*0.9));
     node._spinX=Math.max(-14,Math.min(14,node._spinX-(e.clientY-drag.y)*0.9));
     drag={x:e.clientX,y:e.clientY};
-    node.style.setProperty("--spin-x",`${node._spinX.toFixed(2)}deg`);
-    node.style.setProperty("--spin-y",`${node._spinY.toFixed(2)}deg`);
-    node.style.setProperty("--shine-x",`${(50+node._spinY*3).toFixed(1)}%`);
-    node.style.setProperty("--shine-y",`${(50-node._spinX*2.5).toFixed(1)}%`);
+    rotationJob={x:node._spinX,y:node._spinY};
+    if(!rotationFrame)rotationFrame=requestAnimationFrame(flushRotation);
   };
   node.onpointerup=finish;node.onpointercancel=finish;node.onlostpointercapture=finish;
 }
 
 function openLB(c,options={}){
-  const r=[["Card No.",c.no],["Nation",natTxt(c)],["เผ่า / Race",c.race],["Clan",c.clan],["ไอคอน",c.icon],["Card type",c.unit],["Grade",c.grade],["Power",c.power],["Protection / Shield",c.shield],["Rarity",rarityLabel(c.rarity)],["Trigger",c.trigger],["Product",c.pname],["In collection",c.collectionCount==null?"":c.collectionCount+" copies"]].filter(x=>x[1]!=="");
+  const r=[["Card No.",c.no],["Nation",natTxt(c)],["เผ่า / Race",c.race],["Clan",c.clan],["ไอคอน",c.icon],["Card type",c.unit],["Grade",c.grade],["Power",c.power],["Shield",c.shield],["Rarity",rarityLabel(c.rarity)],["Trigger",c.trigger],["Product",c.pname],["In collection",c.collectionCount==null?"":c.collectionCount+" copies"]].filter(x=>x[1]!=="");
   const cardDescription=String(c.description||"").trim();
   const detailBlock=`<div class="cardDetail"><b>รายละเอียดการ์ด</b><p>${h(cardDescription||"ยังไม่มีรายละเอียดการ์ด")}</p></div>`;
   const action=options.readonly?`<p class="dto">${options.source==="collection"?"การ์ดนี้อยู่ในคลังสะสม · ไม่ได้เพิ่มเข้าเด็ค":"รายละเอียดการ์ดใน Banlist"}</p>`:'<button class="btn primary" id="lbAdd">Add to deck</button> <button class="btn ed" id="lbEdit">Edit this card</button>';
   $("lbBody").innerHTML=`${art(c,1)}<div><h3>${h(c.name)}</h3><button type="button" class="lbFav${isFav(c.id)?" on":""}" id="lbFav">${isFav(c.id)?"★ อยู่ใน Favourite":"☆ เพิ่ม Favourite"}</button> <button type="button" class="btn sm" id="lbResetView">↺ Reset view</button> <button type="button" class="btn sm" id="lbEffects">✦ เอฟเฟค: เปิด</button><p class="lbRotateHint">ลากการ์ดเบา ๆ เพื่อดูแสง Holo/Glare เปลี่ยนตามมุม</p>${detailBlock}<dl>${r.map(x=>`<dt>${x[0]}</dt><dd>${h(x[1])}</dd>`).join("")}</dl>${action}</div>`;
   const viewerArt=$("lbBody").querySelector(".art");
-  bindCardRotation(viewerArt);
+  viewerArt.classList.add("showcase-viewer");bindCardRotation(viewerArt);
   $("lbResetView").onclick=()=>resetCardRotation(viewerArt);$("lbEffects").onclick=()=>{document.body.classList.toggle("viewer-effects-on");$("lbEffects").textContent=document.body.classList.contains("viewer-effects-on")?"✦ เอฟเฟค: เปิด":"✦ เอฟเฟค: ปิด"};document.body.classList.add("viewer-effects-on");
   $("lbFav").onclick=async()=>{await toggleFavourite(c.id);openLB(c,options)};
   if(!options.readonly){
@@ -1968,8 +2026,9 @@ function trigCheck(){
 function renderPick(){
   const nat=$("dnat").value,kw=$("dkw").value.trim().toLowerCase();
   const l=ALL.filter(c=>(!nat||nats(c).includes(nat))&&(!kw||c.name.toLowerCase().includes(kw)));
-  $("dpick").innerHTML=l.slice(0,deckPickLimit).map(c=>`<button class="c${c.orient==="l"?" land":""}" data-add="${c.id}">${art(c,1)}<div class="t"><b>${h(c.name)}</b></div></button>`).join("")||'<p class="count">No cards found.</p>';
-  $("dpickMore").hidden=deckPickLimit>=l.length;
+  const start=(deckPickPage-1)*PAGE_SIZE;
+  $("dpick").innerHTML=l.slice(start,start+PAGE_SIZE).map(c=>`<button class="c${c.orient==="l"?" land":""}" data-add="${c.id}">${art(c,1)}<div class="t"><b>${h(c.name)}</b></div></button>`).join("")||'<p class="count">No cards found.</p>';
+  updatePager("dpickNav",deckPickPage,l.length,p=>{deckPickPage=p;renderPick()});
 }
 function renderDeck(){
   if(!zone(az))az=ZONES[0].id;
@@ -1983,7 +2042,7 @@ function renderDeck(){
 $("dpick").onclick=e=>{const b=e.target.closest("[data-add]");if(b)deckAdd(b.dataset.add,1)};
 $("dlist").onclick=e=>{const m=e.target.closest("[data-m]"),p=e.target.closest("[data-p]");if(m)deckAdd(m.dataset.m,-1);if(p)deckAdd(p.dataset.p,1)};
 $("ztabs").onclick=e=>{const b=e.target.closest("[data-z]");if(b){az=b.dataset.z;renderDeck()}};
-$("dpickMore").onclick=()=>{deckPickLimit+=40;renderPick()};$("dnat").onchange=()=>{deckPickLimit=40;renderPick()};$("dkw").oninput=debounce(()=>{deckPickLimit=40;renderPick()},250);
+$("dnat").onchange=()=>{deckPickPage=1;renderPick()};$("dkw").oninput=debounce(()=>{deckPickPage=1;renderPick()},250);
 $("dname").oninput=()=>deck.name=$("dname").value;
 
 const myAll=()=>Cloud?.configured&&Cloud.user?REMOTE_DECKS:(()=>{try{return JSON.parse(localStorage.getItem(MYKEY))||{}}catch(e){return{}}})();
@@ -2131,6 +2190,7 @@ td:first-child{width:40px;text-align:right;font-weight:bold}td:nth-child(3){widt
 
 
 
+
 </style></head><body><h1>${h(deck.name||"My deck")}</h1><p class="sub">${dtotal()} cards</p>
 <div class="meta"><div>Player: <span></span></div><div>ID: <span></span></div></div>${body}</body></html>`;
   const f=document.createElement("iframe");f.style.cssText="position:fixed;right:0;bottom:0;width:0;height:0;border:0";
@@ -2235,15 +2295,17 @@ function renderCollection(){
  a.sort((x,y)=>sort==="name"?String(x.card.name).localeCompare(String(y.card.name)):sort==="count-desc"?(y.count-x.count||tierOf(y.card)-tierOf(x.card)):sort==="rarity-asc"?(tierOf(x.card)-tierOf(y.card)||String(x.card.name).localeCompare(String(y.card.name))):(tierOf(y.card)-tierOf(x.card)||String(x.card.name).localeCompare(String(y.card.name))));
  const all=Object.values(COLLECTION).filter(v=>v?.card&&v.count>0),total=all.reduce((n,v)=>n+(+v.count||0),0);
  $("collectionSummary").textContent=total+" ใบ · "+all.length+" แบบ";
- box.innerHTML=a.slice(0,collectionLimit).map(v=>`<button type="button" class="collectionCard" data-collection-card="${h(v.id||v.card.id)}" aria-label="ดูรายละเอียด ${h(v.card.name||"การ์ด")}">${art(v.card,1)}<span class="colRarity">${h(rarityLabel(v.card.rarity)||"—")}</span><span class="colQty">×${v.count}</span><b>${h(v.card.name||"การ์ด")}</b><small>${h(v.card.no||"")}${v.productName?" · "+h(v.productName):""}</small></button>`).join("")||'<p class="dto">ยังไม่มีการ์ดในคลัง · เปิดซองเพื่อเริ่มสะสม</p>';
- $("collectionMore").hidden=collectionLimit>=a.length;
+ const start=(collectionPage-1)*PAGE_SIZE;
+ box.innerHTML=a.slice(start,start+PAGE_SIZE).map(v=>`<button type="button" class="collectionCard" data-collection-card="${h(v.id||v.card.id)}" aria-label="ดูรายละเอียด ${h(v.card.name||"การ์ด")}">${art(v.card,1)}<span class="colRarity">${h(rarityLabel(v.card.rarity)||"—")}</span><span class="colQty">×${v.count}</span><b>${h(v.card.name||"การ์ด")}</b><small>${h(v.card.no||"")}${v.productName?" · "+h(v.productName):""}</small></button>`).join("")||'<p class="dto">ยังไม่มีการ์ดในคลัง · เปิดซองเพื่อเริ่มสะสม</p>';
+ updatePager("collectionNav",collectionPage,a.length,p=>{collectionPage=p;renderCollection()});
 }
 let collectionCollapsed=false;
 try{collectionCollapsed=localStorage.getItem(COLLAPSEKEY)==="1"}catch(e){}
 function setCollectionCollapsed(collapsed){collectionCollapsed=!!collapsed;const body=$("collectionBody"),btn=$("collectionToggle");if(!body||!btn)return;body.hidden=collectionCollapsed;btn.setAttribute("aria-expanded",String(!collectionCollapsed));btn.textContent=collectionCollapsed?"⌄ แสดงคลัง":"⌃ ย่อคลัง";try{localStorage.setItem(COLLAPSEKEY,collectionCollapsed?"1":"0")}catch(e){}}
 $("collectionToggle").onclick=()=>setCollectionCollapsed(!collectionCollapsed);setCollectionCollapsed(collectionCollapsed);
-$("collectionMore").onclick=()=>{collectionLimit+=40;renderCollection()};$("collectionSearch").oninput=debounce(()=>{collectionLimit=40;renderCollection()},250);$("collectionSort").onchange=()=>{collectionLimit=40;renderCollection()};
+$("collectionSearch").oninput=debounce(()=>{collectionPage=1;renderCollection()},250);$("collectionSort").onchange=()=>{collectionPage=1;renderCollection()};
 $("collectionCards").onclick=e=>{const b=e.target.closest("[data-collection-card]");if(!b)return;const v=COLLECTION[b.dataset.collectionCard];if(v?.card)openLB({...v.card,pname:v.productName,collectionCount:v.count},{readonly:true,source:"collection"})};
+const ALL_PRODUCTS_ID="__all_products__",ALL_PRODUCTS_LABEL="รวมทุกโปรดัก";
 const PKW={},pkd=r=>{r=String(r).toUpperCase();return({C:60,N:60,U:40,R:25,RR:12,RRR:5,SR:3,PR:8})[r]??(r in FOILT?1.5:5)},pkw=r=>r in PKW?PKW[r]:pkd(r);
 try{Object.assign(PKW,JSON.parse(localStorage.getItem("cardlist-pkw")||"{}"))}catch(e){}
 const pkSaveW=()=>{const p=PRODUCTS.find(x=>x.id===$("pkP").value);if(p){p.gachaWeights={...PKW};save({skipCards:true})}else{try{localStorage.setItem("cardlist-pkw",JSON.stringify(PKW))}catch(e){}}};
@@ -2256,7 +2318,7 @@ const pitySave=()=>{if(Cloud?.configured)return;try{localStorage.setItem(PITYKEY
 const tierOf=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return r in FOILT?FOILT[r]:-1};
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 /* สุ่มจากข้อมูลสด ๆ ทุกครั้ง การ์ด/สินค้าที่เพิ่งเพิ่มจึงเข้าสุ่มทันที */
-const pkPool=()=>{const p=PRODUCTS.find(x=>x.id===$("pkP").value);return p&&Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP"):[]};
+const pkPool=()=>{if($("pkP").value===ALL_PRODUCTS_ID)return PRODUCTS.flatMap(p=>Array.isArray(p.cards)?p.cards:[]).filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP");const p=PRODUCTS.find(x=>x.id===$("pkP").value);return p&&Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP"):[]};
 
 function pkPityUI(){
   const pc=Math.round(PITY/PITYMAX*100),full=PITY>=PITYMAX;
@@ -2273,8 +2335,11 @@ function pkRates(){
 }
 function pkFill(){
   const cur=$("pkP").value;
-  $("pkP").innerHTML=PRODUCTS.map(p=>`<option value="${h(p.id)}">${h(p.name)}${p.cards&&p.cards.length?" ("+p.cards.length+" การ์ด)":" — ยังไม่มีการ์ด"}</option>`).join("")||'<option value="">— ยังไม่มีสินค้า —</option>';
-  if(PRODUCTS.some(p=>p.id===cur))$("pkP").value=cur;
+  const total=PRODUCTS.reduce((n,p)=>n+(Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP").length:0),0);
+  const allOpt=`<option value="${ALL_PRODUCTS_ID}">${ALL_PRODUCTS_LABEL}${total?" ("+total+" การ์ด)":" — ยังไม่มีการ์ด"}</option>`;
+  const productOpts=PRODUCTS.map(p=>`<option value="${h(p.id)}">${h(p.name)}${p.cards&&p.cards.length?" ("+p.cards.length+" การ์ด)":" — ยังไม่มีการ์ด"}</option>`).join("");
+  $("pkP").innerHTML=(allOpt+productOpts)||'<option value="">— ยังไม่มีสินค้า —</option>';
+  if(cur===ALL_PRODUCTS_ID||PRODUCTS.some(p=>p.id===cur))$("pkP").value=cur;
   pkRates();pkPityUI();
 }
 /* สุ่ม 1 ใบตามน้ำหนัก (W) จากกองที่ให้ */
@@ -2308,7 +2373,7 @@ function pkPack(pool){
 }
 
 /* ---------- หน้าจอเปิดซอง ---------- */
-const GA={open:false,pid:"",qty:0,packs:[],pi:0,cards:[],rev:0,all:[],pendingWrites:[],skipBusy:false,revealTimer:0};
+const GA={open:false,pid:"",qty:0,packs:[],pi:0,cards:[],rev:0,all:[],pendingWrites:[],skipBusy:false,skipCooldownUntil:0,skipTimer:0,revealTimer:0};
 	let tearP=0,tg=null,autoT=0,SOUND_ON=true,audioCtx=null;
 	try{SOUND_ON=localStorage.getItem("cardlist-gacha-sound")!=="0"}catch(e){}
 	function soundInit(){if(!SOUND_ON)return null;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;try{audioCtx=audioCtx||new AC();if(audioCtx.state==="suspended")audioCtx.resume();return audioCtx}catch(e){return null}}
@@ -2345,11 +2410,13 @@ const GA={open:false,pid:"",qty:0,packs:[],pi:0,cards:[],rev:0,all:[],pendingWri
 		function playCardRevealStinger(ctx,rarity){const p=CARD_REVEAL_STINGERS[soundRarityCode(rarity)];if(!p)return false;const t=Math.max(ctx.currentTime,rarityStingerQueueAt);rarityStingerQueueAt=t+.24;if(p.noise)noisePop(ctx,t,...p.noise);p.notes.forEach(([f,dt,dur,gain,type,end])=>tone(ctx,f,t+dt,dur,gain,type,end));return true}
 		function raritySoundKey(rarity){const r=soundRarityCode(rarity);if(["SEC","SSR","CSR"].includes(r))return "crimson";if(["SVR","GR","FR","FFR","OR","EMR","OVR","ORR","DSR","ZR","X"].includes(r))return "rainbow";if(r==="RRR")return "gold";if(["R","RR"].includes(r))return "silver";return "common"}
 		function gachaSound(kind,rarity=""){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;if(kind==="tear"){packTearSound(ctx,t)}else if(kind==="flip"){if(playCardRevealStinger(ctx,rarity))return;const p=RARITY_SOUNDS[raritySoundKey(rarity)]||RARITY_SOUNDS.common;noisePop(ctx,t,.055,.018,2600);tone(ctx,p.base,t+.015,.12,p.gain,p.type,p.top);p.notes.forEach((f,i)=>tone(ctx,f,t+.075+i*.065,.28,p.gain*.62,i%2?"sine":"triangle",f*1.015))}}
+	function craftSound(){const ctx=soundInit();if(!ctx)return;const t=ctx.currentTime;tone(ctx,261.6,t,.12,.035,"triangle",392);tone(ctx,392,t+.09,.16,.045,"sine",659.3);tone(ctx,523.3,t+.2,.24,.055,"triangle",784);tone(ctx,1046.5,t+.34,.3,.035,"sine",1318.5)}
+	function craftCelebration(){const layer=document.createElement("div");layer.className="craftFxLayer";const core=document.createElement("div");core.className="craftFxCore";layer.appendChild(core);for(let i=0;i<18;i++){const sp=document.createElement("i");sp.className="craftFxSpark";sp.style.setProperty("--dx",`${(Math.random()-.5)*70}vw`);sp.style.setProperty("--dy",`${(Math.random()-.5)*66}vh`);sp.style.animationDelay=`${Math.random()*.18}s`;layer.appendChild(sp)}document.body.appendChild(layer);craftSound();setTimeout(()=>layer.remove(),1500)}
 	function revealBurst(card){
 	  const r=String(card?.rarity||"").toUpperCase();if(["C","U","R","T"].includes(r))return;
 	  const color=(["RRR"].includes(r)?"255,190,45":r==="SSP"?"255,105,195":["SEC","SSR","CSR","SCR"].includes(r)?"255,92,70":["GR","SVR","FR","FFR","OR","EMR","OVR","ORR","DSR","ZR","X"].includes(r)?"205,90,255":"105,190,255");
-	  const f=document.createElement("div");f.className="ref-flash";f.style.setProperty("--reveal-color",color);document.body.appendChild(f);setTimeout(()=>f.remove(),1100);
-	  const n=r==="RRR"?10:6;for(let i=0;i<n;i++){const s=document.createElement("span");s.className="ref-burst-spark";s.style.setProperty("--reveal-color",color);s.style.left="50%";s.style.top="42%";s.style.setProperty("--dx",`${(Math.random()-.5)*42}vw`);s.style.setProperty("--dy",`${(Math.random()-.55)*44}vh`);s.style.animationDelay=`${Math.random()*.18}s`;document.body.appendChild(s);setTimeout(()=>s.remove(),2100)}
+	  const f=document.createElement("div");f.className="ref-flash";f.style.setProperty("--reveal-color",color);if(r==="RRR")f.style.opacity=".32";document.body.appendChild(f);setTimeout(()=>f.remove(),1100);
+	  const n=r==="RRR"?10:6;for(let i=0;i<n;i++){const s=document.createElement("span");s.className="ref-burst-spark";s.style.setProperty("--reveal-color",color);s.style.left="50%";s.style.top="42%";s.style.setProperty("--dx",`${(Math.random()-.5)*42}vw`);s.style.setProperty("--dy",`${(Math.random()-.55)*44}vh`);if(r==="RRR")s.style.opacity=".42";s.style.animationDelay=`${Math.random()*.18}s`;document.body.appendChild(s);setTimeout(()=>s.remove(),2100)}
 	}
 const trackW=()=>$("pkTrack").getBoundingClientRect().width||1;
 
@@ -2378,11 +2445,11 @@ function pkOpenStart(){
   if(!pool.length){$("pkMsg").textContent="";return notice("bad","ยังไม่มีการ์ดให้สุ่ม","สินค้านี้ยังไม่มีการ์ด เพิ่มการ์ดในหน้าสินค้าก่อนนะ",{auto:2800})}
   GA.pid=$("pkP").value;
   GA.qty=Math.max(1,Math.min(5,parseInt($("pkQty").value)||1));$("pkQty").value=GA.qty;
-  clearTimeout(GA.revealTimer);GA.skipBusy=false;
+  clearTimeout(GA.revealTimer);clearInterval(GA.skipTimer);GA.skipBusy=false;GA.skipCooldownUntil=0;GA.skipTimer=0;
   GA.pool=pool;GA.packs=[];GA.all=[];GA.pendingWrites=[];GA.recordedPI=-1;
   GA.pi=0;pitySave();pkSaveW();
   const p=PRODUCTS.find(x=>x.id===GA.pid);
-  $("gTitle").textContent="เปิดซอง · "+(p?p.name:"");
+  $("gTitle").textContent="เปิดซอง · "+(p?p.name:(GA.pid===ALL_PRODUCTS_ID?ALL_PRODUCTS_LABEL:""));
   $("pkMsg").textContent="เปิด "+GA.qty+" ซอง · "+(GA.qty*PACKSIZE)+" ใบ · Pity "+PITY+"/"+PITYMAX;
   if(!$("gacha").open)$("gacha").showModal();
   GA.open=true;document.body.classList.add("gacha-effects-on");
@@ -2453,16 +2520,19 @@ function pkRevealAll(){
     GA.pi=GA.qty-1;pitySave();pkFinish();
   },wait);
 }
-function pkSkipHTML(){return GA.pi<GA.qty-1?'<button class="btn sm" data-g="skip">Skip · ข้ามซองที่เหลือ</button>':""}
+function pkSkipHTML(){if(GA.pi>=GA.qty-1)return "";const left=Math.max(0,GA.skipCooldownUntil-Date.now());return `<button class="btn sm" data-g="skip" aria-label="ข้ามซองที่เหลือและรอคูลดาวน์ 3 วินาที" ${left?"disabled":""}>Skip · ข้ามซองที่เหลือ${left?" (รอ "+Math.ceil(left/1000)+" วิ)":""}</button>`}
 function pkSkipAll(){
-  if(!GA.open||GA.qty<2||GA.skipBusy||GA.pi>=GA.qty-1)return;
-  GA.skipBusy=true;clearInterval(autoT);clearTimeout(GA.revealTimer);
+  if(!GA.open||GA.qty<2||GA.skipBusy||GA.pi>=GA.qty-1||Date.now()<GA.skipCooldownUntil)return;
+  GA.skipCooldownUntil=Date.now()+3000;GA.skipBusy=true;clearInterval(autoT);clearTimeout(GA.revealTimer);
   if(!$('gStagePack').hidden)pkShowCards();
   $('gCards').querySelectorAll('.pkCard').forEach(e=>e.classList.add('open'));GA.rev=GA.cards.length;
-  for(let i=GA.pi+1;i<GA.qty;i++){
-    GA.pi=i;const pack=pkPack(GA.pool||pkPool());GA.packs[i]=pack;GA.cards=pack;GA.rev=pack.length;GA.all.push(...pack);collectionAdd(pack);GA.recordedPI=i;
-  }
-  GA.pi=GA.qty-1;pitySave();GA.skipBusy=false;pkFinish();
+  const waitSkip=()=>{const left=Math.max(0,GA.skipCooldownUntil-Date.now());if(left>0){$('gFoot').innerHTML=`<button class="btn sm" data-g="skip" disabled>Skip · ข้ามซองที่เหลือ (รอ ${Math.ceil(left/1000)} วิ)</button><span class="gfootmsg">กำลังข้ามซองที่เหลือ ป้องกันการกดซ้ำ</span>`;return}clearInterval(GA.skipTimer);GA.skipTimer=0;
+    for(let i=GA.pi+1;i<GA.qty;i++){
+      GA.pi=i;const pack=pkPack(GA.pool||pkPool());GA.packs[i]=pack;GA.cards=pack;GA.rev=pack.length;GA.all.push(...pack);collectionAdd(pack);GA.recordedPI=i;
+    }
+    GA.pi=GA.qty-1;pitySave();GA.skipBusy=false;pkFinish();
+  };
+  waitSkip();GA.skipTimer=setInterval(waitSkip,100);
 }
 function pkPackDone(){
   const more=GA.pi<GA.qty-1;
@@ -2491,7 +2561,7 @@ function pkFinish(){
     if(failed.length)notice("ask","แสดงสรุปแล้ว","การบันทึกคลังบางรายการยังไม่สำเร็จ: "+String(failed[0].reason?.message||failed[0].reason||"ลองใหม่ภายหลัง"),{auto:6500});
   });
 }
-function pkClose(){$("gacha").close();document.body.classList.remove("gacha-effects-on")}
+function pkClose(){clearInterval(GA.skipTimer);GA.skipTimer=0;GA.skipBusy=false;$("gacha").close();document.body.classList.remove("gacha-effects-on")}
 
 /* ---------- เหตุการณ์ ---------- */
 $("t5").addEventListener("click",pkFill);
@@ -2505,7 +2575,7 @@ $("pkSound").checked=SOUND_ON;
 $("pkSound").onchange=()=>{SOUND_ON=$("pkSound").checked;try{localStorage.setItem("cardlist-gacha-sound",SOUND_ON?"1":"0")}catch(e){}if(SOUND_ON)soundInit()};
 $("pkGo").onclick=()=>{if(SOUND_ON)soundInit();pkOpenStart()};
 $("gClose").onclick=pkClose;
-$("gacha").addEventListener("close",()=>{document.body.classList.remove("gacha-effects-on");GA.open=false;GA.skipBusy=false;clearTimeout(GA.revealTimer);clearInterval(autoT);pkPityUI()});
+$("gacha").addEventListener("close",()=>{document.body.classList.remove("gacha-effects-on");GA.open=false;GA.skipBusy=false;clearInterval(GA.skipTimer);GA.skipTimer=0;clearTimeout(GA.revealTimer);clearInterval(autoT);pkPityUI()});
 
 /* ลากที่แทร็ก */
 $("pkTrack").addEventListener("pointerdown",e=>{
@@ -2586,7 +2656,7 @@ async function renderCommunity(){
       return `<article class="featureCard"><span class="feedBadge">SHARED DECK</span><h3>${h(d.name)}</h3><p>${h(d.description||"")}</p><p class="featureMeta">โดย ${h(d.owner_name)} · ${new Date(d.shared_at).toLocaleString()}</p><div class="featureActions"><button class="btn primary" data-copy-deck="${h(d.id)}">คัดลอกเข้าเด็คของฉัน</button></div></article>`}).join("")||'<p class="dto">ยังไม่มีโพสต์ · แชร์เด็คหรือกดแชร์ผลสุ่ม RRR+ หลังเปิดซองเพื่อเริ่ม Feed</p>';
   }catch(e){box.innerHTML=`<p class="bad">โหลด Feed ไม่สำเร็จ: ${h(e.message)}</p>`}
 }
-$("craftNew").onclick=()=>recipeForm();$("craftRecipes").addEventListener("click",async e=>{const craftBtn=e.target.closest("[data-craft]");if(craftBtn){if(!confirm("คราฟต์ตามสูตรนี้และใช้การ์ดจากคลังส่วนตัวหรือไม่?"))return;try{await Cloud.craft(craftBtn.dataset.craft);COLLECTION=await Cloud.loadCollection();renderCollection();await renderCraft();notice("ok","คราฟต์สำเร็จ","การ์ดผลลัพธ์เพิ่มเข้าในคลังส่วนตัวแล้ว",{auto:3000})}catch(x){alert("คราฟต์ไม่สำเร็จ: "+x.message)}return}const edit=e.target.closest("[data-edit-recipe]");if(edit){const r=(await Cloud.loadRecipes()).find(x=>x.id===edit.dataset.editRecipe);if(r)recipeForm(r);return}const disable=e.target.closest("[data-disable-recipe]");if(disable){const r=(await Cloud.loadRecipes()).find(x=>x.id===disable.dataset.disableRecipe);if(r&&confirm("ปิดสูตรนี้หรือไม่?")){try{await Cloud.saveRecipe({...r,is_active:false});await renderCraft()}catch(x){alert(x.message)}}}});
+$("craftNew").onclick=()=>recipeForm();$("craftRecipes").addEventListener("click",async e=>{const craftBtn=e.target.closest("[data-craft]");if(craftBtn){if(craftBtn.disabled)return;craftBtn.disabled=true;craftBtn.classList.add("crafting");craftCelebration();try{await Cloud.craft(craftBtn.dataset.craft);COLLECTION=await Cloud.loadCollection();renderCollection();await renderCraft();notice("ok","คราฟต์สำเร็จ","การ์ดผลลัพธ์เพิ่มเข้าในคลังส่วนตัวแล้ว",{auto:3000})}catch(x){craftBtn.disabled=false;craftBtn.classList.remove("crafting");alert("คราฟต์ไม่สำเร็จ: "+x.message)}return}const edit=e.target.closest("[data-edit-recipe]");if(edit){const r=(await Cloud.loadRecipes()).find(x=>x.id===edit.dataset.editRecipe);if(r)recipeForm(r);return}const disable=e.target.closest("[data-disable-recipe]");if(disable){const r=(await Cloud.loadRecipes()).find(x=>x.id===disable.dataset.disableRecipe);if(r&&confirm("ปิดสูตรนี้หรือไม่?")){try{await Cloud.saveRecipe({...r,is_active:false});await renderCraft()}catch(x){alert(x.message)}}}});
 
 $("t6").addEventListener("click",renderCraft);$("t7").addEventListener("click",renderCollection);$("t8").addEventListener("click",renderRarityShowcase);
 
