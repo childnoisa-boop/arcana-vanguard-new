@@ -1627,7 +1627,7 @@ const CARD_RARITY_ORDER=RARITY_ORDER_HIGH;
 const productRarityRank=c=>rarityRankHigh(c);
 	const productOtherRarity=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return CARD_RARITY_ORDER[r]===undefined?r:""};
 	const productGradeRank=c=>{const g=nv(c&&c.grade);return g===null?-1:g};
-	const productCardSort=(a,b)=>productRarityRank(a)-productRarityRank(b)||productOtherRarity(a).localeCompare(productOtherRarity(b),undefined,{numeric:true})||productNationRank(a)-productNationRank(b)||productGradeRank(b)-productGradeRank(a)||String(natTxt(a)).localeCompare(String(natTxt(b)))||String(a.name||"").localeCompare(String(b.name||""),undefined,{numeric:true})||num(a.no,b.no);
+	const productCardSort=(a,b)=>{const ap=productRarityRank(a)<RARITY_ORDER_HIGH.RRR?1:0,bp=productRarityRank(b)<RARITY_ORDER_HIGH.RRR?1:0;return ap-bp||productRarityRank(a)-productRarityRank(b)||productOtherRarity(a).localeCompare(productOtherRarity(b),undefined,{numeric:true})||productNationRank(a)-productNationRank(b)||productGradeRank(b)-productGradeRank(a)||String(natTxt(a)).localeCompare(String(natTxt(b)))||String(a.name||"").localeCompare(String(b.name||""),undefined,{numeric:true})||num(a.no,b.no)};
 	const tsort=(a,b)=>{const i=CTYPES.indexOf(a),j=CTYPES.indexOf(b);return (i<0?999:i)-(j<0?999:j)||num(a,b)};
 
 /* Any plain picture that turns out wider than tall is shown landscape automatically */
