@@ -191,9 +191,6 @@
       if (catalogCoreSaved) out.catalogSaved = true;
       throw out;
     };
-    // Save shared UI settings first so Nations / types / zones survive even if
-    // a catalog write is rejected by an older Supabase policy.
-    if (db.settings) await saveAppSettings(db.settings);
     const uploadedImages = new Map();
     const publicImage = async (value, name) => {
       if (!String(value || '').startsWith('data:image/')) return value || null;
@@ -204,6 +201,12 @@
       product.cover = await publicImage(product.cover, `${product.id}-pack`);
       product.packCover = await publicImage(product.packCover, `${product.id}-pack-cover`);
       for (const card of product.cards || []) card.img = await publicImage(card.img, `${card.id}-card`);
+    }
+    // Save shared UI settings, including the aggregate pack cover, so every
+    // signed-in user receives the same image instead of a browser-local copy.
+    if (db.settings) {
+      const settings = { ...db.settings, allProductsCover: await publicImage(db.settings.allProductsCover, 'all-products-pack') };
+      await saveAppSettings(settings);
     }
     const products = (db.products || []).map((p) => ({
       id: p.id,
@@ -269,6 +272,7 @@
       .on('postgres_changes', { event: '*', schema: 'public', table: 'catalog_products' }, onChange)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'catalog_cards' }, onChange)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'product_cards' }, onChange)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'app_settings', filter: 'setting_key=eq.catalog_ui' }, onChange)
       .subscribe();
     return () => { client.removeChannel(channel); };
   }
@@ -358,6 +362,14 @@
   async function recordPack(productId, cards) {
     required();
     const { data, error } = await client.rpc('record_pack_open', { p_product_id: productId, p_card_ids: cards.map((x) => x.id) });
+    fail(error); return data;
+  }
+  async function recordMixedPack(cards, productIds) {
+    required();
+    const { data, error } = await client.rpc('record_mixed_pack_open', {
+      p_card_ids: cards.map((x) => x.id),
+      p_product_ids: productIds,
+    });
     fail(error); return data;
   }
   async function loadDecks() {
@@ -452,7 +464,7 @@
     configured, get user() { return user; }, get admin() { return admin; }, client,
     init, signIn, signUp, signOut,
     loadCatalog, saveCatalog, loadAppSettings, saveAppSettings, subscribeCatalog, loadBanlist, saveBanlist, loadFavourites, setFavourite, loadCollection, loadGachaState,
-    setPityReset, resetPity, recordPack,
+    setPityReset, resetPity, recordPack, recordMixedPack,
     loadDecks, saveDeck, deleteDeck, loadSharedDecks, copySharedDeck,
     loadRecipes, saveRecipe, craft, loadCraftHistory, uploadDataUri,
   });

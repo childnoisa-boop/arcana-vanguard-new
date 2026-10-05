@@ -1238,17 +1238,17 @@ body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0
           <div class="pity" id="pkPity">
             <div class="pityTop"><b>Pity</b><span id="pkPityTxt">0/200</span></div>
             <div class="pityBar"><i id="pkPityBar"></i></div>
-            <small class="dto" style="margin:0">พอ Pity เต็ม 200 ใบถัดไปจะการันตีการ์ดระดับสูงกว่า RRR (SVR / SEC …) แล้วรีเซ็ตกลับเป็น 0</small>
+            <small class="dto" style="margin:0">พอ Pity เต็ม 200 ใบถัดไปจะการันตีการ์ดระดับ SVR ขึ้นไป แล้วรีเซ็ตกลับเป็น 0</small>
           </div>
           <div class="pkacts">
-            <label class="chk" style="margin:0;display:flex;gap:6px;align-items:center"><input type="checkbox" id="pkRst" checked style="width:auto"> รีเซ็ต Pity เมื่อสุ่มได้การ์ดสูงกว่า RRR</label>
+            <label class="chk" style="margin:0;display:flex;gap:6px;align-items:center"><input type="checkbox" id="pkRst" checked style="width:auto"> รีเซ็ต Pity เมื่อสุ่มได้การ์ดระดับ SVR ขึ้นไป</label>
             <button class="btn primary" id="pkGo">เปิดซอง</button>
             <button class="btn sm" id="pkReset">รีเซ็ต Pity</button>
           </div>
         </div>
         <p class="dto" id="pkTierNote" style="margin:12px 0 0"></p>
       </div>
-      <details id="gachaRatesAdmin" class="admin-only" style="margin-top:14px"><summary style="padding:8px 12px;cursor:pointer;font-weight:600">อัตราดรอป (weight) · Admin</summary><div class="pkr" id="pkR" style="padding:10px 12px"></div><p class="dto" style="margin:0 0 6px">เปอร์เซ็นต์คำนวณจาก Weight ของแต่ละเรต (ก่อนผลจาก Pity) · ปรับ Weight ได้ · โอกาส 0.2% ที่ทั้ง 7 ใบเป็น RRR ขึ้นไป (ต้องมีการ์ด RRR+ ไม่ซ้ำกันอย่างน้อย 7 แบบ)</p></details>
+      <details id="gachaRatesAdmin" class="admin-only" style="margin-top:14px"><summary style="padding:8px 12px;cursor:pointer;font-weight:600">อัตราดรอป (weight) · Admin</summary><div class="pkr" id="pkR" style="padding:10px 12px"></div><p class="dto" style="margin:0 0 6px">เปอร์เซ็นต์คำนวณจาก Weight ของแต่ละเรต (ก่อนผลจาก Pity) · ปรับ Weight ได้ · โอกาส 0.2% ที่ทั้ง 7 ใบเป็นการ์ดระดับสูงในกอง (ต้องมีการ์ดระดับสูงอย่างน้อย 7 แบบ)</p></details>
       <p class="count" id="pkMsg" aria-live="polite"></p>
       <div class="packStats"><b id="pkLifetime">เปิดแล้ว 0 ซอง</b><span>เรตข้างต้นเป็น Weight ของการสุ่มในสินค้านี้ ไม่ใช่เปอร์เซ็นต์ตรง ๆ; ระบบจะแสดงสัดส่วนคำนวณให้เมื่อมีข้อมูลครบ</span></div>
       <section class="collectionProgress gachaProgressOnly" aria-labelledby="gachaProgressTitle"><div class="collectionProgressHero"><div><span class="collectionProgressEyebrow">Collection Progress</span><h4 id="gachaProgressTitle">ความคืบหน้าการสะสม</h4><p>ดูรายละเอียดทั้งหมดได้ที่เมนู กระเป๋า</p></div><strong class="collectionProgressPct" id="gachaProgressPct">0%</strong></div><div class="progressTrack" aria-hidden="true"><i id="gachaProgressBar" style="width:0%"></i></div><div class="collectionProgressStats"><div class="collectionProgressStat"><b id="gachaProgressOwned">0</b><small>แบบที่มีแล้ว</small></div><div class="collectionProgressStat"><b id="gachaProgressTotal">0</b><small>การ์ดทั้งหมด</small></div></div></section>
@@ -1356,7 +1356,7 @@ const DEFT=["Normal Unit","Trigger Unit","Normal Order","Set Order","Blitz Order
 const DEFCLANS=["Royal Paladin","Shadow Paladin","Gold Paladin","Kagero","Narukami","Genesis","Oracle Think Tank","Angel Feather","Aqua Force","Bermuda Triangle","Nova Grappler","Dimension Police","Link Joker","Dark Irregulars","Pale Moon","Spike Brothers","Murakumo","Nubatama","Tachikaze","Megacolony","Great Nature","Neo Nectar","Granblue","Gear Chronicle"];
 const Cloud=window.CardCloud;
 let PRODUCTS=[],NATIONS=[],ZONES=[],CTYPES=DEFT.slice(),PW="",loaded=false,REMOTE_DECKS={},stopRealtime=null,refreshBusy=false;
-const DB=()=>({products:PRODUCTS,nations:NATIONS,zones:ZONES,ctypes:CTYPES,settings:{nations:NATIONS,zones:ZONES,ctypes:CTYPES}});
+const DB=()=>({products:PRODUCTS,nations:NATIONS,zones:ZONES,ctypes:CTYPES,settings:{nations:NATIONS,zones:ZONES,ctypes:CTYPES,allProductsCover}});
 const BANKEY="cardlist-banlist-v1",COLKEY="cardlist-pull-collection-v1",COLLAPSEKEY="cardlist-collection-collapsed-v1";
 let BANLIST=[],COLLECTION={};
 try{BANLIST=JSON.parse(localStorage.getItem(BANKEY)||"[]");if(!Array.isArray(BANLIST))BANLIST=[]}catch(e){BANLIST=[]}
@@ -1414,6 +1414,7 @@ async function load(){
       NATIONS=Array.isArray(settings?.nations)?settings.nations.map(n=>({...n})):DEFN.map(x=>({...x}));
       ZONES=Array.isArray(settings?.zones)&&settings.zones.length?settings.zones.map(z=>({...z})):DEFZ.map(x=>({...x}));
       CTYPES=Array.isArray(settings?.ctypes)?[...settings.ctypes]:DEFT.slice();
+      allProductsCover=String(settings?.allProductsCover||"");
       FAVS=new Set(await Cloud.loadFavourites());BANLIST=await Cloud.loadBanlist();COLLECTION=await Cloud.loadCollection();
       const gs=await Cloud.loadGachaState();PITY=Math.max(0,Math.min(PITYMAX,Number(gs.pity_count)||0));PACKS_OPENED=Number(gs.packs_opened)||0;PITYRST=gs.pity_reset_on_high!==false;
       REMOTE_DECKS=await Cloud.loadDecks();
@@ -1491,6 +1492,10 @@ function lay(fit,ori){
 const FOILT={R:0,RR:0,RRR:1,SR:1,SVR:2,GR:2,FR:2,FFR:2,OR:2,EMR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SSP:3,SEC:4,SSR:4,CSR:4,SCR:4};
 const FOILCLASS={R:0,RR:5,RRR:1,SR:6,SVR:2,GR:2,FR:2,FFR:7,OR:2,EMR:2,OVR:2,ORR:2,DSR:2,ZR:2,X:2,SSP:3,SEC:4,SSR:4,CSR:4,SCR:4};
 const rarityLabel=r=>{const x=String(r??"").trim().toUpperCase();if(x==="N"||x==="U")return "C";return x==="OVR"?"EMR":x==="SCR"?"CSR":x};
+const RARITY_ORDER_HIGH={X:0,DSR:1,EMR:2,CSR:3,GR:4,SSR:5,SEC:6,SSP:7,ZR:8,ORR:9,SVR:10,RRR:11,SR:12,RR:13,R:14,C:15};
+const rarityRankHigh=c=>{const r=rarityLabel(typeof c==="string"?c:c?.rarity);return RARITY_ORDER_HIGH[r]??99};
+const PITY_HIGH_RARITIES=new Set(["SVR","ORR","ZR","SSP","SEC","SSR","GR","CSR","EMR","DSR","X"]);
+const isPityHigh=c=>PITY_HIGH_RARITIES.has(rarityLabel(c?.rarity));
 const foil=c=>{const r=rarityLabel(c&&c.rarity);return r in FOILCLASS?" f"+FOILCLASS[r]:""};
 const art=(c,nat)=>{
   const src=c.img||c.image_url||c.imageUrl||c.image||c.picture||c.card_image||"";
@@ -1614,12 +1619,12 @@ const nv=v=>{const n=parseFloat(v);return v===""||v==null||isNaN(n)?null:n};
 	  return (x-y)*(d==="desc"?-1:1)||num(a.pname||"",b.pname||"")||num(a.no,b.no)}};
 	/* Vanguard card-list order: RRR → RR → R → C → every other rarity.
 	   Within each rarity: official nation order first, then Grade 3 → 2 → 1 → 0. */
-	const CARD_RARITY_ORDER={RRR:0,RR:1,R:2,C:3};
+const CARD_RARITY_ORDER=RARITY_ORDER_HIGH;
 	const CARD_NATION_ORDER=["dragon empire","dark states","brandt gate","keter sanctuary","stoicheia","lyrical monasterio"];
 	const CARD_NATION_ALIASES={"dragon":"dragon empire","dragon empire":"dragon empire","dark state":"dark states","dark states":"dark states","brantgate":"brandt gate","brandtgate":"brandt gate","brandt gate":"brandt gate","keter":"keter sanctuary","keter sanctuary":"keter sanctuary","stocia":"stoicheia","stoicheia":"stoicheia","lilycal":"lyrical monasterio","lyrical":"lyrical monasterio","lyrical monasterio":"lyrical monasterio"};
 	const nationKey=n=>String(n||"").trim().toLowerCase().replace(/\s+/g," ");
 	const productNationRank=c=>{const names=nats(c).map(n=>CARD_NATION_ALIASES[nationKey(n)]||nationKey(n));const ranks=names.map(n=>{const fixed=CARD_NATION_ORDER.indexOf(n);if(fixed>=0)return fixed;const configured=NATIONS.findIndex(x=>nationKey(x.name)===n);return 100+(configured<0?999:configured)});return ranks.length?Math.min(...ranks):999};
-	const productRarityRank=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return CARD_RARITY_ORDER[r]??4};
+const productRarityRank=c=>rarityRankHigh(c);
 	const productOtherRarity=c=>{const r=String(c&&c.rarity||"").trim().toUpperCase();return CARD_RARITY_ORDER[r]===undefined?r:""};
 	const productGradeRank=c=>{const g=nv(c&&c.grade);return g===null?-1:g};
 	const productCardSort=(a,b)=>productRarityRank(a)-productRarityRank(b)||productOtherRarity(a).localeCompare(productOtherRarity(b),undefined,{numeric:true})||productNationRank(a)-productNationRank(b)||productGradeRank(b)-productGradeRank(a)||String(natTxt(a)).localeCompare(String(natTxt(b)))||String(a.name||"").localeCompare(String(b.name||""),undefined,{numeric:true})||num(a.no,b.no);
@@ -2325,7 +2330,9 @@ function collectionAdd(cards){const prod=PRODUCTS.find(p=>p.id===GA.pid),name=pr
   const valid=cards.map((r,i)=>({r,i,c:r?.c})).filter(x=>x.c);
   const groups=new Map();
   valid.forEach(x=>{const pid=GA.pid===ALL_PRODUCTS_ID?(x.r.packProductId||x.c.pid||PRODUCTS[0]?.id):GA.pid;if(pid){if(!groups.has(pid))groups.set(pid,[]);groups.get(pid).push(x)}});
-  const writes=[...groups].map(([pid,items])=>Cloud.recordPack(pid,items.map(x=>x.c)).then(packId=>{items.forEach((x,slot)=>{x.r.packOpenId=packId;x.r.slotNumber=slot+1});return packId}));
+  const writes=GA.pid===ALL_PRODUCTS_ID
+    ? [Cloud.recordMixedPack(valid.map(x=>x.c),valid.map(x=>x.r.packProductId||x.c.pid)).then(packId=>{valid.forEach((x,slot)=>{x.r.packOpenId=packId;x.r.slotNumber=slot+1});return packId})]
+    : [...groups].map(([pid,items])=>Cloud.recordPack(pid,items.map(x=>x.c)).then(packId=>{items.forEach((x,slot)=>{x.r.packOpenId=packId;x.r.slotNumber=slot+1});return packId}));
   const pending=Promise.all(writes).then(async()=>{
    try{
      const state=await Cloud.loadGachaState();PITY=Number(state.pity_count)||0;PACKS_OPENED=Number(state.packs_opened)||0;COLLECTION=await Cloud.loadCollection();pkPityUI();renderPackCount();renderCollection();
@@ -2353,7 +2360,7 @@ function renderCollection(){
  renderCollectionProgress();
  const q=$("collectionSearch").value.trim().toLowerCase(),sort=$("collectionSort").value;
  let a=Object.values(COLLECTION).filter(v=>v?.card&&v.count>0&&(!q||(String(v.card.name||"")+" "+String(v.card.no||"")+" "+String(v.card.rarity||"")+" "+String(v.productName||"")).toLowerCase().includes(q)));
- a.sort((x,y)=>sort==="name"?String(x.card.name).localeCompare(String(y.card.name)):sort==="count-desc"?(y.count-x.count||tierOf(y.card)-tierOf(x.card)):sort==="rarity-asc"?(tierOf(x.card)-tierOf(y.card)||String(x.card.name).localeCompare(String(y.card.name))):(tierOf(y.card)-tierOf(x.card)||String(x.card.name).localeCompare(String(y.card.name))));
+ a.sort((x,y)=>sort==="name"?String(x.card.name).localeCompare(String(y.card.name)):sort==="count-desc"?(y.count-x.count||rarityRankHigh(x.card)-rarityRankHigh(y.card)):sort==="rarity-asc"?(rarityRankHigh(y.card)-rarityRankHigh(x.card)||String(x.card.name).localeCompare(String(y.card.name))):(rarityRankHigh(x.card)-rarityRankHigh(y.card)||String(x.card.name).localeCompare(String(y.card.name))));
  const all=Object.values(COLLECTION).filter(v=>v?.card&&v.count>0),total=all.reduce((n,v)=>n+(+v.count||0),0);
  $("collectionSummary").textContent=total+" ใบ · "+all.length+" แบบ";
  const start=(collectionPage-1)*PAGE_SIZE;
@@ -2370,7 +2377,7 @@ const ALL_PRODUCTS_ID="__all_products__",ALL_PRODUCTS_LABEL="รวมทุก�
 const PKW={},pkd=r=>{r=String(r).toUpperCase();return({C:60,N:60,U:40,R:25,RR:12,RRR:5,SR:3,PR:8})[r]??(r in FOILT?1.5:5)},pkw=r=>r in PKW?PKW[r]:pkd(r);
 try{Object.assign(PKW,JSON.parse(localStorage.getItem("cardlist-pkw")||"{}"))}catch(e){}
 const pkSaveW=()=>{const p=PRODUCTS.find(x=>x.id===$("pkP").value);if(p){p.gachaWeights={...PKW};save({skipCards:true})}else{try{localStorage.setItem("cardlist-pkw",JSON.stringify(PKW))}catch(e){}}};
-const PITYKEY="cardlist-pity",PITYMAX=200,PITYMIN=2,PACKSIZE=7;
+const PITYKEY="cardlist-pity",PITYMAX=200,PACKSIZE=7;
 let PITY=0,PITYRST=true,PACKS_OPENED=0;
 try{PITY=Math.max(0,Math.min(PITYMAX,parseInt(localStorage.getItem(PITYKEY))||0))}catch(e){}
 try{PITYRST=localStorage.getItem(PITYKEY+"-reset")!=="0"}catch(e){}
@@ -2385,21 +2392,21 @@ function pkPityUI(){
   const pc=Math.round(PITY/PITYMAX*100),full=PITY>=PITYMAX;
   $("pkPityTxt").textContent=PITY+"/"+PITYMAX+(full?" · พร้อมการันตี!":"");
   $("pkPityBar").style.width=pc+"%";$("pkPity").classList.toggle("full",full);
-  $("gPity").textContent=PITY+"/"+PITYMAX;$("gPityBar").style.width=pc+"%";renderPackCount();
+  $("gPity").textContent=PITY+"/"+PITYMAX;$("gPityBar").style.width=pc+"%";$("gPity").closest(".gpity").hidden=Boolean(GA.open);renderPackCount();
 }
 function pkRates(){
   const product=PRODUCTS.find(x=>x.id===$("pkP").value);Object.keys(PKW).forEach(k=>delete PKW[k]);Object.assign(PKW,product?.gachaWeights||{});
-  const pool=pkPool(),rs=[...new Set(pool.map(c=>String(c.rarity||"").trim()))],total=rs.reduce((n,r)=>n+Math.max(0,pkw(r)),0);
+  const pool=pkPool(),rs=[...new Set(pool.map(c=>String(c.rarity||"").trim()))].sort((a,b)=>rarityRankHigh(a)-rarityRankHigh(b)),total=rs.reduce((n,r)=>n+Math.max(0,pkw(r)),0);
   $("pkR").innerHTML=rs.map(r=>`<div><label>${h(rarityLabel(r)||"(ไม่ระบุ)")} <small>${pool.filter(c=>String(c.rarity||"").trim()===r).length} ใบ · ${total?((Math.max(0,pkw(r))/total)*100).toFixed(2):"0.00"}%</small></label><input type="number" min="0" step="0.5" data-r="${h(r)}" value="${pkw(r)}"></div>`).join("")||'<p class="dto">สินค้านี้ยังไม่มีการ์ดที่เปิดสุ่มได้</p>';
-  const hi=[...new Set(pool.filter(c=>tierOf(c)>=PITYMIN).map(c=>rarityLabel(c.rarity)||"(ไม่ระบุ)"))];
-  $("pkTierNote").textContent=hi.length?"การ์ดที่ถือว่า “สูงกว่า RRR” ในสินค้านี้: "+hi.join(" / "):"สินค้านี้ยังไม่มีการ์ดระดับสูงกว่า RRR — ถ้า Pity เต็ม จะสุ่มจากระดับสูงสุดที่มีให้แทน";
+  const hi=[...new Set(pool.filter(isPityHigh).map(c=>rarityLabel(c.rarity)||"(ไม่ระบุ)"))];
+  $("pkTierNote").textContent=hi.length?"การ์ดที่ใช้ลด/รีเซ็ต Pity ในสินค้านี้: "+hi.join(" / "):"สินค้านี้ยังไม่มีการ์ดระดับ SVR ขึ้นไป — ถ้า Pity เต็ม จะสุ่มจากระดับสูงสุดที่มีให้แทน";
 }
 const ALL_PRODUCTS_COVER_KEY="cardlist-all-products-cover";
 let allProductsCover="";
 try{allProductsCover=localStorage.getItem(ALL_PRODUCTS_COVER_KEY)||""}catch(e){}
 function syncAllProductsCoverUI(){const box=$("allProductsCoverBox"),img=$("allProductsCoverPreview");if(!box||!img)return;const active=$("pkP").value===ALL_PRODUCTS_ID;box.hidden=!active;img.hidden=!active||!allProductsCover;img.src=allProductsCover||""}
-$("allProductsCover")?.addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)return;try{allProductsCover=await pic(f);localStorage.setItem(ALL_PRODUCTS_COVER_KEY,allProductsCover);syncAllProductsCoverUI()}catch(x){alert("เพิ่มรูปปกไม่สำเร็จ: "+x.message)}e.target.value=""});
-$("clearAllProductsCover")?.addEventListener("click",()=>{allProductsCover="";try{localStorage.removeItem(ALL_PRODUCTS_COVER_KEY)}catch(e){}syncAllProductsCoverUI()});
+$("allProductsCover")?.addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)return;try{allProductsCover=await pic(f);try{localStorage.setItem(ALL_PRODUCTS_COVER_KEY,allProductsCover)}catch(x){}syncAllProductsCoverUI();save()}catch(x){alert("เพิ่มรูปปกไม่สำเร็จ: "+x.message)}e.target.value=""});
+$("clearAllProductsCover")?.addEventListener("click",()=>{allProductsCover="";try{localStorage.removeItem(ALL_PRODUCTS_COVER_KEY)}catch(e){}syncAllProductsCoverUI();save()});
 function pkFill(){
   const cur=$("pkP").value;
   const total=PRODUCTS.reduce((n,p)=>n+(p.includeAllProducts===false?0:(Array.isArray(p.cards)?p.cards.filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP").length:0)),0);
@@ -2417,35 +2424,29 @@ function pkPickFrom(src){
   if(tot<=0)k=rnd(ks);else{let x=Math.random()*tot;k=ks.find(q=>(x-=Math.max(0,pkw(q)))<0)||ks[ks.length-1]}
   return rnd(by[k]);
 }
-/* สุ่ม 1 ใบ พร้อมคิด Pity: เต็ม 200 → การันตีระดับสูงกว่า RRR */
+/* สุ่ม 1 ใบ พร้อมคิด Pity: เต็ม 200 → การันตีระดับ SVR ขึ้นไป */
 function pkOne(pool,used){
   const free=pool.filter(c=>!used.has(c.id)),src=free.length?free:pool;
   let c=null;
   if(PITY>=PITYMAX){
-    const hi=src.filter(x=>tierOf(x)>=PITYMIN);
-    const hiAll=pool.filter(x=>tierOf(x)>=PITYMIN);
+    const hi=src.filter(isPityHigh);
+    const hiAll=pool.filter(isPityHigh);
     c=pkPickFrom(hi.length?hi:(hiAll.length?hiAll:src));
   }else c=pkPickFrom(src);
   if(!c)return null;
-  const guar=tierOf(c)>=PITYMIN;
+  const guar=isPityHigh(c);
   if(guar&&(PITY>=PITYMAX||PITYRST))PITY=0;else PITY=Math.min(PITYMAX,PITY+1);
   return{c,guar,full:PITY===0&&guar};
 }
 /* 1 ซอง = 7 ใบ (ไม่ซ้ำกันในซอง ถ้าการ์ดในสินค้ามีพอ) */
 function pkPack(pool){
-  // The database records a pack against one product and requires exactly
-  // seven cards from that product's pool. In the aggregate "all products"
-  // mode, choose one source product per pack instead of mixing products.
-  let source=pool,packProductId=GA.pid;
-  if(GA.pid===ALL_PRODUCTS_ID){
-    const candidates=PRODUCTS.filter(p=>p.includeAllProducts!==false).map(p=>({id:p.id,cards:(p.cards||[]).filter(c=>c.is_gacha_pool!==false&&rarityLabel(c.rarity)!=="SP")})).filter(x=>x.cards.length);
-    const chosen=rnd(candidates);
-    if(chosen){source=chosen.cards;packProductId=chosen.id}
-  }
+  // Aggregate mode intentionally draws from the shared pool, so cards from
+  // different participating Products can appear together in one 7-card pack.
+  const source=pool,packProductId=GA.pid;
   const high=source.filter(c=>tierOf(c)>=1),allHigh=high.length>=PACKSIZE&&Math.random()<0.002;
   const src=allHigh?high:source,used=new Set(),out=[];
   for(let i=0;i<PACKSIZE;i++){const r=pkOne(src,used);if(!r)break;used.add(r.c.id);out.push(r)}
-  out.forEach(r=>{r.packProductId=packProductId});
+  out.forEach(r=>{r.packProductId=GA.pid===ALL_PRODUCTS_ID?(r.c.pid||""):packProductId});
   out.allHigh=allHigh&&out.length===PACKSIZE;return out
 }
 
@@ -2551,7 +2552,7 @@ function pkOpenStart(){
   GA.pi=0;pitySave();pkSaveW();
   const p=PRODUCTS.find(x=>x.id===GA.pid);
   $("gTitle").textContent="เปิดซอง · "+(p?p.name:(GA.pid===ALL_PRODUCTS_ID?ALL_PRODUCTS_LABEL:""));
-  $("pkMsg").textContent="เปิด "+GA.qty+" ซอง · "+(GA.qty*PACKSIZE)+" ใบ · Pity "+PITY+"/"+PITYMAX;
+  $("pkMsg").textContent="เปิด "+GA.qty+" ซอง · "+(GA.qty*PACKSIZE)+" ใบ";
   if(!$("gacha").open)$("gacha").showModal();
   GA.open=true;document.body.classList.add("gacha-effects-on");
   pkShowPack();
@@ -2638,9 +2639,9 @@ function pkSkipAll(){
 }
 function pkPackDone(){
   const more=GA.pi<GA.qty-1;
-  const hi=GA.cards.filter(r=>tierOf(r.c)>=PITYMIN);
+  const hi=GA.cards.filter(r=>isPityHigh(r.c));
   $("gFoot").innerHTML=
-    `<span class="gfootmsg">${hi.length?"✨ ได้การ์ดระดับสูง "+hi.length+" ใบ · ":""}Pity ${PITY}/${PITYMAX}</span>`+
+    `<span class="gfootmsg">${hi.length?"✨ ได้การ์ดระดับ SVR ขึ้นไป "+hi.length+" ใบ":""}</span>`+
     (more?`<button class="btn primary" data-g="next">เปิดซองถัดไป (${GA.pi+2}/${GA.qty}) ›</button>${pkSkipHTML()}`:`<button class="btn primary" data-g="done">ดูสรุปทั้งหมด</button>`);
   pkPityUI();
 }
@@ -2656,7 +2657,7 @@ function pkFinish(){
   const el=$("gCards");el.className="gsum";
   el.innerHTML=list.map(({c,n})=>`<div class="pks" data-id="${h(c.id)}">${art(c,2)}<span class="pkr2">${h(rarityLabel(c.rarity)||"—")}${n>1?" ×"+n:""}</span></div>`).join("");
   $("gFoot").innerHTML=`<button class="btn primary" data-g="again">เปิดอีกครั้ง</button><button class="btn sm" data-g="close">ปิด</button>`;
-  $("pkMsg").textContent="เปิด "+GA.qty+" ซอง · ได้ "+GA.all.length+" ใบ · Pity "+PITY+"/"+PITYMAX;
+  $("pkMsg").textContent="เปิด "+GA.qty+" ซอง · ได้ "+GA.all.length+" ใบ";
   pitySave();pkPityUI();
   Promise.allSettled(pending).then(results=>{
     const failed=results.filter(x=>x.status==="rejected");
