@@ -352,6 +352,11 @@
     fail(error);
     return data || { pity_count: 0, packs_opened: 0, pity_reset_on_high: true };
   }
+  async function disassembleCards(items) {
+    required();
+    const { data, error } = await client.rpc('disassemble_cards', { p_items: items });
+    fail(error); return data;
+  }
   async function setPityReset(enabled) {
     required();
     const { error } = await client.rpc('set_gacha_pity_reset', { p_enabled: Boolean(enabled) }); fail(error);
@@ -464,7 +469,7 @@
     configured, get user() { return user; }, get admin() { return admin; }, client,
     init, signIn, signUp, signOut,
     loadCatalog, saveCatalog, loadAppSettings, saveAppSettings, subscribeCatalog, loadBanlist, saveBanlist, loadFavourites, setFavourite, loadCollection, loadGachaState,
-    setPityReset, resetPity, recordPack, recordMixedPack,
+    setPityReset, resetPity, disassembleCards, recordPack, recordMixedPack,
     loadDecks, saveDeck, deleteDeck, loadSharedDecks, copySharedDeck,
     loadRecipes, saveRecipe, craft, loadCraftHistory, uploadDataUri,
   });

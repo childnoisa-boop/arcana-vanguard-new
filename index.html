@@ -1248,7 +1248,7 @@ body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0
         </div>
         <p class="dto" id="pkTierNote" style="margin:12px 0 0"></p>
       </div>
-      <details id="gachaRatesAdmin" class="admin-only" style="margin-top:14px"><summary style="padding:8px 12px;cursor:pointer;font-weight:600">อัตราดรอป (weight) · Admin</summary><div class="pkr" id="pkR" style="padding:10px 12px"></div><p class="dto" style="margin:0 0 6px">เปอร์เซ็นต์คำนวณจาก Weight ของแต่ละเรต (ก่อนผลจาก Pity) · ปรับ Weight ได้ · โอกาส 0.2% ที่ทั้ง 7 ใบเป็นการ์ดระดับสูงในกอง (ต้องมีการ์ดระดับสูงอย่างน้อย 7 แบบ)</p></details>
+      <details id="gachaRatesAdmin" class="admin-only" style="margin-top:14px"><summary style="padding:8px 12px;cursor:pointer;font-weight:600">อัตราดรอป (Weight) · Admin</summary><div class="pkr" id="pkR" style="padding:10px 12px"></div><p class="dto" style="margin:0 0 6px">Admin สามารถปรับ Weight ของแต่ละเรตได้ · ค่า Weight จะถูกบันทึกแยกตาม Product · โอกาส 0.2% ที่ทั้ง 7 ใบเป็นการ์ดระดับสูงในกอง (ต้องมีการ์ดระดับสูงอย่างน้อย 7 แบบ)</p></details>
       <p class="count" id="pkMsg" aria-live="polite"></p>
       <div class="packStats"><b id="pkLifetime">เปิดแล้ว 0 ซอง</b><span>เรตข้างต้นเป็น Weight ของการสุ่มในสินค้านี้ ไม่ใช่เปอร์เซ็นต์ตรง ๆ; ระบบจะแสดงสัดส่วนคำนวณให้เมื่อมีข้อมูลครบ</span></div>
       <section class="collectionProgress gachaProgressOnly" aria-labelledby="gachaProgressTitle"><div class="collectionProgressHero"><div><span class="collectionProgressEyebrow">Collection Progress</span><h4 id="gachaProgressTitle">ความคืบหน้าการสะสม</h4><p>ดูรายละเอียดทั้งหมดได้ที่เมนู กระเป๋า</p></div><strong class="collectionProgressPct" id="gachaProgressPct">0%</strong></div><div class="progressTrack" aria-hidden="true"><i id="gachaProgressBar" style="width:0%"></i></div><div class="collectionProgressStats"><div class="collectionProgressStat"><b id="gachaProgressOwned">0</b><small>แบบที่มีแล้ว</small></div><div class="collectionProgressStat"><b id="gachaProgressTotal">0</b><small>การ์ดทั้งหมด</small></div></div></section>
@@ -1258,7 +1258,7 @@ body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0
       <div id="craftRecipes" class="featureList"></div>
     </section>
     <section id="p7" role="tabpanel" aria-labelledby="t7" hidden>
-      <div class="banGalleryHead"><div><h2>กระเป๋า (Inventory)</h2><p class="dto">ดูความคืบหน้าและการ์ดที่สะสมได้ทั้งหมด</p></div></div>
+      <div class="banGalleryHead"><div><h2>กระเป๋า (Inventory)</h2><p class="dto">ดูความคืบหน้าและการ์ดที่สะสมได้ทั้งหมด</p></div><button class="btn primary" id="disassembleOpen" type="button">ย่อยการ์ด</button></div>
       <section class="collectionPanel"><div class="collectionHead"><div><h3>คลังการ์ดจากการสุ่ม</h3><p class="dto">สะสมแยกจาก Deck Builder · ไม่เพิ่มการ์ดเข้าเด็คอัตโนมัติ</p></div><div class="collectionHeadActions"><span id="collectionSummary" class="count"></span><button type="button" class="btn sm" id="collectionToggle" aria-controls="collectionBody" aria-expanded="true">⌃ ย่อคลัง</button></div></div>
       <div id="collectionBody" class="collectionBody">
       <div class="collectionProgress" id="collectionProgress" aria-labelledby="collectionProgressTitle">
@@ -1272,6 +1272,21 @@ body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0
     </section>
 
   </div>
+
+  <dialog id="disassemble" class="edialog">
+    <form method="dialog" id="disassembleForm">
+      <h3>ย่อยการ์ด</h3>
+      <p class="dto">เลือกย่อยได้ทั้งตามเรต หรือเลือกการ์ดแยกใบและกำหนดจำนวนที่จะย่อย การ์ดที่ย่อยแล้วจะถูกนำออกจากคลัง</p>
+      <div class="grid">
+        <label>วิธีย่อย<select id="disassembleMode"><option value="rarity">ย่อยตามเรต</option><option value="card">ย่อยแยกใบ</option></select></label>
+        <label id="disassembleRarityWrap">เรตที่ต้องการย่อย<select id="disassembleRarity"></select></label>
+        <label id="disassembleCardWrap" hidden>การ์ดที่ต้องการย่อย<select id="disassembleCard"></select></label>
+        <label id="disassembleQtyWrap" hidden>จำนวนใบ<input id="disassembleQty" type="number" min="1" value="1"></label>
+      </div>
+      <p class="dto" id="disassembleSummary"></p>
+      <div class="actions"><button class="btn primary" id="disassembleConfirm" type="submit">ยืนยันการย่อย</button><button class="btn" id="disassembleCancel" type="button">ยกเลิก</button></div>
+    </form>
+  </dialog>
 
   <div id="pv" hidden>
     <button class="link" id="back">← Back to Products</button>
@@ -1356,7 +1371,8 @@ const DEFT=["Normal Unit","Trigger Unit","Normal Order","Set Order","Blitz Order
 const DEFCLANS=["Royal Paladin","Shadow Paladin","Gold Paladin","Kagero","Narukami","Genesis","Oracle Think Tank","Angel Feather","Aqua Force","Bermuda Triangle","Nova Grappler","Dimension Police","Link Joker","Dark Irregulars","Pale Moon","Spike Brothers","Murakumo","Nubatama","Tachikaze","Megacolony","Great Nature","Neo Nectar","Granblue","Gear Chronicle"];
 const Cloud=window.CardCloud;
 let PRODUCTS=[],NATIONS=[],ZONES=[],CTYPES=DEFT.slice(),PW="",loaded=false,REMOTE_DECKS={},stopRealtime=null,refreshBusy=false;
-const DB=()=>({products:PRODUCTS,nations:NATIONS,zones:ZONES,ctypes:CTYPES,settings:{nations:NATIONS,zones:ZONES,ctypes:CTYPES,allProductsCover}});
+let allProductsGachaWeights={};
+const DB=()=>({products:PRODUCTS,nations:NATIONS,zones:ZONES,ctypes:CTYPES,settings:{nations:NATIONS,zones:ZONES,ctypes:CTYPES,allProductsCover,allProductsGachaWeights}});
 const BANKEY="cardlist-banlist-v1",COLKEY="cardlist-pull-collection-v1",COLLAPSEKEY="cardlist-collection-collapsed-v1";
 let BANLIST=[],COLLECTION={};
 try{BANLIST=JSON.parse(localStorage.getItem(BANKEY)||"[]");if(!Array.isArray(BANLIST))BANLIST=[]}catch(e){BANLIST=[]}
@@ -1414,7 +1430,7 @@ async function load(){
       NATIONS=Array.isArray(settings?.nations)?settings.nations.map(n=>({...n})):DEFN.map(x=>({...x}));
       ZONES=Array.isArray(settings?.zones)&&settings.zones.length?settings.zones.map(z=>({...z})):DEFZ.map(x=>({...x}));
       CTYPES=Array.isArray(settings?.ctypes)?[...settings.ctypes]:DEFT.slice();
-      allProductsCover=String(settings?.allProductsCover||"");
+      allProductsCover=String(settings?.allProductsCover||"");allProductsGachaWeights={...(settings?.allProductsGachaWeights||{})};
       FAVS=new Set(await Cloud.loadFavourites());BANLIST=await Cloud.loadBanlist();COLLECTION=await Cloud.loadCollection();
       const gs=await Cloud.loadGachaState();PITY=Math.max(0,Math.min(PITYMAX,Number(gs.pity_count)||0));PACKS_OPENED=Number(gs.packs_opened)||0;PITYRST=gs.pity_reset_on_high!==false;
       REMOTE_DECKS=await Cloud.loadDecks();
@@ -1433,6 +1449,7 @@ async function load(){
   else if(d&&Array.isArray(d.products)){PRODUCTS=d.products;NATIONS=Array.isArray(d.nations)&&d.nations.length?d.nations:DEFN.map(x=>({...x}));zz=d.zones}
   else{PRODUCTS=seed();NATIONS=DEFN.map(x=>({...x}))}
   ZONES=Array.isArray(zz)&&zz.length?zz:DEFZ.map(x=>({...x}));CTYPES=d&&!Array.isArray(d)&&Array.isArray(d.ctypes)&&d.ctypes.length?d.ctypes:DEFT.slice();
+  allProductsGachaWeights={...(d&&!Array.isArray(d)?d.settings?.allProductsGachaWeights||{}:{})};
   try{BANLIST=JSON.parse(localStorage.getItem(BANKEY)||"[]");if(!Array.isArray(BANLIST))BANLIST=[]}catch(e){BANLIST=[]}
   try{COLLECTION=JSON.parse(localStorage.getItem(COLKEY)||"{}");if(!COLLECTION||typeof COLLECTION!=="object")COLLECTION={}}catch(e){COLLECTION={}}
   try{PACKS_OPENED=Number(localStorage.getItem("cardlist-packs-opened")||0)}catch(e){PACKS_OPENED=0}
@@ -2373,10 +2390,39 @@ function setCollectionCollapsed(collapsed){collectionCollapsed=!!collapsed;const
 $("collectionToggle").onclick=()=>setCollectionCollapsed(!collectionCollapsed);setCollectionCollapsed(collectionCollapsed);
 $("collectionSearch").oninput=debounce(()=>{collectionPage=1;renderCollection()},250);$("collectionSort").onchange=()=>{collectionPage=1;renderCollection()};
 $("collectionCards").onclick=e=>{const b=e.target.closest("[data-collection-card]");if(!b)return;const v=COLLECTION[b.dataset.collectionCard];if(v?.card)openLB({...v.card,pname:v.productName,collectionCount:v.count},{readonly:true,source:"collection"})};
+function disassembleEntries(){return Object.values(COLLECTION).filter(v=>v?.card&&Number(v.count)>0)}
+function renderDisassembleChoices(){
+  const entries=disassembleEntries(),rarity=$("disassembleRarity"),card=$("disassembleCard");
+  const rarities=[...new Set(entries.map(v=>rarityLabel(v.card.rarity)||"ไม่ระบุ"))].sort((a,b)=>rarityRankHigh(a)-rarityRankHigh(b)||a.localeCompare(b));
+  const oldR=rarity.value,oldC=card.value;
+  rarity.innerHTML=rarities.map(r=>`<option value="${h(r)}">${h(r)} · ${entries.filter(v=>(rarityLabel(v.card.rarity)||"ไม่ระบุ")==r).reduce((n,v)=>n+Number(v.count||0),0)} ใบ</option>`).join("")||'<option value="">ไม่มีการ์ดในคลัง</option>';
+  if(rarities.includes(oldR))rarity.value=oldR;
+  card.innerHTML=entries.sort((a,b)=>rarityRankHigh(a.card)-rarityRankHigh(b.card)||String(a.card.name||"").localeCompare(String(b.card.name||""),undefined,{numeric:true})).map(v=>`<option value="${h(v.card.id)}">${h(v.card.name||"การ์ด")} · ${h(rarityLabel(v.card.rarity)||"—")} · มี ${Number(v.count)||0} ใบ</option>`).join("")||'<option value="">ไม่มีการ์ดในคลัง</option>';
+  if(entries.some(v=>v.card.id===oldC))card.value=oldC;
+  updateDisassembleUI();
+}
+function updateDisassembleUI(){
+  const byR=$("disassembleMode").value==="rarity",entries=disassembleEntries(),r=$("disassembleRarity").value,c=$("disassembleCard").value;
+  $("disassembleRarityWrap").hidden=!byR;$("disassembleCardWrap").hidden=byR;$("disassembleQtyWrap").hidden=byR;
+  if(byR){const n=entries.filter(v=>(rarityLabel(v.card.rarity)||"ไม่ระบุ")===r).reduce((s,v)=>s+Number(v.count||0),0);$("disassembleSummary").textContent=n?`จะย่อยการ์ดเรต ${r} ทั้งหมด ${n} ใบ`:"ไม่มีการ์ดเรตนี้ในคลัง"}
+  else{const v=entries.find(x=>x.card.id===c),max=Number(v?.count||0),q=$("disassembleQty");q.max=max;q.value=Math.min(Math.max(1,Number(q.value)||1),Math.max(1,max));$("disassembleSummary").textContent=v?`มีการ์ดใบนี้ ${max} ใบ · เลือกย่อยได้ 1–${max} ใบ`:"เลือกการ์ดที่ต้องการย่อย"}
+}
+function disassemblePayload(){
+  const entries=disassembleEntries(),byR=$("disassembleMode").value==="rarity";
+  if(byR){const r=$("disassembleRarity").value;return entries.filter(v=>(rarityLabel(v.card.rarity)||"ไม่ระบุ")===r).map(v=>({card_id:v.card.id,quantity:Number(v.count)}))}
+  const v=entries.find(x=>x.card.id===$("disassembleCard").value),quantity=Math.max(1,Math.min(Number(v?.count||0),parseInt($("disassembleQty").value)||1));
+  return v&&quantity>0?[{card_id:v.card.id,quantity}]:[];
+}
+function applyLocalDisassemble(items){items.forEach(i=>{const v=COLLECTION[i.card_id];if(!v)return;v.count=Math.max(0,Number(v.count||0)-i.quantity);if(!v.count)delete COLLECTION[i.card_id]});try{localStorage.setItem(COLKEY,JSON.stringify(COLLECTION))}catch(e){}renderCollection()}
+$("disassembleOpen").onclick=()=>{renderDisassembleChoices();$("disassemble").showModal()};
+$("disassembleMode").onchange=updateDisassembleUI;$("disassembleRarity").onchange=updateDisassembleUI;$("disassembleCard").onchange=updateDisassembleUI;$("disassembleQty").oninput=updateDisassembleUI;
+$("disassembleCancel").onclick=()=>$("disassemble").close();
+$("disassembleForm").onsubmit=async e=>{e.preventDefault();const items=disassemblePayload(),total=items.reduce((n,x)=>n+x.quantity,0);if(!total)return notice("bad","ย่อยการ์ดไม่ได้","ยังไม่มีการ์ดที่เลือกหรือไม่มีการ์ดในคลัง",{auto:2600});if(!confirm(`ยืนยันย่อยการ์ด ${total} ใบ? การ์ดที่ย่อยแล้วจะถูกนำออกจากคลัง`))return;const b=$("disassembleConfirm");b.disabled=true;try{if(Cloud?.configured&&Cloud.user){await Cloud.disassembleCards(items);COLLECTION=await Cloud.loadCollection()}else applyLocalDisassemble(items);renderCollection();$("disassemble").close();notice("ok","ย่อยการ์ดสำเร็จ",`นำการ์ดออกจากคลังแล้ว ${total} ใบ`,{auto:2600})}catch(x){notice("bad","ย่อยการ์ดไม่สำเร็จ",String(x?.message||x),{auto:6500})}finally{b.disabled=false}};
 const ALL_PRODUCTS_ID="__all_products__",ALL_PRODUCTS_LABEL="รวมทุกโปรดัก";
 const PKW={},pkd=r=>{r=String(r).toUpperCase();return({C:60,N:60,U:40,R:25,RR:12,RRR:5,SR:3,PR:8})[r]??(r in FOILT?1.5:5)},pkw=r=>r in PKW?PKW[r]:pkd(r);
 try{Object.assign(PKW,JSON.parse(localStorage.getItem("cardlist-pkw")||"{}"))}catch(e){}
-const pkSaveW=()=>{const p=PRODUCTS.find(x=>x.id===$("pkP").value);if(p){p.gachaWeights={...PKW};save({skipCards:true})}else{try{localStorage.setItem("cardlist-pkw",JSON.stringify(PKW))}catch(e){}}};
+try{allProductsGachaWeights={...allProductsGachaWeights,...JSON.parse(localStorage.getItem("cardlist-all-products-pkw")||"{}")}}catch(e){}
+const pkSaveW=()=>{const pid=$("pkP").value,p=PRODUCTS.find(x=>x.id===pid);if(pid===ALL_PRODUCTS_ID){allProductsGachaWeights={...PKW};try{localStorage.setItem("cardlist-all-products-pkw",JSON.stringify(PKW))}catch(e){};save({skipCards:true})}else if(p){p.gachaWeights={...PKW};save({skipCards:true})}else{try{localStorage.setItem("cardlist-pkw",JSON.stringify(PKW))}catch(e){}}};
 const PITYKEY="cardlist-pity",PITYMAX=200,PACKSIZE=7;
 let PITY=0,PITYRST=true,PACKS_OPENED=0;
 try{PITY=Math.max(0,Math.min(PITYMAX,parseInt(localStorage.getItem(PITYKEY))||0))}catch(e){}
@@ -2395,7 +2441,7 @@ function pkPityUI(){
   $("gPity").textContent=PITY+"/"+PITYMAX;$("gPityBar").style.width=pc+"%";$("gPity").closest(".gpity").hidden=Boolean(GA.open);renderPackCount();
 }
 function pkRates(){
-  const product=PRODUCTS.find(x=>x.id===$("pkP").value);Object.keys(PKW).forEach(k=>delete PKW[k]);Object.assign(PKW,product?.gachaWeights||{});
+  const pid=$("pkP").value,product=PRODUCTS.find(x=>x.id===pid);Object.keys(PKW).forEach(k=>delete PKW[k]);Object.assign(PKW,pid===ALL_PRODUCTS_ID?allProductsGachaWeights:(product?.gachaWeights||{}));
   const pool=pkPool(),rs=[...new Set(pool.map(c=>String(c.rarity||"").trim()))].sort((a,b)=>rarityRankHigh(a)-rarityRankHigh(b)),total=rs.reduce((n,r)=>n+Math.max(0,pkw(r)),0);
   $("pkR").innerHTML=rs.map(r=>`<div><label>${h(rarityLabel(r)||"(ไม่ระบุ)")} <small>${pool.filter(c=>String(c.rarity||"").trim()===r).length} ใบ · ${total?((Math.max(0,pkw(r))/total)*100).toFixed(2):"0.00"}%</small></label><input type="number" min="0" step="0.5" data-r="${h(r)}" value="${pkw(r)}"></div>`).join("")||'<p class="dto">สินค้านี้ยังไม่มีการ์ดที่เปิดสุ่มได้</p>';
   const hi=[...new Set(pool.filter(isPityHigh).map(c=>rarityLabel(c.rarity)||"(ไม่ระบุ)"))];
