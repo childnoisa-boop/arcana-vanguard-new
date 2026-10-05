@@ -1216,7 +1216,7 @@ body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0
       </div>
       <div class="dgrid">
         <div>
-          <div class="grid" style="margin-bottom:10px"><div><label for="dnat">Nation</label><select id="dnat"></select></div><div><label for="dkw">Keyword</label><input id="dkw" type="search" placeholder="Card name"></div></div>
+          <div class="grid" style="margin-bottom:10px"><div><label for="dnat">Nation</label><select id="dnat"></select></div><div><label for="dkw">Keyword</label><input id="dkw" type="search" placeholder="Card name"></div><div><label for="dsort">เรียงการ์ด</label><select id="dsort"><option value="default">ค่าเริ่มต้น</option><option value="rarity-high">ระดับสูง → ต่ำ</option><option value="rarity-low">ระดับต่ำ → สูง</option><option value="grade-asc">เกรดน้อย → มาก</option><option value="grade-desc">เกรดมาก → น้อย</option></select></div></div>
           <p class="dto" id="dto"></p>
           <div class="dpick" id="dpick"></div><div class="pageNav" id="dpickNav" hidden><button class="btn sm" data-prev type="button">← ก่อนหน้า</button><span data-page>หน้า 1 / 1</span><button class="btn sm" data-next type="button">ถัดไป →</button></div>
         </div>
@@ -2072,6 +2072,17 @@ function deckAdd(id,d,zid=az){
   else{
     if(d>0){
       if(z.copies&&n>z.copies)return notice("full","Max "+z.copies+" copies","You cannot add more of this card to "+z.name+".",{auto:2200});
+      if(d>0&&zid!=="g"&&zid!=="token"){
+        const rawTrigger=String(dcard(id).trigger||"").trim();
+        const triggerKey=Object.keys(TRIGMAX).find(x=>x.toLowerCase()===rawTrigger.toLowerCase());
+        if(triggerKey){
+          const triggerTotal=["main","ride"].reduce((sum,zoneId)=>sum+Object.entries(deck.z[zoneId]||{}).reduce((n,[cardId,count])=>{
+            const cardTrigger=String(dcard(cardId).trigger||"").trim();
+            return n+(cardTrigger.toLowerCase()===triggerKey.toLowerCase()?Number(count)||0:0)
+          },0),0);
+          if(triggerTotal+d>TRIGMAX[triggerKey])return notice("full",triggerKey+" triggers เต็มแล้ว",`ใส่ ${triggerKey} ได้สูงสุด ${TRIGMAX[triggerKey]} ใบรวมทุกการ์ด แม้เป็นคนละใบ`,{auto:2800});
+        }
+      }
       if(zid==="main"&&rideLineNames().has(normCardName(dcard(id)))&&mainSameNameCount(normCardName(dcard(id)))+d>3)return notice("full","Ride Line name limit","การ์ดชื่อเดียวกับที่อยู่ใน Ride Line ใส่ใน Main Deck ได้สูงสุด 3 ใบ",{auto:2800});
       if(z.size&&zcount(zid)>=z.size)return notice("full",z.name+" is full","("+z.size+"/"+z.size+") Remove a card first to add a new one.",{auto:2400});
       if(z.perGrade){const g=String(dcard(id).grade),cnt=Object.keys(t).filter(k=>k!==id&&String(dcard(k).grade)===g).reduce((a,k)=>a+t[k],0)+n;
@@ -2104,7 +2115,14 @@ function trigCheck(){
 }
 function renderPick(){
   const nat=$("dnat").value,kw=$("dkw").value.trim().toLowerCase();
-  const l=ALL.filter(c=>(!nat||nats(c).includes(nat))&&(!kw||c.name.toLowerCase().includes(kw)));
+  const mode=$("dsort").value||"default";
+  const l=ALL.filter(c=>(!nat||nats(c).includes(nat))&&(!kw||c.name.toLowerCase().includes(kw))).sort((a,b)=>{
+    if(mode==="rarity-high")return rarityRankHigh(a)-rarityRankHigh(b)||gnum(a)-gnum(b)||String(a.name||"").localeCompare(String(b.name||""));
+    if(mode==="rarity-low")return rarityRankHigh(b)-rarityRankHigh(a)||gnum(a)-gnum(b)||String(a.name||"").localeCompare(String(b.name||""));
+    if(mode==="grade-asc")return gnum(a)-gnum(b)||rarityRankHigh(a)-rarityRankHigh(b)||String(a.name||"").localeCompare(String(b.name||""));
+    if(mode==="grade-desc")return gnum(b)-gnum(a)||rarityRankHigh(a)-rarityRankHigh(b)||String(a.name||"").localeCompare(String(b.name||""));
+    return 0;
+  });
   const start=(deckPickPage-1)*PAGE_SIZE;
   $("dpick").innerHTML=l.slice(start,start+PAGE_SIZE).map(c=>`<button class="c${c.orient==="l"?" land":""}" data-add="${c.id}">${art(c,1)}<div class="t"><b>${h(c.name)}</b></div></button>`).join("")||'<p class="count">No cards found.</p>';
   updatePager("dpickNav",deckPickPage,l.length,p=>{deckPickPage=p;renderPick()});
@@ -2122,6 +2140,7 @@ $("dpick").onclick=e=>{const b=e.target.closest("[data-add]");if(b)deckAdd(b.dat
 $("dlist").onclick=e=>{const m=e.target.closest("[data-m]"),p=e.target.closest("[data-p]");if(m)deckAdd(m.dataset.m,-1);if(p)deckAdd(p.dataset.p,1)};
 $("ztabs").onclick=e=>{const b=e.target.closest("[data-z]");if(b){az=b.dataset.z;renderDeck()}};
 $("dnat").onchange=()=>{deckPickPage=1;renderPick()};$("dkw").oninput=debounce(()=>{deckPickPage=1;renderPick()},250);
+$("dsort").onchange=()=>{deckPickPage=1;renderPick()};
 $("dname").oninput=()=>deck.name=$("dname").value;
 
 const myAll=()=>Cloud?.configured&&Cloud.user?REMOTE_DECKS:(()=>{try{return JSON.parse(localStorage.getItem(MYKEY))||{}}catch(e){return{}}})();
