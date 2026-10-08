@@ -1136,6 +1136,21 @@ body.sparkles-off .craftFxLayer .art:not(.back){display:block!important;border:0
   /* T cards are standard cards: no purple aura, frame, holo, or sparkle. */
   .art[data-card-rarity="T"],.art[data-card-rarity="t"]{--foil-color:210,220,235!important;border:0!important;border-color:transparent!important;box-shadow:none!important;filter:none!important;animation:none!important}
   .art[data-card-rarity="T"]::before,.art[data-card-rarity="T"]::after,.art[data-card-rarity="t"]::before,.art[data-card-rarity="t"]::after,.art[data-card-rarity="T"]>.fx,.art[data-card-rarity="t"]>.fx,.art[data-card-rarity="T"] .ref-holo,.art[data-card-rarity="T"] .ref-glare,.art[data-card-rarity="T"] .ref-sweep,.art[data-card-rarity="T"] .ref-spark,.art[data-card-rarity="t"] .ref-holo,.art[data-card-rarity="t"] .ref-glare,.art[data-card-rarity="t"] .ref-sweep,.art[data-card-rarity="t"] .ref-spark{display:none!important;animation:none!important;content:none!important}
+
+/* DSR signature foil: purple, magenta and indigo blend with matching stars. */
+.art.dsr{--foil-color:188,72,246!important;border-color:transparent!important;box-shadow:0 0 0 1px #ffb7f5,0 0 10px #e943d5,0 0 22px #5a43d8,0 0 34px #8f38ff99!important}
+.art.dsr::before{content:""!important;inset:0!important;border:0!important;padding:3px!important;background:conic-gradient(from var(--dsr-angle,0deg),#5b35d6,#7b4dff,#d52bbf,#ff4fcf,#a82ee7,#4d42cb,#5b35d6)!important;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;box-shadow:0 0 8px #ff48d8,0 0 17px #7047ff,0 0 26px #321a9d!important;animation:dsrBorderSpin 3.4s linear infinite!important}
+.art.dsr::after{background:radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,215,255,.9) 0 3%,rgba(255,112,224,.22) 14%,transparent 31%),linear-gradient(112deg,transparent 0%,transparent 28%,rgba(255,176,250,.16) 39%,rgba(255,255,255,.92) 49%,rgba(156,111,255,.28) 56%,transparent 68%) 0 0/235% 100% no-repeat,linear-gradient(125deg,rgba(91,45,211,.35),rgba(255,48,196,.34),rgba(87,64,227,.4),rgba(190,54,255,.3)) 0 0/280% 280%!important;opacity:.7!important;animation:dsrFoilSweep 3.8s ease-in-out infinite!important}
+.art.dsr>.fx{--fc:#ff66db!important;--fc2:#665bff!important;background-image:radial-gradient(circle at 45% 35%,rgba(255,221,255,.95) 0 1.4px,transparent 3px),radial-gradient(circle at 80% 85%,rgba(190,152,255,.78) 0 1.4px,transparent 3px)!important}
+.art.dsr>.fx::before{background-image:radial-gradient(circle at 15% 25%,rgba(255,151,235,.98) 0 1.4px,transparent 3px),radial-gradient(circle at 65% 55%,rgba(135,126,255,.9) 0 1.5px,transparent 3px)!important}
+.art.dsr>.fx::after{background-image:radial-gradient(circle at 82% 18%,rgba(255,193,246,.98) 0 1.5px,transparent 3px),radial-gradient(circle at 28% 75%,rgba(116,105,255,.86) 0 1.2px,transparent 3px)!important}
+.c:has(.art.dsr)>.favStar{color:#d52bbf;background:#f9e5ff;border-color:#b864df;box-shadow:0 0 8px #d52bbf88}
+@keyframes dsrBorderSpin{to{--dsr-angle:360deg}}
+@keyframes dsrFoilSweep{0%,100%{background-position:145% 0,145% 0,0 0;opacity:.18}42%{background-position:5% 0,5% 0,100% 100%;opacity:.82}70%{background-position:-75% 0,-75% 0,180% 180%;opacity:.32}}
+@keyframes dsrFramePulse{0%,100%{filter:brightness(.98) drop-shadow(0 0 2px #6b4dff)}45%{filter:brightness(1.14) drop-shadow(0 0 10px #e943d5) drop-shadow(0 0 16px #5a43d8)}70%{filter:brightness(1.03) drop-shadow(0 0 5px #9d4dff)}}
+.art.dsr{animation:dsrFramePulse 3.8s ease-in-out infinite!important;transition:transform .22s ease,filter .22s ease!important}
+.art.dsr:hover{transform:perspective(900px) rotateX(-2deg) rotateY(2deg) translateY(-4px) scale(1.018)!important;z-index:8}
+@media(prefers-reduced-motion:reduce){.art.dsr::before,.art.dsr::after,.art.dsr{animation:none!important}.art.dsr{box-shadow:0 0 0 1px #ffb7f5,0 0 10px #8f38ff!important}}
 </style>
 </head>
 <body>
@@ -1508,7 +1523,7 @@ const RARITY_ORDER_HIGH={X:0,DSR:1,EMR:2,CSR:3,GR:4,SSR:5,SEC:6,SSP:7,ZR:8,ORR:9
 const rarityRankHigh=c=>{const r=rarityLabel(typeof c==="string"?c:c?.rarity);return RARITY_ORDER_HIGH[r]??99};
 const PITY_HIGH_RARITIES=new Set(["SVR","ORR","ZR","SSP","SEC","SSR","GR","CSR","EMR","DSR","X"]);
 const isPityHigh=c=>PITY_HIGH_RARITIES.has(rarityLabel(c?.rarity));
-const foil=c=>{const r=rarityLabel(c&&c.rarity);return r in FOILCLASS?" f"+FOILCLASS[r]:""};
+const foil=c=>{const r=rarityLabel(c&&c.rarity);return r==="DSR"?" f2 dsr":r in FOILCLASS?" f"+FOILCLASS[r]:""};
 const art=(c,nat)=>{
   const src=c.img||c.image_url||c.imageUrl||c.image||c.picture||c.card_image||"";
   const o=c.orient==="l"?"l":"p",slot=o==="l"&&!nat,ar=o==="l"&&nat?CH+"/"+CW:CW+"/"+CH;let inner;
